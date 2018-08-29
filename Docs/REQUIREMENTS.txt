@@ -1,0 +1,32 @@
+Decisions:
+    Scale of Map: 
+        Countries, REGION, Continents 
+    Time Period:
+        start date:  PRESENT DAY, 2000s, 1750s, 2200 ???
+        time scale:  1 day per 1/10 sec  pause when entering menu
+    Products:
+        CARS, food, electronics, blenders, tiolet paper, clothing
+    
+    
+
+Basic:
+    Map - respond to mouse clicks, identify correct region.
+    Products - one functionally developed product (game play is possible and not excruciatingly boring)
+    Events - 
+    Spread - 
+        standards must be met
+        logistics (land, sea, air)
+        Bi-directional spanning tree for continant maps
+
+Stretch:
+    Map: 
+        tactile/visual interaction (regions are highlighted when mouse hovers)
+        multiple playable maps
+        custom map generation engine (would be really complicated... needs to also create policys)
+    Products:
+        multiple fully developed products
+    Difficulty:
+        multiple difficult levels
+    Music:
+    Multiplayer:
+        multi human / AI ???

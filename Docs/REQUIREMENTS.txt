@@ -17,6 +17,9 @@ Basic:
         standards must be met
         logistics (land, sea, air)
         Bi-directional spanning tree for continant maps
+        
+   Functionality -
+         Ability Exit and Save Game
 
 Stretch:
     Map: 

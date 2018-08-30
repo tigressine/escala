@@ -1,9 +1,12 @@
 <Product Type>:
-      <upgrade name>, <product score>, <marketing score>, <logistics score>
+      <upgrade name>, <product +score>, <marketing +score>, <logistics +score>, <Cost>
               <direct dependencies>
 
 
+Idea:
+Take a look at this and see if this is a better way to outline this
 
+https://cmapscloud.ihmc.us:443/rid=1ST9JGW4J-172272S-7V2MKN
 
 Car Upgrade Map:
       stuff goes here...

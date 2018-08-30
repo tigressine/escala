@@ -7,8 +7,15 @@ Short description
 
 
 Natural:
-
-
+    Shipment gets lost at sea.
+        - Lose supply
+        - .001
+    Airplane Crashes
+        - Lose supply
+        - .001
+    Product Failure results in death?
+        - Lost demand
+        - .01
 
 
 Political:

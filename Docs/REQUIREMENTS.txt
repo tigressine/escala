@@ -1,3 +1,8 @@
+Important:
+    Get comfortable with Swing, JUnit, <more stuff will go here...>
+
+
+
 Decisions:
     Scale of Map: 
         Countries, REGION, Continents 

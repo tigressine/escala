@@ -1,0 +1,43 @@
+ALL:
+    Color scheme
+    List of random events: natural, political, product
+    Contents of Upgrade Map (start with car): product, logistics, marketing
+    Look into testing (might not be applicable yet)
+    Documentation
+
+Tiger:
+    Database:
+        - Regions: cost to entry, efficiency, logistics, marketing, taxes
+        - Product: upgrade graph, images, names, cost, description, effect, scale
+        - Random Events: 
+
+Spencer:
+   Viewer
+   Engine
+
+Jonathan:
+    photoshop graphics overlay
+    mouse interaction
+    
+Barath:
+    Menus, JFrames, Buttons, Events
+    
+    
+    
+    
+    
+Deliverables
+    Basic Map
+    Database (at least the API)
+    Viewer + basic Engine
+    Events, Buttons, Menus
+
+
+
+
+Next Meeting:  Sat 8th, 
+    Documentation
+    Brainstorm
+    Backlog
+    Design
+    Verification

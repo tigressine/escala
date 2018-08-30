@@ -1,5 +1,5 @@
 Important:
-    Get comfortable with Swing, JUnit, <more stuff will go here...>
+    Get comfortable with Swing, JUnit, Selenium <more stuff will go here...>
 
 
 

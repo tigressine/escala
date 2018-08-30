@@ -5,9 +5,20 @@ Important:
 
 Decisions:
     Scale of Map: 
-        Countries, REGION, Continents 
+        Regions
+            Australia (Oceania)
+            Western Europe
+            Eastrn Europe (All of Rusia)
+            SouthEast Asia(China, India Philipins)
+            Midddle East
+            North Africa
+            South Africa
+            North America (Canada, US)
+            Latin/Central America(Mexico, Central Carribean)
+            South Amrica
+            
     Time Period:
-        start date:  PRESENT DAY, 2000s, 1750s, 2200 ???
+        start date:  PRESENt Day, but year 0
         time scale:  1 day per 1/10 sec  pause when entering menu
     Products:
         CARS, food, electronics, blenders, tiolet paper, clothing

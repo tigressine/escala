@@ -4,6 +4,12 @@ Important:
 
 
 Decisions:
+    Scale of Improvements:
+        eg. 0 logistics (min) - 100 logistics (max); single imporvement range 1-10
+
+
+
+Decisions Made:
     Scale of Map: 
         Regions
             Australia (Oceania)

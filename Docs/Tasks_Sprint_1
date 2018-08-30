@@ -9,7 +9,7 @@ Tiger:
     Database:
         - Regions: cost to entry, efficiency, logistics, marketing, taxes
         - Product: upgrade graph, images, names, cost, description, effect, scale
-        - Random Events: 
+        - Random Events: Heading, Description, effect(logistic, Marketing, Product, Cash)
 
 Spencer:
    Viewer

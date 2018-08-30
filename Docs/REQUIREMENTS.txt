@@ -19,9 +19,9 @@ Basic:
     Products - one functionally developed product (game play is possible and not excruciatingly boring)
     Events - 
     Spread - 
-        standards must be met
-        logistics (land, sea, air)
-        Bi-directional spanning tree for continant maps
+        standards must be met to move into new regions
+        logistics (land, sea, air), may need to control or make payments to docks, warehouses, and airports
+        Bi-directional spanning tree for maps, some sort of pay barrior to sell goods in another area.
         
    Functionality -
          Ability Exit and Save Game

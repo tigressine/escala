@@ -24,7 +24,7 @@ Basic:
         Bi-directional spanning tree for maps, some sort of pay barrior to sell goods in another area.
         
    Functionality -
-         Ability Exit and Save Game
+         Ability Exit and Save Game, Return to previously saved game
 
 Stretch:
     Map: 

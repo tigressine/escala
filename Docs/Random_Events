@@ -24,6 +24,12 @@ Political:
 
 
 Product:
+    Product accidently mislabeled as 'organic fertalizer'
+        - lose supply
+        - .001
     Aliens from Mars invade earth and steal all blenders.
         - if product is blenders, you loose all inventory and factories.
+        - 0.00001
+    Rogue AI decides to purchase 52,000 of your products
+        - recieve money: 52000 * value of item
         - 0.00001

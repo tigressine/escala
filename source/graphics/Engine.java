@@ -14,28 +14,23 @@ import java.util.Random;
  * */
 
 public class Engine {
-    private int scaledWidth;
-    private int scaledHeight;
 
 	public final int NUM_SPRITES = 4;
 	
 	Sprite[] sprites = new Sprite[NUM_SPRITES];
 	
 	//TODO::: setup map and sprites...
-	public Engine(int scaledWidth, int scaledHeight, int goalFPS){
-        this.scaledWidth = scaledWidth;
-        this.scaledHeight = scaledHeight;
-
-		sprites[0] = new Sprite(0, 0, 10, goalFPS);
+	public Engine(){
+		sprites[0] = new Sprite(0, 0, 300);
 		sprites[0].setColor(Color.GREEN);
 	
-		sprites[1] = new Sprite(500, 0, 7, goalFPS);
+		sprites[1] = new Sprite(500, 0, 137);
 		sprites[1].setColor(Color.BLUE);
 		
-		sprites[2] = new Sprite(0, 500, 3, goalFPS);
+		sprites[2] = new Sprite(0, 500,  184);
 		sprites[2].setColor(Color.RED);
 		
-		sprites[3] = new Sprite(500, 500, 5, goalFPS);
+		sprites[3] = new Sprite(500, 500, 152);
 		sprites[3].setColor(Color.WHITE);
 	}
 	
@@ -48,8 +43,8 @@ public class Engine {
 		for(int i = 0; i < NUM_SPRITES; i++){
 			if(sprites[i].arrivedAtDestination()){
 				Point p = new Point();
-				double x = rand.nextInt(scaledWidth);
-				double y = rand.nextInt(scaledHeight);
+				double x = rand.nextInt(Escala.scaledWidth);
+				double y = rand.nextInt(Escala.scaledHeight);
 				p.setLocation(x, y);
 				sprites[i].setDestination(p);
 			}
@@ -59,7 +54,8 @@ public class Engine {
 
 	public void renderGame(Graphics2D g) {
 		//TODO:  render background image (MAP) here...
-		g.clearRect(0, 0, scaledWidth, scaledHeight);
+		g.setBackground(Color.BLACK);
+		g.clearRect(0, 0, Escala.scaledWidth, Escala.scaledHeight);
 		
 		for(int i = 0; i < NUM_SPRITES; i++){
 			sprites[i].paintComponent(g);

@@ -122,8 +122,12 @@ public class Escala {
 				strategy.show();
 				Toolkit.getDefaultToolkit().sync();
 			} catch (NullPointerException e) {
+				e.printStackTrace();
+				isRunning = false;
 				break;
 			} catch (IllegalStateException e) {
+				e.printStackTrace();
+				isRunning = false;
 				break;
 			}
 			
@@ -137,13 +141,14 @@ public class Escala {
 	
 	// Sleep the required number of millisecconds to achieve desired frame rate
 	// We don't want 6000+ fps
-	public void sleepForFrameRate(double startTime){
+	public void sleepForFrameRate(long startTime){
 		long totalTime = (System.nanoTime() - startTime) / 1000000;
 		try {
 			Thread.sleep(Math.max(0, FRAME_TIME - totalTime));
 		} catch (InterruptedException e) {
 			Thread.interrupted();
-			break;
+			e.printStackTrace();
+			isRunning = false;
 		}
 	}
 	

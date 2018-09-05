@@ -22,16 +22,13 @@ Jonathan:
 Barath:
     Menus, JFrames, Buttons, Events
     
-    
-    
-    
+
     
 Deliverables
     Basic Map
     Database (at least the API)
     Viewer + basic Engine
     Events, Buttons, Menus
-
 
 
 

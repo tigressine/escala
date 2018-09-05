@@ -40,10 +40,11 @@ public class Portal {
             statement.executeUpdate(
                 "CREATE TABLE regions (" + 
                 "name VARCHAR(15) PRIMARY KEY, " +
-                "entryCost REAL, efficiencyCost INT, " +
+                "taxRate REAL, " +
+                "entryCost REAL, " +
                 "logisticsCost INT, " +
                 "marketingCost INT, " +
-                "taxRate REAL)"
+                "efficiencyCost INT)"
             );
         }
         else if (name.equals("positiveEvents")) {
@@ -63,6 +64,7 @@ public class Portal {
                 "logisticsEffect INT, marketingEffect INT, " +
                 "productEffect INT, cashEffect REAL)"
             );
+        }
 
         if (statement != null) {
             statement.close();
@@ -71,12 +73,32 @@ public class Portal {
    
     // Add a new region to the database.
     public void addRegion(String filename) throws SQLException, IOException {
-    
+        Scanner scanner = new Scanner(new File(filename));
+
+        String name = scanner.nextLine();
+        float taxRate = scanner.nextFloat();
+        float entryCost = scanner.nextFloat();
+        int logisticsCost = scanner.nextInt();
+        int marketingCost = scanner.nextInt();
+        int efficiencyCost = scanner.nextInt();
+
+        Statement statement = connection.createStatement();
+        statement.execute(String.format("DELETE FROM regions WHERE name='%s'", name));
+        statement.execute(String.format(
+            "INSERT INTO regions VALUES ('%s', %f, %f, %d, %d, %d)",
+            name,
+            taxRate,
+            entryCost,
+            logisticsCost,
+            marketingCost,
+            efficiencyCost
+        ));
+       
+        scanner.close();
     }
 
     // Add a new event to the database.
     public void addEvent(String filename) throws SQLException, IOException {
-    
     }
 
     // Get a named region from the database.
@@ -106,17 +128,17 @@ public class Portal {
 
     // Get all regions from the database.
     public ArrayList<Region> getAllRegions() throws SQLException {
-    
+        return null;
     }
 
     // Get an event from the database by name.
     public Event getEvent(String name) throws SQLException {
-    
+        return null;
     }
 
     // Get a random event in between the minimum and maximum alignment values.
     public Event getRandomEvent(float minAlignment, float maxAlignment) throws SQLException {
-        
+        return null;
     }
 
     // Get a random positive event (with an alignment above .5).

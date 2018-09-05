@@ -56,4 +56,22 @@ public class Region {
     public int getEfficiencyCost() {
         return efficiencyCost;
     }
+
+    // Create a string representation of this region.
+    public String toString() {
+        return String.format(
+            "Region \"%s\":\n" +
+            "-> Tax Rate: %.3f\n" +
+            "-> Entry Cost: %.4f\n" +
+            "-> Logistics Cost: %d\n" +
+            "-> Marketing Cost: %d\n" +
+            "-> Efficiency Cost: %d",
+            name,
+            taxRate,
+            entryCost,
+            logisticsCost,
+            marketingCost,
+            efficiencyCost
+        );
+    }
 }

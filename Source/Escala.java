@@ -44,7 +44,7 @@ public class Escala {
 	
 	//Determine maximum sleep time between frames
 	public final static int GOAL_FPS = 2;
-	private final long RENDER_TIME = (long) 1.0 / GOAL_FPS * 1000;
+	private final long FRAME_TIME = (long) 1.0 / GOAL_FPS * 1000;
 
 	public Escala() {
 		// JFrame
@@ -128,18 +128,23 @@ public class Escala {
 			}
 			
 			//Sleep until we get desired frame rate
-			long totalTime = (System.nanoTime() - startTime) / 1000000;
-			try {
-				Thread.sleep(Math.max(0, RENDER_TIME - totalTime));
-			} catch (InterruptedException e) {
-				Thread.interrupted();
-				break;
-			}
-			
+			sleepForFrameRate(startTime);
 		}
 		
 		// TODO After Game clean up
 		// TODO Save option???
+	}
+	
+	// Sleep the required number of millisecconds to achieve desired frame rate
+	// We don't want 6000+ fps
+	public void sleepForFrameRate(double startTime){
+		long totalTime = (System.nanoTime() - startTime) / 1000000;
+		try {
+			Thread.sleep(Math.max(0, FRAME_TIME - totalTime));
+		} catch (InterruptedException e) {
+			Thread.interrupted();
+			break;
+		}
 	}
 	
 	public static void main(String[] args) {

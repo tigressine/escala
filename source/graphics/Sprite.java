@@ -39,7 +39,7 @@ public class Sprite extends JComponent {
 	public Sprite(int x, int y, double speed, int goalFPS) {
 		posX = x;
 		posY = y;
-		maxSpeed = speed / (double) goalFPS;
+		maxSpeed = speed / (double) Escala.GOAL_FPS;
 		arrived = true;
 	}
 	
@@ -85,22 +85,22 @@ public class Sprite extends JComponent {
 		dx = destination.getX() - posX;
 		dy = destination.getY() - posY;
 		
-		System.out.println("Current position: " + posX + ", "+ posY);
-		System.out.println("Current destinat: " + destination.getX() + ", " + destination.getY());
-		System.out.println(" * Distance to destination: " + dx + ", " + dy);
+		//System.out.println("Current position: " + posX + ", "+ posY);
+		//System.out.println("Current destinat: " + destination.getX() + ", " + destination.getY());
+		//System.out.println(" * Distance to destination: " + dx + ", " + dy);
 		
 		double newDist = Math.sqrt( dx*dx + dy*dy ) - maxSpeed;
 		orientation = Math.atan(dy / dx);
 		
 		if(newDist <= 0.0) {
-			System.out.println(" * Arrived");
+			//System.out.println(" * Arrived");
 			arrived = true;
 			velocity = 0.0;
 			posX = destination.getX();
 			posY = destination.getY();
 		} else {
 			//how far will destination be after this turn?
-			System.out.println(" * Distance to destination: " + newDist);
+			//System.out.println(" * Distance to destination: " + newDist);
 					
 			//x and y distance to destination
 			posX += maxSpeed * Math.cos(orientation);

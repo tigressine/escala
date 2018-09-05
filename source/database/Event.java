@@ -9,26 +9,26 @@ public class Event {
     private String description;
     private float alignment;
     private float cashEffect;
-    private int productEffect;
     private int marketingEffect;
     private int logisticsEffect;
+    private int efficiencyEffect;
 
     // Create a new event.
     public Event(String name,
                  String description,
                  float alignment,
                  float cashEffect,
-                 int productEffect,
                  int marketingEffect,
-                 int logisticsEffect) {
+                 int logisticsEffect,
+                 int efficiencyEffect) {
     
         this.name = name;
         this.description = description;
         this.alignment = alignment;
         this.cashEffect = cashEffect;
-        this.productEffect = productEffect;
         this.marketingEffect = marketingEffect;
         this.logisticsEffect = logisticsEffect;
+        this.efficiencyEffect = efficiencyEffect;
     }
 
     // Get the name of this event.
@@ -51,9 +51,9 @@ public class Event {
         return cashEffect;
     }
 
-    // Get the product effect of this event.
-    public int getProductEffect() {
-        return productEffect;
+    // Get the efficiency effect of this event.
+    public int getEfficiencyEffect() {
+        return efficiencyEffect;
     }
 
     // Get the marketing effect of this event.
@@ -64,5 +64,23 @@ public class Event {
     // Get the logisitics effect of this event.
     public int getLogisticsEffect() {
         return logisticsEffect;
+    }
+    
+    // Create a string representation of this event.
+    public String toString() {
+        return String.format(
+            "Event \"%s\":\n" +
+            "-> Alignment: %.3f\n" +
+            "-> Cash Effect: %.4f\n" +
+            "-> Logistics Effect: %d\n" +
+            "-> Marketing Effect: %d\n" +
+            "-> Efficiency Effect: %d",
+            name,
+            alignment,
+            cashEffect,
+            logisticsEffect,
+            marketingEffect,
+            efficiencyEffect
+        );
     }
 }

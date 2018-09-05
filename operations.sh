@@ -6,7 +6,7 @@ LIB="libraries"
 SOURCE="source"
 BUILD="bytecode"
 PACKAGE="escala"
-MAIN_CLASS="Driver"
+MAIN_CLASS="Escala"
 DIST="distribution"
 DERBY_LOG="derby.log"
 MANIFEST="manifest.txt"
@@ -14,7 +14,7 @@ MANIFEST="manifest.txt"
 # Build the project.
 function build_project {
     rm -rf $BUILD
-    javac -cp $LIB/*.jar -d $BUILD $SOURCE/database/*.java $SOURCE/*.java
+    javac -cp $LIB/*.jar -d $BUILD $SOURCE/graphics/*.java $SOURCE/database/*.java $SOURCE/*.java
 }
 
 # Run the project and clean up afterwards.

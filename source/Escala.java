@@ -1,3 +1,6 @@
+
+package escala;
+
 import java.awt.Canvas;
 import java.awt.Graphics2D;
 import java.awt.GraphicsConfiguration;
@@ -8,6 +11,8 @@ import java.awt.image.BufferStrategy;
 import java.awt.image.BufferedImage;
 
 import javax.swing.JFrame;
+
+import escala.graphics.*;
 
 /*
  * This class will create the window and start the game
@@ -97,7 +102,7 @@ public class Escala {
 		//Menu menu = new Menu();  
 		
 		//Setup Game Engine
-		Engine gameEngine = new Engine();
+		Engine gameEngine = new Engine(scaledWidth, scaledHeight, GOAL_FPS);
 				
 		while(isRunning) {
 			long startTime = System.nanoTime();

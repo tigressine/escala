@@ -1,3 +1,6 @@
+
+package escala.graphics;
+
 import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
@@ -33,10 +36,10 @@ public class Sprite extends JComponent {
 	
 	Color color;
 	
-	public Sprite(int x, int y, double speed) {
+	public Sprite(int x, int y, double speed, int goalFPS) {
 		posX = x;
 		posY = y;
-		maxSpeed = speed / (double) Escala.GOAL_FPS;
+		maxSpeed = speed / (double) goalFPS;
 		arrived = true;
 	}
 	

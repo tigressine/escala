@@ -45,77 +45,47 @@ public class Sprite extends JComponent {
 	
 	//TODO:: this hasn't been tested
 	private void followPath(){
-		double dx, dy;
-		dx = path[step].getX() - posX;
-		dy = path[step].getY() - posY;
+		Point prevDestination = destination;
+		destination = path[step];
+		moveTowardsDestination();
 		
-		//if there, stop : else, continue at max speed
-		if(dx*dx + dy*dy <= DELTA){
+		//if we arrived at our intermediate step, move to next step
+		if(arrived){
 			step++;
-			
-			//if this is final destination, stop
-			if(path.length <= step){
-				arrived = true;
-				step = 0;
-				velocity = 0.0;
-				posX = path[step].getX();
-				posY = path[step].getY();
-			}
-			return;
-		} else {
-			//how far will destination be after this turn?
-			double newDist = Math.sqrt( dx*dx + dy*dy ) - maxSpeed;
-			if(newDist <= 0.0){
-				posX = path[step].getX();
-				posY = path[step].getY();
-				step++;
-				return;
-			}
-					
-			//x and y distance to destination (remember your trig)
-			orientation = Math.atan(dy / dx);
-			posX += maxSpeed * Math.cos(orientation);
-			posY += maxSpeed * Math.sin(orientation);
+			arrived = false;
 		}
+		
+		//clean up
+		destination = prevDestination;
 	}
 	
-	//TODO: This TOTALLY DOESN'T WORK... but fun anyways...
+	//this now works
 	private void moveTowardsDestination(){
-		double dx, dy;
-		dx = destination.getX() - posX;
-		dy = destination.getY() - posY;
+		double dx = destination.getX() - posX;
+		double dy = destination.getY() - posY;
+		double dxdy = Math.abs(dx) + Math.abs(dy);
+		double dist = Math.sqrt(dx*dx + dy*dy);
 		
-		System.out.println("Current position: " + posX + ", "+ posY);
-		System.out.println("Current destinat: " + destination.getX() + ", " + destination.getY());
-		System.out.println(" * Distance to destination: " + dx + ", " + dy);
-		
-		double newDist = Math.sqrt( dx*dx + dy*dy ) - maxSpeed;
-		orientation = Math.atan(dy / dx);
-		
-		if(newDist <= 0.0) {
-			System.out.println(" * Arrived");
-			arrived = true;
-			velocity = 0.0;
+		//can we get to destination in 1 frame?, else move in correct direction
+		if(dist < maxSpeed){
 			posX = destination.getX();
 			posY = destination.getY();
+			arrived = true;
 		} else {
-			//how far will destination be after this turn?
-			System.out.println(" * Distance to destination: " + newDist);
-					
-			//x and y distance to destination
-			posX += maxSpeed * Math.cos(orientation);
-			posY += maxSpeed * Math.sin(orientation);
-			
-			if(dx < 0)
-				posX *= -1.0;
-			if(dy < 0)
-				posY *= -1.0;
+			posX += ( dx / dxdy ) * maxSpeed;
+			posY += ( dy / dxdy ) * maxSpeed;
 		}
+		
 	}
 	
 	//TODO::: this may need to be changed
 	//Update method
 	public void update(){
+		
+		// If we already arrived, there is nothing to do.
+		if(arrived)
+			return;
+		
 		double dx, dy;
 		
 		//follow path, or move towards destination, 
@@ -193,15 +163,12 @@ public class Sprite extends JComponent {
 	public void setPositionX(int x) {
 		posX = x;
 	}
-	
 	public double getPositionX() {
 		return posX;
 	}
-	
 	public void setPositionY(int y) {
 		posY = y;
 	}
-	
 	public double getPositionY(){
 		return posY;
 	}
@@ -213,7 +180,4 @@ public class Sprite extends JComponent {
 		Rectangle box = new Rectangle((int) posX, (int) posY, 10, 10);
 		g2.draw(box);
 	}
-	
-	
-	
 }

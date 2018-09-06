@@ -24,6 +24,11 @@ public class Start{
     public static int scaledWidth = (int) (width * SCALE);
     public static int scaledHeight = (int) (height * SCALE);
     JButton play = new JButton("PLAY");
+    JButton set = new JButton("SETTINGS");
+    JButton cred = new JButton("CREDITS");
+    JButton back = new JButton("BACK");
+    JButton back2 = new JButton("BACK");
+    JButton exit = new JButton("EXIT");
     JPanel cards = new JPanel(new CardLayout());
     
 
@@ -41,10 +46,17 @@ public class Start{
         
         addIndexCard(cards);
         addDiffCard(cards);
+        addSetCard(cards);
+        addCredCard(cards);
         
         frame.add(cards);
         
-        play.addActionListener(e -> tst(frame));
+        play.addActionListener(e -> toDiff(frame));
+        back.addActionListener(e -> toMenu(frame));
+        back2.addActionListener(e -> toMenu(frame));
+        set.addActionListener(e -> toSet(frame));
+        cred.addActionListener(e -> toCred(frame));
+        exit.addActionListener(e -> quit(frame));
     
        
         frame.setVisible(true);
@@ -54,9 +66,9 @@ public class Start{
         JPanel index = new JPanel();
         index.add(new JLabel("ESCALA"));
         index.add(play);
-        index.add(new JButton("SETTINGS"));
-        index.add(new JButton("CREDITS"));
-        index.add(new JButton("EXIT"));
+        index.add(set);
+        index.add(cred);
+        index.add(exit);
         
         pane.add(index, "INDEX");
         
@@ -70,6 +82,24 @@ public class Start{
         diff.add(new JButton("HARD"));
         
         pane.add(diff, "DIFF");
+    }
+    
+    public void addSetCard(Container pane){
+        JPanel set = new JPanel();
+        set.add(new JLabel("SETTINGS"));
+        set.add(new JLabel("This page is under construction"));
+        set.add(back);
+        
+        pane.add(set, "SET");
+    }
+    
+    public void addCredCard(Container pane){
+        JPanel cred = new JPanel();
+        cred.add(new JLabel("CREDITS"));
+        cred.add(new JLabel("This page is under construction"));
+        cred.add(back2);
+        
+        pane.add(cred, "CRED");
     }
     
     
@@ -110,10 +140,27 @@ public class Start{
         Start game = new Start();
     }
 
-    private void tst(Container parent) {
+    private void toDiff(Container parent) {
         CardLayout cl = (CardLayout)(cards.getLayout());
-        cl.next(cards);
-
+        cl.show(cards, "DIFF");
+    }
+    
+    private void toMenu(Container parent) {
+        CardLayout cl = (CardLayout)(cards.getLayout());
+        cl.show(cards, "INDEX");
+    }
+    
+    private void toSet(Container parent) {
+        CardLayout cl = (CardLayout)(cards.getLayout());
+        cl.show(cards, "SET");
+    }
+    
+    private void toCred(Container parent) {
+        CardLayout cl = (CardLayout)(cards.getLayout());
+        cl.show(cards, "CRED");
+    }
+    private void quit(Container parent) {
+        System.exit(0);
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

@@ -1,0 +1,32 @@
+WEEKEND
+    Tiger - udpdating layout on GitHub
+    Spencer - create globals and gamestate class
+	    - outline of logic class
+    Barath - add to settings, rough outline of game page 
+    Jonathan - export all graphics for map
+
+EARLY WEEK:
+    SUNDAYish: Tiger + Spencer - pass database object to game
+    MONDAYish: Barath + Spencer - Menu is available on game
+    TUESDAYish: Jonathan + Spencer - Make sure game map is rendered properly
+
+LATER WEEK:
+    WEDNESDAY: All - uml
+    
+    All - documentation, refactoring, and testing (if applicable).
+    Barath - main game page outline, event handling?
+    Tiger - work on scripts and database, make sure database info is accessible in game.
+    Jonathan - export graphics, logic class, sprites?
+    Spencer - refactoring, map responds to mouse events?
+    
+
+
+Deliverable:
+    User can start game, go through menus, and see map with moving sprites.
+    
+    
+Next Meeting (Sunday 16th):
+    turn in sprint 1
+    discuss design
+    game play
+    

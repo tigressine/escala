@@ -1,0 +1,11 @@
+BARATH
+User can interact with menus that allow them to change game settings, see credits, choose the dificulty level, and play the game.
+
+TIGER
+Game can access configuration information and stored data from database.
+
+JONATHAN
+User sees beautiful map with 10 regions, each region can be highlighted.
+	
+SPENCER
+User can see sprites following paths across canvas.  

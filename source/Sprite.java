@@ -13,6 +13,7 @@ import javax.swing.JComponent;
  * 		Boat
  * 
  * TODO:  fix max speed so it corresponds to frame rate and scale of map.
+ *        allow sprites to wrap around map horizontally
  * */
 
 public class Sprite extends JComponent {

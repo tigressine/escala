@@ -14,6 +14,8 @@ public class Menu{
     private final static double SCALE = 1.5;
     public static int scaledWidth = (int) (width * SCALE);
     public static int scaledHeight = (int) (height * SCALE);
+    public static int gameWidth = 1600;
+    public static int gameHeight = 900;
     JButton play = new JButton("PLAY");
     JButton set = new JButton("SETTINGS");
     JButton cred = new JButton("CREDITS");
@@ -49,6 +51,7 @@ public class Menu{
         addDiffCard(cards);
         addSetCard(cards);
         addCredCard(cards);
+        addGameCard(cards);
         
         frame.add(cards);
         
@@ -60,6 +63,7 @@ public class Menu{
         set.addActionListener(e -> toSet(frame));
         cred.addActionListener(e -> toCred(frame));
         exit.addActionListener(e -> quit(frame));
+        easy.addActionListener(e -> startGameEasy(frame));
        
         //show screen
         frame.setVisible(true);
@@ -153,7 +157,14 @@ public class Menu{
         cred.add(back2);
         
         pane.add(cred, "CRED");
-    }                        
+    }      
+    
+    public void addGameCard(Container pane){
+        JPanel game = new JPanel();
+        game.setLayout(null);
+        
+        pane.add(game, "GAME");
+    }
 
     public static void main(String args[]) {
         Menu game = new Menu(); //main method simply starts game
@@ -186,6 +197,14 @@ public class Menu{
     //exits game
     private void quit(Container parent) {
         System.exit(0);
+    }
+    
+    private void startGameEasy(Container parent) {
+        frame.setSize( gameWidth, gameHeight);
+        Dimension dim = Toolkit.getDefaultToolkit().getScreenSize();
+        frame.setLocation(dim.width/2-frame.getSize().width/2, dim.height/2-frame.getSize().height/2);
+        CardLayout cl = (CardLayout)(cards.getLayout());
+        cl.show(cards, "GAME");
     }
 
     // Variables declaration - do not modify                     

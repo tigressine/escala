@@ -10,11 +10,14 @@ import javax.imageio.ImageIO;
 
 /*
  * 
+ * NOTE::: if map is not rendered properly, double check path and names:
+ * 
  * TODO::: Ideally, we will pull NUM_REGIONS and regionNames from database
  * 				regionNames can be stored as paths...
  * 
  * 		Use cursor location to determine which region to highlight
  * 
+ * NOTE::: To improve game performance, reduce image size and pre-stretch all images when loading.
  * */
 
 public class Map {
@@ -22,8 +25,8 @@ public class Map {
 	private static final int NUM_REGIONS = 10;
 	BufferedImage background = null;
 	BufferedImage[] regions = new BufferedImage[NUM_REGIONS];
-	String[] regionNames = {"Asia", "EasternEurope", "LatinAmerica", "MiddleEast", 
-			"NorthAfrica", "NorthAmerica", "Ocenia", "SouthAfrica", "SouthAmerica", "WesternEurope"};
+	String[] regionNames = {"Asia", "Eastern Europe", "Latin America", "Middle East", 
+			"North Africa", "North America", "Ocenia", "South Africa", "South America", "Western Europe"};
 	BufferedImage[] glowRegions = new BufferedImage[NUM_REGIONS];
 	
 	int imageWidth = 1152;
@@ -32,12 +35,15 @@ public class Map {
 	
 	public Map(){
 		
-		// try to load every image
 		try { 
 			background = ImageIO.read(new File("assets/Background.png"));
 			
+			//load all regions
 			for(int i = 0; i < NUM_REGIONS; i++)
 				regions[i] = ImageIO.read(new File("assets/" + regionNames[i] + ".png"));
+			
+			//load all glow regions
+			// TODO:
 			
 		} catch (IOException e){
 			e.printStackTrace();

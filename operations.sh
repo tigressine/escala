@@ -1,13 +1,14 @@
 # Operations to manipulate this repository.
 # Written by Tiger Sachse.
 
-LIB="libraries"
+LIB="libs"
+BUILD="bin"
+DIST="dist"
+DOCS="docs"
+DATA="data"
 SOURCE="source"
-BUILD="bytecode"
 PACKAGE="escala"
 MAIN_CLASS="Escala"
-DIST="distribution"
-DOCS="documentation"
 DERBY_LOG="derby.log"
 MANIFEST="manifest.txt"
 
@@ -31,7 +32,7 @@ function package_project {
 
     # Prepare the distribution space. 
     mkdir -p $DIST
-    rm -f $DIST/$NAME.jar
+    rm -f $DIST/$NAME.zip
 
     # Create a manifest.
     echo "Main-Class: $PACKAGE.$MAIN_CLASS" > $MANIFEST
@@ -43,7 +44,7 @@ function package_project {
     cd ..
 
     # Zip the jar with its libraries and assets.
-    zip -r $DIST/$PACKAGE.zip $PACKAGE.jar $SOURCE/ $DOCS/ $LIB/
+    zip -r $DIST/$PACKAGE.zip $PACKAGE.jar $SOURCE/ $DOCS/ $LIB/ $DATA/
 
     # Clean up after yourself!
     rm $MANIFEST $PACKAGE.jar

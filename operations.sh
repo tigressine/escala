@@ -1,13 +1,13 @@
 # Operations to manipulate this repository.
 # Written by Tiger Sachse.
 
-DOCS="docs"
 LIB="libraries"
 SOURCE="source"
 BUILD="bytecode"
 PACKAGE="escala"
 MAIN_CLASS="Escala"
 DIST="distribution"
+DOCS="documentation"
 DERBY_LOG="derby.log"
 MANIFEST="manifest.txt"
 

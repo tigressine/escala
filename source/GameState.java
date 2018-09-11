@@ -1,3 +1,5 @@
+package escala;
+
 import javax.swing.JFrame;
 
 /* This Singleton class will store all the constants and global variables needed for the game to run.

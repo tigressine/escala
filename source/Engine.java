@@ -1,7 +1,11 @@
+package escala;
+
 import java.awt.Color;
 import java.awt.Graphics2D;
 import java.awt.Point;
 import java.util.Random;
+import escala.graphics.Map;
+import escala.graphics.Sprite;
 
 /*
  * This class does two things:

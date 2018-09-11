@@ -1,3 +1,5 @@
+package escala;
+
 import java.awt.*;
 import javax.swing.*;
 /**

@@ -1,3 +1,5 @@
+package escala;
+
 import java.awt.Canvas;
 import java.awt.Graphics2D;
 import java.awt.GraphicsConfiguration;

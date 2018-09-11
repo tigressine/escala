@@ -37,7 +37,7 @@ public class Menu{
      */
     public Menu() {
         //init frame
-    	GameState myGame = GameState.getInstance();
+        GameState myGame = GameState.getInstance();
         frame = myGame.getFrame();
         
         frame.setResizable(false);
@@ -170,10 +170,6 @@ public class Menu{
         pane.add(game, "GAME");
     }
 
- //   public static void main(String args[]) {
- //       Menu game = new Menu(); //main method simply starts game
- //   }
-
     //switches to diff page
     private void toDiff(Container parent) {
         CardLayout cl = (CardLayout)(cards.getLayout());
@@ -204,11 +200,11 @@ public class Menu{
     }
     
     private void startGameEasy(Container parent) {
-    	GameState myGame = GameState.getInstance();
-    	myGame.setDifficulty("Easy");
-    	myGame.setGameIsRunning(true);
-    	
-    	frame.dispose();
+        GameState myGame = GameState.getInstance();
+        myGame.setDifficulty("Easy");
+        myGame.setGameIsRunning(true);
+        
+        frame.dispose();
         myGame.setFrame(null);
     }
 }

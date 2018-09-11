@@ -1,3 +1,5 @@
+package escala;
+
 /*
  * This class initializes GameState (game variables) and the Database, 
  * 		and provides entry into the game

@@ -21,12 +21,19 @@ public class Viewer{
 	private BufferStrategy strategy;
 	private Graphics2D graphicsBuffer;
 	
+	//For performance testing
+	private long frameCount = 0;
+	
 	// CONSTRUCTOR
 	public Viewer(){
 		GameState myGame = GameState.getInstance();
-		
-		// JFrame
+		frame = myGame.getFrame();
+	}
+	
+	public void gameViewer(){
+		GameState myGame = GameState.getInstance();
 		frame = new JFrame();
+		myGame.setFrame(frame);
 		frame.setTitle("Escala Test");
 		frame.setSize( myGame.getWidth(), myGame.getHeight() + myGame.getFrameHeight());
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -43,12 +50,22 @@ public class Viewer{
 		strategy = canvas.getBufferStrategy();
 	}
 	
+	public void menuViewer(){
+		
+	}
+	
+	
 	// Sleep the required number of milliseconds to achieve desired frame rate
 	// We don't want 6000+ fps
-	public void sleepForFrameRate(long startTime, long frame_time) {
-		long totalTime = (System.nanoTime() - startTime) / 1000000;
+	private void sleepForFrameRate(long startTime, long allowedTime) {
+		long elapsedTime = (System.nanoTime() - startTime) / 1000000;
+		
+		//every 100 frames, display percent of frame time actually utilized.
+		if(frameCount++ % 100 == 0)
+			System.out.println( (double) allowedTime / (double) elapsedTime);
+		
 		try {
-			Thread.sleep(Math.max(0, frame_time - totalTime));
+			Thread.sleep(Math.max(0, allowedTime - elapsedTime));
 		} catch (InterruptedException e) {
 			Thread.interrupted();
 			e.printStackTrace();
@@ -62,23 +79,32 @@ public class Viewer{
 		
 		GameState myGame = GameState.getInstance();
 		
-		//setup game environment
-		// TODO: Menu stuff goes here
-		// Menu menu = new Menu();
+		while(myGame.gameIsRunning() != true) {
+			// stall here while menu is doing its thing...
+			// when user selects difficulty, gameIsRunning will be set to true
+			// NOTE: sleeping here does not affect menu listeners
+			
+			//sleep for .5 seconds between checks (don't waste CPU cycles)
+			sleepForFrameRate(System.nanoTime(), 500);
+		}
+		
+		
+		//setup game window environment
+		gameViewer();
 		
 		// Setup Game Engine
 		Engine engine = new Engine();
 		
 		
 		// MAIN GAME LOOP
-		while(myGame.gameIsRunning()){
+		while( myGame.gameIsRunning() ) {
 			
 			//get current time for frame rate calculations
 			long startTime = System.nanoTime();
 			
 			graphicsBuffer = (Graphics2D) strategy.getDrawGraphics();
 		
-			if (!strategy.contentsLost()){
+			if ( strategy.contentsLost() != true ){
 				
 				// TODO: check for user input here
 				

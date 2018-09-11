@@ -13,13 +13,18 @@ import java.util.Random;
 public class Engine {
 	public final int NUM_SPRITES = 4;
 	
-	Sprite[] sprites = new Sprite[NUM_SPRITES];
+	Sprite[] sprites = null;
 	
 	//initialize map, logic, random events, and other necessary classes
-	Map map = new Map();
+	Map map = null;
+	// Logic
+	// RandomEvent
+	// other...
 	
 	//TODO::: setup map and sprites...
 	public Engine(){
+		sprites = new Sprite[NUM_SPRITES];
+		
 		sprites[0] = new Sprite(0, 0, 30);
 		sprites[0].setColor(Color.GREEN);
 	
@@ -32,7 +37,7 @@ public class Engine {
 		sprites[3] = new Sprite(500, 500, 15);
 		sprites[3].setColor(Color.WHITE);
 		
-		
+		map = new Map();
 	}
 	
 	public void updateGame() {

@@ -1,4 +1,4 @@
-
+import javax.swing.JFrame;
 
 /* This Singleton class will store all the constants and global variables needed for the game to run.
  * 
@@ -24,10 +24,14 @@ public class GameState {
 	private double SCALE = 1.4;
 		
 	// Game Variables
-	private boolean gameIsRunning = true;
+	private boolean gameIsRunning = false;
+	private boolean gameIsPaused = false;	//TODO::: set this while event handling
+	private boolean gameIsActive = true;    //TODO::: 
+	private String difficulty = "";
 		
 	// Window, Frame, and Canvas related variables
 	private int GOAL_FPS = 60;
+	private static JFrame frame = null;
 	
 	
 	// CONSTRUCTOR
@@ -87,6 +91,28 @@ public class GameState {
 
 	public int getFrameHeight() {
 		return frameHeight;
+	}
+
+	public JFrame getFrame() {
+		if(frame == null)
+			frame = new JFrame();
+		return frame;
+	}
+	
+	public void setFrame(JFrame jf){
+		frame = jf;
+	}
+
+	public void setDifficulty(String diff) {
+		difficulty = diff;
+	}
+	
+	public String getDifficulty(){
+		return difficulty;
+	}
+
+	public void setGameIsRunning(boolean b) {
+		gameIsRunning = b;
 	}
 	
 	

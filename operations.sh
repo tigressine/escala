@@ -2,10 +2,10 @@
 # Written by Tiger Sachse.
 
 LIB="libs"
-BUILD="bin"
 DIST="dist"
 DOCS="docs"
 DATA="data"
+BUILD="build"
 SOURCE="source"
 PACKAGE="escala"
 MAIN_CLASS="Escala"
@@ -38,9 +38,11 @@ function package_project {
     echo "Main-Class: $PACKAGE.$MAIN_CLASS" > $MANIFEST
     echo "Class-Path: $LIB/derby.jar" >> $MANIFEST
 
+    #cp -r $DATA/ $BUILD/
+
     # Compress everything into a jar.
     cd $BUILD
-    jar cvfm ../$PACKAGE.jar ../$MANIFEST $PACKAGE/*
+    jar cvfm ../$PACKAGE.jar ../$MANIFEST $PACKAGE/* #$DATA/*
     cd ..
 
     # Zip the jar with its libraries and assets.

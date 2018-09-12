@@ -27,8 +27,8 @@ public class Escala {
     
     public static void main(String[] args) throws SQLException, IOException {
         Escala escala = new Escala();
-        //Portal portal = new Portal();
-        //portal.addRegion("data/raw/regions/NorthAmerica.txt");
-        //System.out.println(portal.getRegion("North America"));
+        Portal portal = new Portal();
+        portal.addRegion("data/raw/regions/NorthAmerica.txt");
+        System.out.println(portal.getRegion("North America"));
     }
 }

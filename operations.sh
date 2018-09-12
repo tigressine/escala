@@ -1,56 +1,68 @@
 # Operations to manipulate this repository.
 # Written by Tiger Sachse.
 
-LIB="libs"
-DIST="dist"
-DOCS="docs"
-DATA="data"
-BUILD="build"
-SOURCE="source"
-PACKAGE="escala"
+LIB_DIR="libs"
+DIST_DIR="dist"
+DOCS_DIR="docs"
+DATA_DIR="data"
+BUILD_DIR="build"
+SOURCE_DIR="source"
 MAIN_CLASS="Escala"
 DERBY_LOG="derby.log"
-MANIFEST="manifest.txt"
+PACKAGE_NAME="escala"
+RUN_UNIX_SCRIPT="run.sh"
+RUN_WINDOWS_SCRIPT="run.bat"
 
 # Build the project.
 function build_project {
-    rm -rf $BUILD
-    javac -cp $LIB/*.jar -d $BUILD $SOURCE/graphics/*.java $SOURCE/database/*.java $SOURCE/*.java
+    rm -rf $BUILD_DIR
+    mkdir $BUILD_DIR
+
+    cp -r $LIB_DIR $BUILD_DIR
+    cp -r $DATA_DIR $BUILD_DIR
+
+    javac -cp $BUILD_DIR/$LIB_DIR/*.jar -d $BUILD_DIR $SOURCE_DIR/graphics/*.java \
+        $SOURCE_DIR/database/*.java $SOURCE_DIR/*.java
 }
 
 # Run the project and clean up afterwards.
 function run_project {
     build_project &&
-    java -cp $BUILD:$LIB/* $PACKAGE.$MAIN_CLASS &&
-    rm -f $DERBY_LOG
-    rm -rf $BUILD
+    cd $BUILD_DIR
+    java -cp .:$LIB_DIR/$DERBY_JAR $PACKAGE_NAME.$MAIN_CLASS
+    cd ..
+    rm -rf $BUILD_DIR
 }
 
-# Package the project into a jar and clean up afterwards.
+# Package the project into an archive and clean up afterwards.
 function package_project {
+
+    # Build the project and copy extras into the build directory.
     build_project
+    cp -r $DOCS_DIR $BUILD_DIR
+    cp -r $SOURCE_DIR $BUILD_DIR
+
+    # Create executable files for the package for Windows and Unix.
+    echo "java -cp .:$LIB_DIR/$DERBY_JAR $PACKAGE_NAME.$MAIN_CLASS" > \
+        $BUILD_DIR/$RUN_UNIX_SCRIPT
+    echo "@echo off" > $BUILD_DIR/$RUN_WINDOWS_SCRIPT
+    echo "java -cp .;$LIB_DIR/$DERBY_JAR $PACKAGE_NAME.$MAIN_CLASS" >> \
+        $BUILD_DIR/$RUN_WINDOWS_SCRIPT
+
+    chmod +x $BUILD_DIR/$RUN_UNIX_SCRIPT
+    chmod +x $BUILD_DIR/$RUN_WINDOWS_SCRIPT
 
     # Prepare the distribution space. 
-    mkdir -p $DIST
-    rm -f $DIST/$NAME.zip
+    mkdir -p $DIST_DIR
+    rm -f $DIST_DIR/$NAME.zip
 
-    # Create a manifest.
-    echo "Main-Class: $PACKAGE.$MAIN_CLASS" > $MANIFEST
-    echo "Class-Path: $LIB/derby.jar" >> $MANIFEST
-
-    #cp -r $DATA/ $BUILD/
-
-    # Compress everything into a jar.
-    cd $BUILD
-    jar cvfm ../$PACKAGE.jar ../$MANIFEST $PACKAGE/* #$DATA/*
+    # Zip everything in the build directory.
+    cd $BUILD_DIR
+    zip -r ../$DIST_DIR/$PACKAGE_NAME.zip *
     cd ..
 
-    # Zip the jar with its libraries and assets.
-    zip -r $DIST/$PACKAGE.zip $PACKAGE.jar $SOURCE/ $DOCS/ $LIB/ $DATA/
-
     # Clean up after yourself!
-    rm $MANIFEST $PACKAGE.jar
-    rm -rf $BUILD
+    rm -rf $BUILD_DIR
 }
 
 # Main entry point of this script.

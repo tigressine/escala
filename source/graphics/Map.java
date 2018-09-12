@@ -4,8 +4,8 @@ import java.awt.Color;
 import java.awt.Graphics2D;
 import java.awt.image.BufferedImage;
 import java.io.File;
+import java.net.URL;
 import java.io.IOException;
-
 import javax.imageio.ImageIO;
 import escala.GameState;
 
@@ -35,13 +35,15 @@ public class Map {
     
     
     public Map(){
-        
-        try { 
-            background = ImageIO.read(new File("data/assets/Background.png"));
+        try {
+            URL url = getClass().getResource("/data/assets/Background.png");
+            background = ImageIO.read(new File(url.getPath()));
             
             //load all regions
-            for(int i = 0; i < NUM_REGIONS; i++)
-                regions[i] = ImageIO.read(new File("data/assets/" + regionNames[i] + ".png"));
+            for(int i = 0; i < NUM_REGIONS; i++) {
+                url = getClass().getResource("/data/assets/" + regionNames[i] + ".png"); 
+                regions[i] = ImageIO.read(new File(url.getPath()));
+            }
             
             //load all glow regions
             // TODO:

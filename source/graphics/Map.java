@@ -26,8 +26,8 @@ public class Map {
     private static final int NUM_REGIONS = 10;
     BufferedImage background = null;
     BufferedImage[] regions = new BufferedImage[NUM_REGIONS];
-    String[] regionNames = {"Asia", "Eastern Europe", "Latin America", "Middle East", 
-            "North Africa", "North America", "Ocenia", "South Africa", "South America", "Western Europe"};
+    String[] regionNames = {"Asia", "EasternEurope", "LatinAmerica", "MiddleEast", 
+            "NorthAfrica", "NorthAmerica", "Ocenia", "SouthAfrica", "SouthAmerica", "WesternEurope"};
     BufferedImage[] glowRegions = new BufferedImage[NUM_REGIONS];
     
     int imageWidth = 1152;
@@ -37,11 +37,11 @@ public class Map {
     public Map(){
         
         try { 
-            background = ImageIO.read(new File("assets/Background.png"));
+            background = ImageIO.read(new File("data/assets/Background.png"));
             
             //load all regions
             for(int i = 0; i < NUM_REGIONS; i++)
-                regions[i] = ImageIO.read(new File("assets/" + regionNames[i] + ".png"));
+                regions[i] = ImageIO.read(new File("data/assets/" + regionNames[i] + ".png"));
             
             //load all glow regions
             // TODO:

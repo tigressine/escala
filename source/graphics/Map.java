@@ -67,15 +67,11 @@ public class Map {
         // right now this is just brute force... need to load these automatically
 
         int asiaX[] = {820, 782, 796, 835, 920, 926, 999, 1037, 1037, 929, 910};
-        int asiaY[] = {333, 266, 196, 150, 157, 138, 142, 184,  221,  363, 348
-
-};
+        int asiaY[] = {333, 266, 196, 150, 157, 138, 142, 184,  221,  363, 348};
         regionsPoly[0] = new Polygon(asiaX, asiaY, asiaX.length);
         
         int eEuropeX[] = {985, 983, 696, 706, 642, 617, 585, 631, 830, 1077,  1052};
-        int eEuropeY[] = {191, 168, 156, 194, 178, 219, 179, 80,  57,   90,   161
-
-};
+        int eEuropeY[] = {191, 168, 156, 194, 178, 219, 179, 80,  57,   90,   161};
         regionsPoly[1] = new Polygon(eEuropeX, eEuropeY, eEuropeX.length);
         
         int lAmericaX[] = {112, 153, 183, 293, 238, 127};
@@ -86,8 +82,7 @@ public class Map {
         int mEastY[] = {317, 198, 184, 152, 135, 161, 269};
         regionsPoly[3] = new Polygon(mEastX, mEastY, mEastX.length);
         
-        int nAfricaX[] = {504, 469, 469, 510, 578, 658, 702, 729, 706
-};
+        int nAfricaX[] = {504, 469, 469, 510, 578, 658, 702, 729, 706};
         int nAfricaY[] = {356, 316, 271, 219, 209, 233, 317, 312, 356};
         regionsPoly[4] = new Polygon(nAfricaX, nAfricaY, nAfricaX.length);
         
@@ -96,16 +91,11 @@ public class Map {
         regionsPoly[5] = new Polygon(nAmericaX, nAmericaY, nAmericaX.length);
         
         int oceniaX[] = {923, 892, 985, 1117, 1139, 1086};
-        int oceniaY[] = {510, 337, 285, 377,  525,  561
-
-};
+        int oceniaY[] = {510, 337, 285, 377,  525,  561};
         regionsPoly[6] = new Polygon(oceniaX, oceniaY, oceniaX.length);
         
-        int sAfricaX[] = {566, 705, 728, 711, 634, 603
-};
-        int sAfricaY[] = {352, 352, 415, 472, 508, 508
-
-};
+        int sAfricaX[] = {566, 705, 728, 711, 634, 603};
+        int sAfricaY[] = {352, 352, 415, 472, 508, 508};
         regionsPoly[7] = new Polygon(sAfricaX, sAfricaY, sAfricaX.length);
         
         int sAmericaX[] = {251, 408, 336, 287, 226};
@@ -115,7 +105,6 @@ public class Map {
         int wEuropeX[] = {503, 506, 621, 636, 592};
         int wEuropeY[] = {214, 141, 77,  111, 222};
         regionsPoly[9] = new Polygon(wEuropeX, wEuropeY, wEuropeX.length);
-        
     }
 
     public void renderMap(Graphics2D g) {

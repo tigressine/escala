@@ -2,15 +2,23 @@ package escala.graphics;
 
 import java.awt.Polygon;
 import java.net.URL;
-import java.awt.*;
+import java.awt.Point;
 import java.io.*;
 import java.util.*;
+import javax.swing.JFrame;
 
-public class PolyMouseList{
+/**
+ *
+ * @author Jonathan Ponader
+ */
+
+public class PolyMouseList
+{
+	private static PolyMouseList instance = null;
 
 	private static final int NUM_REGIONS = 10;
-	Polygon [] regions = new Polygon[NUM_REGIONS];
-	String[] regionNames = {"Asia", "EasternEurope", "LatinAmerica", "MiddleEast", 
+	static Polygon [] regions = new Polygon[NUM_REGIONS];
+	final String[] regionNames = {"Asia", "EasternEurope", "LatinAmerica", "MiddleEast", 
             "NorthAfrica", "NorthAmerica", "Ocenia", "SouthAfrica", "SouthAmerica", "WesternEurope"};
 
 	public PolyMouseList()
@@ -19,17 +27,17 @@ public class PolyMouseList{
 
 		for(int i = 0; i < NUM_REGIONS; i++) 
 		{
-                url = getClass().getResource("/data/polygons/" + regionNames[i] + ".txt"); 
-                try
-                {
-                	regions[i] = addPoly(new File(url.getPath()));
-                }
-                catch (IOException e)
-                {
-           			 e.printStackTrace();
-           		}
-        }
+            url = getClass().getResource("/data/polygons/" + regionNames[i] + ".txt"); 
 
+            try
+            {
+            	regions[i] = addPoly(new File(url.getPath()));
+            }
+            catch (IOException e)
+            {
+       			 e.printStackTrace();
+       		}
+        }
 	}
 
 	public int contains(Point p, double scale)
@@ -45,7 +53,7 @@ public class PolyMouseList{
 		return Integer.MAX_VALUE;
 	}
 
-	public Polygon addPoly(File file) throws  IOException
+	private Polygon addPoly(File file) throws  IOException
 	{
 		Polygon poly = new Polygon();
 		Scanner in = new Scanner(file);
@@ -55,4 +63,11 @@ public class PolyMouseList{
 
 		return poly;
 	}
+
+	public static PolyMouseList getInstance() {
+        if(instance == null){
+            instance = new PolyMouseList();
+        }
+        return instance;
+    }
 }

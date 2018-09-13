@@ -8,8 +8,10 @@ import java.net.URL;
 import java.io.IOException;
 import javax.imageio.ImageIO;
 import escala.GameState;
-import java.awt.*;
+import java.awt.Point;
 import javax.swing.JFrame;
+import java.awt.MouseInfo;
+
 
 /*
  * 
@@ -35,9 +37,10 @@ public class Map {
     int imageWidth = 1152;
     int imageHeight = 648;
 
-    PolyMouseList poly = new PolyMouseList();
-    
-    
+    PolyMouseList poly = PolyMouseList.getInstance();
+    static int skip = Integer.MAX_VALUE;
+    static boolean clicked = false;
+
     public Map(){
         try {
             URL url = getClass().getResource("/data/assets/Background.png");
@@ -69,7 +72,8 @@ public class Map {
         Point p = MouseInfo.getPointerInfo().getLocation();
         Point r = myGame.getFrame().getLocation();
 
-        int skip = poly.contains(new Point((p.x - r.x),(p.y - r.y - 23)), myGame.getScale());
+        if(clicked == false)
+            skip = poly.contains(new Point((p.x - r.x),(p.y - r.y - 23)), myGame.getScale());
 
         //System.out.println((p.x - r.x) + " " + p.y - r.y - 23));
         
@@ -95,4 +99,15 @@ public class Map {
             g.drawImage(glowRegions[skip], 0, 0, myGame.getWidth(), myGame.getHeight(), 0, 0, imageWidth, imageHeight, null);
         
     }
+
+    public static void setSkip(int reg)
+    {
+        skip = reg;
+    }
+
+    public static void setClick(boolean click)
+    {
+        clicked = click;
+    }
 }
+

@@ -5,8 +5,9 @@ import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.Point;
 import java.awt.Rectangle;
-
 import javax.swing.JComponent;
+
+import escala.GameState;
 
 /*
  * This is a base class for all sprite types:
@@ -35,10 +36,16 @@ public class Sprite extends JComponent {
     Point destination;  //final destination (use if path is null)
     private boolean arrived;
     
+    private int screenWidth;
+    private int screenHeight;
     
     Color color;
     
     public Sprite(int x, int y, double speed) {
+        GameState myGame = GameState.getInstance();
+        screenWidth = myGame.getWidth();
+        screenHeight = myGame.getHeight();
+
         posX = x;
         posY = y;
         maxSpeed = speed;
@@ -62,6 +69,38 @@ public class Sprite extends JComponent {
         destination = prevDestination;
     }
     
+
+    // allow sprite to wrap horizontally around the world
+    private void moveTowardsDestinationWrapped(){
+
+        double prevX = posX;
+        
+        double delta = 0.5 * (double) screenWidth;
+
+        if(posX < delta && destination.getX() - posX > delta){
+            //if sprite is on left side, and faster to wrap around
+            posX += screenWidth;
+            moveTowardsDestination();
+	    if(posX > screenWidth)
+                posX -= screenWidth;
+        } else if (posX > delta && posX - destination.getX() > delta){
+            //if sprite is on right side, and faster to wrap around
+            posX -= screenWidth;
+            moveTowardsDestination();
+	
+            if(posX < 0.0)
+                posX += screenWidth;
+        } else {
+                moveTowardsDestination();
+        }
+
+        // DEBUGGING TELEPORTS...
+        //if ( Math.abs(prevX - posX) > maxSpeed)
+        //    if ( prevX - maxSpeed > 0.0 || prevX + maxSpeed < screenWidth)
+        //        System.out.println("JUMPED from " + prevX + " to " + posX);
+    }
+
+
     //this now works
     private void moveTowardsDestination(){
         double dx = destination.getX() - posX;
@@ -95,7 +134,7 @@ public class Sprite extends JComponent {
             followPath();
             return;
         } else if(destination != null) {
-            moveTowardsDestination();
+            moveTowardsDestinationWrapped();
             return;
         } else {
             

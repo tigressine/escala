@@ -9,3 +9,28 @@ User sees beautiful map with 10 regions, each region can be highlighted.
 	
 SPENCER
 User can see sprites following paths across canvas.  
+
+
+
+Priority	Story Point	Stories
+1				As a gamer, I want to be able to change the resolution of the game.
+				As a gamer, I want to be able to change the difficulty of the game.
+				As a gamer, I want to be able to select different products for the the game.
+				As a gamer, I want to be able to pause the game on click or when i open a menu.
+				As a gamer, I want to be able to change the speed of the game.
+				As a gamer, I want the software to laod to the center of my screen.
+				As a gamer, I want to be able to change the setting before starting the game.
+				As a gamer, I want the graphics to change when I hover over the country.
+				As a gamer, I want to see a demo before playing the game.
+				As a gamer, I want to be able to click on the map, and see the effects of my click.
+				As a gamer, I want the map to change on hover.
+				As a gamer, I want the game to conitnue without me having to click next turn.
+				As a gamer, I want to be able to uograde my product, marketing and logistics.
+				As a gamer, I want to see my product being shipped accross the globe.
+				As a gamer, I want the game to have some randomness, so I cant play the same game twice.
+				As a gamer, I want to see my stats without having to enter a seprate menu.
+				As a gamer, I want to be able to change my settings mid game.
+				As a gamer, I want to be able to name my product, and see it used in the game.
+				
+				
+		

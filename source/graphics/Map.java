@@ -29,7 +29,7 @@ public class Map {
     BufferedImage background = null;
     BufferedImage[] regions = new BufferedImage[NUM_REGIONS];
     String[] regionNames = {"Asia", "EasternEurope", "LatinAmerica", "MiddleEast", 
-            "NorthAfrica", "NorthAmerica", "Ocenia", "SouthAfrica", "SouthAmerica", "WesternEurope"};
+            "NorthAfrica", "NorthAmerica", "Oceania", "SouthAfrica", "SouthAmerica", "WesternEurope"};
     BufferedImage[] glowRegions = new BufferedImage[NUM_REGIONS];
     
     int imageWidth = 1152;

@@ -60,8 +60,7 @@ public class Map {
             
         } catch (IOException e){
             e.printStackTrace();
-        }
-        
+        } 
     }
 
     public void renderMap(Graphics2D g) {
@@ -96,8 +95,7 @@ public class Map {
         }
 
         if(skip < NUM_REGIONS)
-            g.drawImage(glowRegions[skip], 0, 0, myGame.getWidth(), myGame.getHeight(), 0, 0, imageWidth, imageHeight, null);
-        
+            g.drawImage(glowRegions[skip], 0, 0, myGame.getWidth(), myGame.getHeight(), 0, 0, imageWidth, imageHeight, null);  
     }
 
     public static void setSkip(int reg)

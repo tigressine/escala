@@ -3,8 +3,9 @@ package escala.graphics;
 import java.awt.Polygon;
 import java.net.URL;
 import java.awt.Point;
-import java.io.*;
-import java.util.*;
+import java.io.IOException;
+import java.io.File;
+import java.util.Scanner;
 import javax.swing.JFrame;
 
 /**

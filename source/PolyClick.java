@@ -9,8 +9,6 @@ import java.awt.Point;
 import javax.swing.JFrame;
 import java.awt.MouseInfo;
 
-import java.io.*;
-import java.util.*;
 
 /**
  *
@@ -31,9 +29,9 @@ class PolyClick implements MouseListener{
 	}
 
     public void mouseClicked(MouseEvent e) {
-        eventOutput("Mouse clicked (# of clicks: "
-                + e.getClickCount() + ")", e);
+        eventOutput("Mouse clicked (# of clicks: " + e.getClickCount() + ")", e);
 
+        //Checks to see if in Region, then highlight region till clicked out of
         Point p = MouseInfo.getPointerInfo().getLocation();
         Point r = myGame.getFrame().getLocation();
 
@@ -48,13 +46,8 @@ class PolyClick implements MouseListener{
         {
             Map.setSkip(region);
             Map.setClick(true);
-  
         }
-           
-
-
     }
-
 
 	private void eventOutput(String eventDescription, MouseEvent e) {
         System.out.println(eventDescription + " detected on "

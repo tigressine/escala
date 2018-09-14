@@ -48,6 +48,7 @@ public class Viewer{
         canvas.setSize( myGame.getWidth(), myGame.getHeight());
         frame.add(canvas, 0);
 
+        //Adds Mouse Listener from class PolyClick
         canvas.addMouseListener(new PolyClick());
             
         // Establish Buffer Strategy

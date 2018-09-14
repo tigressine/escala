@@ -7,6 +7,9 @@ import java.awt.GraphicsEnvironment;
 import java.awt.image.BufferStrategy;
 import javax.swing.JFrame;
 
+import java.awt.Component;
+import java.awt.PopupMenu;
+
 /*
  * This class sets up the JFrame and Canvas and contains the main game loop. 
  * It also enables double buffering, and enforces fps limits.
@@ -16,6 +19,8 @@ public class Viewer{
     
     private JFrame frame;
     private Canvas canvas;
+
+    PopupMenu cash;
     
     //Double Buffer Graphics Configuration
     private GraphicsConfiguration configuration = 
@@ -46,6 +51,10 @@ public class Viewer{
         canvas = new Canvas(configuration);
         canvas.setSize( myGame.getWidth(), myGame.getHeight());
         frame.add(canvas, 0);
+
+        //Game Stats view
+        cash = new PopupMenu("Test");
+        canvas.add(cash);
             
         // Establish Buffer Strategy
         canvas.createBufferStrategy(2);
@@ -114,6 +123,7 @@ public class Viewer{
                 
                 //render map, sprites, and other stuff here
                 engine.renderGame(graphicsBuffer);
+                cash.show(canvas, 1,1);
                 
                 strategy.show();
                 graphicsBuffer.dispose();

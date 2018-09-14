@@ -132,8 +132,31 @@ public class Portal {
     }
 
     // Get all regions from the database.
-    public ArrayList<Region> getAllRegions() throws SQLException {
-        return null;
+    public HashMap<String, Region> getAllRegions() {
+        try {
+            HashMap<String, Region> regions = new HashSet<>();
+            Statement statement = connection.createStatement();
+            ResultSet results = statement.executeQuery("SELECT * FROM regions");
+
+            while (results.next()) {
+                Region region = new Region(results.getString("name"),
+                                           results.getFloat("taxRate"),
+                                           results.getFloat("entryCost"),
+                                           results.getInt("logisticsCost"),
+                                           results.getInt("marketingCost"),
+                                           results.getInt("efficiencyCost"));
+                regions.put(region.getName(), region); 
+            }
+            
+            if (statement != null) {
+                statement.close();
+            }
+
+            return regions;
+        }
+        catch (IOException | SQLException exception) {
+            return null;
+        }
     }
 
     // Get an event from the database by name.

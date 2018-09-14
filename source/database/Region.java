@@ -2,6 +2,8 @@
 
 package escala.database;
 
+import java.awt.image.*;
+
 // Read-only Region data structure.
 public class Region {
     private String name;
@@ -10,6 +12,7 @@ public class Region {
     private int logisticsCost;
     private int marketingCost;
     private int efficiencyCost;
+    private 
 
     // Create a new region.
     public Region(String name,

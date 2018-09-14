@@ -23,7 +23,7 @@ public class GameState {
     private int width = 1152;
     private int height = 648;
     private int frameHeight = 47;
-    private double SCALE = 1.4;
+    private double SCALE = 1;
         
     // Game Variables
     private boolean gameIsRunning = false;

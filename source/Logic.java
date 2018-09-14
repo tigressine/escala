@@ -2,7 +2,6 @@
 // Commented out for Local Testing From Main
 package escala;
 
-import java.util.Calendar;
 
 /*
 *	0	12	Australia (Oceania)
@@ -29,7 +28,6 @@ public class Logic
 	private int logistics;
 	private int marketing;
 	private int product;
-	private int minDiff;
 
 
 	public static void main(String[] args)
@@ -67,7 +65,6 @@ public class Logic
 		this.product = product;
 		this.marketing = marketing;
 		this.logistics = logistics;
-		this.minDiff = 20;
 
 		active = new boolean [10];
 		regMarketShare = new int [10];
@@ -115,13 +112,12 @@ public class Logic
 
 	void timedUpdate()
 	{
+		int minDiff =  Math.min(logistics, Math.min(marketing, product)) + 20;
 		int log = Math.min(minDiff,this.logistics);
 		int mark = Math.min(minDiff,this.marketing);
 		int prod = Math.min(minDiff,this.product);
 		int total = 0;
 		int flag = 0;
-
-		maxDiffIncrement();
 
 		for(int i = 0; i < active.length; i++)
 		{
@@ -144,12 +140,6 @@ public class Logic
 	{
 		String string = String.format("%d, %d", this.cash, this.marketShare);
 		return string;
-	}
-
-	void maxDiffIncrement()
-	{
-		int min = Math.min(logistics, Math.min(marketing, product));
-		this.minDiff = min + 20;
 	}
 
 

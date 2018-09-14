@@ -2,6 +2,9 @@
 
 package escala.database;
 
+import java.io.*;
+import java.net.*;
+import javax.imageio.*;
 import java.awt.image.*;
 
 // Read-only Region data structure.
@@ -12,7 +15,8 @@ public class Region {
     private int logisticsCost;
     private int marketingCost;
     private int efficiencyCost;
-    private 
+    private BufferedImage image;
+    private BufferedImage outline;
 
     // Create a new region.
     public Region(String name,
@@ -20,7 +24,7 @@ public class Region {
                   float entryCost,
                   int logisticsCost,
                   int marketingCost,
-                  int efficiencyCost) {
+                  int efficiencyCost) throws IOException {
     
         this.name = name;
         this.taxRate = taxRate;
@@ -28,6 +32,8 @@ public class Region {
         this.marketingCost = marketingCost;
         this.logisticsCost = logisticsCost;
         this.efficiencyCost = efficiencyCost;
+        loadImage();
+        loadOutline();
     }
 
     // Get the name of this region.
@@ -60,6 +66,16 @@ public class Region {
         return efficiencyCost;
     }
 
+    // Get the associated image for this region.
+    public BufferedImage getImage() {
+        return image;
+    }
+
+    // Get the associated image outline for this region.
+    public BufferedImage getOutline() {
+        return outline;
+    }
+
     // Create a string representation of this region.
     public String toString() {
         return String.format(
@@ -76,5 +92,17 @@ public class Region {
             marketingCost,
             efficiencyCost
         );
+    }
+
+    // Load the associated image from file.
+    private void loadImage() throws IOException {
+        URL url = getClass().getResource("/data/assets/" + name + ".png");
+        image = ImageIO.read(new File(url.getPath()));
+    }
+
+    // Load the associated outline from file.
+    private void loadOutline() throws IOException {
+        URL url = getClass().getResource("/data/assets/" + name + "Glow.png");
+        outline = ImageIO.read(new File(url.getPath()));
     }
 }

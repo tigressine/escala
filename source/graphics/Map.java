@@ -8,6 +8,8 @@ import java.net.URL;
 import java.io.IOException;
 import javax.imageio.ImageIO;
 import escala.GameState;
+import escala.Logic;
+import java.awt.Font;
 
 /*
  * 
@@ -32,6 +34,8 @@ public class Map {
     
     int imageWidth = 1152;
     int imageHeight = 648;
+
+    Font font = new Font("serif", Font.BOLD, 48);
     
     
     public Map(){
@@ -56,6 +60,7 @@ public class Map {
 
     public void renderMap(Graphics2D g) {
         GameState myGame = GameState.getInstance();
+        Logic logic = Logic.getInstance();
         
         // render background
         if(background != null)
@@ -73,7 +78,13 @@ public class Map {
         // TODO use cursor location to determine which region should be highlighted
         
         // TODO render highlighted region
-        
+
+        //Stats on Screen
+    // TODO Change to Scalable once merged to Click-able version 
+        g.setFont(font);
+        g.drawString(logic.cashToString(),10,630);
+        g.drawString(logic.shareToString(),1000,630);
+       
     }
 
 }

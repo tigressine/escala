@@ -4,70 +4,54 @@ package escala;
 
 
 /*
-*	0	12	Australia (Oceania)
-*	1	14	Western Europe
-*	2	8	Eastrn Europe (All of Rusia)
-*	3	17	SouthEast Asia(China, India Philipins)
-*	4	5	Midddle East
-*	5	7	North Africa
-*	6	10	South Africa
-*	7	13	North America (Canada, US)
-*	8	8	Latin/Central America(Mexico, Central Carribean)
-*	9	6	South Amrica
+*	0	17	Asia(China, India Philippines)
+*	1	8	Eastern Europe (All of Russia)
+*	2	8	Latin/Central America(Mexico, Central Caribbean)
+*	3	5	Middle East
+*	4	7	North Africa
+*	5	13	North America (Canada, US)
+*	6	12	Oceania
+*	7	10	South Africa
+*	8	6	South America
+*	9	14	Western Europe
 */
 
 
 public class Logic
 {
+	private static final int NUM_REGIONS = 10;
+	String[] regionNames = {"Asia", "EasternEurope", "LatinAmerica", "MiddleEast", 
+            "NorthAfrica", "NorthAmerica", "Ocenia", "SouthAfrica", "SouthAmerica", "WesternEurope"};
 
-	private int marketShare;
-	private boolean [] active;
-	private final double [] distribution = { .12, .14, .08, .17, .05, .07, .10, .13, .08, .06 };
-	int [] regMarketShare;
-	private int cash;
-	private int logistics;
-	private int marketing;
-	private int product;
+    private static Logic instance = null;
+	private int marketShare = 0;
+	private boolean [] active = new boolean [10];
+	private final double [] distribution = { .17, .08, .08, .05, .07, .13, .12, .10, .06, .14 };
+	int [] regMarketShare = new int [10];
+	private int cash = 0;
+	private int logistics = 0;
+	private int marketing = 0;
+	private int product = 0;
 
-
-	public static void main(String[] args)
+	public Logic()
 	{
-		Logic test = new Logic(0,0,0,0);
 
-		System.out.println(test.toStringStats());
-
-		test.updateStats(1000,53,35,23);
-
-		for(int i = 0; i < 5 ; i++)
-		{
-			test.setActive(i);
-		}
-
-		System.out.println(test.toStringStats());
-
-		for(int i = 0; i < 10; i++)
-		{
-
-			for(int j = 0; j < 10; j++)
-				System.out.print(test.regMarketShare[j] + "  ");
-
-			System.out.println("");
-			test.timedUpdate();
-
-			System.out.println(test.toStringTimed());
-		}
 	}
 
+	public static Logic getInstance() {
+    	if(instance == null)
+       	{
+            instance = new Logic();
+    	}
+        return instance;
+    }
 
-	public Logic(int cash, int product, int marketing, int logistics)
+	public void setLogic(int cash, int product, int marketing, int logistics)
 	{
 		this.cash = cash;
 		this.product = product;
 		this.marketing = marketing;
 		this.logistics = logistics;
-
-		active = new boolean [10];
-		regMarketShare = new int [10];
 	}
 
 	//Checks to see if the player can afford the purchase, if so purchases the goods
@@ -105,6 +89,18 @@ public class Logic
 		return string;
 	}
 
+	public String cashToString()
+	{
+		String string = String.format("$ %05d", cash);
+		return string;
+	}
+
+	public String shareToString()
+	{
+		String string = String.format("%02d %%", marketShare);
+		return string;
+	}
+
 	void setActive(int region)
 	{
 		this.active[region] =  true;
@@ -119,7 +115,7 @@ public class Logic
 		int total = 0;
 		int flag = 0;
 
-		for(int i = 0; i < active.length; i++)
+		for(int i = 0; i < NUM_REGIONS; i++)
 		{
 			if(active[i])
 			{
@@ -135,13 +131,4 @@ public class Logic
 		this.marketShare = total/10;
 		this.cash += (this.marketShare) * (log + mark + prod);
 	}
-
-	public String toStringTimed()
-	{
-		String string = String.format("%d, %d", this.cash, this.marketShare);
-		return string;
-	}
-
-
-
 }

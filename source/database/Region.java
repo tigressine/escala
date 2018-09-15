@@ -12,7 +12,6 @@ public class Region {
     private int logisticsCost;
     private int marketingCost;
     private int efficiencyCost;
-    private 
 
     // Create a new region.
     public Region(String name,

@@ -1,3 +1,32 @@
-Done:
+What was accomplished:
+    Johnathan:
+            Create Maps
+            Mouse listener
+            Logic Class
+                + draw to screen
+    Tiger:
+        working on database
+        
+    Barath:
+        Menu stuff
+            
+            
+    Spencer - 
+        Rendering Map
+        Frame rate issues...
+        
+        
+        
+Finishing Sprint 1:
+    Vision Statement
+    User Stories
+        priority, storypoints, validation
+    Product Backlog
+    Sprint Backlog
+    Burndown Chart
+    Design Docs - UML
+    Code
 
+
+        
     

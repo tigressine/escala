@@ -1,11 +1,11 @@
+// Part of Escala.
+// Written by Barath Tirumala.
+
 package escala;
 
 import java.awt.*;
 import javax.swing.*;
-/**
- *
- * @author Barath Tirumala
- */
+
 public class Menu{
     
     //declare some variables

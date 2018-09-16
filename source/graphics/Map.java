@@ -8,8 +8,10 @@ import java.net.URL;
 import java.io.IOException;
 import javax.imageio.ImageIO;
 import escala.GameState;
-import java.awt.*;
+import java.awt.Point;
 import javax.swing.JFrame;
+import java.awt.MouseInfo;
+
 
 /*
  * 
@@ -29,15 +31,18 @@ public class Map {
     BufferedImage background = null;
     BufferedImage[] regions = new BufferedImage[NUM_REGIONS];
     String[] regionNames = {"Asia", "EasternEurope", "LatinAmerica", "MiddleEast", 
-            "NorthAfrica", "NorthAmerica", "Ocenia", "SouthAfrica", "SouthAmerica", "WesternEurope"};
+            "NorthAfrica", "NorthAmerica", "Oceania", "SouthAfrica", "SouthAmerica", "WesternEurope"};
     BufferedImage[] glowRegions = new BufferedImage[NUM_REGIONS];
     
     Polygon[] regionsPoly = new Polygon[NUM_REGIONS];
     
     int imageWidth = 1152;
     int imageHeight = 648;
-    
-    
+
+    PolyMouseList poly = PolyMouseList.getInstance();
+    static int skip = Integer.MAX_VALUE;
+    static boolean clicked = false;
+
     public Map(){
         try {
             URL url = getClass().getResource("/data/assets/Background.png");
@@ -115,11 +120,10 @@ public class Map {
         Point p = MouseInfo.getPointerInfo().getLocation();
         Point r = myGame.getFrame().getLocation();
 
-        int skip = regionSelect(new Point((p.x - r.x),(p.y - r.y - 23)),myGame.getScale());
+        if(clicked == false)
+            skip = poly.contains(new Point((p.x - r.x),(p.y - r.y - 23)), myGame.getScale());
 
-        System.out.println("(" + (p.x - r.x) + 
-              ", " + 
-              (p.y - r.y - 23) + ")");
+        //System.out.println((p.x - r.x) + " " + p.y - r.y - 23));
         
         // render background
         if(background != null)
@@ -133,18 +137,17 @@ public class Map {
         // render each region
         for(int i = 0; i < NUM_REGIONS; i++)
         {
-            if(i == skip)
-                continue;
+           if(i == skip)
+               continue;
 
             g.drawImage(regions[i], 0, 0, myGame.getWidth(), myGame.getHeight(), 0, 0, imageWidth, imageHeight, null);
         }
 
         if(skip < NUM_REGIONS)
-            g.drawImage(glowRegions[skip], 0, 0, myGame.getWidth(), myGame.getHeight(), 0, 0, imageWidth, imageHeight, null);
-        
+            g.drawImage(glowRegions[skip], 0, 0, myGame.getWidth(), myGame.getHeight(), 0, 0, imageWidth, imageHeight, null);  
     }
 
-    private int regionSelect(Point p, double scale)
+    public static int setSkip(int reg)
     {
         /*//TODO Replace with Polygons for higher accuracy 
         Rectangle [] regionsRect = {
@@ -170,4 +173,9 @@ public class Map {
         return Integer.MAX_VALUE;
     }
 
+    public static void setClick(boolean click)
+    {
+        clicked = click;
+    }
 }
+

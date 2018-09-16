@@ -1,3 +1,6 @@
+// Part of Escala.
+// Written by Jonathan Ponader.
+
 package escala.graphics;
 
 import java.awt.Polygon;
@@ -7,11 +10,6 @@ import java.io.IOException;
 import java.io.File;
 import java.util.Scanner;
 import javax.swing.JFrame;
-
-/**
- *
- * @author Jonathan Ponader
- */
 
 public class PolyMouseList
 {

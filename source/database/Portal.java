@@ -1,4 +1,5 @@
-// Part of Escala by Tiger Sachse.
+// Part of Escala.
+// Written by Tiger Sachse.
 
 package escala.database;
 

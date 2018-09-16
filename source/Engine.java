@@ -1,3 +1,5 @@
+// Part of Escala.
+// Written by Spencer Phillips.
 
 package escala;
 

@@ -116,6 +116,4 @@ public class GameState {
     public void setGameIsRunning(boolean b) {
         gameIsRunning = b;
     }
-
-
 }

@@ -8,8 +8,15 @@ import java.net.URL;
 import java.io.IOException;
 import javax.imageio.ImageIO;
 import escala.GameState;
+<<<<<<< HEAD
 import escala.Logic;
 import java.awt.Font;
+=======
+import java.awt.Point;
+import javax.swing.JFrame;
+import java.awt.MouseInfo;
+
+>>>>>>> c098e57d68157e021e577bac005881e167cafd95
 
 /*
  * 
@@ -35,9 +42,16 @@ public class Map {
     int imageWidth = 1152;
     int imageHeight = 648;
 
+<<<<<<< HEAD
     Font font = new Font("serif", Font.BOLD, 48);
     
     
+=======
+    PolyMouseList poly = PolyMouseList.getInstance();
+    static int skip = Integer.MAX_VALUE;
+    static boolean clicked = false;
+
+>>>>>>> c098e57d68157e021e577bac005881e167cafd95
     public Map(){
         try {
             URL url = getClass().getResource("/data/assets/Background.png");
@@ -50,17 +64,32 @@ public class Map {
             }
             
             //load all glow regions
-            // TODO:
+            for(int i = 0; i < NUM_REGIONS; i++) {
+                url = getClass().getResource("/data/assets/" + regionNames[i] + "Glow.png"); 
+                glowRegions[i] = ImageIO.read(new File(url.getPath()));
+            }
             
         } catch (IOException e){
             e.printStackTrace();
-        }
-        
+        } 
     }
 
     public void renderMap(Graphics2D g) {
         GameState myGame = GameState.getInstance();
+<<<<<<< HEAD
         Logic logic = Logic.getInstance();
+=======
+
+
+        //Determines which region should be highlighted 
+        Point p = MouseInfo.getPointerInfo().getLocation();
+        Point r = myGame.getFrame().getLocation();
+
+        if(clicked == false)
+            skip = poly.contains(new Point((p.x - r.x),(p.y - r.y - 23)), myGame.getScale());
+
+        //System.out.println((p.x - r.x) + " " + p.y - r.y - 23));
+>>>>>>> c098e57d68157e021e577bac005881e167cafd95
         
         // render background
         if(background != null)
@@ -73,7 +102,12 @@ public class Map {
         
         // render each region
         for(int i = 0; i < NUM_REGIONS; i++)
+        {
+           if(i == skip)
+               continue;
+
             g.drawImage(regions[i], 0, 0, myGame.getWidth(), myGame.getHeight(), 0, 0, imageWidth, imageHeight, null);
+<<<<<<< HEAD
         
         // TODO use cursor location to determine which region should be highlighted
         
@@ -85,6 +119,22 @@ public class Map {
         g.drawString(logic.cashToString(),10,630);
         g.drawString(logic.shareToString(),1000,630);
        
+=======
+        }
+
+        if(skip < NUM_REGIONS)
+            g.drawImage(glowRegions[skip], 0, 0, myGame.getWidth(), myGame.getHeight(), 0, 0, imageWidth, imageHeight, null);  
     }
 
+    public static void setSkip(int reg)
+    {
+        skip = reg;
+>>>>>>> c098e57d68157e021e577bac005881e167cafd95
+    }
+
+    public static void setClick(boolean click)
+    {
+        clicked = click;
+    }
 }
+

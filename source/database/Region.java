@@ -2,6 +2,8 @@
 
 package escala.database;
 
+import java.awt.image.*;
+
 // Read-only Region data structure.
 public class Region {
     private String name;

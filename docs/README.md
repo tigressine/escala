@@ -4,7 +4,7 @@ Escala is a simulation game that gives players the opportunity to spread a ficti
 Escala is inspired by [Plague Inc.](https://www.ndemiccreations.com/en/22-plague-inc), a mobile application whose primary objective is to enable players to destroy humanity with a biblical pandemic... Unlike Plague Inc., Escala’s objective is much more benign and *civilization-friendly*.
 
 # installation
-Download the zip [here](www.google.com) and unzip the contents. To the run game, double click `run.sh` on Linux and macOS or `run.bat` on Windows. The scripts can also be executed from the command line.
+Download the zip [here](https://github.com/tgsachse/escala/releases/download/v0.1/escala.zip) and unzip the contents. To the run game, double click `run.sh` on Linux and macOS or `run.bat` on Windows. The scripts can also be executed from the command line.
 
 # sprints
 Click the links to view Agile sprint documentation for this program.   

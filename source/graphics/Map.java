@@ -32,6 +32,8 @@ public class Map {
             "NorthAfrica", "NorthAmerica", "Ocenia", "SouthAfrica", "SouthAmerica", "WesternEurope"};
     BufferedImage[] glowRegions = new BufferedImage[NUM_REGIONS];
     
+    Polygon[] regionsPoly = new Polygon[NUM_REGIONS];
+    
     int imageWidth = 1152;
     int imageHeight = 648;
     
@@ -56,7 +58,53 @@ public class Map {
         } catch (IOException e){
             e.printStackTrace();
         }
+
+        initPolyRegions();
         
+    }
+
+    public void initPolyRegions(){
+        // right now this is just brute force... need to load these automatically
+
+        int asiaX[] = {820, 782, 796, 835, 920, 926, 999, 1037, 1037, 929, 910};
+        int asiaY[] = {333, 266, 196, 150, 157, 138, 142, 184,  221,  363, 348};
+        regionsPoly[0] = new Polygon(asiaX, asiaY, asiaX.length);
+        
+        int eEuropeX[] = {985, 983, 696, 706, 642, 617, 585, 631, 830, 1077,  1052};
+        int eEuropeY[] = {191, 168, 156, 194, 178, 219, 179, 80,  57,   90,   161};
+        regionsPoly[1] = new Polygon(eEuropeX, eEuropeY, eEuropeX.length);
+        
+        int lAmericaX[] = {112, 153, 183, 293, 238, 127};
+        int lAmericaY[] = {227, 231, 256, 278, 336, 273};
+        regionsPoly[2] = new Polygon(lAmericaX, lAmericaY, lAmericaX.length);
+        
+        int mEastX[] = {695, 625, 690, 689, 751, 830, 791};
+        int mEastY[] = {317, 198, 184, 152, 135, 161, 269};
+        regionsPoly[3] = new Polygon(mEastX, mEastY, mEastX.length);
+        
+        int nAfricaX[] = {504, 469, 469, 510, 578, 658, 702, 729, 706};
+        int nAfricaY[] = {356, 316, 271, 219, 209, 233, 317, 312, 356};
+        regionsPoly[4] = new Polygon(nAfricaX, nAfricaY, nAfricaX.length);
+        
+        int nAmericaX[] = {39,  65, 349, 519, 509, 246, 177, 151, 112, 100, 122};
+        int nAmericaY[] = {137, 93, 43,  44,  108, 261, 264, 234, 231, 217, 128};
+        regionsPoly[5] = new Polygon(nAmericaX, nAmericaY, nAmericaX.length);
+        
+        int oceniaX[] = {923, 892, 985, 1117, 1139, 1086};
+        int oceniaY[] = {510, 337, 285, 377,  525,  561};
+        regionsPoly[6] = new Polygon(oceniaX, oceniaY, oceniaX.length);
+        
+        int sAfricaX[] = {566, 705, 728, 711, 634, 603};
+        int sAfricaY[] = {352, 352, 415, 472, 508, 508};
+        regionsPoly[7] = new Polygon(sAfricaX, sAfricaY, sAfricaX.length);
+        
+        int sAmericaX[] = {251, 408, 336, 287, 226};
+        int sAmericaY[] = {311, 386, 590, 557, 365};
+        regionsPoly[8] = new Polygon(sAmericaX, sAmericaY, sAmericaX.length);
+        
+        int wEuropeX[] = {503, 506, 621, 636, 592};
+        int wEuropeY[] = {214, 141, 77,  111, 222};
+        regionsPoly[9] = new Polygon(wEuropeX, wEuropeY, wEuropeX.length);
     }
 
     public void renderMap(Graphics2D g) {
@@ -98,7 +146,7 @@ public class Map {
 
     private int regionSelect(Point p, double scale)
     {
-        //TODO Replace with Polygons for higher accuracy 
+        /*//TODO Replace with Polygons for higher accuracy 
         Rectangle [] regionsRect = {
             new Rectangle(819, 166, 1036, 335),
             new Rectangle(624, 75, 1049, 182),
@@ -112,11 +160,11 @@ public class Map {
             new Rectangle(505, 64, 599, 208)};
 
         //To be tested, Scale might not be working
-        //Change point to doubles for polygons
+        //Change point to doubles for polygons*/
         p = new Point((int)(p.x * scale), (int)(p.y * scale));
 
         for(int i = 0; i < NUM_REGIONS; i++)
-            if(regionsRect[i].contains(p))
+            if(regionsPoly[i].contains(p))
                 return i;
 
         return Integer.MAX_VALUE;

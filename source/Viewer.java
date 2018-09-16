@@ -70,8 +70,9 @@ public class Viewer{
         long elapsedTime = (System.nanoTime() - startTime) / 1000000;
         
         //every 100 frames, display percent of frame time actually utilized.
-        if(frameCount++ % 100 == 0)
+        if(frameCount++ % 100 == 0) {
             //System.out.println( (double) allowedTime / (double) elapsedTime);
+        }
         
         try {
             Thread.sleep(Math.max(0, allowedTime - elapsedTime));

@@ -29,7 +29,7 @@ class PolyClick implements MouseListener{
 	}
 
     public void mouseClicked(MouseEvent e) {
-        eventOutput("Mouse clicked (# of clicks: " + e.getClickCount() + ")", e);
+       // eventOutput("Mouse clicked (# of clicks: " + e.getClickCount() + ")", e);
 
         //Checks to see if in Region, then highlight region till clicked out of
         Point p = MouseInfo.getPointerInfo().getLocation();

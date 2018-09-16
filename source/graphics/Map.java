@@ -8,6 +8,8 @@ import java.net.URL;
 import java.io.IOException;
 import javax.imageio.ImageIO;
 import escala.GameState;
+import escala.Logic;
+import java.awt.Font;
 import java.awt.Point;
 import javax.swing.JFrame;
 import java.awt.MouseInfo;
@@ -37,6 +39,8 @@ public class Map {
     int imageWidth = 1152;
     int imageHeight = 648;
 
+    Font font = new Font("serif", Font.BOLD, 48);
+    
     PolyMouseList poly = PolyMouseList.getInstance();
     static int skip = Integer.MAX_VALUE;
     static boolean clicked = false;
@@ -65,7 +69,7 @@ public class Map {
 
     public void renderMap(Graphics2D g) {
         GameState myGame = GameState.getInstance();
-
+        Logic logic = Logic.getInstance();
 
         //Determines which region should be highlighted 
         Point p = MouseInfo.getPointerInfo().getLocation();
@@ -78,7 +82,6 @@ public class Map {
         
         // render background
         if(background != null)
-            //g.drawImage(Image, dstx1, dsty1, dstx2, dsty2, srcx1, srcy1, srcx2, srcy2, observer)
             g.drawImage(background, 0, 0, myGame.getWidth(), myGame.getHeight(), 0, 0, imageWidth, imageHeight, null);
         else{
             g.setBackground(Color.BLACK);
@@ -96,6 +99,11 @@ public class Map {
 
         if(skip < NUM_REGIONS)
             g.drawImage(glowRegions[skip], 0, 0, myGame.getWidth(), myGame.getHeight(), 0, 0, imageWidth, imageHeight, null);  
+        
+                //Stats on Screen
+        g.setFont(font);
+        g.drawString(logic.cashToString(),10,630);
+        g.drawString(logic.shareToString(),1000,630);
     }
 
     public static void setSkip(int reg)

@@ -39,7 +39,8 @@ burndown chart
 
 design diagram  
 --------------  
-placeholder
+![Image cannot be displayed.](./UML.png)  
+[larger view](https://raw.githubusercontent.com/tgsachse/escala/dev/docs/sprints/sprint1/UML.png)  
 
 code  
 ----  

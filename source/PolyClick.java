@@ -48,9 +48,11 @@ class PolyClick implements MouseListener{
     }
 
 	private void eventOutput(String eventDescription, MouseEvent e) {
+        /*
         System.out.println(eventDescription + " detected on "
                 + e.getComponent().getClass().getName()
                 + ".");
+        */
     }
      
     public void mousePressed(MouseEvent e) {

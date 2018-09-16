@@ -52,7 +52,7 @@ public class Sprite extends JComponent {
         posX = x;
         posY = y;
         maxSpeed = speed;
-        System.out.println("MAX SPEED "+maxSpeed);
+        //System.out.println("MAX SPEED "+maxSpeed);
         arrived = true;
     }
     

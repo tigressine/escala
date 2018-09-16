@@ -71,7 +71,7 @@ public class Viewer{
         
         //every 100 frames, display percent of frame time actually utilized.
         if(frameCount++ % 100 == 0)
-            System.out.println( (double) allowedTime / (double) elapsedTime);
+            //System.out.println( (double) allowedTime / (double) elapsedTime);
         
         try {
             Thread.sleep(Math.max(0, allowedTime - elapsedTime));

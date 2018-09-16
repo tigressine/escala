@@ -98,12 +98,14 @@ public class Region {
     // Load the associated image from file.
     private void loadImage() throws IOException {
         URL url = getClass().getResource("/data/assets/" + name + ".png");
-        image = ImageIO.read(new File(url.getPath()));
+        String path = URLDecoder.decode(url.getPath(), "UTF-8");
+        image = ImageIO.read(new File(path));
     }
 
     // Load the associated outline from file.
     private void loadOutline() throws IOException {
         URL url = getClass().getResource("/data/assets/" + name + "Glow.png");
-        outline = ImageIO.read(new File(url.getPath()));
+        String path = URLDecoder.decode(url.getPath(), "UTF-8");
+        outline = ImageIO.read(new File(path));
     }
 }

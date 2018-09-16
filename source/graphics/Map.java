@@ -8,15 +8,12 @@ import java.net.URL;
 import java.io.IOException;
 import javax.imageio.ImageIO;
 import escala.GameState;
-<<<<<<< HEAD
 import escala.Logic;
 import java.awt.Font;
-=======
 import java.awt.Point;
 import javax.swing.JFrame;
 import java.awt.MouseInfo;
 
->>>>>>> c098e57d68157e021e577bac005881e167cafd95
 
 /*
  * 
@@ -42,16 +39,12 @@ public class Map {
     int imageWidth = 1152;
     int imageHeight = 648;
 
-<<<<<<< HEAD
     Font font = new Font("serif", Font.BOLD, 48);
     
-    
-=======
     PolyMouseList poly = PolyMouseList.getInstance();
     static int skip = Integer.MAX_VALUE;
     static boolean clicked = false;
 
->>>>>>> c098e57d68157e021e577bac005881e167cafd95
     public Map(){
         try {
             URL url = getClass().getResource("/data/assets/Background.png");
@@ -76,10 +69,7 @@ public class Map {
 
     public void renderMap(Graphics2D g) {
         GameState myGame = GameState.getInstance();
-<<<<<<< HEAD
         Logic logic = Logic.getInstance();
-=======
-
 
         //Determines which region should be highlighted 
         Point p = MouseInfo.getPointerInfo().getLocation();
@@ -89,11 +79,9 @@ public class Map {
             skip = poly.contains(new Point((p.x - r.x),(p.y - r.y - 23)), myGame.getScale());
 
         //System.out.println((p.x - r.x) + " " + p.y - r.y - 23));
->>>>>>> c098e57d68157e021e577bac005881e167cafd95
         
         // render background
         if(background != null)
-            //g.drawImage(Image, dstx1, dsty1, dstx2, dsty2, srcx1, srcy1, srcx2, srcy2, observer)
             g.drawImage(background, 0, 0, myGame.getWidth(), myGame.getHeight(), 0, 0, imageWidth, imageHeight, null);
         else{
             g.setBackground(Color.BLACK);
@@ -107,29 +95,20 @@ public class Map {
                continue;
 
             g.drawImage(regions[i], 0, 0, myGame.getWidth(), myGame.getHeight(), 0, 0, imageWidth, imageHeight, null);
-<<<<<<< HEAD
-        
-        // TODO use cursor location to determine which region should be highlighted
-        
-        // TODO render highlighted region
-
-        //Stats on Screen
-    // TODO Change to Scalable once merged to Click-able version 
-        g.setFont(font);
-        g.drawString(logic.cashToString(),10,630);
-        g.drawString(logic.shareToString(),1000,630);
-       
-=======
         }
 
         if(skip < NUM_REGIONS)
             g.drawImage(glowRegions[skip], 0, 0, myGame.getWidth(), myGame.getHeight(), 0, 0, imageWidth, imageHeight, null);  
+        
+                //Stats on Screen
+        g.setFont(font);
+        g.drawString(logic.cashToString(),10,630);
+        g.drawString(logic.shareToString(),1000,630);
     }
 
     public static void setSkip(int reg)
     {
         skip = reg;
->>>>>>> c098e57d68157e021e577bac005881e167cafd95
     }
 
     public static void setClick(boolean click)

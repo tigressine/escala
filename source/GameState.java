@@ -20,19 +20,11 @@ public class GameState {
     private static GameState instance = null;
 
     // Window Dimensions   images are 1152 x 648
-<<<<<<< HEAD
-    private int width = 1152;
-    private int height = 648;
-    private int frameHeight = 47;
-    private double SCALE = 1;
-        
-=======
     private static int width = 1152;
     private static int height = 648;
     private static int frameHeight = 47;
     private static double SCALE = 1;
 
->>>>>>> c098e57d68157e021e577bac005881e167cafd95
     // Game Variables
     private static boolean gameIsRunning = false;
     private static boolean gameIsPaused = false;   //TODO::: set this while event handling

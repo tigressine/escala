@@ -1,10 +1,13 @@
-# Sprint 1 Deliverables
-[Vision Statement](../README.md#escala)  
+Vision Statement  
+----------------  
+Escala is a simulation game that gives players the opportunity to spread a fictional commercial product around the world. This software features educational aspects but is primarily targeted at gamers. Many of the world’s cultural, social, logistical, and economic complexities are baked into the simulation engine, which means this game offers insight into the systems of product diffusion and economies-of-scale that many people take for granted.  
+
+Escala is inspired by [Plague Inc.](https://www.ndemiccreations.com/en/22-plague-inc), a mobile application whose primary objective is to enable players to destroy humanity with a biblical pandemic... Unlike Plague Inc., Escala’s objective is much more benign and *civilization-friendly*.
 
 User Stories  
 ------------  
 | User Stories | Validation | Priority | Story Points |
-|--------------|------------|----------|--------------|
+|:------------:|:----------:|:--------:|:------------:|
 | I want to be able to change the resolution of the game. | User sees resolution change. | 5 | 2 |
 | I want to be able to change the difficulty of the game. | User has different experience at different difficulties. | 5 | 21 |
 | I want to be able to select different products for the the game. | User has different experience with different products. | 5 | 3 |

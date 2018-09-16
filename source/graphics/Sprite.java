@@ -1,3 +1,6 @@
+// Part of Escala.
+// Written by Spencer Phillips.
+
 package escala.graphics;
 
 import java.awt.Color;
@@ -239,8 +242,4 @@ public class Sprite extends JComponent {
         Rectangle box = new Rectangle((int) posX, (int) posY, width, height);
         g2.fill(box);
     }
-    
-    
-    
-    
 }

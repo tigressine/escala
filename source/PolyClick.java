@@ -1,3 +1,6 @@
+// Part of Escala.
+// Written by Jonathan Ponader.
+
 package escala;
 
 import java.awt.event.MouseListener;
@@ -9,11 +12,6 @@ import java.awt.Point;
 import javax.swing.JFrame;
 import java.awt.MouseInfo;
 
-
-/**
- *
- * @author Jonathan Ponader
- */
 
 class PolyClick implements MouseListener{
 
@@ -70,6 +68,4 @@ class PolyClick implements MouseListener{
     public void mouseExited(MouseEvent e) {
        // eventOutput("Mouse exited", e);
     }
-   
-    
 }

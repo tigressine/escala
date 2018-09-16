@@ -31,6 +31,8 @@ Priority	Story Point	Validation							Stories
 1		3		Stats are displayed on map.					As a gamer, I want to see my stats without having to enter a seprate menu.
 5		21		Game changes take affect.					As a gamer, I want to be able to change my game settings mid game.
 5		5		Name is ued throughout game.					As a gamer, I want to be able to name my product, and see it used in the game.
+5		8		Game can be reloaded.						As a gamer, I want to be able to save my game, and reload it.
+5		8		Users see the region data and can use in game.			As a gamer, I want each region to have immersive data on it.
 
 
 				

@@ -8,8 +8,10 @@ import java.net.URL;
 import java.io.IOException;
 import javax.imageio.ImageIO;
 import escala.GameState;
-import java.awt.*;
+import java.awt.Point;
 import javax.swing.JFrame;
+import java.awt.MouseInfo;
+
 
 /*
  * 
@@ -34,8 +36,11 @@ public class Map {
     
     int imageWidth = 1152;
     int imageHeight = 648;
-    
-    
+
+    PolyMouseList poly = PolyMouseList.getInstance();
+    static int skip = Integer.MAX_VALUE;
+    static boolean clicked = false;
+
     public Map(){
         try {
             URL url = getClass().getResource("/data/assets/Background.png");
@@ -55,8 +60,7 @@ public class Map {
             
         } catch (IOException e){
             e.printStackTrace();
-        }
-        
+        } 
     }
 
     public void renderMap(Graphics2D g) {
@@ -67,11 +71,10 @@ public class Map {
         Point p = MouseInfo.getPointerInfo().getLocation();
         Point r = myGame.getFrame().getLocation();
 
-        int skip = regionSelect(new Point((p.x - r.x),(p.y - r.y - 23)),myGame.getScale());
+        if(clicked == false)
+            skip = poly.contains(new Point((p.x - r.x),(p.y - r.y - 23)), myGame.getScale());
 
-        System.out.println("(" + (p.x - r.x) + 
-              ", " + 
-              (p.y - r.y - 23) + ")");
+        //System.out.println((p.x - r.x) + " " + p.y - r.y - 23));
         
         // render background
         if(background != null)
@@ -85,41 +88,24 @@ public class Map {
         // render each region
         for(int i = 0; i < NUM_REGIONS; i++)
         {
-            if(i == skip)
-                continue;
+           if(i == skip)
+               continue;
 
             g.drawImage(regions[i], 0, 0, myGame.getWidth(), myGame.getHeight(), 0, 0, imageWidth, imageHeight, null);
         }
 
         if(skip < NUM_REGIONS)
-            g.drawImage(glowRegions[skip], 0, 0, myGame.getWidth(), myGame.getHeight(), 0, 0, imageWidth, imageHeight, null);
-        
+            g.drawImage(glowRegions[skip], 0, 0, myGame.getWidth(), myGame.getHeight(), 0, 0, imageWidth, imageHeight, null);  
     }
 
-    private int regionSelect(Point p, double scale)
+    public static void setSkip(int reg)
     {
-        //TODO Replace with Polygons for higher accuracy 
-        Rectangle [] regionsRect = {
-            new Rectangle(819, 166, 1036, 335),
-            new Rectangle(624, 75, 1049, 182),
-            new Rectangle(113, 230, 284, 307),
-            new Rectangle(641, 165, 782, 308),
-            new Rectangle(450, 219, 721, 357),
-            new Rectangle(16, 38, 401, 257),
-            new Rectangle(882, 336, 1443, 540),
-            new Rectangle(567, 350, 717, 510),
-            new Rectangle(213, 334, 394, 590),
-            new Rectangle(505, 64, 599, 208)};
-
-        //To be tested, Scale might not be working
-        //Change point to doubles for polygons
-        p = new Point((int)(p.x * scale), (int)(p.y * scale));
-
-        for(int i = 0; i < NUM_REGIONS; i++)
-            if(regionsRect[i].contains(p))
-                return i;
-
-        return Integer.MAX_VALUE;
+        skip = reg;
     }
 
+    public static void setClick(boolean click)
+    {
+        clicked = click;
+    }
 }
+

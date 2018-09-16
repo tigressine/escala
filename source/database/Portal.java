@@ -133,6 +133,7 @@ public class Portal {
 
     // Get all regions from the database.
     public HashMap<String, Region> getAllRegions() {
+        /*
         try {
             HashMap<String, Region> regions = new HashSet<>();
             Statement statement = connection.createStatement();
@@ -157,6 +158,8 @@ public class Portal {
         catch (IOException | SQLException exception) {
             return null;
         }
+        */
+        return null;
     }
 
     // Get an event from the database by name.

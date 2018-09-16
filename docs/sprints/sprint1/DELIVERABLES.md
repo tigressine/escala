@@ -44,4 +44,4 @@ design diagram
 
 code  
 ----  
-placeholder
+Download the zip [here](https://github.com/tgsachse/escala/releases/download/v0.1/escala.zip) and unzip the contents. To the run game, double click `run.sh` on Linux and macOS or `run.bat` on Windows. The scripts can also be executed from the command line.

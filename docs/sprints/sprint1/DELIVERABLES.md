@@ -35,7 +35,7 @@ backlogs
 
 burndown chart  
 ---------------  
-![Image cannot be displayed.](./BURN_DOWN.png)
+![Image cannot be displayed.](./BURNDOWN.png)
 
 design diagram  
 --------------  

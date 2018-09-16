@@ -1,3 +1,6 @@
+// Part of Escala.
+// Written by Spencer Phillips.
+
 package escala;
 
 import javax.swing.JFrame;
@@ -116,6 +119,4 @@ public class GameState {
     public void setGameIsRunning(boolean b) {
         gameIsRunning = b;
     }
-
-
 }

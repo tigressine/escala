@@ -1,3 +1,6 @@
+// Part of Escala.
+// Written by Spencer Phillips.
+
 package escala.graphics;
 
 import java.awt.Color;
@@ -49,7 +52,7 @@ public class Sprite extends JComponent {
         posX = x;
         posY = y;
         maxSpeed = speed;
-        System.out.println("MAX SPEED "+maxSpeed);
+        //System.out.println("MAX SPEED "+maxSpeed);
         arrived = true;
     }
     
@@ -239,8 +242,4 @@ public class Sprite extends JComponent {
         Rectangle box = new Rectangle((int) posX, (int) posY, width, height);
         g2.fill(box);
     }
-    
-    
-    
-    
 }

@@ -5,6 +5,7 @@ package escala.graphics;
 
 import java.awt.Polygon;
 import java.net.URL;
+import java.net.URLDecoder;
 import java.awt.Point;
 import java.io.IOException;
 import java.io.File;
@@ -27,10 +28,10 @@ public class PolyMouseList
 		for(int i = 0; i < NUM_REGIONS; i++) 
 		{
             url = getClass().getResource("/data/raw/polygons/" + regionNames[i] + ".txt"); 
-
             try
             {
-            	regions[i] = addPoly(new File(url.getPath()));
+                String path = URLDecoder.decode(url.getPath(), "UTF-8");
+            	regions[i] = addPoly(new File(path));
             }
             catch (IOException e)
             {

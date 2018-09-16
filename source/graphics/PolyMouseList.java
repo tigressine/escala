@@ -20,7 +20,7 @@ public class PolyMouseList
 	private static final int NUM_REGIONS = 10;
 	static Polygon [] regions = new Polygon[NUM_REGIONS];
 	final String[] regionNames = {"Asia", "EasternEurope", "LatinAmerica", "MiddleEast", 
-            "NorthAfrica", "NorthAmerica", "Ocenia", "SouthAfrica", "SouthAmerica", "WesternEurope"};
+            "NorthAfrica", "NorthAmerica", "Oceania", "SouthAfrica", "SouthAmerica", "WesternEurope"};
 
 	public PolyMouseList()
 	{
@@ -28,7 +28,7 @@ public class PolyMouseList
 
 		for(int i = 0; i < NUM_REGIONS; i++) 
 		{
-            url = getClass().getResource("/data/polygons/" + regionNames[i] + ".txt"); 
+            url = getClass().getResource("/data/raw/polygons/" + regionNames[i] + ".txt"); 
 
             try
             {

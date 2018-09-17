@@ -1,3 +1,6 @@
+// Part of Escala.
+// Written by Spencer Phillips.
+
 package escala;
 
 import javax.swing.JFrame;

@@ -1,3 +1,6 @@
+// Part of Escala.
+// Written by Spencer Phillips.
+
 package escala.graphics;
 
 import java.awt.Color;
@@ -5,6 +8,7 @@ import java.awt.Graphics2D;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.net.URL;
+import java.net.URLDecoder;
 import java.io.IOException;
 import javax.imageio.ImageIO;
 import escala.GameState;
@@ -34,7 +38,7 @@ public class Map {
     BufferedImage background = null;
     BufferedImage[] regions = new BufferedImage[NUM_REGIONS];
     String[] regionNames = {"Asia", "EasternEurope", "LatinAmerica", "MiddleEast", 
-            "NorthAfrica", "NorthAmerica", "Ocenia", "SouthAfrica", "SouthAmerica", "WesternEurope"};
+            "NorthAfrica", "NorthAmerica", "Oceania", "SouthAfrica", "SouthAmerica", "WesternEurope"};
     BufferedImage[] glowRegions = new BufferedImage[NUM_REGIONS];
     
     int imageWidth = 1152;
@@ -49,18 +53,21 @@ public class Map {
     public Map(){
         try {
             URL url = getClass().getResource("/data/assets/Background.png");
-            background = ImageIO.read(new File(url.getPath()));
+            String path = URLDecoder.decode(url.getPath(), "UTF-8");
+            background = ImageIO.read(new File(path));
             
             //load all regions
             for(int i = 0; i < NUM_REGIONS; i++) {
                 url = getClass().getResource("/data/assets/" + regionNames[i] + ".png"); 
-                regions[i] = ImageIO.read(new File(url.getPath()));
+                path = URLDecoder.decode(url.getPath(), "UTF-8");
+                regions[i] = ImageIO.read(new File(path));
             }
             
             //load all glow regions
             for(int i = 0; i < NUM_REGIONS; i++) {
                 url = getClass().getResource("/data/assets/" + regionNames[i] + "Glow.png"); 
-                glowRegions[i] = ImageIO.read(new File(url.getPath()));
+                path = URLDecoder.decode(url.getPath(), "UTF-8");
+                glowRegions[i] = ImageIO.read(new File(path));
             }
             
         } catch (IOException e){
@@ -119,4 +126,3 @@ public class Map {
         clicked = click;
     }
 }
-

@@ -1,4 +1,5 @@
-// Part of Escala by Tiger Sachse.
+// Part of Escala.
+// Written by Tiger Sachse.
 
 package escala.database;
 
@@ -102,32 +103,63 @@ public class Portal {
     }
 
     // Get a named region from the database.
-    public Region getRegion(String name) throws SQLException {
-        Statement statement = connection.createStatement();
-        String search = "SELECT * FROM regions WHERE name='" + name + "'";
-        ResultSet results = statement.executeQuery(search);
+    public Region getRegion(String name) {
+        try {
+            Statement statement = connection.createStatement();
+            String search = "SELECT * FROM regions WHERE name='" + name + "'";
+            ResultSet results = statement.executeQuery(search);
 
-        if (results.next() == false) {
+            if (results.next() == false) {
+                return null;
+            }
+
+            // Create a new region from the results.
+            Region region = new Region(results.getString("name"),
+                                       results.getFloat("taxRate"),
+                                       results.getFloat("entryCost"),
+                                       results.getInt("logisticsCost"),
+                                       results.getInt("marketingCost"),
+                                       results.getInt("efficiencyCost"));
+
+            if (statement != null) {
+                statement.close();
+            }
+
+            return region;
+        }
+        catch (IOException | SQLException exception) {
             return null;
         }
-
-        // Create a new region from the results.
-        Region region = new Region(results.getString("name"),
-                                   results.getFloat("taxRate"),
-                                   results.getFloat("entryCost"),
-                                   results.getInt("logisticsCost"),
-                                   results.getInt("marketingCost"),
-                                   results.getInt("efficiencyCost"));
-
-        if (statement != null) {
-            statement.close();
-        }
-
-        return region;
     }
 
     // Get all regions from the database.
-    public ArrayList<Region> getAllRegions() throws SQLException {
+    public HashMap<String, Region> getAllRegions() {
+        /*
+        try {
+            HashMap<String, Region> regions = new HashSet<>();
+            Statement statement = connection.createStatement();
+            ResultSet results = statement.executeQuery("SELECT * FROM regions");
+
+            while (results.next()) {
+                Region region = new Region(results.getString("name"),
+                                           results.getFloat("taxRate"),
+                                           results.getFloat("entryCost"),
+                                           results.getInt("logisticsCost"),
+                                           results.getInt("marketingCost"),
+                                           results.getInt("efficiencyCost"));
+                regions.put(region.getName(), region); 
+            }
+            
+            if (statement != null) {
+                statement.close();
+            }
+
+            return regions;
+        }
+        catch (IOException | SQLException exception) {
+            return null;
+        }
+        */
         return null;
     }
 

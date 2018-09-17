@@ -1,5 +1,6 @@
+// Part of Escala.
+// Written by Jonathan Ponader.
 
-// Commented out for Local Testing From Main
 package escala;
 
 
@@ -21,7 +22,7 @@ public class Logic
 {
 	private static final int NUM_REGIONS = 10;
 	String[] regionNames = {"Asia", "EasternEurope", "LatinAmerica", "MiddleEast", 
-            "NorthAfrica", "NorthAmerica", "Ocenia", "SouthAfrica", "SouthAmerica", "WesternEurope"};
+            "NorthAfrica", "NorthAmerica", "Oceania", "SouthAfrica", "SouthAmerica", "WesternEurope"};
 
     private static Logic instance = null;
 	private int marketShare = 0;

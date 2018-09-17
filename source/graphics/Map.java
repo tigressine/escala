@@ -13,6 +13,7 @@ import java.awt.Font;
 import java.awt.Point;
 import javax.swing.JFrame;
 import java.awt.MouseInfo;
+import java.awt.Insets;
 
 
 /*
@@ -74,9 +75,11 @@ public class Map {
         //Determines which region should be highlighted 
         Point p = MouseInfo.getPointerInfo().getLocation();
         Point r = myGame.getFrame().getLocation();
+        Insets margin = myGame.getFrame().getInsets();
+        double scale = myGame.getScale();
 
         if(clicked == false)
-            skip = poly.contains(new Point((p.x - r.x),(p.y - r.y - 23)), myGame.getScale());
+            skip = poly.contains(new Point((p.x - r.x - margin.left),(p.y - r.y - margin.top)), scale);
 
         //System.out.println((p.x - r.x) + " " + p.y - r.y - 23));
         
@@ -102,8 +105,8 @@ public class Map {
         
                 //Stats on Screen
         g.setFont(font);
-        g.drawString(logic.cashToString(),10,630);
-        g.drawString(logic.shareToString(),1000,630);
+        g.drawString(logic.cashToString(),(int)((10 * scale) + margin.left),(int)((605 * scale) + margin.top));
+        g.drawString(logic.shareToString(),(int)((1000 * scale) + margin.left),(int)((605 * scale)+ margin.top));
     }
 
     public static void setSkip(int reg)

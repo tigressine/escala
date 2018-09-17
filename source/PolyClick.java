@@ -8,7 +8,7 @@ import escala.graphics.Map;
 import java.awt.Point;
 import javax.swing.JFrame;
 import java.awt.MouseInfo;
-
+import java.awt.Insets;
 
 /**
  *
@@ -34,8 +34,9 @@ class PolyClick implements MouseListener{
         //Checks to see if in Region, then highlight region till clicked out of
         Point p = MouseInfo.getPointerInfo().getLocation();
         Point r = myGame.getFrame().getLocation();
+        Insets margin = myGame.getFrame().getInsets();
 
-        int region = poly.contains(new Point((p.x - r.x),(p.y - r.y - 23)), myGame.getScale());
+        int region = poly.contains(new Point((p.x - r.x - margin.left),(p.y - r.y - margin.top)), myGame.getScale());
 
         if(region > NUM_REGIONS)
         {
@@ -70,6 +71,4 @@ class PolyClick implements MouseListener{
     public void mouseExited(MouseEvent e) {
        // eventOutput("Mouse exited", e);
     }
-   
-    
 }

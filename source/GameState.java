@@ -14,6 +14,7 @@ import javax.swing.JFrame;
  *              full screen
  *      prevent window from re-sizing???
  * */
+
 public class GameState {
 
     //Singleton instance
@@ -23,7 +24,7 @@ public class GameState {
     private static int width = 1152;
     private static int height = 648;
     private static int frameHeight = 47;
-    private static double SCALE = 1;
+    private static double SCALE = .8;
 
     // Game Variables
     private static boolean gameIsRunning = false;

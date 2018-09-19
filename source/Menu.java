@@ -95,6 +95,8 @@ public class Menu{
         
         pane.add(index, "INDEX");
         
+        //Add background and color scheme
+        
     }    
     
     //add difficulty menu
@@ -119,6 +121,8 @@ public class Menu{
         diff.add(backfromDiff);
         
         pane.add(diff, "DIFF");
+        
+        // color schemes
     }
     
     //add settings menu
@@ -140,6 +144,8 @@ public class Menu{
         set.add(back);
         
         pane.add(set, "SET");
+        
+        //add setting options
     }
     
     //add credits menu
@@ -161,6 +167,8 @@ public class Menu{
         cred.add(back2);
         
         pane.add(cred, "CRED");
+        
+        //have credits page more text
     }      
     
     public void addGameCard(Container pane){

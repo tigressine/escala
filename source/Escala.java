@@ -15,23 +15,33 @@ import escala.database.*;
 public class Escala {
     
     public Escala() {
+        GameState state = null;
+        try {
+            state = new GameState();
+        }
+        catch (SQLException | IOException exception) {
+            exception.printStackTrace();
+            System.exit(-1);    
+        }
         
-        GameState myGame = GameState.getInstance();
-        
-        // TODO: initialize database instance here... attach to myGame
-        // myGame.setDatabaseInstance(dbInstance);   NOTE: this function does not exist yet.
-        
-        // Menu stuff
-        Menu menu = new Menu();
-        
-        Viewer gameViewer = new Viewer();
+        Menu menu = new Menu(state);
+        Viewer gameViewer = new Viewer(state);
         gameViewer.run(); 
     }
     
-    public static void main(String[] args) throws SQLException, IOException {
+    public static void main(String[] args) {
         Escala escala = new Escala();
-        //Portal portal = new Portal();
-        //portal.addRegion("data/raw/regions/NorthAmerica.txt");
-        //System.out.println(portal.getRegion("North America"));
+        /*
+        try {
+            Loader loader = new Loader();
+            Portal portal = new Portal();
+            loader.createRegions();
+
+            loader.close();
+            portal.close();
+        }
+        catch (Exception e) {
+            e.printStackTrace();
+        }*/
     }
 }

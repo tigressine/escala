@@ -23,7 +23,7 @@ function build_project {
     cp -r $DATA_DIR $BUILD_DIR
 
     javac -cp $BUILD_DIR/$LIB_DIR/$DERBY_JAR -d $BUILD_DIR $SOURCE_DIR/graphics/*.java \
-        $SOURCE_DIR/database/*.java $SOURCE_DIR/*.java
+        $SOURCE_DIR/*.java
 }
 
 # Run the project and clean up afterwards.

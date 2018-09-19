@@ -31,8 +31,17 @@ public class Escala {
     
     public static void main(String[] args) {
         Escala escala = new Escala();
-        //Portal portal = new Portal();
-        //portal.addRegion("data/raw/regions/NorthAmerica.txt");
-        //System.out.println(portal.getRegion("North America"));
+        /*
+        try {
+            Loader loader = new Loader();
+            Portal portal = new Portal();
+            loader.createRegions();
+
+            loader.close();
+            portal.close();
+        }
+        catch (Exception e) {
+            e.printStackTrace();
+        }*/
     }
 }

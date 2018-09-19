@@ -41,10 +41,12 @@ public class GameState {
         difficulty = Difficulty.NORMAL;
 
         // Load all regions and events from the database.
-        Portal portal = new Portal();
-        regions = portal.getAllRegions();
-        events = portal.getAllEvents();
-        portal.close();
+        //Portal portal = new Portal();
+        //regions = portal.getAllRegions();
+        //events = portal.getAllEvents();
+        //portal.close();
+        regions = new HashMap<>();
+        events = new HashMap<>();
     }
 
     public int getWidth() {

@@ -18,12 +18,12 @@ class PolyClick implements MouseListener{
     private static final int NUM_REGIONS = 10;
 
     PolyMouseList poly;
-    GameState myGame;
+    GameState state;
 
-	public PolyClick ()
+	public PolyClick(GameState state)
 	{
 		poly = PolyMouseList.getInstance();
-        myGame = GameState.getInstance();
+        this.state = state;
 	}
 
     public void mouseClicked(MouseEvent e) {
@@ -31,10 +31,10 @@ class PolyClick implements MouseListener{
 
         //Checks to see if in Region, then highlight region till clicked out of
         Point p = MouseInfo.getPointerInfo().getLocation();
-        Point r = myGame.getFrame().getLocation();
-        Insets margin = myGame.getFrame().getInsets();
+        Point r = state.getFrame().getLocation();
+        Insets margin = state.getFrame().getInsets();
 
-        int region = poly.contains(new Point((p.x - r.x - margin.left),(p.y - r.y - margin.top)), myGame.getScale());
+        int region = poly.contains(new Point((p.x - r.x - margin.left),(p.y - r.y - margin.top)), state.getScale());
 
         if(region > NUM_REGIONS)
         {

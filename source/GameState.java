@@ -1,98 +1,76 @@
 // Part of Escala.
-// Written by Spencer Phillips.
+// Written by Spencer Phillips and Tiger Sachse.
 
 package escala;
 
-import javax.swing.JFrame;
-
-/* This Singleton class will store all the constants and global variables needed for the game to run.
- *
- * TODO:
- *      we need to pre-define SCALE factors for the game:
- *              SCALE  0.6  ->  960  x 540
- *              SCALE  0.8  ->  1280 x 720
- *              SCALE  1.0  ->  1600 x 900
- *              SCALE  1.2  ->  1920 x 1080
- *              Maximum size
- *              full screen
- *      prevent window from re-sizing???
- * */
+import java.io.*;
+import java.sql.*;
+import java.util.*;
+import javax.swing.*;
+import escala.database.*;
 
 public class GameState {
 
-    //Singleton instance
-    private static GameState instance = null;
-
-    // Window Dimensions   images are 1152 x 648
-    private static int width = 1152;
-    private static int height = 648;
-    private static int frameHeight = 47;
-    private static double SCALE = 1.1;
-
-    // Game Variables
-    private static boolean gameIsRunning = false;
-    private static boolean gameIsPaused = false;   //TODO::: set this while event handling
-    private static boolean gameIsActive = true;    //TODO:::
-    private static String difficulty = "";
-
-    // Window, Frame, and Canvas related variables
-    private static int GOAL_FPS = 60;
-    private static JFrame frame = null;
-
-
-    // CONSTRUCTOR
-    private GameState(){
-        // Exists only to defeat instantiation.
-        // LEAVE THIS EMPTY
+    public static enum Difficulty {
+        EASY, NORMAL, HARD 
     }
 
-    public static GameState getInstance() {
-        if(instance == null){
-            instance = new GameState();
-        }
-        return instance;
+    private int width;
+    private int height;
+    private int goalFPS;
+    private double scale;
+    private JFrame frame;
+    private int frameHeight;
+    private boolean isRunning;
+    private Difficulty difficulty;
+    private HashMap<String, Event> events;
+    private HashMap<String, Region> regions;
+
+    public GameState() throws SQLException, IOException {
+
+        // Set frame size and other visual variables.
+        scale = 1;
+        frame = null;
+        width = 1152;
+        height = 648;
+        goalFPS = 60;
+        frameHeight = 47;
+
+        // Set game status variables.
+        isRunning = false;
+        difficulty = Difficulty.NORMAL;
+
+        // Load all regions and events from the database.
+        //Portal portal = new Portal();
+        //regions = portal.getAllRegions();
+        //events = portal.getAllEvents();
+        //portal.close();
+        regions = new HashMap<>();
+        events = new HashMap<>();
     }
 
-    // GETTERS AND SETTERS
-    // Width:  no set method
-    public int getWidth(){
-        return (int) ((double) width * SCALE);
+    public int getWidth() {
+        return (int) ((double) width * scale);
     }
 
-    // Height:  no set method
-    public int getHeight(){
-        return (int) ((double) height * SCALE);
+    public int getHeight() {
+        return (int) ((double) height * scale);
     }
 
-    // Scale
-    public double getScale(){
-        return SCALE;
-    }
-    public void setScale(double scale){
-        //TODO: sanity check
-        SCALE = scale;
+    public double getScale() {
+        return scale;
     }
 
-    // GameIsRunning
-    public boolean gameIsRunning(){
-        return gameIsRunning;
-    }
-    public void stopGame(){
-        gameIsRunning = false;
+    public boolean isGameRunning() {
+        return isRunning;
     }
 
-    // Goal FPS
-    public int getGoalFPS(){
-        return GOAL_FPS;
-    }
-    public void setGoalFPS(int fps){
-        //TODO: sanity check
-        GOAL_FPS = fps;
+    public int getGoalFPS() {
+        return goalFPS;
     }
 
-    // frame time (in milliseconds)
-    public long getFrameTime(){
-        return (long) (1.0 / GOAL_FPS * 1000.0);
+    public long getFrameTime() {
+        return (long) (1.0 / goalFPS * 1000.0);
     }
 
     public int getFrameHeight() {
@@ -100,24 +78,46 @@ public class GameState {
     }
 
     public JFrame getFrame() {
-        if(frame == null)
-            frame = new JFrame();
         return frame;
     }
 
-    public void setFrame(JFrame jf){
-        frame = jf;
-    }
-
-    public void setDifficulty(String diff) {
-        difficulty = diff;
-    }
-
-    public String getDifficulty(){
+    public Difficulty getDifficulty() {
         return difficulty;
     }
 
-    public void setGameIsRunning(boolean b) {
-        gameIsRunning = b;
+    public Region getRegion(String name) {
+        return regions.get(name);
+    }
+
+    public ArrayList<Region> getAllRegions() {
+        return new ArrayList<Region>(regions.values());
+    }
+
+    public Event getEvent(String name) {
+        return events.get(name);
+    }
+
+    public void setScale(double scale) {
+        this.scale = scale;
+    }
+
+    public void stopGame() {
+        isRunning = false;
+    }
+
+    public void startGame() {
+        isRunning = true;
+    }
+
+    public void setGoalFPS(int goalFPS) {
+        this.goalFPS = goalFPS;
+    }
+
+    public void setFrame(JFrame frame) {
+        this.frame = frame;
+    }
+
+    public void setDifficulty(Difficulty difficulty) {
+        this.difficulty = difficulty;
     }
 }

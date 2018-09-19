@@ -39,6 +39,7 @@ public class Menu{
     public Menu(GameState state) {
         //init frame
         this.state = state;
+        state.setFrame(new JFrame());
         frame = state.getFrame();
         
         frame.setResizable(false);

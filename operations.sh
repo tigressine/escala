@@ -9,6 +9,7 @@ BUILD_DIR="build"
 SOURCE_DIR="source"
 MAIN_CLASS="Escala"
 DERBY_LOG="derby.log"
+DERBY_JAR="derby.jar"
 PACKAGE_NAME="escala"
 RUN_UNIX_SCRIPT="run.sh"
 RUN_WINDOWS_SCRIPT="run.bat"
@@ -21,7 +22,7 @@ function build_project {
     cp -r $LIB_DIR $BUILD_DIR
     cp -r $DATA_DIR $BUILD_DIR
 
-    javac -cp $BUILD_DIR/$LIB_DIR/*.jar -d $BUILD_DIR $SOURCE_DIR/graphics/*.java \
+    javac -cp $BUILD_DIR/$LIB_DIR/$DERBY_JAR -d $BUILD_DIR $SOURCE_DIR/graphics/*.java \
         $SOURCE_DIR/database/*.java $SOURCE_DIR/*.java
 }
 

@@ -21,7 +21,8 @@ public class Engine {
     public final int NUM_SPRITES = 4;
     
     Sprite[] sprites = null;
-    
+    private GameState state;
+
     //initialize map, logic, random events, and other necessary classes
     Map map = null;
     // Logic
@@ -29,26 +30,26 @@ public class Engine {
     // other...
     
     //TODO::: setup map and sprites...
-    public Engine(){
+    public Engine(GameState state){
+        this.state = state;
         sprites = new Sprite[NUM_SPRITES];
         
-        sprites[0] = new Sprite(0, 0, 30);
+        sprites[0] = new Sprite(0, 0, 30, this.state);
         sprites[0].setColor(Color.GREEN);
     
-        sprites[1] = new Sprite(500, 0, 13);
+        sprites[1] = new Sprite(500, 0, 13, this.state);
         sprites[1].setColor(Color.BLUE);
         
-        sprites[2] = new Sprite(0, 500, 18);
+        sprites[2] = new Sprite(0, 500, 18, this.state);
         sprites[2].setColor(Color.RED);
         
-        sprites[3] = new Sprite(500, 500, 15);
+        sprites[3] = new Sprite(500, 500, 15, this.state);
         sprites[3].setColor(Color.WHITE);
         
-        map = new Map();
+        map = new Map(this.state);
     }
     
     public void updateGame() {
-        GameState myGame = GameState.getInstance();
         //TODO::: respond to user input (if necessary)
         
         //TODO::: calculate and apply income and expenses
@@ -62,8 +63,8 @@ public class Engine {
         for(int i = 0; i < NUM_SPRITES; i++){
             if(sprites[i].arrivedAtDestination()){
                 Point p = new Point();
-                double x = rand.nextInt(myGame.getWidth() - sprites[i].getWidth());
-                double y = rand.nextInt(myGame.getHeight() - sprites[i].getHeight());
+                double x = rand.nextInt(state.getWidth() - sprites[i].getWidth());
+                double y = rand.nextInt(state.getHeight() - sprites[i].getHeight());
                 p.setLocation(x, y);
                 sprites[i].setDestination(p);
             }

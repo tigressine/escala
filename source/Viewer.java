@@ -17,7 +17,8 @@ import escala.PolyClick;
  * */
 
 public class Viewer{
-    
+
+    private GameState state;
     private JFrame frame;
     private Canvas canvas;
     
@@ -31,28 +32,27 @@ public class Viewer{
     private long frameCount = 0;
     
     // CONSTRUCTOR
-    public Viewer(){
-        GameState myGame = GameState.getInstance();
-        frame = myGame.getFrame();
+    public Viewer(GameState state){
+        this.state = state;
+        frame = state.getFrame();
     }
     
     public void gameViewer(){
-        GameState myGame = GameState.getInstance();
         frame = new JFrame();
-        myGame.setFrame(frame);
+        state.setFrame(frame);
         frame.setTitle("Escala Test");
-        frame.setSize( myGame.getWidth(), myGame.getHeight() + myGame.getFrameHeight());
+        frame.setSize( state.getWidth(), state.getHeight() + state.getFrameHeight());
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setIgnoreRepaint(true);
         frame.setVisible(true);
                 
         // Canvas
         canvas = new Canvas(configuration);
-        canvas.setSize( myGame.getWidth(), myGame.getHeight());
+        canvas.setSize( state.getWidth(), state.getHeight());
         frame.add(canvas, 0);
 
         //Adds Mouse Listener from class PolyClick
-        canvas.addMouseListener(new PolyClick());
+        canvas.addMouseListener(new PolyClick(state));
             
         // Establish Buffer Strategy
         canvas.createBufferStrategy(2);
@@ -87,9 +87,7 @@ public class Viewer{
     // CALLS UPDATE AND RENDER FUNCTIONS (also in Engine)
     public void run(){
         
-        GameState myGame = GameState.getInstance();
-        
-        while(myGame.gameIsRunning() != true) {
+        while(state.isGameRunning() != true) {
             // stall here while menu is doing its thing...
             // when user selects difficulty, gameIsRunning will be set to true
             // NOTE: sleeping here does not affect menu listeners
@@ -103,11 +101,11 @@ public class Viewer{
         gameViewer();
         
         // Setup Game Engine
-        Engine engine = new Engine();
+        Engine engine = new Engine(state);
         
         
         // MAIN GAME LOOP
-        while( myGame.gameIsRunning() ) {
+        while( state.isGameRunning() ) {
             
             //get current time for frame rate calculations
             long startTime = System.nanoTime();
@@ -127,10 +125,10 @@ public class Viewer{
                 graphicsBuffer.dispose();
             } else {
                 System.err.println("ERROR: Lost graphics context for game");
-                myGame.stopGame();
+                state.stopGame();
             }
             
-            sleepForFrameRate(startTime, myGame.getFrameTime());
+            sleepForFrameRate(startTime, state.getFrameTime());
         }
         
         // TODO After Game clean up

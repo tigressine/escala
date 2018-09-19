@@ -19,6 +19,8 @@ import javax.swing.JFrame;
 import java.awt.MouseInfo;
 import java.awt.Insets;
 
+import java.awt.BasicStroke;
+
 
 /*
  * 
@@ -44,9 +46,7 @@ public class Map {
     int imageWidth = 1152;
     int imageHeight = 648;
 
-    Font font = new Font("serif", Font.BOLD, 48);
-    
-    PolyMouseList poly = PolyMouseList.getInstance();
+
     static int skip = Integer.MAX_VALUE;
     static boolean clicked = false;
 
@@ -78,7 +78,8 @@ public class Map {
     public void renderMap(Graphics2D g) {
         GameState myGame = GameState.getInstance();
         Logic logic = Logic.getInstance();
-
+        PolyMouseList poly = PolyMouseList.getInstance();
+    
         //Determines which region should be highlighted 
         Point p = MouseInfo.getPointerInfo().getLocation();
         Point r = myGame.getFrame().getLocation();
@@ -88,7 +89,7 @@ public class Map {
         if(clicked == false)
             skip = poly.contains(new Point((p.x - r.x - margin.left),(p.y - r.y - margin.top)), scale);
 
-        //System.out.println((p.x - r.x) + " " + p.y - r.y - 23));
+        //System.out.println((p.x - r. - margin.left) + " " + p.y - r.y - margin.top));
         
         // render background
         if(background != null)
@@ -111,9 +112,15 @@ public class Map {
             g.drawImage(glowRegions[skip], 0, 0, myGame.getWidth(), myGame.getHeight(), 0, 0, imageWidth, imageHeight, null);  
         
                 //Stats on Screen
-        g.setFont(font);
+        g.setFont(new Font("serif", Font.BOLD, (int)(48 * scale)));
         g.drawString(logic.cashToString(),(int)((10 * scale) + margin.left),(int)((605 * scale) + margin.top));
         g.drawString(logic.shareToString(),(int)((1000 * scale) + margin.left),(int)((605 * scale)+ margin.top));
+        g.setColor(Color.YELLOW);
+        g.fillRect((int)((500 * scale) + margin.left),(int)((605 * scale) + margin.top),75,10);
+        g.setColor(Color.BLACK);
+        g.setStroke(new BasicStroke(2));
+        g.drawRoundRect((int)((500 * scale) + margin.left),(int)((605 * scale) + margin.top),100,10,5,5);
+
     }
 
     public static void setSkip(int reg)

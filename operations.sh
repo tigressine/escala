@@ -66,6 +66,20 @@ function package_project {
     rm -rf $BUILD_DIR
 }
 
+# Run an SQL script located in the script directory.
+function run_sql {
+    cd $LIB_DIR
+    java -jar derbyrun.jar ij ../$1
+    rm $DERBY_LOG
+}
+
+# Run an interactive prompt for the database.
+function run_ij {
+    cd $LIB_DIR
+    java -jar derbyrun.jar ij
+    rm $DERBY_LOG
+}
+
 # Main entry point of this script.
 case "$1" in
     "--build")
@@ -76,5 +90,11 @@ case "$1" in
         ;;
     "--pack")
         package_project
+        ;;
+    "--sql")
+        run_sql $2
+        ;;
+    "--ij")
+        run_ij
         ;;
 esac

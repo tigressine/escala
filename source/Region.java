@@ -1,7 +1,7 @@
 // Part of Escala.
 // Written by Tiger Sachse.
 
-package escala.database;
+package escala;
 
 import java.io.*;
 import java.net.*;
@@ -97,7 +97,6 @@ public class Region {
 
     // Load the associated image from file.
     private void loadImage() throws IOException {
-        System.out.println(name);
         URL url = getClass().getResource("/data/assets/" + name + ".png");
         String path = URLDecoder.decode(url.getPath(), "UTF-8");
         image = ImageIO.read(new File(path));

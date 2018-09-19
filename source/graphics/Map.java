@@ -61,16 +61,12 @@ public class Map {
             
             //load all regions
             for(int i = 0; i < NUM_REGIONS; i++) {
-                url = getClass().getResource("/data/assets/" + regionNames[i] + ".png"); 
-                path = URLDecoder.decode(url.getPath(), "UTF-8");
-                regions[i] = ImageIO.read(new File(path));
+                regions[i] = state.getRegion(regionNames[i]).getImage();
             }
             
             //load all glow regions
             for(int i = 0; i < NUM_REGIONS; i++) {
-                url = getClass().getResource("/data/assets/" + regionNames[i] + "Glow.png"); 
-                path = URLDecoder.decode(url.getPath(), "UTF-8");
-                glowRegions[i] = ImageIO.read(new File(path));
+                glowRegions[i] = state.getRegion(regionNames[i]).getOutline();
             }
             
         } catch (IOException e){

@@ -22,18 +22,19 @@ public class Portal {
         DriverManager.registerDriver(driver);
         connection = DriverManager.getConnection("jdbc:derby:data/tables;create=true");
 
-        // Create any missing tables.
-        String[] tables = {"regions", "positiveEvents", "negativeEvents"};
-        DatabaseMetaData data = connection.getMetaData();
-        for (String table : tables) {
-            ResultSet results = data.getTables(null, null, table.toUpperCase(), null);
-            if (!results.next()) {
-                createTable(table);
-            }
-        }
+            // Create any missing tables.
+            //String[] tables = {"regions", "positiveEvents", "negativeEvents"};
+            //DatabaseMetaData data = connection.getMetaData();
+            //for (String table : tables) {
+            //    ResultSet results = data.getTables(null, null, table.toUpperCase(), null);
+            //    if (!results.next()) {
+            //        createTable(table);
+            //    }
+            //}
     }
 
     // Create a new table in the database.
+    /*
     private void createTable(String name) throws SQLException {
         Statement statement = connection.createStatement();
 
@@ -70,9 +71,10 @@ public class Portal {
         if (statement != null) {
             statement.close();
         }
-    }
+    }*/
    
     // Add a new region to the database.
+    /*
     public void addRegion(String filename) throws SQLException, IOException {
         Scanner scanner = new Scanner(new File(filename));
 
@@ -96,13 +98,15 @@ public class Portal {
         ));
        
         scanner.close();
-    }
+    }*/
 
     // Add a new event to the database.
+    /*
     public void addEvent(String filename) throws SQLException, IOException {
-    }
+    }*/
 
     // Get a named region from the database.
+    /*
     public Region getRegion(String name) {
         try {
             Statement statement = connection.createStatement();
@@ -130,39 +134,36 @@ public class Portal {
         catch (IOException | SQLException exception) {
             return null;
         }
-    }
+    }*/
 
-    // Get all regions from the database.
-    public HashMap<String, Region> getAllRegions() {
-        /*
-        try {
-            HashMap<String, Region> regions = new HashSet<>();
-            Statement statement = connection.createStatement();
-            ResultSet results = statement.executeQuery("SELECT * FROM regions");
-
-            while (results.next()) {
-                Region region = new Region(results.getString("name"),
-                                           results.getFloat("taxRate"),
-                                           results.getFloat("entryCost"),
-                                           results.getInt("logisticsCost"),
-                                           results.getInt("marketingCost"),
-                                           results.getInt("efficiencyCost"));
-                regions.put(region.getName(), region); 
-            }
-            
-            if (statement != null) {
-                statement.close();
-            }
-
-            return regions;
-        }
-        catch (IOException | SQLException exception) {
-            return null;
-        }
-        */
+    public HashMap<String, Event> getAllEvents() {
         return null;
     }
 
+    // Get all regions from the database.
+    public HashMap<String, Region> getAllRegions() throws SQLException, IOException {
+        HashMap<String, Region> regions = new HashMap<>();
+        Statement statement = connection.createStatement();
+        ResultSet results = statement.executeQuery("SELECT * FROM regions");
+
+        while (results.next()) {
+            Region region = new Region(results.getString("name"),
+                                       results.getFloat("taxRate"),
+                                       results.getFloat("entryCost"),
+                                       results.getInt("logisticsCost"),
+                                       results.getInt("marketingCost"),
+                                       results.getInt("efficiencyCost"));
+            regions.put(region.getName(), region); 
+        }
+            
+        if (statement != null) {
+            statement.close();
+        }
+
+        return regions;
+    }
+
+    /*
     // Get an event from the database by name.
     public Event getEvent(String name) throws SQLException {
         return null;
@@ -181,7 +182,7 @@ public class Portal {
     // Get a random negative event (with an alignment below .5).
     public Event getRandomNegativeEvent(float minAlignment) throws SQLException {
         return getRandomEvent(minAlignment, .5f);
-    }
+    }*/
 
     // Close the connection.
     public void close() throws SQLException {

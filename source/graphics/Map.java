@@ -50,7 +50,11 @@ public class Map {
     static int skip = Integer.MAX_VALUE;
     static boolean clicked = false;
 
-    public Map(){
+    private GameState state;
+
+    public Map(GameState state){
+        this.state = state;
+
         try {
             URL url = getClass().getResource("/data/assets/Background.png");
             String path = URLDecoder.decode(url.getPath(), "UTF-8");
@@ -76,15 +80,14 @@ public class Map {
     }
 
     public void renderMap(Graphics2D g) {
-        GameState myGame = GameState.getInstance();
         Logic logic = Logic.getInstance();
         PolyMouseList poly = PolyMouseList.getInstance();
     
         //Determines which region should be highlighted 
         Point p = MouseInfo.getPointerInfo().getLocation();
-        Point r = myGame.getFrame().getLocation();
-        Insets margin = myGame.getFrame().getInsets();
-        double scale = myGame.getScale();
+        Point r = state.getFrame().getLocation();
+        Insets margin = state.getFrame().getInsets();
+        double scale = state.getScale();
 
         if(clicked == false)
             skip = poly.contains(new Point((p.x - r.x - margin.left),(p.y - r.y - margin.top)), scale);
@@ -93,10 +96,10 @@ public class Map {
         
         // render background
         if(background != null)
-            g.drawImage(background, 0, 0, myGame.getWidth(), myGame.getHeight(), 0, 0, imageWidth, imageHeight, null);
+            g.drawImage(background, 0, 0, state.getWidth(), state.getHeight(), 0, 0, imageWidth, imageHeight, null);
         else{
             g.setBackground(Color.BLACK);
-            g.clearRect(0, 0, myGame.getWidth(), myGame.getHeight());
+            g.clearRect(0, 0, state.getWidth(), state.getHeight());
         }
         
         // render each region
@@ -105,11 +108,11 @@ public class Map {
            if(i == skip)
                continue;
 
-            g.drawImage(regions[i], 0, 0, myGame.getWidth(), myGame.getHeight(), 0, 0, imageWidth, imageHeight, null);
+            g.drawImage(regions[i], 0, 0, state.getWidth(), state.getHeight(), 0, 0, imageWidth, imageHeight, null);
         }
 
         if(skip < NUM_REGIONS)
-            g.drawImage(glowRegions[skip], 0, 0, myGame.getWidth(), myGame.getHeight(), 0, 0, imageWidth, imageHeight, null);  
+            g.drawImage(glowRegions[skip], 0, 0, state.getWidth(), state.getHeight(), 0, 0, imageWidth, imageHeight, null);  
         
                 //Stats on Screen
         g.setFont(new Font("serif", Font.BOLD, (int)(48 * scale)));

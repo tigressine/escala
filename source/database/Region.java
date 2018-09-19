@@ -97,6 +97,7 @@ public class Region {
 
     // Load the associated image from file.
     private void loadImage() throws IOException {
+        System.out.println(name);
         URL url = getClass().getResource("/data/assets/" + name + ".png");
         String path = URLDecoder.decode(url.getPath(), "UTF-8");
         image = ImageIO.read(new File(path));

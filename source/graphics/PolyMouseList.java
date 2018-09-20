@@ -27,7 +27,7 @@ public class PolyMouseList
 
 		for(int i = 0; i < NUM_REGIONS; i++) 
 		{
-            url = getClass().getResource("/data/raw/polygons/" + regionNames[i] + ".txt"); 
+            url = getClass().getResource("/data/polygons/" + regionNames[i] + ".txt"); 
             try
             {
                 String path = URLDecoder.decode(url.getPath(), "UTF-8");

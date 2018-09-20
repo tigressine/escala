@@ -5,6 +5,8 @@ package escala;
 
 import java.io.*;
 import java.net.*;
+import java.awt.*;
+import java.util.*;
 import javax.imageio.*;
 import java.awt.image.*;
 
@@ -13,6 +15,7 @@ public class Region {
     private String name;
     private float taxRate;
     private float entryCost;
+    private Polygon polygon;
     private int logisticsCost;
     private int marketingCost;
     private int efficiencyCost;
@@ -35,6 +38,7 @@ public class Region {
         this.efficiencyCost = efficiencyCost;
         loadImage();
         loadOutline();
+        loadPolygon();
     }
 
     // Get the name of this region.
@@ -77,6 +81,13 @@ public class Region {
         return outline;
     }
 
+	public boolean contains(Point point, double scale) {
+		point.x *= 1.0 / scale;
+		point.y *= 1.0 / scale;
+
+        return polygon.contains(point);
+	}
+
     // Create a string representation of this region.
     public String toString() {
         return String.format(
@@ -107,5 +118,17 @@ public class Region {
         URL url = getClass().getResource("/data/assets/" + name + "Glow.png");
         String path = URLDecoder.decode(url.getPath(), "UTF-8");
         outline = ImageIO.read(new File(path));
+    }
+
+    private void loadPolygon() throws IOException {
+        polygon = new Polygon();
+
+        URL url = getClass().getResource("/data/polygons/" + name + ".txt"); 
+        String path = URLDecoder.decode(url.getPath(), "UTF-8");
+        Scanner scanner = new Scanner(new File(path));
+
+        while (scanner.hasNext()) {
+            polygon.addPoint(scanner.nextInt(), scanner.nextInt());
+        }
     }
 }

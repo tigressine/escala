@@ -1,25 +1,18 @@
 // Part of Escala.
-// Written by Spencer Phillips.
+// Written by Spencer Phillips and Tiger Sachse.
 
 package escala.graphics;
 
-import java.awt.Color;
-import java.awt.Graphics2D;
-import java.awt.image.BufferedImage;
-import java.io.File;
-import java.net.URL;
-import java.net.URLDecoder;
-import java.io.IOException;
-import javax.imageio.ImageIO;
-import escala.GameState;
-import escala.Logic;
-import escala.Region;
-import java.awt.Font;
-import java.awt.Point;
-import javax.swing.JFrame;
-import java.awt.MouseInfo;
-import java.util.ArrayList;
+import escala.*;
+import java.io.*;
+import java.awt.*
+import java.net.*;
+import java.util.*;
+import javax.swing.*;
+import javax.imageio.*;
+import java.awt.image.*;
 
+// Holds the map and rendered regions.
 public class Map {
     private Font font;
     private int imageWidth;
@@ -27,7 +20,8 @@ public class Map {
     private GameState state;
     private BufferedImage background;
 
-    public Map(GameState state){
+    // Create a new map.
+    public Map(GameState state) {
         imageWidth = 1152;
         imageHeight = 648;
         this.state = state;
@@ -41,9 +35,10 @@ public class Map {
         catch (IOException exception) {
             exception.printStackTrace();
             System.exit(-1);
-        } 
+        }
     }
 
+    // Render the map onto the screen.
     public void renderMap(Graphics2D g) {
         Logic logic = Logic.getInstance();
         Point r = state.getFrame().getLocation();
@@ -63,6 +58,7 @@ public class Map {
             g.clearRect(0, 0, state.getWidth(), state.getHeight());
         }
 
+        // Determine if a region is already selected.
         Region selectedRegion = null;
         ArrayList<Region> regions = state.getAllRegions();
         for (Region region : regions) {
@@ -72,7 +68,7 @@ public class Map {
             }
         }
 
-        // Render all regions and save the selected region, if needed.
+        // Render all regions and determine if a region is being hovered, if needed.
         Point containsPoint = new Point(p.x - r.x, p.y - r.y - 23);
         for (Region region : regions) {
             if (selectedRegion == null && region.contains(containsPoint, state.getScale())) {
@@ -88,7 +84,7 @@ public class Map {
             }
         }
 
-        // Draw the selected region.
+        // Draw the selected/hovered region.
         if (selectedRegion != null) {
             g.drawImage(selectedRegion.getOutline(),
                         0, 0, state.getWidth(),

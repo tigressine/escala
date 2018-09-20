@@ -24,12 +24,13 @@ public class Region {
     private BufferedImage outline;
 
     // Create a new region.
-    public Region(String name,
-                  float taxRate,
-                  float entryCost,
-                  int logisticsCost,
-                  int marketingCost,
-                  int efficiencyCost) throws IOException {
+    public Region(
+        String name,
+        float taxRate,
+        float entryCost,
+        int logisticsCost,
+        int marketingCost,
+        int efficiencyCost) throws IOException {
    
         selected = false;
         this.name = name;

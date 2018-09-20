@@ -87,10 +87,7 @@ public class Region {
         return selected;
     }
 
-	public boolean contains(Point point, double scale) {
-		point.x *= 1.0 / scale;
-		point.y *= 1.0 / scale;
-
+	public boolean contains(Point point) {
         return polygon.contains(point);
 	}
 

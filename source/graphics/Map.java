@@ -20,31 +20,17 @@ import javax.swing.JFrame;
 import java.awt.MouseInfo;
 import java.util.ArrayList;
 
-/*
- * 
- * NOTE::: if map is not rendered properly, double check path and names:
- * 
- * TODO::: Ideally, we will pull NUM_REGIONS and regionNames from database
- *              regionNames can be stored as paths...
- * 
- *      Use cursor location to determine which region to highlight
- * 
- * NOTE::: To improve game performance, reduce image size and pre-stretch all images when loading.
- * */
-
 public class Map {
     private Font font;
     private int imageWidth;
     private int imageHeight;
     private GameState state;
-    private PolyMouseList poly;
     private BufferedImage background;
 
     public Map(GameState state){
         imageWidth = 1152;
         imageHeight = 648;
         this.state = state;
-        poly = PolyMouseList.getInstance();
         font = new Font("serif", Font.BOLD, 48);
 
         try {
@@ -60,14 +46,8 @@ public class Map {
 
     public void renderMap(Graphics2D g) {
         Logic logic = Logic.getInstance();
-
         Point r = state.getFrame().getLocation();
         Point p = MouseInfo.getPointerInfo().getLocation();
-
-        /*
-        if(clicked == false)
-            skip = poly.contains(new Point((p.x - r.x),(p.y - r.y - 23)), state.getScale());
-        */
 
         // Render the background.
         if (background != null) {
@@ -83,11 +63,19 @@ public class Map {
             g.clearRect(0, 0, state.getWidth(), state.getHeight());
         }
 
-        // Render all regions and save the selected region, if needed.
         Region selectedRegion = null;
+        ArrayList<Region> regions = state.getAllRegions();
+        for (Region region : regions) {
+            if (region.isSelected()) {
+                selectedRegion = region;
+                break;
+            }
+        }
+
+        // Render all regions and save the selected region, if needed.
         Point containsPoint = new Point(p.x - r.x, p.y - r.y - 23);
-        for (Region region : state.getAllRegions()) {
-            if (region.isSelected() || region.contains(containsPoint, state.getScale())) {
+        for (Region region : regions) {
+            if (selectedRegion == null && region.contains(containsPoint, state.getScale())) {
                 selectedRegion = region;
             }
             else {

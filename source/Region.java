@@ -142,7 +142,7 @@ public class Region {
     private void loadPolygon() throws IOException {
         polygon = new Polygon();
 
-        URL url = getClass().getResource("/data/polygons/" + name + ".txt"); 
+        URL url = getClass().getResource("/data/polygons/" + name + ".data"); 
         String path = URLDecoder.decode(url.getPath(), "UTF-8");
         Scanner scanner = new Scanner(new File(path));
 

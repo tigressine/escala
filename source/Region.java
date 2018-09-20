@@ -14,6 +14,7 @@ import java.awt.image.*;
 public class Region {
     private String name;
     private float taxRate;
+    private boolean selected;
     private float entryCost;
     private Polygon polygon;
     private int logisticsCost;
@@ -29,7 +30,8 @@ public class Region {
                   int logisticsCost,
                   int marketingCost,
                   int efficiencyCost) throws IOException {
-    
+   
+        selected = false;
         this.name = name;
         this.taxRate = taxRate;
         this.entryCost = entryCost;
@@ -81,6 +83,10 @@ public class Region {
         return outline;
     }
 
+    public boolean isSelected() {
+        return selected;
+    }
+
 	public boolean contains(Point point, double scale) {
 		point.x *= 1.0 / scale;
 		point.y *= 1.0 / scale;
@@ -104,6 +110,14 @@ public class Region {
             marketingCost,
             efficiencyCost
         );
+    }
+
+    public void select() {
+        selected = true;
+    }
+
+    public void deselect() {
+        selected = false;
     }
 
     // Load the associated image from file.

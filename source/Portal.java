@@ -49,18 +49,6 @@ public class Portal {
         return regions;
     }
 
-    public Event getRandomEvent() {
-        return getRandomEvent(0.0, 1.0);
-    }
-
-    public Event getRandomPositiveEvent() {
-        return getRandomEvent(0.55, 1.0);
-    }
-
-    public Event getRandomNegativeEvent() {
-        return getRandomEvent(0.0, 0.45);
-    }
-
     public Event getRandomEvent(double minAlign, double maxAlign) {
         if (minAlign < 0.0) {
             minAlign = 0.0;
@@ -79,12 +67,9 @@ public class Portal {
             Statement statement = connection.createStatement();
             ResultSet results = statement.executeQuery(query);
             
-            if (statement != null) {
-                statement.close();
-            }
-
+            Event event = null;
             if (results.next()) {
-                return new Event(
+                event = new Event(
                     results.getString("name"),
                     results.getString("description"),
                     results.getFloat("alignment"),
@@ -94,12 +79,16 @@ public class Portal {
                     results.getInt("productEffect")
                 );
             }
+
+            if (statement != null) {
+                statement.close();
+            }
+
+            return event;
         }
         catch (SQLException exception) {
             return null;
         }
-
-        return null;
     }
 
     // Close the connection.

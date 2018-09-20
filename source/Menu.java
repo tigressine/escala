@@ -33,6 +33,9 @@ public class Menu{
     JButton exit = new JButton("EXIT");
     JPanel cards = new JPanel(new CardLayout());
     
+    Color background = Color.decode("#e6ffe6");
+    Color buttonCol = Color.decode("#33adff");
+    
     
 
     /**
@@ -82,6 +85,9 @@ public class Menu{
         JPanel index = new JPanel();
         index.setLayout(null);
         
+        index.setOpaque(true);
+        index.setBackground(background);
+        
         JLabel title = new JLabel("ESCALA");
         title.setFont(new Font("Serif", Font.PLAIN, 50));
         title.setBounds(170, 40, 220, 60);
@@ -97,6 +103,11 @@ public class Menu{
         index.add(cred);
         index.add(exit);
         
+        play.setBackground(buttonCol);
+        set.setBackground(buttonCol);
+        cred.setBackground(buttonCol);
+        exit.setBackground(buttonCol);
+        
         pane.add(index, "INDEX");
         
         //Add background and color scheme
@@ -107,6 +118,9 @@ public class Menu{
     public void addDiffCard(Container pane){
         JPanel diff = new JPanel();
         diff.setLayout(null);
+        
+        diff.setOpaque(true);
+        diff.setBackground(background);
         
         
         JLabel diffTitle = new JLabel("DIFFICULTY");
@@ -133,6 +147,9 @@ public class Menu{
     public void addSetCard(Container pane){
         JPanel set = new JPanel();
         set.setLayout(null);
+        
+        set.setOpaque(true);
+        set.setBackground(background);
         
         JLabel setTitle = new JLabel("SETTINGS");
         setTitle.setFont(new Font("Serif", Font.PLAIN, 50));
@@ -168,6 +185,9 @@ public class Menu{
     public void addCredCard(Container pane){
         JPanel cred = new JPanel();
         cred.setLayout(null);
+        
+        cred.setOpaque(true);
+        cred.setBackground(background);
         
         JLabel credTitle = new JLabel("CREDITS");
         credTitle.setFont(new Font("Serif", Font.PLAIN, 50));

@@ -3,6 +3,7 @@
 
 package escala;
 
+import escala.*;
 import java.io.*;
 import java.sql.*;
 import java.util.*;
@@ -20,10 +21,10 @@ public class GameState {
     private int goalFPS;
     private double scale;
     private JFrame frame;
+    private Portal portal;
     private int frameHeight;
     private boolean isRunning;
     private Difficulty difficulty;
-    private HashMap<String, Event> events;
     private HashMap<String, Region> regions;
 
     // Create a new game state with some defaults.
@@ -41,11 +42,9 @@ public class GameState {
         isRunning = false;
         difficulty = Difficulty.NORMAL;
 
-        // Load all regions and events from the database.
-        DatabaseViewer viewer = new DatabaseViewer();
-        regions = viewer.getAllRegions();
-        events = viewer.getAllEvents();
-        viewer.close();
+        // Load the database and get all regions.
+        portal = new Portal();
+        regions = portal.getAllRegions();
     }
 
     // Get the game width.
@@ -103,9 +102,8 @@ public class GameState {
         return new ArrayList<Region>(regions.values());
     }
 
-    // Get an event by name from loaded data.
-    public Event getEvent(String name) {
-        return events.get(name);
+    public Event getRandomEvent(Event.Alignment minAlign, Event.Alignment maxAlign) {
+        return null;    
     }
 
     // Set the scale of the window.
@@ -136,5 +134,10 @@ public class GameState {
     // Set the difficulty of the game.
     public void setDifficulty(Difficulty difficulty) {
         this.difficulty = difficulty;
+    }
+
+    // Close the database portal.
+    public void closePortal() {
+        portal.close();
     }
 }

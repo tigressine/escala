@@ -26,6 +26,7 @@ public class Escala {
         Menu menu = new Menu(state);
         Viewer gameViewer = new Viewer(state);
         gameViewer.run(); 
+        state.closePortal();
     }
     
     public static void main(String[] args) {

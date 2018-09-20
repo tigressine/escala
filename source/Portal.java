@@ -9,23 +9,18 @@ import java.util.*;
 import org.apache.derby.jdbc.*;
 
 // A view into the main game database.
-public class DatabaseViewer {
+public class Portal {
 
     private Driver driver;
     private Connection connection;
 
-    // Create a new viewer.
-    public DatabaseViewer() throws SQLException {
+    // Create a new portal.
+    public Portal() throws SQLException {
 
         // Create and register the driver and connection.
         driver = new EmbeddedDriver();
         DriverManager.registerDriver(driver);
         connection = DriverManager.getConnection("jdbc:derby:data/tables");
-    }
-
-    // Return a map of all events in the database.
-    public HashMap<String, Event> getAllEvents() {
-        return null;
     }
 
     // Return a map of all regions in the database.
@@ -53,9 +48,15 @@ public class DatabaseViewer {
     }
 
     // Close the connection.
-    public void close() throws SQLException {
-        if (connection != null) {
-            connection.close();
-        } 
+    public void close() {
+        try {
+            if (connection != null) {
+                connection.close();
+            } 
+        }
+        catch (SQLException exception) {
+            exception.printStackTrace();
+            System.exit(-1);
+        }
     }
 }

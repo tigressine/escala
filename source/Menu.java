@@ -5,6 +5,8 @@ package escala;
 
 import java.awt.*;
 import javax.swing.*;
+import javax.swing.event.ChangeEvent;
+import javax.swing.event.ChangeListener;
 
 public class Menu{
     
@@ -136,17 +138,29 @@ public class Menu{
         setTitle.setFont(new Font("Serif", Font.PLAIN, 50));
         setTitle.setBounds(140, 40, 240, 60);
         
-        JLabel setText = new JLabel("This page is under construction");
-        setText.setFont(new Font("Serif", Font.PLAIN, 20));
-        setText.setBounds(135, 60, 300, 150);
         
         set.add(setTitle);
-        set.add(setText);
         back.setBounds(200, 240, 120, 30);
         set.add(back);
         
-        pane.add(set, "SET");
+        JButton loadFile = new JButton("Load Save File");
+        loadFile.setBounds(200, 110, 120, 30);
+        set.add(loadFile);
         
+        JLabel frameScale = new JLabel("50");
+        frameScale.setFont(new Font("Serif", Font.PLAIN, 20));
+        frameScale.setBounds(250, 130, 240, 60);
+        set.add(frameScale);
+        
+        JSlider framesPerSecond = new JSlider(JSlider.HORIZONTAL);
+        framesPerSecond.setBounds(160,190,200,30);
+        framesPerSecond.addChangeListener((ChangeEvent e) -> {
+            frameScale.setText(String.valueOf(framesPerSecond.getValue()));
+        });
+        set.add(framesPerSecond);
+        
+        
+        pane.add(set, "SET");        
         //add setting options
     }
     

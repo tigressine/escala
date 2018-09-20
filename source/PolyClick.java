@@ -33,17 +33,14 @@ class PolyClick implements MouseListener{
         Point p = MouseInfo.getPointerInfo().getLocation();
         Point r = state.getFrame().getLocation();
 
-        int region = poly.contains(new Point((p.x - r.x),(p.y - r.y - 23)), state.getScale());
-
-        if(region > NUM_REGIONS)
-        {
-            Map.setSkip(Integer.MAX_VALUE);
-            Map.setClick(false);
-        }
-        else
-        {
-            Map.setSkip(region);
-            Map.setClick(true);
+        Point containsPoint = new Point(p.x - r.x, p.y - r.y - 23);
+        for (Region region : state.getAllRegions()) {
+            if (region.contains(containsPoint, state.getScale())) {
+                region.select();
+            }
+            else {
+                region.deselect();
+            }
         }
     }
 

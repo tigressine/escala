@@ -1,5 +1,5 @@
 // Part of Escala.
-// Written by Spencer Phillips.
+// Written by Spencer Phillips and Tiger Sachse.
 
 package escala.graphics;
 
@@ -13,14 +13,13 @@ import java.io.IOException;
 import javax.imageio.ImageIO;
 import escala.GameState;
 import escala.Logic;
+import escala.Region;
 import java.awt.Font;
 import java.awt.Point;
-import javax.swing.JFrame;
 import java.awt.MouseInfo;
 import java.awt.Insets;
-
 import java.awt.BasicStroke;
-
+import java.util.ArrayList;
 
 /*
  * 
@@ -34,87 +33,96 @@ import java.awt.BasicStroke;
  * NOTE::: To improve game performance, reduce image size and pre-stretch all images when loading.
  * */
 
+// Holds the map and rendered regions.
 public class Map {
-    
-    private static final int NUM_REGIONS = 10;
-    BufferedImage background = null;
-    BufferedImage[] regions = new BufferedImage[NUM_REGIONS];
-    String[] regionNames = {"Asia", "EasternEurope", "LatinAmerica", "MiddleEast", 
-            "NorthAfrica", "NorthAmerica", "Oceania", "SouthAfrica", "SouthAmerica", "WesternEurope"};
-    BufferedImage[] glowRegions = new BufferedImage[NUM_REGIONS];
-    
-    int imageWidth = 1152;
-    int imageHeight = 648;
 
-
-    static int skip = Integer.MAX_VALUE;
-    static boolean clicked = false;
+    private int imageWidth;
+    private int imageHeight;
 
     private GameState state;
+    private BufferedImage background;
 
-    public Map(GameState state){
+    // Create a new map.
+    public Map(GameState state) {
+        imageWidth = 1152;
+        imageHeight = 648;
         this.state = state;
 
         try {
             URL url = getClass().getResource("/data/assets/Background.png");
             String path = URLDecoder.decode(url.getPath(), "UTF-8");
-            background = ImageIO.read(new File(path));
-            
-            //load all regions
-            for(int i = 0; i < NUM_REGIONS; i++) {
-                url = getClass().getResource("/data/assets/" + regionNames[i] + ".png"); 
-                path = URLDecoder.decode(url.getPath(), "UTF-8");
-                regions[i] = ImageIO.read(new File(path));
-            }
-            
-            //load all glow regions
-            for(int i = 0; i < NUM_REGIONS; i++) {
-                url = getClass().getResource("/data/assets/" + regionNames[i] + "Glow.png"); 
-                path = URLDecoder.decode(url.getPath(), "UTF-8");
-                glowRegions[i] = ImageIO.read(new File(path));
-            }
-            
-        } catch (IOException e){
-            e.printStackTrace();
-        } 
+            background = ImageIO.read(new File(path));    
+        }
+        catch (IOException exception) {
+            exception.printStackTrace();
+            System.exit(-1);
+        }
     }
 
-    public void renderMap(Graphics2D g) {
+    // Render the map onto the screen.
+    public void renderMap(Graphics2D g) 
+    {
         Logic logic = Logic.getInstance();
-        PolyMouseList poly = PolyMouseList.getInstance();
-    
-        //Determines which region should be highlighted 
-        Point p = MouseInfo.getPointerInfo().getLocation();
         Point r = state.getFrame().getLocation();
+        Point p = MouseInfo.getPointerInfo().getLocation();
         Insets margin = state.getFrame().getInsets();
         double scale = state.getScale();
 
-        if(clicked == false)
-            skip = poly.contains(new Point((p.x - r.x - margin.left),(p.y - r.y - margin.top)), scale);
+        p = new Point((p.x - r.x - margin.left),(p.y - r.y - margin.top));
 
-        //System.out.println((p.x - r.x - margin.left) + " " + (p.y - r.y - margin.top));
-        
-        // render background
-        if(background != null)
-            g.drawImage(background, 0, 0, state.getWidth(), state.getHeight(), 0, 0, imageWidth, imageHeight, null);
-        else{
+        p.x = (int)((1/scale) * (double)p.x);
+        p.y = (int)((1/scale) * (double)p.y);
+
+        // Render the background.
+        if (background != null) {
+            g.drawImage(background, 0, 0,
+                        state.getWidth(),
+                        state.getHeight(),
+                        0, 0, imageWidth,
+                        imageHeight,
+                        null);
+        }
+        else {
             g.setBackground(Color.BLACK);
             g.clearRect(0, 0, state.getWidth(), state.getHeight());
         }
-        
-        // render each region
-        for(int i = 0; i < NUM_REGIONS; i++)
-        {
-           if(i == skip)
-               continue;
 
-            g.drawImage(regions[i], 0, 0, state.getWidth(), state.getHeight(), 0, 0, imageWidth, imageHeight, null);
+        // Determine if a region is already selected.
+        Region selectedRegion = null;
+        ArrayList<Region> regions = state.getAllRegions();
+        for (Region region : regions) {
+            if (region.isSelected()) {
+                selectedRegion = region;
+                break;
+            }
         }
 
-        if(skip < NUM_REGIONS)
-            g.drawImage(glowRegions[skip], 0, 0, state.getWidth(), state.getHeight(), 0, 0, imageWidth, imageHeight, null);  
+        // Render all regions and determine if a region is being hovered, if needed.
+        for (Region region : regions) {
+            if (selectedRegion == null && region.contains(p)) {
+                selectedRegion = region;
+            }
+            else {
+                g.drawImage(region.getImage(), 0, 0,
+                            state.getWidth(),
+                            state.getHeight(),
+                            0, 0, imageWidth,
+                            imageHeight,
+                            null);  
+            }
+        }
+
+        // Draw the selected/hovered region.
+        if (selectedRegion != null) {
+            g.drawImage(selectedRegion.getOutline(),
+                        0, 0, state.getWidth(),
+                        state.getHeight(),
+                        0, 0, imageWidth,
+                        imageHeight,
+                        null);
+        }
         
-                //Stats on Screen
+        //Stats on Screen
         g.setFont(new Font("serif", Font.BOLD, (int)(48 * scale)));
         g.drawString(logic.cashToString(),(int)((10 * scale) + margin.left),(int)((605 * scale) + margin.top));
         g.drawString(logic.shareToString(),(int)((1000 * scale) + margin.left),(int)((605 * scale)+ margin.top));
@@ -139,16 +147,5 @@ public class Map {
         g.fillRect((int)((676 * scale) + margin.left),(int)((595 * scale) + margin.top),(int)(logic.getLog() * scale),(int)(20 * scale));
         g.setColor(Color.BLACK);
         g.drawRoundRect((int)((676 * scale) + margin.left),(int)((595 * scale) + margin.top),(int)(100 * scale),(int)(20 * scale),(int)(5 * scale),(int)(5 * scale));
-
-    }
-
-    public static void setSkip(int reg)
-    {
-        skip = reg;
-    }
-
-    public static void setClick(boolean click)
-    {
-        clicked = click;
     }
 }

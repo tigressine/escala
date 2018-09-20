@@ -5,7 +5,6 @@ package escala;
 
 import java.awt.event.MouseListener;
 import java.awt.event.MouseEvent;
-import escala.graphics.PolyMouseList;
 import escala.GameState;
 import escala.graphics.Map;
 import java.awt.Point;
@@ -18,7 +17,7 @@ class PolyClick implements MouseListener{
 
     private static final int NUM_REGIONS = 10;
 
-    PolyMouseList poly;
+    //PolyMouseList poly;
     GameState state;
     Rectangle cash  = new Rectangle(0,577,230,71);
     Rectangle stats = new Rectangle(260,600,632,48);
@@ -27,14 +26,11 @@ class PolyClick implements MouseListener{
 
 	public PolyClick(GameState state)
 	{
-		poly = PolyMouseList.getInstance();
+		//poly = PolyMouseList.getInstance();
         this.state = state;
 	}
 
     public void mouseClicked(MouseEvent e) {
-       // eventOutput("Mouse clicked (# of clicks: " + e.getClickCount() + ")", e);
-
-        //Checks to see if in Region, then highlight region till clicked out of
         Point p = MouseInfo.getPointerInfo().getLocation();
         Point r = state.getFrame().getLocation();
         Insets margin = state.getFrame().getInsets();
@@ -61,44 +57,34 @@ class PolyClick implements MouseListener{
 
         else
         {
-            int region = poly.contains(p);
-
-            if(region > NUM_REGIONS)
-            {
-                Map.setSkip(Integer.MAX_VALUE);
-                Map.setClick(false);
+            for (Region region : state.getAllRegions()) {
+                if (region.contains(p)) {
+                    if (region.isSelected()) {
+                        region.deselect();
+                    }
+                    else {
+                        region.select();
+                    }
+                }
+                else {
+                    region.deselect();
+                }
             }
-            else
-            {
-                Map.setSkip(region);
-                Map.setClick(true);
-            }
-        }
-
-        
+        } 
     }
 
 	private void eventOutput(String eventDescription, MouseEvent e) {
-        /*
-        System.out.println(eventDescription + " detected on "
-                + e.getComponent().getClass().getName()
-                + ".");
-        */
     }
      
     public void mousePressed(MouseEvent e) {
-       // eventOutput("Mouse pressed (# of clicks: " + e.getClickCount() + ")", e);
     }
      
     public void mouseReleased(MouseEvent e) {
-       // eventOutput("Mouse released (# of clicks: " + e.getClickCount() + ")", e);
     }
      
     public void mouseEntered(MouseEvent e) {
-        //eventOutput("Mouse entered", e);
     }
      
     public void mouseExited(MouseEvent e) {
-       // eventOutput("Mouse exited", e);
     }
 }

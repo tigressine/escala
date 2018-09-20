@@ -5,7 +5,7 @@ package escala.graphics;
 
 import escala.*;
 import java.io.*;
-import java.awt.*
+import java.awt.*;
 import java.net.*;
 import java.util.*;
 import javax.swing.*;

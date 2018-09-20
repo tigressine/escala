@@ -14,9 +14,9 @@ import java.awt.image.*;
 public class Region {
     private String name;
     private float taxRate;
-    private boolean selected;
     private float entryCost;
     private Polygon polygon;
+    private boolean selected;
     private int logisticsCost;
     private int marketingCost;
     private int efficiencyCost;
@@ -87,9 +87,10 @@ public class Region {
         return selected;
     }
 
-	public boolean contains(Point point, double scale) {
-		point.x *= 1.0 / scale;
-		point.y *= 1.0 / scale;
+    // Check if a point is contained within this region's polygon.
+    public boolean contains(Point point, double scale) {
+        point.x *= 1.0 / scale;
+        point.y *= 1.0 / scale;
 
         return polygon.contains(point);
 	}
@@ -112,10 +113,12 @@ public class Region {
         );
     }
 
+    // Select the region.
     public void select() {
         selected = true;
     }
 
+    // Deselect the region.
     public void deselect() {
         selected = false;
     }
@@ -134,6 +137,7 @@ public class Region {
         outline = ImageIO.read(new File(path));
     }
 
+    // Load the polygon information from file.
     private void loadPolygon() throws IOException {
         polygon = new Polygon();
 

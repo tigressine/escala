@@ -6,11 +6,6 @@ package escala;
 // Read-only Event data structure.
 public class Event {
 
-    public static enum Alignment {
-        HORRIFIC, TRAGIC, ROUGH,
-        NEUTRAL, NICE, GREAT, EXCELLENT
-    }
-
     private String name;
     private String description;
     private float alignment;
@@ -20,13 +15,14 @@ public class Event {
     private int efficiencyEffect;
 
     // Create a new event.
-    public Event(String name,
-                 String description,
-                 float alignment,
-                 float cashEffect,
-                 int marketingEffect,
-                 int logisticsEffect,
-                 int efficiencyEffect) {
+    public Event(
+        String name,
+        String description,
+        float alignment,
+        float cashEffect,
+        int marketingEffect,
+        int logisticsEffect,
+        int efficiencyEffect) {
     
         this.name = name;
         this.description = description;

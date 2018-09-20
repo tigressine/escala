@@ -102,10 +102,6 @@ public class GameState {
         return new ArrayList<Region>(regions.values());
     }
 
-    public Event getRandomEvent(Event.Alignment minAlign, Event.Alignment maxAlign) {
-        return null;    
-    }
-
     // Set the scale of the window.
     public void setScale(double scale) {
         this.scale = scale;

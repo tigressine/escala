@@ -46,12 +46,14 @@ public class Map {
 
         // Render the background.
         if (background != null) {
-            g.drawImage(background, 0, 0,
-                        state.getWidth(),
-                        state.getHeight(),
-                        0, 0, imageWidth,
-                        imageHeight,
-                        null);
+            g.drawImage(
+                background, 0, 0,
+                state.getWidth(),
+                state.getHeight(),
+                0, 0, imageWidth,
+                imageHeight,
+                null
+            );
         }
         else {
             g.setBackground(Color.BLACK);
@@ -75,23 +77,27 @@ public class Map {
                 selectedRegion = region;
             }
             else {
-                g.drawImage(region.getImage(), 0, 0,
-                            state.getWidth(),
-                            state.getHeight(),
-                            0, 0, imageWidth,
-                            imageHeight,
-                            null);  
+                g.drawImage(
+                    region.getImage(), 0, 0,
+                    state.getWidth(),
+                    state.getHeight(),
+                    0, 0, imageWidth,
+                    imageHeight,
+                    null
+                );  
             }
         }
 
         // Draw the selected/hovered region.
         if (selectedRegion != null) {
-            g.drawImage(selectedRegion.getOutline(),
-                        0, 0, state.getWidth(),
-                        state.getHeight(),
-                        0, 0, imageWidth,
-                        imageHeight,
-                        null);
+            g.drawImage(
+                selectedRegion.getOutline(),
+                0, 0, state.getWidth(),
+                state.getHeight(),
+                0, 0, imageWidth,
+                imageHeight,
+                null
+            );
         }
         
         // Show stats on the screen.

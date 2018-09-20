@@ -102,18 +102,22 @@ public class GameState {
         return new ArrayList<Region>(regions.values());
     }
 
+    // Get a random event.
     public Event getRandomEvent() {
         return portal.getRandomEvent(0.0, 1.0);
     }
 
+    // Get a random positive event.
     public Event getRandomPositiveEvent() {
         return portal.getRandomEvent(0.55, 1.0);
     }
 
+    // Get a random negative event.
     public Event getRandomNegativeEvent() {
         return portal.getRandomEvent(0.0, 0.45);
     }
 
+    // Get a random event with a specific alignment interval.
     public Event getRandomEvent(double minAlign, double maxAlign) {
         return portal.getRandomEvent(minAlign, maxAlign);
     }

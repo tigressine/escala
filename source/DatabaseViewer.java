@@ -8,13 +8,13 @@ import java.sql.*;
 import java.util.*;
 import org.apache.derby.jdbc.*;
 
-// Enable a view into the main game database.
+// A view into the main game database.
 public class DatabaseViewer {
 
     private Driver driver;
     private Connection connection;
 
-    // Create a new portal.
+    // Create a new viewer.
     public DatabaseViewer() throws SQLException {
 
         // Create and register the driver and connection.
@@ -23,16 +23,18 @@ public class DatabaseViewer {
         connection = DriverManager.getConnection("jdbc:derby:data/tables");
     }
 
+    // Return a map of all events in the database.
     public HashMap<String, Event> getAllEvents() {
         return null;
     }
 
-    // Get all regions from the database.
+    // Return a map of all regions in the database.
     public HashMap<String, Region> getAllRegions() throws SQLException, IOException {
         HashMap<String, Region> regions = new HashMap<>();
         Statement statement = connection.createStatement();
         ResultSet results = statement.executeQuery("SELECT * FROM regions");
 
+        // Add all the results to the map as new regions.
         while (results.next()) {
             Region region = new Region(results.getString("name"),
                                        results.getFloat("taxRate"),

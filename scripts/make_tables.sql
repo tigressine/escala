@@ -2,6 +2,7 @@
 Part of Escala.
 Written by Tiger Sachse.
 */
+
 CONNECT 'jdbc:derby:../data/tables;create=true';
 CREATE TABLE regions (name VARCHAR(15) PRIMARY KEY,
                       taxRate REAL,

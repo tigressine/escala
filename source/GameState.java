@@ -102,6 +102,22 @@ public class GameState {
         return new ArrayList<Region>(regions.values());
     }
 
+    public Event getRandomEvent() {
+        return portal.getRandomEvent(0.0, 1.0);
+    }
+
+    public Event getRandomPositiveEvent() {
+        return portal.getRandomEvent(0.55, 1.0);
+    }
+
+    public Event getRandomNegativeEvent() {
+        return portal.getRandomEvent(0.0, 0.45);
+    }
+
+    public Event getRandomEvent(double minAlign, double maxAlign) {
+        return portal.getRandomEvent(minAlign, maxAlign);
+    }
+
     // Set the scale of the window.
     public void setScale(double scale) {
         this.scale = scale;

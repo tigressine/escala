@@ -49,7 +49,10 @@ public class Portal {
         return regions;
     }
 
+    // Get a random event from the database.
     public Event getRandomEvent(double minAlign, double maxAlign) {
+
+        // Sanitize any wild inputs.
         if (minAlign < 0.0) {
             minAlign = 0.0;
         }
@@ -57,6 +60,8 @@ public class Portal {
             maxAlign = 1.0;
         }
 
+        // Build the query. I know this isn't the safest method to construct
+        // an SQL statement. I like to live dangerously. ;)
         String query = String.format(
             "SELECT * FROM events WHERE alignment <= %f AND alignment >= %f " + 
             "ORDER BY RANDOM() { LIMIT 1 }",
@@ -66,7 +71,8 @@ public class Portal {
         try {
             Statement statement = connection.createStatement();
             ResultSet results = statement.executeQuery(query);
-            
+           
+            // If an event was found, create that event object.
             Event event = null;
             if (results.next()) {
                 event = new Event(

@@ -92,7 +92,7 @@ public class Map {
         if(clicked == false)
             skip = poly.contains(new Point((p.x - r.x - margin.left),(p.y - r.y - margin.top)), scale);
 
-        //System.out.println((p.x - r. - margin.left) + " " + p.y - r.y - margin.top));
+        //System.out.println((p.x - r.x - margin.left) + " " + (p.y - r.y - margin.top));
         
         // render background
         if(background != null)
@@ -118,11 +118,27 @@ public class Map {
         g.setFont(new Font("serif", Font.BOLD, (int)(48 * scale)));
         g.drawString(logic.cashToString(),(int)((10 * scale) + margin.left),(int)((605 * scale) + margin.top));
         g.drawString(logic.shareToString(),(int)((1000 * scale) + margin.left),(int)((605 * scale)+ margin.top));
+        g.setStroke(new BasicStroke((int)(2 * scale)));
+
+        g.setFont(new Font("serif", Font.BOLD, (int)(14 * scale)));
+        
+        g.drawString("Product",(int)((403 * scale) + margin.left),(int)((590 * scale) + margin.top));
         g.setColor(Color.YELLOW);
-        g.fillRect((int)((500 * scale) + margin.left),(int)((605 * scale) + margin.top),75,10);
+        g.fillRect((int)((376 * scale) + margin.left),(int)((595 * scale) + margin.top),(int)(logic.getProd() * scale),(int)(20 * scale));
         g.setColor(Color.BLACK);
-        g.setStroke(new BasicStroke(2));
-        g.drawRoundRect((int)((500 * scale) + margin.left),(int)((605 * scale) + margin.top),100,10,5,5);
+        g.drawRoundRect((int)((376 * scale) + margin.left),(int)((595 * scale) + margin.top),(int)(100 * scale),(int)(20 * scale),(int)(5 * scale),(int)(5 * scale));
+
+        g.drawString("Marketing",(int)((545 * scale) + margin.left),(int)((590 * scale) + margin.top));
+        g.setColor(Color.YELLOW);
+        g.fillRect((int)((526 * scale) + margin.left),(int)((595 * scale) + margin.top),(int)(logic.getMark() * scale),(int)(20 * scale));
+        g.setColor(Color.BLACK);
+        g.drawRoundRect((int)((526 * scale) + margin.left),(int)((595 * scale) + margin.top),(int)(100 * scale),(int)(20 * scale),(int)(5 * scale),(int)(5 * scale));
+
+        g.drawString("Logistics",(int)((700 * scale) + margin.left),(int)((590 * scale) + margin.top));
+        g.setColor(Color.YELLOW);
+        g.fillRect((int)((676 * scale) + margin.left),(int)((595 * scale) + margin.top),(int)(logic.getLog() * scale),(int)(20 * scale));
+        g.setColor(Color.BLACK);
+        g.drawRoundRect((int)((676 * scale) + margin.left),(int)((595 * scale) + margin.top),(int)(100 * scale),(int)(20 * scale),(int)(5 * scale),(int)(5 * scale));
 
     }
 

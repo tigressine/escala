@@ -10,6 +10,7 @@ Format of the regions table:
     marketingCost,
     efficiencyCost
 */
+
 CONNECT 'jdbc:derby:../data/tables';
 INSERT INTO regions VALUES ('Asia', 1.2, 1.3, 200, 300, 400);
 INSERT INTO regions VALUES ('EasternEurope', 1.8, 2.2, 500, 55, 111);

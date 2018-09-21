@@ -73,6 +73,7 @@ function run_sql {
     cd $LIB_DIR
     java -jar derbyrun.jar ij ../$1
     rm $DERBY_LOG
+    cd ..
 }
 
 # Run an interactive prompt for the database.
@@ -80,12 +81,22 @@ function run_ij {
     cd $LIB_DIR
     java -jar derbyrun.jar ij
     rm $DERBY_LOG
+    cd ..
 }
 
+# Load events from raw files into an SQL script, then execute that script.
 function load_events {
     python3 $SCRIPT_DIR/convert_events.py data/events/*
     mv $EVENT_SCRIPT $SCRIPT_DIR/$EVENT_SCRIPT
     run_sql $SCRIPT_DIR/$EVENT_SCRIPT
+}
+
+# Rebuild the main database from scratch.
+function rebuild_table {
+    run_sql $SCRIPT_DIR/drop_tables.sql
+    run_sql $SCRIPT_DIR/make_tables.sql
+    run_sql $SCRIPT_DIR/add_regions.sql
+    load_events
 }
 
 # Main entry point of this script.
@@ -107,5 +118,8 @@ case "$1" in
         ;;
     "--load-events")
         load_events
+        ;;
+    "--rebuild-table")
+        rebuild_table
         ;;
 esac

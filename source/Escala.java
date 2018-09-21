@@ -30,7 +30,8 @@ public class Escala {
     }
     
     public static void main(String[] args) {
-        //Escala escala = new Escala();
+        Escala escala = new Escala();
+        /*
         try {
             GameState state = new GameState();
             System.out.println("All events");
@@ -53,7 +54,7 @@ public class Escala {
         }
         catch (Exception e) {
             e.printStackTrace();
-        }
+        }*/
         /*
         try {
             Loader loader = new Loader();

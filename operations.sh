@@ -8,11 +8,13 @@ DATA_DIR="data"
 BUILD_DIR="build"
 SOURCE_DIR="source"
 MAIN_CLASS="Escala"
+SCRIPT_DIR="scripts"
 DERBY_LOG="derby.log"
 DERBY_JAR="derby.jar"
 PACKAGE_NAME="escala"
 RUN_UNIX_SCRIPT="run.sh"
 RUN_WINDOWS_SCRIPT="run.bat"
+EVENT_SCRIPT="add_events.sql"
 
 # Build the project.
 function build_project {
@@ -80,6 +82,12 @@ function run_ij {
     rm $DERBY_LOG
 }
 
+function load_events {
+    python3 $SCRIPT_DIR/convert_events.py data/events/*
+    mv $EVENT_SCRIPT $SCRIPT_DIR/$EVENT_SCRIPT
+    run_sql $SCRIPT_DIR/$EVENT_SCRIPT
+}
+
 # Main entry point of this script.
 case "$1" in
     "--build")
@@ -96,5 +104,8 @@ case "$1" in
         ;;
     "--ij")
         run_ij
+        ;;
+    "--load-events")
+        load_events
         ;;
 esac

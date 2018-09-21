@@ -14,9 +14,10 @@ import java.awt.image.*;
 
 // Holds the map and rendered regions.
 public class Map {
-    private Font font;
+
     private int imageWidth;
     private int imageHeight;
+
     private GameState state;
     private BufferedImage background;
 
@@ -25,7 +26,6 @@ public class Map {
         imageWidth = 1152;
         imageHeight = 648;
         this.state = state;
-        font = new Font("serif", Font.BOLD, 48);
 
         try {
             URL url = getClass().getResource("/data/assets/Background.png");
@@ -39,10 +39,18 @@ public class Map {
     }
 
     // Render the map onto the screen.
-    public void renderMap(Graphics2D g) {
+    public void renderMap(Graphics2D g) 
+    {
         Logic logic = Logic.getInstance();
         Point r = state.getFrame().getLocation();
         Point p = MouseInfo.getPointerInfo().getLocation();
+        Insets margin = state.getFrame().getInsets();
+        double scale = state.getScale();
+
+        p = new Point((p.x - r.x - margin.left),(p.y - r.y - margin.top));
+
+        p.x = (int)((1/scale) * (double)p.x);
+        p.y = (int)((1/scale) * (double)p.y);
 
         // Render the background.
         if (background != null) {
@@ -71,9 +79,8 @@ public class Map {
         }
 
         // Render all regions and determine if a region is being hovered, if needed.
-        Point containsPoint = new Point(p.x - r.x, p.y - r.y - 23);
         for (Region region : regions) {
-            if (selectedRegion == null && region.contains(containsPoint, state.getScale())) {
+            if (selectedRegion == null && region.contains(p)) {
                 selectedRegion = region;
             }
             else {
@@ -100,9 +107,30 @@ public class Map {
             );
         }
         
-        // Show stats on the screen.
-        g.setFont(font);
-        g.drawString(logic.cashToString(),10,630);
-        g.drawString(logic.shareToString(),1000,630);
+        //Stats on Screen
+        g.setFont(new Font("serif", Font.BOLD, (int)(48 * scale)));
+        g.drawString(logic.cashToString(),(int)((10 * scale) + margin.left),(int)((605 * scale) + margin.top));
+        g.drawString(logic.shareToString(),(int)((1000 * scale) + margin.left),(int)((605 * scale)+ margin.top));
+        g.setStroke(new BasicStroke((int)(2 * scale)));
+
+        g.setFont(new Font("serif", Font.BOLD, (int)(14 * scale)));
+        
+        g.drawString("Product",(int)((403 * scale) + margin.left),(int)((590 * scale) + margin.top));
+        g.setColor(Color.YELLOW);
+        g.fillRect((int)((376 * scale) + margin.left),(int)((595 * scale) + margin.top),(int)(logic.getProd() * scale),(int)(20 * scale));
+        g.setColor(Color.BLACK);
+        g.drawRoundRect((int)((376 * scale) + margin.left),(int)((595 * scale) + margin.top),(int)(100 * scale),(int)(20 * scale),(int)(5 * scale),(int)(5 * scale));
+
+        g.drawString("Marketing",(int)((545 * scale) + margin.left),(int)((590 * scale) + margin.top));
+        g.setColor(Color.YELLOW);
+        g.fillRect((int)((526 * scale) + margin.left),(int)((595 * scale) + margin.top),(int)(logic.getMark() * scale),(int)(20 * scale));
+        g.setColor(Color.BLACK);
+        g.drawRoundRect((int)((526 * scale) + margin.left),(int)((595 * scale) + margin.top),(int)(100 * scale),(int)(20 * scale),(int)(5 * scale),(int)(5 * scale));
+
+        g.drawString("Logistics",(int)((700 * scale) + margin.left),(int)((590 * scale) + margin.top));
+        g.setColor(Color.YELLOW);
+        g.fillRect((int)((676 * scale) + margin.left),(int)((595 * scale) + margin.top),(int)(logic.getLog() * scale),(int)(20 * scale));
+        g.setColor(Color.BLACK);
+        g.drawRoundRect((int)((676 * scale) + margin.left),(int)((595 * scale) + margin.top),(int)(100 * scale),(int)(20 * scale),(int)(5 * scale),(int)(5 * scale));
     }
 }

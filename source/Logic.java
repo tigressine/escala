@@ -25,14 +25,14 @@ public class Logic
             "NorthAfrica", "NorthAmerica", "Oceania", "SouthAfrica", "SouthAmerica", "WesternEurope"};
 
     private static Logic instance = null;
-	private int marketShare = 0;
+	private int marketShare = 12;
 	private boolean [] active = new boolean [10];
 	private final double [] distribution = { .17, .08, .08, .05, .07, .13, .12, .10, .06, .14 };
 	int [] regMarketShare = new int [10];
-	private int cash = 0;
-	private int logistics = 0;
-	private int marketing = 0;
-	private int product = 0;
+	private int cash = 400;
+	private int logistics = 75;
+	private int marketing = 75;
+	private int product = 75;
 
 	public Logic()
 	{
@@ -92,7 +92,7 @@ public class Logic
 
 	public String cashToString()
 	{
-		String string = String.format("$ %05d", cash);
+		String string = String.format("$ %06d", cash);
 		return string;
 	}
 
@@ -100,6 +100,18 @@ public class Logic
 	{
 		String string = String.format("%02d %%", marketShare);
 		return string;
+	}
+
+	public int getLog(){
+		return this.logistics;
+	}
+
+	public int getProd(){
+		return this.product;
+	}
+
+	public int getMark(){
+		return this.marketing;
 	}
 
 	void setActive(int region)

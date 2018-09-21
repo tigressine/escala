@@ -15,13 +15,14 @@ public class Event {
     private int efficiencyEffect;
 
     // Create a new event.
-    public Event(String name,
-                 String description,
-                 float alignment,
-                 float cashEffect,
-                 int marketingEffect,
-                 int logisticsEffect,
-                 int efficiencyEffect) {
+    public Event(
+        String name,
+        String description,
+        float alignment,
+        float cashEffect,
+        int marketingEffect,
+        int logisticsEffect,
+        int efficiencyEffect) {
     
         this.name = name;
         this.description = description;

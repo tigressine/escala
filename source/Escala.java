@@ -26,10 +26,35 @@ public class Escala {
         Menu menu = new Menu(state);
         Viewer gameViewer = new Viewer(state);
         gameViewer.run(); 
+        state.closePortal();
     }
     
     public static void main(String[] args) {
         Escala escala = new Escala();
+        /*
+        try {
+            GameState state = new GameState();
+            System.out.println("All events");
+            for (int i = 0; i < 10; i++) {
+                System.out.println(state.getRandomEvent());
+            }
+            System.out.println("\nPositive events");
+            for (int i = 0; i < 10; i++) {
+                System.out.println(state.getRandomPositiveEvent());
+            }
+            System.out.println("\nNegative events");
+            for (int i = 0; i < 10; i++) {
+                System.out.println(state.getRandomNegativeEvent());
+            }
+            System.out.println("\nSpecific events");
+            for (int i = 0; i < 10; i++) {
+                System.out.println(state.getRandomEvent(.7, .8));
+            }
+            state.closePortal();
+        }
+        catch (Exception e) {
+            e.printStackTrace();
+        }*/
         /*
         try {
             Loader loader = new Loader();

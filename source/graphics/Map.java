@@ -3,35 +3,14 @@
 
 package escala.graphics;
 
-import java.awt.Color;
-import java.awt.Graphics2D;
-import java.awt.image.BufferedImage;
-import java.io.File;
-import java.net.URL;
-import java.net.URLDecoder;
-import java.io.IOException;
-import javax.imageio.ImageIO;
-import escala.GameState;
-import escala.Logic;
-import escala.Region;
-import java.awt.Font;
-import java.awt.Point;
-import java.awt.MouseInfo;
-import java.awt.Insets;
-import java.awt.BasicStroke;
-import java.util.ArrayList;
-
-/*
- * 
- * NOTE::: if map is not rendered properly, double check path and names:
- * 
- * TODO::: Ideally, we will pull NUM_REGIONS and regionNames from database
- *              regionNames can be stored as paths...
- * 
- *      Use cursor location to determine which region to highlight
- * 
- * NOTE::: To improve game performance, reduce image size and pre-stretch all images when loading.
- * */
+import escala.*;
+import java.io.*;
+import java.awt.*;
+import java.net.*;
+import java.util.*;
+import javax.swing.*;
+import javax.imageio.*;
+import java.awt.image.*;
 
 // Holds the map and rendered regions.
 public class Map {
@@ -75,12 +54,14 @@ public class Map {
 
         // Render the background.
         if (background != null) {
-            g.drawImage(background, 0, 0,
-                        state.getWidth(),
-                        state.getHeight(),
-                        0, 0, imageWidth,
-                        imageHeight,
-                        null);
+            g.drawImage(
+                background, 0, 0,
+                state.getWidth(),
+                state.getHeight(),
+                0, 0, imageWidth,
+                imageHeight,
+                null
+            );
         }
         else {
             g.setBackground(Color.BLACK);
@@ -103,23 +84,27 @@ public class Map {
                 selectedRegion = region;
             }
             else {
-                g.drawImage(region.getImage(), 0, 0,
-                            state.getWidth(),
-                            state.getHeight(),
-                            0, 0, imageWidth,
-                            imageHeight,
-                            null);  
+                g.drawImage(
+                    region.getImage(), 0, 0,
+                    state.getWidth(),
+                    state.getHeight(),
+                    0, 0, imageWidth,
+                    imageHeight,
+                    null
+                );  
             }
         }
 
         // Draw the selected/hovered region.
         if (selectedRegion != null) {
-            g.drawImage(selectedRegion.getOutline(),
-                        0, 0, state.getWidth(),
-                        state.getHeight(),
-                        0, 0, imageWidth,
-                        imageHeight,
-                        null);
+            g.drawImage(
+                selectedRegion.getOutline(),
+                0, 0, state.getWidth(),
+                state.getHeight(),
+                0, 0, imageWidth,
+                imageHeight,
+                null
+            );
         }
         
         //Stats on Screen

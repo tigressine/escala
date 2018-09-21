@@ -89,10 +89,7 @@ public class Region {
     }
 
     // Check if a point is contained within this region's polygon.
-    public boolean contains(Point point, double scale) {
-        point.x *= 1.0 / scale;
-        point.y *= 1.0 / scale;
-
+    public boolean contains(Point point) {
         return polygon.contains(point);
 	}
 

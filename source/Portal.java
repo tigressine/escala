@@ -82,7 +82,7 @@ public class Portal {
                     results.getFloat("cashEffect"),
                     results.getInt("logisticsEffect"),
                     results.getInt("marketingEffect"),
-                    results.getInt("productEffect")
+                    results.getInt("efficiencyEffect")
                 );
             }
 

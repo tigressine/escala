@@ -1,6 +1,10 @@
+# Part of Escala.
+# Written by Tiger Sachse.
+
 from sys import argv as ARGS
 
-SQL_FILE = "add_events.sql"
+# Constants that make up a complete SQL script.
+SQL_SCRIPT = "add_events.sql"
 INSERT = "INSERT INTO events VALUES ('{0}', '{1}', {2}, {3}, {4}, {5}, {6});\n"
 HEADER = ("/*\n"
          "Part of Escala.\n"
@@ -9,7 +13,9 @@ HEADER = ("/*\n"
          "CONNECT 'jdbc:derby:../data/tables';\n")
 FOOTER = "DISCONNECT;\nExit;\n"
 
-with open(SQL_FILE, "w") as destination:
+# Open the destination and write the header and footer, as well as individual
+# INSERT lines for each argument file passed to this script.
+with open(SQL_SCRIPT, "w") as destination:
     destination.write(HEADER)
     for arg in ARGS[1:]:
         with open(arg, "r") as source:

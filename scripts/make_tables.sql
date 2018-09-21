@@ -13,9 +13,9 @@ CREATE TABLE regions (name VARCHAR(15) PRIMARY KEY,
 CREATE TABLE events (name VARCHAR(15) PRIMARY KEY,
                      description VARCHAR(300),
                      alignment REAL,
+                     cashEffect REAL,
                      logisticsEffect INT,
                      marketingEffect INT,
-                     productEffect INT,
-                     cashEffect REAL);
+                     efficiencyEffect INT);
 DISCONNECT;
 EXIT;

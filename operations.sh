@@ -13,9 +13,11 @@ SCRIPT_DIR="scripts"
 DERBY_LOG="derby.log"
 DERBY_JAR="derby.jar"
 PACKAGE_NAME="escala"
+GRAPHICS_DIR="graphics"
 RUN_UNIX_SCRIPT="run.sh"
 JUNIT_JAR="junit-4.10.jar"
 RUN_WINDOWS_SCRIPT="run.bat"
+DERBY_RUN_JAR="derbyrun.jar"
 EVENT_SCRIPT="add_events.sql"
 
 # Build the project.
@@ -26,7 +28,8 @@ function build_project {
     cp -r $LIB_DIR $BUILD_DIR
     cp -r $DATA_DIR $BUILD_DIR
 
-    javac -cp $BUILD_DIR/$LIB_DIR/$DERBY_JAR -d $BUILD_DIR $SOURCE_DIR/graphics/*.java \
+    javac -cp $BUILD_DIR/$LIB_DIR/$DERBY_JAR \
+        -d $BUILD_DIR $SOURCE_DIR/$GRAPHICS_DIR/*.java \
         $SOURCE_DIR/*.java
 }
 
@@ -70,12 +73,14 @@ function package_project {
     rm -rf $BUILD_DIR
 }
 
+# Run unit tests for this project.
 function test_project {
     build_project
     javac -cp $BUILD_DIR:$BUILD_DIR/$LIB_DIR/$JUNIT_JAR \
         -d $BUILD_DIR $TEST_DIR/*.java
     cd $BUILD_DIR
-    java -cp .:$LIB_DIR/$JUNIT_JAR:$LIB_DIR/$DERBY_JAR org.junit.runner.JUnitCore \
+    java -cp .:$LIB_DIR/$JUNIT_JAR:$LIB_DIR/$DERBY_JAR \
+        org.junit.runner.JUnitCore \
         $TEST_DIR.DatabaseTester
     cd ..
     rm -rf $BUILD_DIR
@@ -84,7 +89,7 @@ function test_project {
 # Run an SQL script located in the script directory.
 function run_sql {
     cd $LIB_DIR
-    java -jar derbyrun.jar ij ../$1
+    java -jar $DERBY_RUN_JAR ij ../$1
     rm $DERBY_LOG
     cd ..
 }
@@ -92,14 +97,14 @@ function run_sql {
 # Run an interactive prompt for the database.
 function run_ij {
     cd $LIB_DIR
-    java -jar derbyrun.jar ij
+    java -jar $DERBY_RUN_JAR ij
     rm $DERBY_LOG
     cd ..
 }
 
 # Load events from raw files into an SQL script, then execute that script.
 function load_events {
-    python3 $SCRIPT_DIR/convert_events.py data/events/*
+    python3 $SCRIPT_DIR/convert_events.py $DATA_DIR/events/*
     mv $EVENT_SCRIPT $SCRIPT_DIR/$EVENT_SCRIPT
     run_sql $SCRIPT_DIR/$EVENT_SCRIPT
 }

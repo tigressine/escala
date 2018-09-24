@@ -5,6 +5,7 @@ LIB_DIR="libs"
 DIST_DIR="dist"
 DOCS_DIR="docs"
 DATA_DIR="data"
+TEST_DIR="tests"
 BUILD_DIR="build"
 SOURCE_DIR="source"
 MAIN_CLASS="Escala"
@@ -13,6 +14,7 @@ DERBY_LOG="derby.log"
 DERBY_JAR="derby.jar"
 PACKAGE_NAME="escala"
 RUN_UNIX_SCRIPT="run.sh"
+JUNIT_JAR="junit-4.10.jar"
 RUN_WINDOWS_SCRIPT="run.bat"
 EVENT_SCRIPT="add_events.sql"
 
@@ -68,6 +70,17 @@ function package_project {
     rm -rf $BUILD_DIR
 }
 
+function test_project {
+    build_project
+    javac -cp $BUILD_DIR:$BUILD_DIR/$LIB_DIR/$JUNIT_JAR \
+        -d $BUILD_DIR $TEST_DIR/*.java
+    cd $BUILD_DIR
+    java -cp .:$LIB_DIR/$JUNIT_JAR:$LIB_DIR/$DERBY_JAR org.junit.runner.JUnitCore \
+        $TEST_DIR.DatabaseTester
+    cd ..
+    rm -rf $BUILD_DIR
+}
+
 # Run an SQL script located in the script directory.
 function run_sql {
     cd $LIB_DIR
@@ -109,6 +122,9 @@ case "$1" in
         ;;
     "--pack")
         package_project
+        ;;
+    "--test")
+        test_project
         ;;
     "--sql")
         run_sql $2

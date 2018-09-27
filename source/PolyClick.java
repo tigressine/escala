@@ -12,6 +12,8 @@ import javax.swing.JFrame;
 import java.awt.MouseInfo;
 import java.awt.Insets;
 import java.awt.Rectangle;
+import java.awt.*;
+import javax.swing.*;
 
 class PolyClick implements MouseListener{
 
@@ -45,12 +47,7 @@ class PolyClick implements MouseListener{
 
         if(cash.contains(p)){
             System.out.println("Cash Money");
-            JFrame frame = new JFrame();
-            frame.setResizable(false);
-            frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-            frame.setTitle("Escala");
-            frame.setSize(200 ,200);
-            frame.setVisible(true);
+            tempPopup("Cash Money");
         }
         else if(stats.contains(p))
             System.out.println("Big STATS boy");
@@ -77,6 +74,20 @@ class PolyClick implements MouseListener{
                 }
             }
         }
+    }
+
+    public void tempPopup(String title){
+      JFrame popup = new JFrame();
+      popup.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+      popup.setTitle(title);
+      popup.setSize(200 ,200);
+      Dimension dim = Toolkit.getDefaultToolkit().getScreenSize();
+      popup.setLocation(dim.width/2-frame.getSize().width/2, dim.height/2-frame.getSize().height/2);
+      popup.setVisible(true);
+    }
+
+    public void closeTempPopup(){
+
     }
 
 	private void eventOutput(String eventDescription, MouseEvent e) {

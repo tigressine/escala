@@ -49,15 +49,18 @@ class PolyClick implements MouseListener{
             System.out.println("Cash Money");
             tempPopup("Cash Money");
         }
-        else if(stats.contains(p))
+        else if(stats.contains(p)){
             System.out.println("Big STATS boy");
-
-        else if(share.contains(p))
+            tempPopup("BIG boi");
+        }
+        else if(share.contains(p)){
             System.out.println("I own that shit");
-
-        else if(time.contains(p))
+            tempPopup("****");
+        }
+        else if(time.contains(p)){
             System.out.println("Got time on my MIND");
-
+            tempPopup("TIMEONMYMIND");
+        }
         else
         {
             for (Region region : state.getAllRegions()) {
@@ -78,18 +81,14 @@ class PolyClick implements MouseListener{
 
     public void tempPopup(String title){
       JFrame popup = new JFrame();
-      popup.setDefaultCloseOperation(closeTempPopup(popup));
+      popup.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
       popup.setTitle(title);
-      popup.setSize(200 ,200);
+      popup.setSize(400 ,300);
       Dimension dim = Toolkit.getDefaultToolkit().getScreenSize();
       popup.setLocation(dim.width/2-popup.getSize().width/2, dim.height/2-popup.getSize().height/2);
       popup.setVisible(true);
     }
 
-    public void closeTempPopup(JFrame inp){
-      inp.setVisible(false);
-      inp.dispose();
-    }
 
 	private void eventOutput(String eventDescription, MouseEvent e) {
     }

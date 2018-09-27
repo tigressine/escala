@@ -43,14 +43,20 @@ class PolyClick implements MouseListener{
 
         System.out.println(p.x + " " + p.y);
 
-        if(cash.contains(p))
+        if(cash.contains(p)){
             System.out.println("Cash Money");
+            JFrame frame = new JFrame();
+            frame.setResizable(false);
+            frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+            frame.setTitle("Escala");
+            frame.setSize(200 ,200);
+            frame.setVisible(true);
+        }
+        else if(stats.contains(p))
+            System.out.println("Big STATS boy");
 
         else if(share.contains(p))
             System.out.println("I own that shit");
-
-        else if(stats.contains(p))
-            System.out.println("Big STATS boy");
 
         else if(time.contains(p))
             System.out.println("Got time on my MIND");
@@ -70,21 +76,21 @@ class PolyClick implements MouseListener{
                     region.deselect();
                 }
             }
-        } 
+        }
     }
 
 	private void eventOutput(String eventDescription, MouseEvent e) {
     }
-     
+
     public void mousePressed(MouseEvent e) {
     }
-     
+
     public void mouseReleased(MouseEvent e) {
     }
-     
+
     public void mouseEntered(MouseEvent e) {
     }
-     
+
     public void mouseExited(MouseEvent e) {
     }
 }

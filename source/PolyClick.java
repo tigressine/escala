@@ -78,16 +78,17 @@ class PolyClick implements MouseListener{
 
     public void tempPopup(String title){
       JFrame popup = new JFrame();
-      popup.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+      popup.setDefaultCloseOperation(closeTempPopup(popup));
       popup.setTitle(title);
       popup.setSize(200 ,200);
       Dimension dim = Toolkit.getDefaultToolkit().getScreenSize();
-      popup.setLocation(dim.width/2-frame.getSize().width/2, dim.height/2-frame.getSize().height/2);
+      popup.setLocation(dim.width/2-popup.getSize().width/2, dim.height/2-popup.getSize().height/2);
       popup.setVisible(true);
     }
 
-    public void closeTempPopup(){
-
+    public void closeTempPopup(JFrame inp){
+      inp.setVisible(false);
+      inp.dispose();
     }
 
 	private void eventOutput(String eventDescription, MouseEvent e) {

@@ -13,7 +13,7 @@ import javax.swing.*;
 public class GameState {
 
     public static enum Difficulty {
-        EASY, NORMAL, HARD 
+        EASY, NORMAL, HARD
     }
 
     private int width;
@@ -24,6 +24,8 @@ public class GameState {
     private Portal portal;
     private int frameHeight;
     private boolean isRunning;
+	private boolean isPaused;
+	private int gameSpeed = 1; // days per second (default is 1)
     private Difficulty difficulty;
     private HashMap<String, Region> regions;
 
@@ -40,6 +42,7 @@ public class GameState {
 
         // Set game status variables.
         isRunning = false;
+		isPaused = false;
         difficulty = Difficulty.NORMAL;
 
         // Load the database and get all regions.
@@ -63,9 +66,19 @@ public class GameState {
     }
 
     // Check if the game is running.
-    public boolean isGameRunning() {
+    public boolean gameIsRunning() {
         return isRunning;
     }
+
+	// Check if game is paused.
+	public boolean gameIsPaused() {
+		return isPaused;
+	}
+
+	// Get game speed
+	public int getGameSpeed(){
+		return gameSpeed;
+	}
 
     // Get the goal FPS.
     public int getGoalFPS() {
@@ -136,6 +149,21 @@ public class GameState {
     public void startGame() {
         isRunning = true;
     }
+
+	// Set the game to paused.
+	public void pauseGame(){
+		isPaused = true;
+	}
+
+	// Set the game to unpaused.
+	public void continueGame(){
+		isPaused = false;
+	}
+
+	// Set game speed
+	public void setGameSpeed(int gameSpeed){
+		this.gameSpeed = gameSpeed;
+	}
 
     // Set the goal FPS.
     public void setGoalFPS(int goalFPS) {

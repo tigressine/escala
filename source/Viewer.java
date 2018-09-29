@@ -13,13 +13,16 @@ import escala.PolyClick;
 import java.awt.*;
 import javax.swing.*;
 
+// This should only be temporary stuff...
+import java.awt.event.*;
+
 
 /*
  * This class sets up the JFrame and Canvas and contains the main game loop.
  * It also enables double buffering, and enforces fps limits.
  * */
 
-public class Viewer{
+public class Viewer implements KeyListener{
 
     private GameState state;
     private JFrame frame;
@@ -61,14 +64,45 @@ public class Viewer{
         //Adds Mouse Listener from class PolyClick
         canvas.addMouseListener(new PolyClick(state));
 
+		//Adds Key Listener
+		canvas.addKeyListener(this);
+
         // Establish Buffer Strategy
         canvas.createBufferStrategy(2);
         strategy = canvas.getBufferStrategy();
     }
 
-    public void menuViewer(){
 
-    }
+	@Override
+	public void keyPressed(KeyEvent e) {
+		// get key that was pressed
+		int keyCode = e.getKeyCode();
+		//System.out.println("You Pressed A Key: " + keyCode);
+		//System.out.println("Expected: " + KeyEvent.VK_P);
+
+		// if key is p, pause / unpause game
+		if(keyCode == KeyEvent.VK_P){
+			if(state.gameIsPaused()){
+				state.continueGame();
+			} else {
+				state.pauseGame();
+			}
+		}
+
+		// TODO other key stuff ???
+		// +/- to speed up or slow down game speed...
+		// q to quit
+	}
+
+	@Override
+	public void keyReleased(KeyEvent e) {
+		// leave this alone
+	}
+
+	@Override
+    public void keyTyped(KeyEvent e) {
+		// leave this alone
+	}
 
 
     // Sleep the required number of milliseconds to achieve desired frame rate
@@ -94,7 +128,7 @@ public class Viewer{
     // CALLS UPDATE AND RENDER FUNCTIONS (also in Engine)
     public void run(){
 
-        while(state.isGameRunning() != true) {
+        while(state.gameIsRunning() != true) {
             // stall here while menu is doing its thing...
             // when user selects difficulty, gameIsRunning will be set to true
             // NOTE: sleeping here does not affect menu listeners
@@ -112,7 +146,7 @@ public class Viewer{
 
 
         // MAIN GAME LOOP
-        while( state.isGameRunning() ) {
+        while( state.gameIsRunning() ) {
 
             //get current time for frame rate calculations
             long startTime = System.nanoTime();
@@ -123,7 +157,10 @@ public class Viewer{
 
                 // TODO: check for user input here
 
-                engine.updateGame();
+				// update game if game is not paused.
+                if( state.gameIsPaused() != true ) {
+                	engine.updateGame();
+				}
 
                 //render map, sprites, and other stuff here
                 engine.renderGame(graphicsBuffer);

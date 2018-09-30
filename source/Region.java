@@ -14,9 +14,9 @@ import java.awt.image.*;
 public class Region {
     private String name;
     private float taxRate;
-    private boolean selected;
     private float entryCost;
     private Polygon polygon;
+    private boolean selected;
     private int logisticsCost;
     private int marketingCost;
     private int efficiencyCost;
@@ -24,12 +24,13 @@ public class Region {
     private BufferedImage outline;
 
     // Create a new region.
-    public Region(String name,
-                  float taxRate,
-                  float entryCost,
-                  int logisticsCost,
-                  int marketingCost,
-                  int efficiencyCost) throws IOException {
+    public Region(
+        String name,
+        float taxRate,
+        float entryCost,
+        int logisticsCost,
+        int marketingCost,
+        int efficiencyCost) throws IOException {
    
         selected = false;
         this.name = name;
@@ -87,7 +88,8 @@ public class Region {
         return selected;
     }
 
-	public boolean contains(Point point) {
+    // Check if a point is contained within this region's polygon.
+    public boolean contains(Point point) {
         return polygon.contains(point);
 	}
 
@@ -109,10 +111,12 @@ public class Region {
         );
     }
 
+    // Select the region.
     public void select() {
         selected = true;
     }
 
+    // Deselect the region.
     public void deselect() {
         selected = false;
     }
@@ -131,10 +135,11 @@ public class Region {
         outline = ImageIO.read(new File(path));
     }
 
+    // Load the polygon information from file.
     private void loadPolygon() throws IOException {
         polygon = new Polygon();
 
-        URL url = getClass().getResource("/data/polygons/" + name + ".txt"); 
+        URL url = getClass().getResource("/data/polygons/" + name + ".data"); 
         String path = URLDecoder.decode(url.getPath(), "UTF-8");
         Scanner scanner = new Scanner(new File(path));
 

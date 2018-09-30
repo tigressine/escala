@@ -5,6 +5,8 @@ package escala;
 
 import java.awt.*;
 import javax.swing.*;
+import javax.swing.event.ChangeEvent;
+import javax.swing.event.ChangeListener;
 
 public class Menu{
     
@@ -30,6 +32,9 @@ public class Menu{
     JButton hard = new JButton("HARD");
     JButton exit = new JButton("EXIT");
     JPanel cards = new JPanel(new CardLayout());
+    
+    Color background = Color.decode("#e6ffe6");
+    Color buttonCol = Color.decode("#33adff");
     
     
 
@@ -80,6 +85,9 @@ public class Menu{
         JPanel index = new JPanel();
         index.setLayout(null);
         
+        index.setOpaque(true);
+        index.setBackground(background);
+        
         JLabel title = new JLabel("ESCALA");
         title.setFont(new Font("Serif", Font.PLAIN, 50));
         title.setBounds(170, 40, 220, 60);
@@ -95,7 +103,14 @@ public class Menu{
         index.add(cred);
         index.add(exit);
         
+        play.setBackground(buttonCol);
+        set.setBackground(buttonCol);
+        cred.setBackground(buttonCol);
+        exit.setBackground(buttonCol);
+        
         pane.add(index, "INDEX");
+        
+        //Add background and color scheme
         
     }    
     
@@ -103,6 +118,9 @@ public class Menu{
     public void addDiffCard(Container pane){
         JPanel diff = new JPanel();
         diff.setLayout(null);
+        
+        diff.setOpaque(true);
+        diff.setBackground(background);
         
         
         JLabel diffTitle = new JLabel("DIFFICULTY");
@@ -121,6 +139,8 @@ public class Menu{
         diff.add(backfromDiff);
         
         pane.add(diff, "DIFF");
+        
+        // color schemes
     }
     
     //add settings menu
@@ -128,26 +148,46 @@ public class Menu{
         JPanel set = new JPanel();
         set.setLayout(null);
         
+        set.setOpaque(true);
+        set.setBackground(background);
+        
         JLabel setTitle = new JLabel("SETTINGS");
         setTitle.setFont(new Font("Serif", Font.PLAIN, 50));
         setTitle.setBounds(140, 40, 240, 60);
         
-        JLabel setText = new JLabel("This page is under construction");
-        setText.setFont(new Font("Serif", Font.PLAIN, 20));
-        setText.setBounds(135, 60, 300, 150);
         
         set.add(setTitle);
-        set.add(setText);
         back.setBounds(200, 240, 120, 30);
         set.add(back);
         
-        pane.add(set, "SET");
+        JButton loadFile = new JButton("Load Save File");
+        loadFile.setBounds(200, 110, 120, 30);
+        set.add(loadFile);
+        
+        JLabel frameScale = new JLabel("50");
+        frameScale.setFont(new Font("Serif", Font.PLAIN, 20));
+        frameScale.setBounds(250, 130, 240, 60);
+        set.add(frameScale);
+        
+        JSlider framesPerSecond = new JSlider(JSlider.HORIZONTAL);
+        framesPerSecond.setBounds(160,190,200,30);
+        framesPerSecond.addChangeListener((ChangeEvent e) -> {
+            frameScale.setText(String.valueOf(framesPerSecond.getValue()));
+        });
+        set.add(framesPerSecond);
+        
+        
+        pane.add(set, "SET");        
+        //add setting options
     }
     
     //add credits menu
     public void addCredCard(Container pane){
         JPanel cred = new JPanel();
         cred.setLayout(null);
+        
+        cred.setOpaque(true);
+        cred.setBackground(background);
         
         JLabel credTitle = new JLabel("CREDITS");
         credTitle.setFont(new Font("Serif", Font.PLAIN, 50));
@@ -163,6 +203,8 @@ public class Menu{
         cred.add(back2);
         
         pane.add(cred, "CRED");
+        
+        //have credits page more text
     }      
     
     public void addGameCard(Container pane){

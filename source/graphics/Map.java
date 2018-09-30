@@ -18,8 +18,11 @@ public class Map {
     private int imageWidth;
     private int imageHeight;
 
+    //For testing of different back grounds
+    private int backgroundNum = 0;
+
     private GameState state;
-    private BufferedImage background;
+    private BufferedImage [] background = new BufferedImage[3];
 
     // Create a new map.
     public Map(GameState state) {
@@ -30,7 +33,15 @@ public class Map {
         try {
             URL url = getClass().getResource("/data/assets/Background.png");
             String path = URLDecoder.decode(url.getPath(), "UTF-8");
-            background = ImageIO.read(new File(path));    
+            background[0] = ImageIO.read(new File(path));   
+
+            url = getClass().getResource("/data/assets/BackgroundPaused.png");
+            path = URLDecoder.decode(url.getPath(), "UTF-8");
+            background[1] = ImageIO.read(new File(path));    
+
+            url = getClass().getResource("/data/assets/BackgroundFast.png");
+            path = URLDecoder.decode(url.getPath(), "UTF-8");
+            background[2] = ImageIO.read(new File(path));    
         }
         catch (IOException exception) {
             exception.printStackTrace();
@@ -54,14 +65,12 @@ public class Map {
 
         // Render the background.
         if (background != null) {
-            g.drawImage(
-                background, 0, 0,
-                state.getWidth(),
-                state.getHeight(),
-                0, 0, imageWidth,
-                imageHeight,
-                null
-            );
+            g.drawImage(background[backgroundNum], 0, 0,
+                        state.getWidth(),
+                        state.getHeight(),
+                        0, 0, imageWidth,
+                        imageHeight,
+                        null);
         }
         else {
             g.setBackground(Color.BLACK);

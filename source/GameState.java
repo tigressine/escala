@@ -27,6 +27,9 @@ public class GameState {
     private Difficulty difficulty;
     private HashMap<String, Region> regions;
 
+    //For background
+    private int backgroundNum = 0;
+
     // Create a new game state with some defaults.
     public GameState() throws SQLException, IOException {
 

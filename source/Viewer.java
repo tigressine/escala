@@ -83,8 +83,8 @@ public class Viewer implements KeyListener{
         //Adds Mouse Listener from class PolyClick
         canvas.addMouseListener(new PolyClick(state));
 
-		//Adds Key Listener
-		canvas.addKeyListener(this);
+        //Adds Key Listener
+        canvas.addKeyListener(this);
 
         // Establish Buffer Strategy
         canvas.createBufferStrategy(2);
@@ -92,36 +92,36 @@ public class Viewer implements KeyListener{
     }
 
 
-	@Override
-	public void keyPressed(KeyEvent e) {
-		// get key that was pressed
-		int keyCode = e.getKeyCode();
-		//System.out.println("You Pressed A Key: " + keyCode);
-		//System.out.println("Expected: " + KeyEvent.VK_P);
+    @Override
+    public void keyPressed(KeyEvent e) {
+        // get key that was pressed
+        int keyCode = e.getKeyCode();
+        //System.out.println("You Pressed A Key: " + keyCode);
+        //System.out.println("Expected: " + KeyEvent.VK_P);
 
-		// if key is p, pause / unpause game
-		if(keyCode == KeyEvent.VK_P){
-			if(state.gameIsPaused()){
-				state.continueGame();
-			} else {
-				state.pauseGame();
-			}
-		}
+        // if key is p, pause / unpause game
+        if(keyCode == KeyEvent.VK_P){
+            if(state.gameIsPaused()){
+                state.continueGame();
+            } else {
+                state.pauseGame();
+            }
+        }
 
-		// TODO other key stuff ???
-		// +/- to speed up or slow down game speed...
-		// q to quit
-	}
+        // TODO other key stuff ???
+        // +/- to speed up or slow down game speed...
+        // q to quit
+    }
 
-	@Override
-	public void keyReleased(KeyEvent e) {
-		// leave this alone
-	}
+    @Override
+    public void keyReleased(KeyEvent e) {
+        // leave this alone
+    }
 
-	@Override
+    @Override
     public void keyTyped(KeyEvent e) {
-		// leave this alone
-	}
+        // leave this alone
+    }
 
 
     // Sleep the required number of milliseconds to achieve desired frame rate

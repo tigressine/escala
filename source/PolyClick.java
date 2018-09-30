@@ -71,11 +71,6 @@ class PolyClick implements MouseListener{
             tempPopup("****");
         }
 
-        /*else if(time.contains(p)){
-            System.out.println("Got time on my MIND");
-            tempPopup("TIMEONMYMIND");
-        }*/
-
         else
         {
             for (Region region : state.getAllRegions()) {

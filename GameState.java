@@ -13,7 +13,7 @@ import javax.swing.*;
 public class GameState {
 
     public static enum Difficulty {
-        EASY, NORMAL, HARD 
+        EASY, NORMAL, HARD
     }
 
     private int width;
@@ -24,11 +24,9 @@ public class GameState {
     private Portal portal;
     private int frameHeight;
     private boolean isRunning;
+	private int gameSpeed = 1; // days per second (default is 1)
     private Difficulty difficulty;
     private HashMap<String, Region> regions;
-
-    //For background
-    private int backgroundNum = 0;
 
     // Create a new game state with some defaults.
     public GameState() throws SQLException, IOException {
@@ -69,6 +67,11 @@ public class GameState {
     public boolean isGameRunning() {
         return isRunning;
     }
+
+	// Get game speed
+	public int getGameSpeed(){
+		return gameSpeed;
+	}
 
     // Get the goal FPS.
     public int getGoalFPS() {
@@ -139,6 +142,11 @@ public class GameState {
     public void startGame() {
         isRunning = true;
     }
+
+	// Set game speed
+	public void setGameSpeed(int gameSpeed){
+		this.gameSpeed = gameSpeed;
+	}
 
     // Set the goal FPS.
     public void setGoalFPS(int goalFPS) {

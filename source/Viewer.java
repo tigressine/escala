@@ -49,25 +49,24 @@ public class Viewer implements KeyListener{
         frame.setTitle("Escala Test");
         frame.setSize( state.getWidth(), state.getHeight() + state.getFrameHeight());
 
-		//ask if player is sure before exiting
+        //ask if player is sure before exiting
         frame.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
-		frame.addWindowListener(new java.awt.event.WindowAdapter() {
-        @Override
-        public void windowClosing(java.awt.event.WindowEvent windowEvent) {
-			// pause game here just in case player changes their mind
-			state.pauseGame();
+        frame.addWindowListener(new java.awt.event.WindowAdapter() {
+            @Override
+            public void windowClosing(java.awt.event.WindowEvent windowEvent) {
+                // pause game here just in case player changes their mind
+                state.pauseGame();
 
-            if (JOptionPane.showConfirmDialog(frame,
-            "Are you sure you want to quit this game?", "Quit Game?",
-            JOptionPane.YES_NO_OPTION,
-            JOptionPane.QUESTION_MESSAGE) == JOptionPane.YES_OPTION){
-            	frame.dispose();
-				System.exit(0);
-        	} else {
-				state.continueGame();
-			}
-		}
-		});
+                if (JOptionPane.showConfirmDialog(frame, "Are you sure you want to quit this game?", "Quit Game?",
+                    JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE) == JOptionPane.YES_OPTION){
+
+                    frame.dispose();
+                    System.exit(0);
+                } else {
+                    state.continueGame();
+                }
+            }
+        });
 
         frame.setIgnoreRepaint(true);
 
@@ -177,10 +176,10 @@ public class Viewer implements KeyListener{
 
                 // TODO: check for user input here
 
-				// update game if game is not paused.
+                // update game if game is not paused.
                 if( state.gameIsPaused() != true ) {
-                	engine.updateGame();
-				}
+                    engine.updateGame();
+                }
 
                 //render map, sprites, and other stuff here
                 engine.renderGame(graphicsBuffer);

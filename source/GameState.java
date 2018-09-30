@@ -24,8 +24,8 @@ public class GameState {
     private Portal portal;
     private int frameHeight;
     private boolean isRunning;
-	private boolean isPaused;
-	private int gameSpeed = 1; // days per second (default is 1)
+    private boolean isPaused;
+    private int gameSpeed = 1; // days per second (default is 1)
     private Difficulty difficulty;
     private HashMap<String, Region> regions;
 
@@ -42,7 +42,7 @@ public class GameState {
 
         // Set game status variables.
         isRunning = false;
-		isPaused = false;
+        isPaused = false;
         difficulty = Difficulty.NORMAL;
 
         // Load the database and get all regions.
@@ -70,15 +70,15 @@ public class GameState {
         return isRunning;
     }
 
-	// Check if game is paused.
-	public boolean gameIsPaused() {
-		return isPaused;
-	}
+    // Check if game is paused.
+    public boolean gameIsPaused() {
+        return isPaused;
+    }
 
-	// Get game speed
-	public int getGameSpeed(){
-		return gameSpeed;
-	}
+    // Get game speed
+    public int getGameSpeed(){
+        return gameSpeed;
+    }
 
     // Get the goal FPS.
     public int getGoalFPS() {

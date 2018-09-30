@@ -1,9 +1,6 @@
 // Part of Escala.
 // Written by Jonathan Ponader.
 
-
-//NO LONGER NEEDED
-
 package escala.graphics;
 
 import java.awt.Polygon;
@@ -26,7 +23,7 @@ public class PolyMouseList
 
 	public PolyMouseList()
 	{
-		/*URL url;
+		URL url;
 
 		for(int i = 0; i < NUM_REGIONS; i++) 
 		{
@@ -40,11 +37,14 @@ public class PolyMouseList
             {
        			 e.printStackTrace();
        		}
-        }*/
+        }
 	}
-/*
-	public int contains(Point p)
+
+	public int contains(Point p, double scale)
 	{
+		p.x = (int)((1/scale) * (double)p.x);
+		p.y = (int)((1/scale) * (double)p.y);
+
 		for(int i = 0; i < NUM_REGIONS; i++)
 		{
 			if(regions[i].contains(p))
@@ -70,5 +70,4 @@ public class PolyMouseList
         }
         return instance;
     }
-   */
 }

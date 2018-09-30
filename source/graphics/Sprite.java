@@ -41,14 +41,13 @@ public class Sprite extends JComponent {
     
     private int screenWidth;
     private int screenHeight;
+    
     Color color;
     
-    private GameState state;
-
-    public Sprite(int x, int y, double speed, GameState state) {
-        this.state = state;
-        screenWidth = state.getWidth();
-        screenHeight = state.getHeight();
+    public Sprite(int x, int y, double speed) {
+        GameState myGame = GameState.getInstance();
+        screenWidth = myGame.getWidth();
+        screenHeight = myGame.getHeight();
 
         posX = x;
         posY = y;

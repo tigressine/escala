@@ -21,6 +21,9 @@ public class Map {
     //For testing of different back grounds
     private int backgroundNum = 0;
 
+    //Barath for Testing of Game timer
+    Integer time = 0;
+
     private GameState state;
     private BufferedImage [] background = new BufferedImage[3];
 
@@ -120,9 +123,11 @@ public class Map {
         g.setFont(new Font("serif", Font.BOLD, (int)(48 * scale)));
         g.drawString(logic.cashToString(),(int)((10 * scale) + margin.left),(int)((605 * scale) + margin.top));
         g.drawString(logic.shareToString(),(int)((1000 * scale) + margin.left),(int)((605 * scale)+ margin.top));
-        g.setStroke(new BasicStroke((int)(2 * scale)));
+
+        g.drawString(time.toString(),(int)((15 * scale) + margin.left),(int)((15 * scale) + margin.top));
 
         g.setFont(new Font("serif", Font.BOLD, (int)(14 * scale)));
+        g.setStroke(new BasicStroke((int)(2 * scale)));
         
         g.drawString("Product",(int)((403 * scale) + margin.left),(int)((590 * scale) + margin.top));
         g.setColor(Color.YELLOW);

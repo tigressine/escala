@@ -46,11 +46,10 @@ class PolyClick implements MouseListener{
         System.out.println(p.x + " " + p.y);
 
         if(cash.contains(p)){
-            System.out.println("Cash Money");
-            tempPopup("Cash Money");
+            tempPopup("Cash");
         }
         else if(stats.contains(p)){
-            System.out.println("Big STATS boy");
+            System.out.println("Stats");
         }
 
         else if(play.contains(p)){
@@ -58,17 +57,15 @@ class PolyClick implements MouseListener{
         }
 
         else if(pause.contains(p)){
-            System.out.println("pasue");
+            System.out.println("pause");
         }
 
         else if(fast.contains(p)){
             System.out.println("fast");
-            tempPopup("BIG boi");
         }
 
         else if(share.contains(p)){
-            System.out.println("I own that shit");
-            tempPopup("****");
+            tempPopup("Market");
         }
 
         else

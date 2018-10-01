@@ -10,10 +10,12 @@ import org.junit.*;
 import java.util.*;
 import static org.junit.Assert.*;
 
+// Test the database and database portal.
 public class DatabaseTester {
 
+    // Ensure that the portal can open and close.
     @Test
-    public void testPortalCanOpenAndClose() {
+    public void testNewPortal() {
         try {
             Portal portal = new Portal();
             portal.close();
@@ -23,8 +25,9 @@ public class DatabaseTester {
         }
     }
 
+    // Ensure that all regions can be fetched from the portal.
     @Test
-    public void testShouldReturnCorrectRegions() {
+    public void testGetAllRegions() {
         try {
             Portal portal = new Portal();
             HashMap<String, Region> regions = portal.getAllRegions();
@@ -43,8 +46,9 @@ public class DatabaseTester {
         }
     }
 
+    // Ensure that appropriate random events can be retrieved from the portal.
     @Test
-    public void testShouldReturnAppropriateRandomEvents() {
+    public void testGetRandomEvent() {
         Portal portal = null;
         try {
             portal = new Portal();
@@ -53,10 +57,15 @@ public class DatabaseTester {
             fail("Exception " + exception);
         }
 
+        // Retrieve 500 random events from the portal. Each event must have
+        // an alignment between the two random floats randLow and randHigh.
         for (int test = 0; test < 500; test++) {
             double randLow = Math.random() * .7;
             double randHigh = randLow + (Math.random() * (1.0 - randLow));
             Event event = portal.getRandomEvent(randLow, randHigh); 
+
+            // Not all alignment parameters will result in an event. Only
+            // perform checks for alignment parameters that returned an event.
             if (event != null) {
                 double eventAlignment = event.getAlignment();
                 assertTrue(eventAlignment >= randLow && eventAlignment <= randHigh);
@@ -66,6 +75,7 @@ public class DatabaseTester {
         portal.close();
     }
 
+    // Ensure that getRandomEvent can handle wild bounds.
     @Test
     public void testShouldHandleWildBounds() {
         Portal portal = null;

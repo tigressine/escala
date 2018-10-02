@@ -30,7 +30,7 @@ class PolyClick implements MouseListener{
 	public PolyClick(GameState state)
 	{
         this.state = state;
-	}
+    }
 
     public void mouseClicked(MouseEvent e) {
         Point frameLoc = state.getFrame().getLocation();
@@ -45,29 +45,26 @@ class PolyClick implements MouseListener{
         System.out.println(mouse.x + " " + mouse.y);
 
         if(cash.contains(mouse)){
-            tempPopup("Cash");
+            upgradePopup("Cash");
         }
         else if(stats.contains(mouse)){
-            tempPopup("Stats");
+            upgradePopup("Stats");
         }
 
         else if(play.contains(mouse)){
-            state.startGame();
-            System.out.println("play");
+            state.continueGame();
         }
 
         else if(pause.contains(mouse)){
-            state.stopGame();
-            System.out.println("pause");
+            state.pauseGame();
         }
 
         else if(fast.contains(mouse)){
-            state.startGame();
-            System.out.println("fast");
+            state.increaseSpeed();
         }
 
         else if(share.contains(mouse)){
-            tempPopup("Market");
+            upgradePopup("Market");
         }
 
         else
@@ -96,6 +93,30 @@ class PolyClick implements MouseListener{
       Dimension dim = Toolkit.getDefaultToolkit().getScreenSize();
       popup.setLocation(dim.width/2-popup.getSize().width/2, dim.height/2-popup.getSize().height/2);
       popup.setVisible(true);
+    }
+
+    public void upgradePopup(String title){
+        JFrame popup = new JFrame();
+        popup.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
+        popup.setTitle(title);
+        popup.setSize((int) (state.getWidth() * .75), (int) (state.getHeight() * .75));
+        Dimension dim = Toolkit.getDefaultToolkit().getScreenSize();
+        popup.setLocation(dim.width/2-popup.getSize().width/2, dim.height/2-popup.getSize().height/2);
+        popup.setVisible(true);
+
+        //canvas for upgrades
+
+        // pause game
+        state.pauseGame();
+
+        // continue game when window closes.
+        popup.addWindowListener(new java.awt.event.WindowAdapter() {
+            @Override
+            public void windowClosing(java.awt.event.WindowEvent windowEvent) {
+                popup.dispose();
+                state.continueGame();
+            }
+        });
     }
 
     public void mousePressed(MouseEvent e) {

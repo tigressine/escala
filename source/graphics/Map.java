@@ -34,13 +34,15 @@ public class Map {
         this.state = state;
 
         try {
-            URL url = getClass().getResource("/data/assets/Background.png");
-            String path = URLDecoder.decode(url.getPath(), "UTF-8");
-            background[0] = ImageIO.read(new File(path));   
+            
 
-            url = getClass().getResource("/data/assets/BackgroundPaused.png");
+            URL url = getClass().getResource("/data/assets/BackgroundPaused.png");
+            String path = URLDecoder.decode(url.getPath(), "UTF-8");
+            background[0] = ImageIO.read(new File(path));    
+
+            url = getClass().getResource("/data/assets/Background.png");
             path = URLDecoder.decode(url.getPath(), "UTF-8");
-            background[1] = ImageIO.read(new File(path));    
+            background[1] = ImageIO.read(new File(path)); 
 
             url = getClass().getResource("/data/assets/BackgroundFast.png");
             path = URLDecoder.decode(url.getPath(), "UTF-8");
@@ -64,14 +66,9 @@ public class Map {
         mouse.x = (int)((1/scale) * (double)(mouse.x - frameLoc.x - margin.left));
         mouse.y = (int)((1/scale) * (double)(mouse.y - frameLoc.y - margin.top));
 
-        if(state.isGameRunning())
-                backgroundNum = 0;
-        else
-            backgroundNum = 1;
-
         // Render the background.
         if (background != null) {
-            g.drawImage(background[backgroundNum], 0, 0,
+            g.drawImage(background[state.getGameSpeed()], 0, 0,
                         state.getWidth(),
                         state.getHeight(),
                         0, 0, imageWidth,

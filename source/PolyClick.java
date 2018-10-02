@@ -52,14 +52,17 @@ class PolyClick implements MouseListener{
         }
 
         else if(play.contains(mouse)){
+            state.startGame();
             System.out.println("play");
         }
 
         else if(pause.contains(mouse)){
+            state.stopGame();
             System.out.println("pause");
         }
 
         else if(fast.contains(mouse)){
+            state.startGame();
             System.out.println("fast");
         }
 

@@ -64,6 +64,11 @@ public class Map {
         mouse.x = (int)((1/scale) * (double)(mouse.x - frameLoc.x - margin.left));
         mouse.y = (int)((1/scale) * (double)(mouse.y - frameLoc.y - margin.top));
 
+        if(state.isGameRunning())
+                backgroundNum = 0;
+        else
+            backgroundNum = 1;
+
         // Render the background.
         if (background != null) {
             g.drawImage(background[backgroundNum], 0, 0,

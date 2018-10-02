@@ -33,45 +33,44 @@ class PolyClick implements MouseListener{
 	}
 
     public void mouseClicked(MouseEvent e) {
-        Point p = MouseInfo.getPointerInfo().getLocation();
-        Point r = state.getFrame().getLocation();
+        Point frameLoc = state.getFrame().getLocation();
+        Point mouse = MouseInfo.getPointerInfo().getLocation();
         Insets margin = state.getFrame().getInsets();
         double scale = state.getScale();
 
-        p = new Point((p.x - r.x - margin.left),(p.y - r.y - margin.top));
+        mouse.x = (int)((1/scale) * (double)(mouse.x - frameLoc.x - margin.left));
+        mouse.y = (int)((1/scale) * (double)(mouse.y - frameLoc.y - margin.top));
 
-        p.x = (int)((1/scale) * (double)p.x);
-        p.y = (int)((1/scale) * (double)p.y);
 
-        System.out.println(p.x + " " + p.y);
+        System.out.println(mouse.x + " " + mouse.y);
 
-        if(cash.contains(p)){
+        if(cash.contains(mouse)){
             tempPopup("Cash");
         }
-        else if(stats.contains(p)){
-            System.out.println("Stats");
+        else if(stats.contains(mouse)){
+            tempPopup("Stats");
         }
 
-        else if(play.contains(p)){
+        else if(play.contains(mouse)){
             System.out.println("play");
         }
 
-        else if(pause.contains(p)){
+        else if(pause.contains(mouse)){
             System.out.println("pause");
         }
 
-        else if(fast.contains(p)){
+        else if(fast.contains(mouse)){
             System.out.println("fast");
         }
 
-        else if(share.contains(p)){
+        else if(share.contains(mouse)){
             tempPopup("Market");
         }
 
         else
         {
             for (Region region : state.getAllRegions()) {
-                if (region.contains(p)) {
+                if (region.contains(mouse)) {
                     if (region.isSelected()) {
                         region.deselect();
                     }
@@ -94,10 +93,6 @@ class PolyClick implements MouseListener{
       Dimension dim = Toolkit.getDefaultToolkit().getScreenSize();
       popup.setLocation(dim.width/2-popup.getSize().width/2, dim.height/2-popup.getSize().height/2);
       popup.setVisible(true);
-    }
-
-
-	private void eventOutput(String eventDescription, MouseEvent e) {
     }
 
     public void mousePressed(MouseEvent e) {

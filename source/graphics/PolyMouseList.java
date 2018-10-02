@@ -17,19 +17,18 @@ import javax.swing.JFrame;
 
 public class PolyMouseList
 {
-	private static PolyMouseList instance = null;
+    private static PolyMouseList instance = null;
 
-	private static final int NUM_REGIONS = 10;
-	static Polygon [] regions = new Polygon[NUM_REGIONS];
-	final String[] regionNames = {"Asia", "EasternEurope", "LatinAmerica", "MiddleEast", 
+    private static final int NUM_REGIONS = 10;
+    static Polygon [] regions = new Polygon[NUM_REGIONS];
+    final String[] regionNames = {"Asia", "EasternEurope", "LatinAmerica", "MiddleEast", 
             "NorthAfrica", "NorthAmerica", "Oceania", "SouthAfrica", "SouthAmerica", "WesternEurope"};
 
-	public PolyMouseList()
-	{
-		/*URL url;
+    public PolyMouseList()
+    {
+        /*URL url;
 
-		for(int i = 0; i < NUM_REGIONS; i++) 
-		{
+        for(int i = 0; i < NUM_REGIONS; i++) {
             url = getClass().getResource("/data/raw/polygons/" + regionNames[i] + ".txt"); 
             try
             {
@@ -38,33 +37,30 @@ public class PolyMouseList
             }
             catch (IOException e)
             {
-       			 e.printStackTrace();
-       		}
+                e.printStackTrace();
+            }
         }*/
 	}
 /*
-	public int contains(Point p)
-	{
-		for(int i = 0; i < NUM_REGIONS; i++)
-		{
-			if(regions[i].contains(p))
-				return i;
-		}
-		return Integer.MAX_VALUE;
-	}
+    public int contains(Point p) {
+        for(int i = 0; i < NUM_REGIONS; i++) {
+            if(regions[i].contains(p))
+            return i;
+        }
+        return Integer.MAX_VALUE;
+    }
 
-	private Polygon addPoly(File file) throws  IOException
-	{
-		Polygon poly = new Polygon();
-		Scanner in = new Scanner(file);
+    private Polygon addPoly(File file) throws  IOException {
+        Polygon poly = new Polygon();
+        Scanner in = new Scanner(file);
 		
-		while(in.hasNext())
-			poly.addPoint(in.nextInt(),in.nextInt());
+        while(in.hasNext())
+            poly.addPoint(in.nextInt(),in.nextInt());
 
-		return poly;
-	}
+            return poly;
+    }
 
-	public static PolyMouseList getInstance() {
+    public static PolyMouseList getInstance() {
         if(instance == null){
             instance = new PolyMouseList();
         }

@@ -29,18 +29,20 @@ public class Map {
 
     // Create a new map.
     public Map(GameState state) {
-        imageWidth = 1152;
-        imageHeight = 648;
+        imageWidth = state.getWidth();
+        imageHeight =  state.getHeight();
         this.state = state;
 
         try {
-            URL url = getClass().getResource("/data/assets/Background.png");
-            String path = URLDecoder.decode(url.getPath(), "UTF-8");
-            background[0] = ImageIO.read(new File(path));   
+            
 
-            url = getClass().getResource("/data/assets/BackgroundPaused.png");
+            URL url = getClass().getResource("/data/assets/BackgroundPaused.png");
+            String path = URLDecoder.decode(url.getPath(), "UTF-8");
+            background[0] = ImageIO.read(new File(path));    
+
+            url = getClass().getResource("/data/assets/Background.png");
             path = URLDecoder.decode(url.getPath(), "UTF-8");
-            background[1] = ImageIO.read(new File(path));    
+            background[1] = ImageIO.read(new File(path)); 
 
             url = getClass().getResource("/data/assets/BackgroundFast.png");
             path = URLDecoder.decode(url.getPath(), "UTF-8");
@@ -56,19 +58,17 @@ public class Map {
     public void renderMap(Graphics2D g) 
     {
         Logic logic = Logic.getInstance();
-        Point r = state.getFrame().getLocation();
-        Point p = MouseInfo.getPointerInfo().getLocation();
+        Point frameLoc = state.getFrame().getLocation();
+        Point mouse = MouseInfo.getPointerInfo().getLocation();
         Insets margin = state.getFrame().getInsets();
         double scale = state.getScale();
 
-        p = new Point((p.x - r.x - margin.left),(p.y - r.y - margin.top));
-
-        p.x = (int)((1/scale) * (double)p.x);
-        p.y = (int)((1/scale) * (double)p.y);
+        mouse.x = (int)((1/scale) * (double)(mouse.x - frameLoc.x - margin.left));
+        mouse.y = (int)((1/scale) * (double)(mouse.y - frameLoc.y - margin.top));
 
         // Render the background.
         if (background != null) {
-            g.drawImage(background[backgroundNum], 0, 0,
+            g.drawImage(background[state.getGameSpeed()], 0, 0,
                         state.getWidth(),
                         state.getHeight(),
                         0, 0, imageWidth,
@@ -92,7 +92,7 @@ public class Map {
 
         // Render all regions and determine if a region is being hovered, if needed.
         for (Region region : regions) {
-            if (selectedRegion == null && region.contains(p)) {
+            if (selectedRegion == null && region.contains(mouse)) {
                 selectedRegion = region;
             }
             else {

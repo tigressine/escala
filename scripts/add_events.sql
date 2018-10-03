@@ -1,6 +1,7 @@
 /*
 Part of Escala.
 Written by Tiger Sachse.
+This script has been automatically generated.
 */
 
 CONNECT 'jdbc:derby:../data/tables';

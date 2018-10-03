@@ -110,7 +110,7 @@ function load_events {
 }
 
 # Rebuild the main database from scratch.
-function rebuild_table {
+function rebuild_tables {
     run_sql $SCRIPT_DIR/drop_tables.sql
     run_sql $SCRIPT_DIR/make_tables.sql
     run_sql $SCRIPT_DIR/add_regions.sql
@@ -140,7 +140,7 @@ case "$1" in
     "--load-events")
         load_events
         ;;
-    "--rebuild-table")
-        rebuild_table
+    "--rebuild-tables")
+        rebuild_tables
         ;;
 esac

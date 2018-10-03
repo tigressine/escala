@@ -30,48 +30,47 @@ class PolyClick implements MouseListener{
 	public PolyClick(GameState state)
 	{
         this.state = state;
-	}
+    }
 
     public void mouseClicked(MouseEvent e) {
-        Point p = MouseInfo.getPointerInfo().getLocation();
-        Point r = state.getFrame().getLocation();
+        Point frameLoc = state.getFrame().getLocation();
+        Point mouse = MouseInfo.getPointerInfo().getLocation();
         Insets margin = state.getFrame().getInsets();
         double scale = state.getScale();
 
-        p = new Point((p.x - r.x - margin.left),(p.y - r.y - margin.top));
+        mouse.x = (int)((1/scale) * (double)(mouse.x - frameLoc.x - margin.left));
+        mouse.y = (int)((1/scale) * (double)(mouse.y - frameLoc.y - margin.top));
 
-        p.x = (int)((1/scale) * (double)p.x);
-        p.y = (int)((1/scale) * (double)p.y);
 
-        System.out.println(p.x + " " + p.y);
+        System.out.println(mouse.x + " " + mouse.y);
 
-        if(cash.contains(p)){
-            tempPopup("Cash");
+        if(cash.contains(mouse)){
+            upgradePopup("Cash");
         }
-        else if(stats.contains(p)){
-            System.out.println("Stats");
-        }
-
-        else if(play.contains(p)){
-            System.out.println("play");
+        else if(stats.contains(mouse)){
+            upgradePopup("Stats");
         }
 
-        else if(pause.contains(p)){
-            System.out.println("pause");
+        else if(play.contains(mouse)){
+            state.continueGame();
         }
 
-        else if(fast.contains(p)){
-            System.out.println("fast");
+        else if(pause.contains(mouse)){
+            state.pauseGame();
         }
 
-        else if(share.contains(p)){
-            tempPopup("Market");
+        else if(fast.contains(mouse)){
+            state.increaseSpeed();
+        }
+
+        else if(share.contains(mouse)){
+            upgradePopup("Market");
         }
 
         else
         {
             for (Region region : state.getAllRegions()) {
-                if (region.contains(p)) {
+                if (region.contains(mouse)) {
                     if (region.isSelected()) {
                         region.deselect();
                     }
@@ -96,8 +95,28 @@ class PolyClick implements MouseListener{
       popup.setVisible(true);
     }
 
+    public void upgradePopup(String title){
+        JFrame popup = new JFrame();
+        popup.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
+        popup.setTitle(title);
+        popup.setSize((int) (state.getWidth() * .75), (int) (state.getHeight() * .75));
+        Dimension dim = Toolkit.getDefaultToolkit().getScreenSize();
+        popup.setLocation(dim.width/2-popup.getSize().width/2, dim.height/2-popup.getSize().height/2);
+        popup.setVisible(true);
 
-	private void eventOutput(String eventDescription, MouseEvent e) {
+        //canvas for upgrades
+
+        // pause game
+        state.pauseGame();
+
+        // continue game when window closes.
+        popup.addWindowListener(new java.awt.event.WindowAdapter() {
+            @Override
+            public void windowClosing(java.awt.event.WindowEvent windowEvent) {
+                popup.dispose();
+                state.continueGame();
+            }
+        });
     }
 
     public void mousePressed(MouseEvent e) {

@@ -17,20 +17,20 @@ import escala.GameState;
  *      Plane
  *      Truck
  *      Boat
- * 
+ *
  * TODO:  fix max speed so it corresponds to frame rate and scale of map.
  * */
 
 public class Sprite extends JComponent {
-    
+
     public double DELTA = 0.5;
     private double posX;
     private double posY;
-    
+
     private double velocity;
     private double orientation;
     private double maxSpeed;
-    
+
     private int width = 10;
     private int height = 10;
 
@@ -38,47 +38,47 @@ public class Sprite extends JComponent {
     int step;           //how far along path are we?
     Point destination;  //final destination (use if path is null)
     private boolean arrived;
-    
+
     private int screenWidth;
     private int screenHeight;
     Color color;
-    
+
     private GameState state;
 
     public Sprite(int x, int y, double speed, GameState state) {
         this.state = state;
-        screenWidth = state.getWidth();
-        screenHeight = state.getHeight();
+        this.screenWidth = state.getWidth();
+        this.screenHeight = state.getHeight();
 
-        posX = x;
-        posY = y;
-        maxSpeed = speed;
+        this.posX = x;
+        this.posY = y;
+        setMaxSpeed(speed);
         //System.out.println("MAX SPEED "+maxSpeed);
-        arrived = true;
+        this.arrived = true;
     }
-    
+
     //TODO:: this hasn't been tested
     private void followPath(){
         Point prevDestination = destination;
         destination = path[step];
         moveTowardsDestination();
-        
+
         //if we arrived at our intermediate step, move to next step
         if(arrived){
             step++;
             arrived = false;
         }
-        
+
         //clean up
         destination = prevDestination;
     }
-    
+
 
     // allow sprite to wrap horizontally around the world
     private void moveTowardsDestinationWrapped(){
 
         double prevX = posX;
-        
+
         double delta = 0.5 * (double) screenWidth;
 
         if(posX < delta && destination.getX() - posX > delta){
@@ -91,7 +91,7 @@ public class Sprite extends JComponent {
             //if sprite is on right side, and faster to wrap around
             posX -= screenWidth;
             moveTowardsDestination();
-	
+
             if(posX < 0.0)
                 posX += screenWidth;
         } else {
@@ -111,7 +111,7 @@ public class Sprite extends JComponent {
         double dy = destination.getY() - posY;
         double dxdy = Math.abs(dx) + Math.abs(dy);
         double dist = Math.sqrt(dx*dx + dy*dy);
-        
+
         //can we get to destination in 1 frame?, else move in correct direction
         if(dist < maxSpeed){
             posX = destination.getX();
@@ -121,18 +121,18 @@ public class Sprite extends JComponent {
             posX += ( dx / dxdy ) * maxSpeed;
             posY += ( dy / dxdy ) * maxSpeed;
         }
-        
+
     }
-    
+
     //TODO::: this may need to be changed
     //Update method
     public void update(){
-        
+
         // If we already arrived, there is nothing to do.
         if(arrived)
             return;
-        
-        //follow path, or move towards destination, 
+
+        //follow path, or move towards destination,
         //or continue in same direction.
         if(path != null && path.length > step){
             followPath();
@@ -141,24 +141,24 @@ public class Sprite extends JComponent {
             moveTowardsDestinationWrapped();
             return;
         } else {
-            
+
             posX += maxSpeed * Math.cos(orientation);
             posY += maxSpeed * Math.sin(orientation);
         }
-        
+
         //TODO: Sanity Check to make sure we are still on the map...
     }
-    
+
     public void translate(double dx, double dy){
         posX += dx;
         posY += dy;
     }
-    
+
     //Arrived At Destination
     public boolean arrivedAtDestination(){
         return arrived;
     }
-    
+
     //Color
     public void setColor(Color c) {
         color = c;
@@ -166,7 +166,7 @@ public class Sprite extends JComponent {
     public Color getColor() {
         return color;
     }
-    
+
     //Destination
     public void setDestination(Point d) {
         destination = d;
@@ -175,7 +175,7 @@ public class Sprite extends JComponent {
     public Point getDestination() {
         return destination;
     }
-    
+
     //Path
     public void setPath(Point[] p) {
         path = p;
@@ -192,50 +192,57 @@ public class Sprite extends JComponent {
             return destination;
         return null;
     }
-    
-    
+
+
     //Velocity
     public void setVelocity(double v) {
         velocity = v;
     }
-    
+
     public double getVelocity() {
         return velocity;
     }
-    
+
     //Position
     public void setPositionX(int x) {
         posX = x;
     }
-    
+
     public double getPositionX() {
         return posX;
     }
-    
+
     public void setPositionY(int y) {
         posY = y;
     }
-    
+
     public double getPositionY(){
         return posY;
     }
-    
+
     public double getMaxSpeed(){
         return maxSpeed;
     }
-    
+
+	/*Enter desired speed in mph and you will recieve something that looks reasonable
+	at a time scale of 1 day per second.  */
     public void setMaxSpeed(double speed){
-        maxSpeed = speed;
+        double scale = this.state.getScale();
+        double fps = (double) this.state.getGoalFPS();
+        double gameSpeed = (double) this.state.getGameSpeed();
+
+        this.maxSpeed = (2.0 * speed * scale * gameSpeed) / fps;
+		//System.out.println("Speed: " + this.maxSpeed);
     }
-    
+
     public int getWidth(){
         return width;
     }
-    
+
     public int getHeight(){
         return height;
     }
-    
+
     //TODO: override this in child classes
     public void paintComponent(Graphics g) {
         Graphics2D g2 = (Graphics2D) g;

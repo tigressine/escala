@@ -42,18 +42,8 @@ public class Map {
         mouse.x = (int)((1/scale) * (double)(mouse.x - frameLoc.x - margin.left));
         mouse.y = (int)((1/scale) * (double)(mouse.y - frameLoc.y - margin.top));
 
-        // Render the background.
-        BufferedImage background = null;
-        int gameSpeed = game.getGameSpeed();
-        if (gameSpeed == 0) {
-            background = game.getBackground(Game.Background.PAUSED);
-        }
-        else if (gameSpeed == 1) {
-            background = game.getBackground(Game.Background.NORMAL);
-        }
-        else if (gameSpeed == 2) {
-            background = game.getBackground(Game.Background.FAST);
-        }
+        // Load the background and render it.
+        BufferedImage background = game.getBackground();
         if (background != null) {
             g.drawImage(background, 0, 0,
                         game.getWidth(),

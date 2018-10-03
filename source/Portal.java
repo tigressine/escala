@@ -17,6 +17,7 @@ public class Portal {
     private Driver driver;
     private Connection connection;
 
+    // Get all background images from file.
     public static HashMap<String, BufferedImage> getBackgrounds() throws IOException {
         HashMap<String, BufferedImage> backgrounds = new HashMap<>();
         String[] names = {"Normal", "Fast", "Paused"};

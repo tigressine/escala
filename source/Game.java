@@ -17,10 +17,6 @@ public class Game {
         EASY, NORMAL, HARD
     }
 
-    public static enum Background {
-        NORMAL, FAST, PAUSED 
-    }
-
     private int width;
     private int height;
     private int goalFPS;
@@ -117,15 +113,16 @@ public class Game {
         return difficulty;
     }
 
-    public BufferedImage getBackground(Background background) {
-        if (background == Background.NORMAL) {
+    // Fetch the appropriate background from the backgrounds hashmap.
+    public BufferedImage getBackground() {
+        if (gameSpeed == 0) {
+            return backgrounds.get("Paused");
+        }
+        else if (gameSpeed == 1) {
             return backgrounds.get("Normal");
         }
-        else if (background == Background.FAST) {
+        else if (gameSpeed == 2) {
             return backgrounds.get("Fast");
-        }
-        else if (background == Background.PAUSED) {
-            return backgrounds.get("Paused");
         }
         else {
             return null;

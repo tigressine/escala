@@ -5,25 +5,27 @@ Written by Tiger Sachse.
 
 CONNECT 'jdbc:derby:../data/tables;create=true';
 CREATE TABLE regions (
-    name VARCHAR(15) PRIMARY KEY,
+    name VARCHAR(15),
     taxRate REAL,
     entryCost REAL,
     logisticsCost INT,
     marketingCost INT,
-    efficiencyCost INT
+    efficiencyCost INT,
+    PRIMARY KEY (name)
 );
 CREATE TABLE events (
-    name VARCHAR(15) PRIMARY KEY,
+    name VARCHAR(15),
     description VARCHAR(300),
     alignment REAL,
     cashEffect REAL,
     logisticsEffect INT,
     marketingEffect INT,
-    efficiencyEffect INT
+    efficiencyEffect INT,
+    PRIMARY KEY (name)
 );
 CREATE TABLE skill_nodes (
-    node_id INT,
     tree_id VARCHAR(100),
+    node_id INT,
     name VARCHAR(100),
     description VARCHAR(300),
     cost REAL,

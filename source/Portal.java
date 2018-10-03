@@ -17,23 +17,18 @@ public class Portal {
     private Driver driver;
     private Connection connection;
 
-    public static enum Background {
-        NORMAL, FAST, PAUSED
-    }
+    public static HashMap<String, BufferedImage> getBackgrounds() throws IOException {
+        HashMap<String, BufferedImage> backgrounds = new HashMap<>();
+        String[] names = {"Normal", "Fast", "Paused"};
 
-    public static BufferedImage getBackground(Background background) throws IOException {
-        String type = "";
-        if (background == Background.FAST) {
-            type = "Fast";
-        }
-        else if (background == Background.PAUSED) {
-            type = "Paused";
-        }
-
-        URL url = Portal.class.getResource("/data/assets/Background" + type + ".png");
-        String path = URLDecoder.decode(url.getPath(), "UTF-8");
+        for (String name : names) {
+            URL url = Portal.class.getResource("/data/assets/Background" + name + ".png");
+            String path = URLDecoder.decode(url.getPath(), "UTF-8");
         
-        return ImageIO.read(new File(path));
+            backgrounds.put(name, ImageIO.read(new File(path)));
+        }
+
+        return backgrounds;
     }
 
     // Create a new portal.

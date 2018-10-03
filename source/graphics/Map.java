@@ -33,11 +33,9 @@ public class Map {
     // Render the map onto the screen.
     public void renderMap(Graphics2D g) 
     {
+
         // Load the background and render it.
         BufferedImage background = game.getBackground();
-        System.out.println(game.getGameSpeed());
-        System.out.println(game.getWidth());
-        System.out.println(game.getHeight());
         if (background != null) {
             g.drawImage(background, 0, 0,
                         game.getWidth(),
@@ -60,8 +58,14 @@ public class Map {
                 break;
             }
         }
-
+        
+        Point frameLoc = game.getFrame().getLocation();
+        Insets margin = game.getFrame().getInsets();
+        double scale = game.getScale();
         Point mouse = MouseInfo.getPointerInfo().getLocation();
+
+        mouse.x = (int)((1/scale) * (double)(mouse.x - frameLoc.x - margin.left));
+        mouse.y = (int)((1/scale) * (double)(mouse.y - frameLoc.y - margin.top));
 
         // Render all regions and determine if a region is being hovered, if needed.
         for (Region region : regions) {
@@ -92,13 +96,8 @@ public class Map {
             );
         }
         
-        Logic logic = Logic.getInstance();
-        Point frameLoc = game.getFrame().getLocation();
-        Insets margin = game.getFrame().getInsets();
-        double scale = game.getScale();
 
-        mouse.x = (int)((1/scale) * (double)(mouse.x - frameLoc.x - margin.left));
-        mouse.y = (int)((1/scale) * (double)(mouse.y - frameLoc.y - margin.top));
+        Logic logic = Logic.getInstance();
 
         //Stats on Screen
         g.setFont(new Font("serif", Font.BOLD, (int)(48 * scale)));

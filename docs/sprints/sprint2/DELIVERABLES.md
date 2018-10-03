@@ -1,10 +1,10 @@
-vision statement  
+vision statement  DONE
 ----------------  
 Escala is a simulation game that gives players the opportunity to spread a fictional commercial product around the world. This software features educational aspects but is primarily targeted at gamers. Many of the world’s cultural, social, logistical, and economic complexities are baked into the simulation engine, which means this game offers insight into the systems of product diffusion and economies-of-scale that many people take for granted.  
 
 Escala is inspired by [Plague Inc.](https://www.ndemiccreations.com/en/22-plague-inc), a mobile application whose primary objective is to enable players to destroy humanity with a biblical pandemic... Unlike Plague Inc., Escala’s objective is much more benign and *civilization-friendly*.
 
-user stories  
+user stories UPDATE 
 ------------  
 | User Stories | Validation | Priority | Story Points |
 |:------------:|:----------:|:--------:|:------------:|
@@ -28,20 +28,20 @@ user stories
 | I want to be able to save my game and reload it. | Game can be reloaded. | 5 | 8 |
 | I want each region to have immersive data. | User sees region data in-game. | 5 | 8 |
 
-backlogs  
+backlogs  DONE
 --------  
 [Product Backlog](https://github.com/tgsachse/escala/issues?utf8=%E2%9C%93&q=is%3Aissue+label%3A%22product+backlog%22+)  
-[Sprint Backlog](https://github.com/tgsachse/escala/issues?utf8=%E2%9C%93&q=is%3Aissue+label%3A%22sprint+1+backlog%22+)  
+[Sprint Backlog](https://github.com/tgsachse/escala/issues?utf8=%E2%9C%93&q=is%3Aissue+label%3A%22sprint+2+backlog%22+)  
 
-burndown chart  
+burndown chart  UPDATE
 ---------------  
 ![Image cannot be displayed.](./BURNDOWN.png)
 
-design diagram  
+design diagram  UPDATE
 --------------  
 ![Image cannot be displayed.](./UML.png)  
 [larger view](https://raw.githubusercontent.com/tgsachse/escala/dev/docs/sprints/sprint1/UML.png)  
 
-code  
+code  DONE
 ----  
-This game requires [Java8](http://www.oracle.com/technetwork/java/javase/downloads/index.html). Download the zip [here](https://github.com/tgsachse/escala/releases/download/v0.1/escala.zip) and unzip the contents. To the run game, double click `run.sh` on Linux and macOS or `run.bat` on Windows. The scripts can also be executed from the command line.
+This game requires [Java8](http://www.oracle.com/technetwork/java/javase/downloads/index.html). Download the zip [here](https://github.com/tgsachse/escala/releases/download/v0.2/escala.zip) and unzip the contents. To the run game, double click `run.sh` on Linux and macOS or `run.bat` on Windows. The scripts can also be executed from the command line.

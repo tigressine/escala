@@ -10,7 +10,7 @@ import java.awt.Point;
 import java.awt.Rectangle;
 import javax.swing.JComponent;
 
-import escala.GameState;
+import escala.Game;
 
 /*
  * This is a base class for all sprite types:
@@ -43,12 +43,12 @@ public class Sprite extends JComponent {
     private int screenHeight;
     Color color;
 
-    private GameState state;
+    private Game game;
 
-    public Sprite(int x, int y, double speed, GameState state) {
-        this.state = state;
-        this.screenWidth = state.getWidth();
-        this.screenHeight = state.getHeight();
+    public Sprite(int x, int y, double speed, Game game) {
+        this.game = game;
+        this.screenWidth = game.getWidth();
+        this.screenHeight = game.getHeight();
 
         this.posX = x;
         this.posY = y;
@@ -227,9 +227,9 @@ public class Sprite extends JComponent {
 	/*Enter desired speed in mph and you will recieve something that looks reasonable
 	at a time scale of 1 day per second.  */
     public void setMaxSpeed(double speed){
-        double scale = this.state.getScale();
-        double fps = (double) this.state.getGoalFPS();
-        double gameSpeed = (double) this.state.getGameSpeed();
+        double scale = this.game.getScale();
+        double fps = (double) this.game.getGoalFPS();
+        double gameSpeed = (double) this.game.getGameSpeed();
 
         this.maxSpeed = (2.0 * speed * scale * gameSpeed) / fps;
 		//System.out.println("Speed: " + this.maxSpeed);

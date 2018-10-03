@@ -10,7 +10,7 @@ import java.util.*;
 import javax.swing.*;
 
 // Stores the game status and many variables.
-public class GameState {
+public class Game {
 
     public static enum Difficulty {
         EASY, NORMAL, HARD
@@ -22,15 +22,15 @@ public class GameState {
     private double scale;
     private JFrame frame;
     private Portal portal;
+    private int gameSpeed;
     private int frameHeight;
     private boolean isRunning;
     private boolean isPaused;
-    private int gameSpeed = 1; // days per second (default is 1)
     private Difficulty difficulty;
     private HashMap<String, Region> regions;
 
     // Create a new game state with some defaults.
-    public GameState() throws SQLException, IOException {
+    public Game() throws SQLException, IOException {
 
         // Set frame size and other visual variables.
         scale = 1;
@@ -38,6 +38,7 @@ public class GameState {
         width = 1152;
         height = 648;
         goalFPS = 60;
+        gameSpeed = 1;
         frameHeight = 47;
 
         // Set game status variables.
@@ -152,25 +153,26 @@ public class GameState {
         isRunning = true;
     }
 
-    // Set the game to paused.
-    public void pauseGame(){
+    // Pause the game.
+    public void pauseGame() {
         setGameSpeed(0);
         isPaused = true;
     }
 
-    // Set the game to unpaused.
-    public void continueGame(){
+    // Unpause the game.
+    public void continueGame() {
         setGameSpeed(1);
         isPaused = false;
     }
 
-    public void increaseSpeed(){
-        continueGame();
+    // Speed up the game.
+    public void increaseSpeed() {
+        isPaused = false;
         setGameSpeed(2);
     }
 
-    // Set game speed
-    public void setGameSpeed(int gameSpeed){
+    // Set the game speed.
+    public void setGameSpeed(int gameSpeed) {
         this.gameSpeed = gameSpeed;
     }
 

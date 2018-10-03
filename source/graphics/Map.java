@@ -24,14 +24,14 @@ public class Map {
     //Barath for Testing of Game timer
     Integer time = 0;
 
-    private GameState state;
+    private Game game;
     private BufferedImage [] background = new BufferedImage[3];
 
     // Create a new map.
-    public Map(GameState state) {
-        imageWidth = state.getWidth();
-        imageHeight =  state.getHeight();
-        this.state = state;
+    public Map(Game game) {
+        imageWidth = game.getWidth();
+        imageHeight =  game.getHeight();
+        this.game = game;
 
         try {
             
@@ -58,31 +58,31 @@ public class Map {
     public void renderMap(Graphics2D g) 
     {
         Logic logic = Logic.getInstance();
-        Point frameLoc = state.getFrame().getLocation();
+        Point frameLoc = game.getFrame().getLocation();
         Point mouse = MouseInfo.getPointerInfo().getLocation();
-        Insets margin = state.getFrame().getInsets();
-        double scale = state.getScale();
+        Insets margin = game.getFrame().getInsets();
+        double scale = game.getScale();
 
         mouse.x = (int)((1/scale) * (double)(mouse.x - frameLoc.x - margin.left));
         mouse.y = (int)((1/scale) * (double)(mouse.y - frameLoc.y - margin.top));
 
         // Render the background.
         if (background != null) {
-            g.drawImage(background[state.getGameSpeed()], 0, 0,
-                        state.getWidth(),
-                        state.getHeight(),
+            g.drawImage(background[game.getGameSpeed()], 0, 0,
+                        game.getWidth(),
+                        game.getHeight(),
                         0, 0, imageWidth,
                         imageHeight,
                         null);
         }
         else {
             g.setBackground(Color.BLACK);
-            g.clearRect(0, 0, state.getWidth(), state.getHeight());
+            g.clearRect(0, 0, game.getWidth(), game.getHeight());
         }
 
         // Determine if a region is already selected.
         Region selectedRegion = null;
-        ArrayList<Region> regions = state.getAllRegions();
+        ArrayList<Region> regions = game.getAllRegions();
         for (Region region : regions) {
             if (region.isSelected()) {
                 selectedRegion = region;
@@ -98,8 +98,8 @@ public class Map {
             else {
                 g.drawImage(
                     region.getImage(), 0, 0,
-                    state.getWidth(),
-                    state.getHeight(),
+                    game.getWidth(),
+                    game.getHeight(),
                     0, 0, imageWidth,
                     imageHeight,
                     null
@@ -111,8 +111,8 @@ public class Map {
         if (selectedRegion != null) {
             g.drawImage(
                 selectedRegion.getOutline(),
-                0, 0, state.getWidth(),
-                state.getHeight(),
+                0, 0, game.getWidth(),
+                game.getHeight(),
                 0, 0, imageWidth,
                 imageHeight,
                 null

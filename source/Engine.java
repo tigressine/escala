@@ -77,9 +77,10 @@ public class Engine {
         map.renderMap(g);
 
         //TODO:  render sprites
+        /*
         for(int i = 0; i < NUM_SPRITES; i++){
             sprites[i].paintComponent(g);
-        }
+        }*/
 
         //TODO: render other stuff (charts, buttons)
     }

@@ -5,7 +5,10 @@ package escala;
 
 import java.io.*;
 import java.sql.*;
+import java.net.*;
 import java.util.*;
+import javax.imageio.*;
+import java.awt.image.*;
 import org.apache.derby.jdbc.*;
 
 // A view into the main game database.
@@ -13,6 +16,21 @@ public class Portal {
 
     private Driver driver;
     private Connection connection;
+
+    // Get all background images from file.
+    public static HashMap<String, BufferedImage> getBackgrounds() throws IOException {
+        HashMap<String, BufferedImage> backgrounds = new HashMap<>();
+        String[] names = {"Normal", "Fast", "Paused"};
+
+        for (String name : names) {
+            URL url = Portal.class.getResource("/data/assets/Background" + name + ".png");
+            String path = URLDecoder.decode(url.getPath(), "UTF-8");
+        
+            backgrounds.put(name, ImageIO.read(new File(path)));
+        }
+
+        return backgrounds;
+    }
 
     // Create a new portal.
     public Portal() throws SQLException {

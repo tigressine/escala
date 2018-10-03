@@ -18,77 +18,50 @@ public class Map {
     private int imageWidth;
     private int imageHeight;
 
-    //For testing of different back grounds
-    private int backgroundNum = 0;
-
     //Barath for Testing of Game timer
     Integer time = 0;
 
-    private GameState state;
-    private BufferedImage [] background = new BufferedImage[3];
+    private Game game;
 
     // Create a new map.
-    public Map(GameState state) {
-        imageWidth = state.getWidth();
-        imageHeight =  state.getHeight();
-        this.state = state;
-
-        try {
-            
-
-            URL url = getClass().getResource("/data/assets/BackgroundPaused.png");
-            String path = URLDecoder.decode(url.getPath(), "UTF-8");
-            background[0] = ImageIO.read(new File(path));    
-
-            url = getClass().getResource("/data/assets/Background.png");
-            path = URLDecoder.decode(url.getPath(), "UTF-8");
-            background[1] = ImageIO.read(new File(path)); 
-
-            url = getClass().getResource("/data/assets/BackgroundFast.png");
-            path = URLDecoder.decode(url.getPath(), "UTF-8");
-            background[2] = ImageIO.read(new File(path));    
-        }
-        catch (IOException exception) {
-            exception.printStackTrace();
-            System.exit(-1);
-        }
+    public Map(Game game) {
+        imageWidth = game.getWidth();
+        imageHeight =  game.getHeight();
+        this.game = game;
     }
 
     // Render the map onto the screen.
     public void renderMap(Graphics2D g) 
     {
-        Logic logic = Logic.getInstance();
-        Point frameLoc = state.getFrame().getLocation();
-        Point mouse = MouseInfo.getPointerInfo().getLocation();
-        Insets margin = state.getFrame().getInsets();
-        double scale = state.getScale();
-
-        mouse.x = (int)((1/scale) * (double)(mouse.x - frameLoc.x - margin.left));
-        mouse.y = (int)((1/scale) * (double)(mouse.y - frameLoc.y - margin.top));
-
-        // Render the background.
+        // Load the background and render it.
+        BufferedImage background = game.getBackground();
+        System.out.println(game.getGameSpeed());
+        System.out.println(game.getWidth());
+        System.out.println(game.getHeight());
         if (background != null) {
-            g.drawImage(background[state.getGameSpeed()], 0, 0,
-                        state.getWidth(),
-                        state.getHeight(),
+            g.drawImage(background, 0, 0,
+                        game.getWidth(),
+                        game.getHeight(),
                         0, 0, imageWidth,
                         imageHeight,
                         null);
         }
         else {
             g.setBackground(Color.BLACK);
-            g.clearRect(0, 0, state.getWidth(), state.getHeight());
+            g.clearRect(0, 0, game.getWidth(), game.getHeight());
         }
 
         // Determine if a region is already selected.
         Region selectedRegion = null;
-        ArrayList<Region> regions = state.getAllRegions();
+        ArrayList<Region> regions = game.getAllRegions();
         for (Region region : regions) {
             if (region.isSelected()) {
                 selectedRegion = region;
                 break;
             }
         }
+
+        Point mouse = MouseInfo.getPointerInfo().getLocation();
 
         // Render all regions and determine if a region is being hovered, if needed.
         for (Region region : regions) {
@@ -98,8 +71,8 @@ public class Map {
             else {
                 g.drawImage(
                     region.getImage(), 0, 0,
-                    state.getWidth(),
-                    state.getHeight(),
+                    game.getWidth(),
+                    game.getHeight(),
                     0, 0, imageWidth,
                     imageHeight,
                     null
@@ -111,14 +84,22 @@ public class Map {
         if (selectedRegion != null) {
             g.drawImage(
                 selectedRegion.getOutline(),
-                0, 0, state.getWidth(),
-                state.getHeight(),
+                0, 0, game.getWidth(),
+                game.getHeight(),
                 0, 0, imageWidth,
                 imageHeight,
                 null
             );
         }
         
+        Logic logic = Logic.getInstance();
+        Point frameLoc = game.getFrame().getLocation();
+        Insets margin = game.getFrame().getInsets();
+        double scale = game.getScale();
+
+        mouse.x = (int)((1/scale) * (double)(mouse.x - frameLoc.x - margin.left));
+        mouse.y = (int)((1/scale) * (double)(mouse.y - frameLoc.y - margin.top));
+
         //Stats on Screen
         g.setFont(new Font("serif", Font.BOLD, (int)(48 * scale)));
         g.drawString(logic.cashToString(),(int)((10 * scale) + margin.left),(int)((605 * scale) + margin.top));

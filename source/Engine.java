@@ -21,7 +21,7 @@ public class Engine {
     public final int NUM_SPRITES = 4;
 
     Sprite[] sprites = null;
-    private GameState state;
+    private Game game;
 
     //initialize map, logic, random events, and other necessary classes
     Map map = null;
@@ -30,23 +30,23 @@ public class Engine {
     // other...
 
     //TODO::: setup map and sprites...
-    public Engine(GameState state){
-        this.state = state;
+    public Engine(Game game){
+        this.game = game;
         sprites = new Sprite[NUM_SPRITES];
 
-        sprites[0] = new Sprite(0, 0, 300, this.state);
+        sprites[0] = new Sprite(0, 0, 300, this.game);
         sprites[0].setColor(Color.GREEN);
 
-        sprites[1] = new Sprite(500, 0, 13, this.state);
+        sprites[1] = new Sprite(500, 0, 13, this.game);
         sprites[1].setColor(Color.BLUE);
 
-        sprites[2] = new Sprite(0, 500, 18, this.state);
+        sprites[2] = new Sprite(0, 500, 18, this.game);
         sprites[2].setColor(Color.RED);
 
-        sprites[3] = new Sprite(500, 500, 500, this.state);
+        sprites[3] = new Sprite(500, 500, 500, this.game);
         sprites[3].setColor(Color.WHITE);
 
-        map = new Map(this.state);
+        map = new Map(this.game);
     }
 
     public void updateGame() {
@@ -63,8 +63,8 @@ public class Engine {
         for(int i = 0; i < NUM_SPRITES; i++){
             if(sprites[i].arrivedAtDestination()){
                 Point p = new Point();
-                double x = rand.nextInt(state.getWidth() - sprites[i].getWidth());
-                double y = rand.nextInt(state.getHeight() - sprites[i].getHeight());
+                double x = rand.nextInt(game.getWidth() - sprites[i].getWidth());
+                double y = rand.nextInt(game.getHeight() - sprites[i].getHeight());
                 p.setLocation(x, y);
                 sprites[i].setDestination(p);
             }
@@ -77,9 +77,10 @@ public class Engine {
         map.renderMap(g);
 
         //TODO:  render sprites
+        /*
         for(int i = 0; i < NUM_SPRITES; i++){
             sprites[i].paintComponent(g);
-        }
+        }*/
 
         //TODO: render other stuff (charts, buttons)
     }

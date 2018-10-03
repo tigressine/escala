@@ -12,7 +12,7 @@ public class Menu{
     
     //declare some variables
     
-    private GameState state;
+    private Game game;
     private JFrame frame;
     private static int width = 360;
     private static int height = 240;
@@ -41,11 +41,11 @@ public class Menu{
     /**
      * Creates new form Start
      */
-    public Menu(GameState state) {
+    public Menu(Game game) {
         //init frame
-        this.state = state;
-        state.setFrame(new JFrame());
-        frame = state.getFrame();
+        this.game = game;
+        game.setFrame(new JFrame());
+        frame = game.getFrame();
         
         frame.setResizable(false);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -244,10 +244,10 @@ public class Menu{
     }
     
     private void startGameEasy(Container parent) {
-        state.setDifficulty(GameState.Difficulty.EASY);
-        state.startGame();
+        game.setDifficulty(Game.Difficulty.EASY);
+        game.startGame();
         
         frame.dispose();
-        state.setFrame(null);
+        game.setFrame(null);
     }
 }

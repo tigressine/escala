@@ -77,7 +77,7 @@ public class DatabaseTester {
 
     // Ensure that getRandomEvent can handle wild bounds.
     @Test
-    public void testShouldHandleWildBounds() {
+    public void testRandomEventWithWildBounds() {
         Portal portal = null;
         try {
             portal = new Portal();

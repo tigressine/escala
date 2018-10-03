@@ -24,7 +24,7 @@ import java.awt.event.*;
 
 public class Viewer implements KeyListener{
 
-    private GameState state;
+    private Game game;
     private JFrame frame;
     private Canvas canvas;
 
@@ -38,16 +38,16 @@ public class Viewer implements KeyListener{
     private long frameCount = 0;
 
     // CONSTRUCTOR
-    public Viewer(GameState state){
-        this.state = state;
-        frame = state.getFrame();
+    public Viewer(Game game){
+        this.game = game;
+        frame = game.getFrame();
     }
 
     public void gameViewer(){
         frame = new JFrame();
-        state.setFrame(frame);
+        game.setFrame(frame);
         frame.setTitle("Escala Test");
-        frame.setSize( state.getWidth(), state.getHeight() + state.getFrameHeight());
+        frame.setSize( game.getWidth(), game.getHeight() + game.getFrameHeight());
 
         //ask if player is sure before exiting
         frame.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
@@ -55,14 +55,14 @@ public class Viewer implements KeyListener{
             @Override
             public void windowClosing(java.awt.event.WindowEvent windowEvent) {
                 // pause game here just in case player changes their mind
-                state.pauseGame();
+                game.pauseGame();
                 if (JOptionPane.showConfirmDialog(frame,
                     "Are you sure you want to quit this game?", "Quit Game?",
                     JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE) == JOptionPane.YES_OPTION){
                     frame.dispose();
                     System.exit(0);
                 } else {
-                    state.continueGame();
+                    game.continueGame();
                 }
             }
         });
@@ -76,11 +76,11 @@ public class Viewer implements KeyListener{
 
         // Canvas
         canvas = new Canvas(configuration);
-        canvas.setSize( state.getWidth(), state.getHeight());
+        canvas.setSize( game.getWidth(), game.getHeight());
         frame.add(canvas, 0);
 
         //Adds Mouse Listener from class PolyClick
-        canvas.addMouseListener(new PolyClick(state));
+        canvas.addMouseListener(new PolyClick(game));
 
         //Adds Key Listener
         canvas.addKeyListener(this);
@@ -100,10 +100,10 @@ public class Viewer implements KeyListener{
 
         // if key is p, pause / unpause game
         if(keyCode == KeyEvent.VK_P){
-            if(state.gameIsPaused()){
-                state.continueGame();
+            if(game.gameIsPaused()){
+                game.continueGame();
             } else {
-                state.pauseGame();
+                game.pauseGame();
             }
         }
 
@@ -146,7 +146,7 @@ public class Viewer implements KeyListener{
     // CALLS UPDATE AND RENDER FUNCTIONS (also in Engine)
     public void run(){
 
-        while(state.gameIsRunning() != true) {
+        while(game.gameIsRunning() != true) {
             // stall here while menu is doing its thing...
             // when user selects difficulty, gameIsRunning will be set to true
             // NOTE: sleeping here does not affect menu listeners
@@ -160,11 +160,11 @@ public class Viewer implements KeyListener{
         gameViewer();
 
         // Setup Game Engine
-        Engine engine = new Engine(state);
+        Engine engine = new Engine(game);
 
 
         // MAIN GAME LOOP
-        while( state.gameIsRunning() ) {
+        while( game.gameIsRunning() ) {
 
             //get current time for frame rate calculations
             long startTime = System.nanoTime();
@@ -176,7 +176,7 @@ public class Viewer implements KeyListener{
                 // TODO: check for user input here
 
                 // update game if game is not paused.
-                if( state.gameIsPaused() != true ) {
+                if( game.gameIsPaused() != true ) {
                     engine.updateGame();
                 }
 
@@ -187,10 +187,10 @@ public class Viewer implements KeyListener{
                 graphicsBuffer.dispose();
             } else {
                 System.err.println("ERROR: Lost graphics context for game");
-                state.stopGame();
+                game.stopGame();
             }
 
-            sleepForFrameRate(startTime, state.getFrameTime());
+            sleepForFrameRate(startTime, game.getFrameTime());
         }
 
         // TODO After Game clean up

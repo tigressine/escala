@@ -18,40 +18,16 @@ public class Map {
     private int imageWidth;
     private int imageHeight;
 
-    //For testing of different back grounds
-    private int backgroundNum = 0;
-
     //Barath for Testing of Game timer
     Integer time = 0;
 
     private Game game;
-    private BufferedImage [] background = new BufferedImage[3];
 
     // Create a new map.
     public Map(Game game) {
         imageWidth = game.getWidth();
         imageHeight =  game.getHeight();
         this.game = game;
-
-        try {
-            
-
-            URL url = getClass().getResource("/data/assets/BackgroundPaused.png");
-            String path = URLDecoder.decode(url.getPath(), "UTF-8");
-            background[0] = ImageIO.read(new File(path));    
-
-            url = getClass().getResource("/data/assets/Background.png");
-            path = URLDecoder.decode(url.getPath(), "UTF-8");
-            background[1] = ImageIO.read(new File(path)); 
-
-            url = getClass().getResource("/data/assets/BackgroundFast.png");
-            path = URLDecoder.decode(url.getPath(), "UTF-8");
-            background[2] = ImageIO.read(new File(path));    
-        }
-        catch (IOException exception) {
-            exception.printStackTrace();
-            System.exit(-1);
-        }
     }
 
     // Render the map onto the screen.
@@ -67,8 +43,19 @@ public class Map {
         mouse.y = (int)((1/scale) * (double)(mouse.y - frameLoc.y - margin.top));
 
         // Render the background.
+        BufferedImage background = null;
+        int gameSpeed = game.getGameSpeed();
+        if (gameSpeed == 0) {
+            background = game.getBackground(Game.Background.PAUSED);
+        }
+        else if (gameSpeed == 1) {
+            background = game.getBackground(Game.Background.NORMAL);
+        }
+        else if (gameSpeed == 2) {
+            background = game.getBackground(Game.Background.FAST);
+        }
         if (background != null) {
-            g.drawImage(background[game.getGameSpeed()], 0, 0,
+            g.drawImage(background, 0, 0,
                         game.getWidth(),
                         game.getHeight(),
                         0, 0, imageWidth,

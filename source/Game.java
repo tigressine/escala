@@ -8,12 +8,17 @@ import java.io.*;
 import java.sql.*;
 import java.util.*;
 import javax.swing.*;
+import java.awt.image.*;
 
 // Stores the game status and many variables.
 public class Game {
 
     public static enum Difficulty {
         EASY, NORMAL, HARD
+    }
+
+    public static enum Background {
+        NORMAL, FAST, PAUSED 
     }
 
     private int width;
@@ -28,6 +33,7 @@ public class Game {
     private boolean isPaused;
     private Difficulty difficulty;
     private HashMap<String, Region> regions;
+    private HashMap<String, BufferedImage> backgrounds;
 
     // Create a new game state with some defaults.
     public Game() throws SQLException, IOException {
@@ -45,6 +51,9 @@ public class Game {
         isRunning = false;
         isPaused = false;
         difficulty = Difficulty.NORMAL;
+
+        // Load all backgrounds.
+        backgrounds = Portal.getBackgrounds();
 
         // Load the database and get all regions.
         portal = new Portal();
@@ -106,6 +115,21 @@ public class Game {
     // Get the difficulty of the present frame.
     public Difficulty getDifficulty() {
         return difficulty;
+    }
+
+    public BufferedImage getBackground(Background background) {
+        if (background == Background.NORMAL) {
+            return backgrounds.get("Normal");
+        }
+        else if (background == Background.FAST) {
+            return backgrounds.get("Fast");
+        }
+        else if (background == Background.PAUSED) {
+            return backgrounds.get("Paused");
+        }
+        else {
+            return null;
+        }
     }
 
     // Get a region by name from loaded data.

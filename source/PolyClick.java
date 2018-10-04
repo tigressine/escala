@@ -64,7 +64,7 @@ class PolyClick implements MouseListener{
         }
 
         else if(share.contains(mouse)){
-            upgradePopup("Market");
+            MSharePopup("Market");
         }
 
         else
@@ -96,6 +96,32 @@ class PolyClick implements MouseListener{
     }
 
     public void upgradePopup(String title){
+        JFrame popup = new JFrame();
+        popup.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
+        popup.setTitle(title);
+        popup.setSize((int) (game.getWidth() * .75), (int) (game.getHeight() * .75));
+        Dimension dim = Toolkit.getDefaultToolkit().getScreenSize();
+        popup.setLocation(dim.width/2-popup.getSize().width/2, dim.height/2-popup.getSize().height/2);
+
+
+        popup.setVisible(true);
+
+        //canvas for upgrades
+
+        // pause game
+        game.pauseGame();
+
+        // continue game when window closes.
+        popup.addWindowListener(new java.awt.event.WindowAdapter() {
+            @Override
+            public void windowClosing(java.awt.event.WindowEvent windowEvent) {
+                popup.dispose();
+                game.continueGame();
+            }
+        });
+    }
+
+    public void MSharePopup(String title){
         JFrame popup = new JFrame();
         popup.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
         popup.setTitle(title);

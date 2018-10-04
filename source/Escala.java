@@ -7,50 +7,50 @@ import java.io.*;
 import java.sql.*;
 
 /*
- * This class initializes GameState (game variables) and the Database, 
+ * This class initializes Game (game variables) and the Database, 
  *      and provides entry into the game
  */
 
 public class Escala {
     
     public Escala() {
-        GameState state = null;
+        Game game = null;
         try {
-            state = new GameState();
+            game = new Game();
         }
         catch (SQLException | IOException exception) {
             exception.printStackTrace();
             System.exit(-1);    
         }
         
-        Menu menu = new Menu(state);
-        Viewer gameViewer = new Viewer(state);
+        Menu menu = new Menu(game);
+        Viewer gameViewer = new Viewer(game);
         gameViewer.run(); 
-        state.closePortal();
+        game.closePortal();
     }
     
     public static void main(String[] args) {
         Escala escala = new Escala();
         /*
         try {
-            GameState state = new GameState();
+            Game game = new Game();
             System.out.println("All events");
             for (int i = 0; i < 10; i++) {
-                System.out.println(state.getRandomEvent());
+                System.out.println(game.getRandomEvent());
             }
             System.out.println("\nPositive events");
             for (int i = 0; i < 10; i++) {
-                System.out.println(state.getRandomPositiveEvent());
+                System.out.println(game.getRandomPositiveEvent());
             }
             System.out.println("\nNegative events");
             for (int i = 0; i < 10; i++) {
-                System.out.println(state.getRandomNegativeEvent());
+                System.out.println(game.getRandomNegativeEvent());
             }
             System.out.println("\nSpecific events");
             for (int i = 0; i < 10; i++) {
-                System.out.println(state.getRandomEvent(.7, .8));
+                System.out.println(game.getRandomEvent(.7, .8));
             }
-            state.closePortal();
+            game.closePortal();
         }
         catch (Exception e) {
             e.printStackTrace();

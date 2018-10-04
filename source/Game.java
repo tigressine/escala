@@ -8,12 +8,13 @@ import java.io.*;
 import java.sql.*;
 import java.util.*;
 import javax.swing.*;
+import java.awt.image.*;
 
 // Stores the game status and many variables.
-public class GameState {
+public class Game {
 
     public static enum Difficulty {
-        EASY, NORMAL, HARD 
+        EASY, NORMAL, HARD
     }
 
     private int width;
@@ -22,16 +23,16 @@ public class GameState {
     private double scale;
     private JFrame frame;
     private Portal portal;
+    private int gameSpeed;
     private int frameHeight;
     private boolean isRunning;
+    private boolean isPaused;
     private Difficulty difficulty;
     private HashMap<String, Region> regions;
-
-    //For background
-    private int backgroundNum = 0;
+    private HashMap<String, BufferedImage> backgrounds;
 
     // Create a new game state with some defaults.
-    public GameState() throws SQLException, IOException {
+    public Game() throws SQLException, IOException {
 
         // Set frame size and other visual variables.
         scale = 1;
@@ -39,11 +40,16 @@ public class GameState {
         width = 1152;
         height = 648;
         goalFPS = 60;
+        gameSpeed = 1;
         frameHeight = 47;
 
         // Set game status variables.
         isRunning = false;
+        isPaused = false;
         difficulty = Difficulty.NORMAL;
+
+        // Load all backgrounds.
+        backgrounds = Portal.getBackgrounds();
 
         // Load the database and get all regions.
         portal = new Portal();
@@ -66,9 +72,21 @@ public class GameState {
     }
 
     // Check if the game is running.
-    public boolean isGameRunning() {
+    public boolean gameIsRunning() {
         return isRunning;
     }
+
+    // Check if game is paused.
+    public boolean gameIsPaused() {
+        return isPaused;
+    }
+
+    //Returns Speed of Game
+    //Range 0-2
+    public int getGameSpeed(){
+        return this.gameSpeed;
+    }
+
 
     // Get the goal FPS.
     public int getGoalFPS() {
@@ -93,6 +111,22 @@ public class GameState {
     // Get the difficulty of the present frame.
     public Difficulty getDifficulty() {
         return difficulty;
+    }
+
+    // Fetch the appropriate background from the backgrounds hashmap.
+    public BufferedImage getBackground() {
+        if (gameSpeed == 0) {
+            return backgrounds.get("Paused");
+        }
+        else if (gameSpeed == 1) {
+            return backgrounds.get("Normal");
+        }
+        else if (gameSpeed == 2) {
+            return backgrounds.get("Fast");
+        }
+        else {
+            return null;
+        }
     }
 
     // Get a region by name from loaded data.
@@ -138,6 +172,29 @@ public class GameState {
     // Set the game running flag to true.
     public void startGame() {
         isRunning = true;
+    }
+
+    // Pause the game.
+    public void pauseGame() {
+        setGameSpeed(0);
+        isPaused = true;
+    }
+
+    // Unpause the game.
+    public void continueGame() {
+        setGameSpeed(1);
+        isPaused = false;
+    }
+
+    // Speed up the game.
+    public void increaseSpeed() {
+        isPaused = false;
+        setGameSpeed(2);
+    }
+
+    // Set the game speed.
+    public void setGameSpeed(int gameSpeed) {
+        this.gameSpeed = gameSpeed;
     }
 
     // Set the goal FPS.

@@ -13,15 +13,18 @@ import escala.PolyClick;
 import java.awt.*;
 import javax.swing.*;
 
+// This should only be temporary stuff...
+import java.awt.event.*;
+
 
 /*
  * This class sets up the JFrame and Canvas and contains the main game loop.
  * It also enables double buffering, and enforces fps limits.
  * */
 
-public class Viewer{
+public class Viewer implements KeyListener{
 
-    private GameState state;
+    private Game game;
     private JFrame frame;
     private Canvas canvas;
 
@@ -35,17 +38,35 @@ public class Viewer{
     private long frameCount = 0;
 
     // CONSTRUCTOR
-    public Viewer(GameState state){
-        this.state = state;
-        frame = state.getFrame();
+    public Viewer(Game game){
+        this.game = game;
+        frame = game.getFrame();
     }
 
     public void gameViewer(){
         frame = new JFrame();
-        state.setFrame(frame);
+        game.setFrame(frame);
         frame.setTitle("Escala Test");
-        frame.setSize( state.getWidth(), state.getHeight() + state.getFrameHeight());
-        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        frame.setSize( game.getWidth(), game.getHeight() + game.getFrameHeight());
+
+        //ask if player is sure before exiting
+        frame.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
+        frame.addWindowListener(new java.awt.event.WindowAdapter() {
+            @Override
+            public void windowClosing(java.awt.event.WindowEvent windowEvent) {
+                // pause game here just in case player changes their mind
+                game.pauseGame();
+                if (JOptionPane.showConfirmDialog(frame,
+                    "Are you sure you want to quit this game?", "Quit Game?",
+                    JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE) == JOptionPane.YES_OPTION){
+                    frame.dispose();
+                    System.exit(0);
+                } else {
+                    game.continueGame();
+                }
+            }
+        });
+
         frame.setIgnoreRepaint(true);
 
         Dimension dim = Toolkit.getDefaultToolkit().getScreenSize();
@@ -55,19 +76,50 @@ public class Viewer{
 
         // Canvas
         canvas = new Canvas(configuration);
-        canvas.setSize( state.getWidth(), state.getHeight());
+        canvas.setSize( game.getWidth(), game.getHeight());
         frame.add(canvas, 0);
 
         //Adds Mouse Listener from class PolyClick
-        canvas.addMouseListener(new PolyClick(state));
+        canvas.addMouseListener(new PolyClick(game));
+
+        //Adds Key Listener
+        canvas.addKeyListener(this);
 
         // Establish Buffer Strategy
         canvas.createBufferStrategy(2);
         strategy = canvas.getBufferStrategy();
     }
 
-    public void menuViewer(){
 
+    @Override
+    public void keyPressed(KeyEvent e) {
+        // get key that was pressed
+        int keyCode = e.getKeyCode();
+        //System.out.println("You Pressed A Key: " + keyCode);
+        //System.out.println("Expected: " + KeyEvent.VK_P);
+
+        // if key is p, pause / unpause game
+        if(keyCode == KeyEvent.VK_P){
+            if(game.gameIsPaused()){
+                game.continueGame();
+            } else {
+                game.pauseGame();
+            }
+        }
+
+        // TODO other key stuff ???
+        // +/- to speed up or slow down game speed...
+        // q to quit
+    }
+
+    @Override
+    public void keyReleased(KeyEvent e) {
+        // leave this alone
+    }
+
+    @Override
+    public void keyTyped(KeyEvent e) {
+        // leave this alone
     }
 
 
@@ -94,7 +146,7 @@ public class Viewer{
     // CALLS UPDATE AND RENDER FUNCTIONS (also in Engine)
     public void run(){
 
-        while(state.isGameRunning() != true) {
+        while(game.gameIsRunning() != true) {
             // stall here while menu is doing its thing...
             // when user selects difficulty, gameIsRunning will be set to true
             // NOTE: sleeping here does not affect menu listeners
@@ -108,11 +160,11 @@ public class Viewer{
         gameViewer();
 
         // Setup Game Engine
-        Engine engine = new Engine(state);
+        Engine engine = new Engine(game);
 
 
         // MAIN GAME LOOP
-        while( state.isGameRunning() ) {
+        while( game.gameIsRunning() ) {
 
             //get current time for frame rate calculations
             long startTime = System.nanoTime();
@@ -123,7 +175,10 @@ public class Viewer{
 
                 // TODO: check for user input here
 
-                engine.updateGame();
+                // update game if game is not paused.
+                if( game.gameIsPaused() != true ) {
+                    engine.updateGame();
+                }
 
                 //render map, sprites, and other stuff here
                 engine.renderGame(graphicsBuffer);
@@ -132,10 +187,10 @@ public class Viewer{
                 graphicsBuffer.dispose();
             } else {
                 System.err.println("ERROR: Lost graphics context for game");
-                state.stopGame();
+                game.stopGame();
             }
 
-            sleepForFrameRate(startTime, state.getFrameTime());
+            sleepForFrameRate(startTime, game.getFrameTime());
         }
 
         // TODO After Game clean up

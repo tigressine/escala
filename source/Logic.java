@@ -21,11 +21,11 @@ package escala;
 public class Logic
 {
 	private static final int NUM_REGIONS = 10;
-	String[] regionNames = {"Asia", "EasternEurope", "LatinAmerica", "MiddleEast", 
+	String[] regionNames = {"Asia", "EasternEurope", "LatinAmerica", "MiddleEast",
             "NorthAfrica", "NorthAmerica", "Oceania", "SouthAfrica", "SouthAmerica", "WesternEurope"};
 
     private static Logic instance = null;
-	private int marketShare = 12;
+	public int marketShare = 12;
 	private boolean [] active = new boolean [10];
 	private final double [] distribution = { .17, .08, .08, .05, .07, .13, .12, .10, .06, .14 };
 	int [] regMarketShare = new int [10];
@@ -66,7 +66,7 @@ public class Logic
 
 		if((this.marketing - marketing) < 0)
 			return false;
-		
+
 		if((this.logistics - logistics) < 0)
 			return false;
 

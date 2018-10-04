@@ -33,8 +33,8 @@ public class Menu{
     JButton exit = new JButton("EXIT");
     JPanel cards = new JPanel(new CardLayout());
 
-    Color background = Color.decode("#e6ffe6");
-    Color buttonCol = Color.decode("#33adff");
+    Color background = Color.decode("#1981C9");
+    Color buttonCol = Color.decode("#567A4C");
 
 
 
@@ -134,6 +134,11 @@ public class Menu{
         hard.setBounds(320, 120, 100, 100);
         backfromDiff.setBounds(200, 240, 120, 30);
 
+        easy.setBackground(buttonCol);
+        medium.setBackground(buttonCol);
+        hard.setBackground(buttonCol);
+        backfromDiff.setBackground(buttonCol);
+
         diff.add(diffTitle);
         diff.add(easy);
         diff.add(medium);
@@ -160,19 +165,23 @@ public class Menu{
 
         set.add(setTitle);
         back.setBounds(200, 240, 120, 30);
+        back.setBackground(buttonCol);
         set.add(back);
 
         JButton loadFile = new JButton("Load Save File");
         loadFile.setBounds(200, 110, 120, 30);
+        loadFile.setBackground(buttonCol);
         set.add(loadFile);
 
         JLabel frameScale = new JLabel("50");
         frameScale.setFont(new Font("Serif", Font.PLAIN, 20));
         frameScale.setBounds(250, 130, 240, 60);
+        frameScale.setBackground(buttonCol);
         set.add(frameScale);
 
         JSlider framesPerSecond = new JSlider(JSlider.HORIZONTAL);
         framesPerSecond.setBounds(160,190,200,30);
+        framesPerSecond.setBackground(buttonCol);
         framesPerSecond.addChangeListener((ChangeEvent e) -> {
             frameScale.setText(String.valueOf(framesPerSecond.getValue()));
         });
@@ -203,6 +212,9 @@ public class Menu{
         cred.add(credText);
         back2.setBounds(200, 240, 120, 30);
         cred.add(back2);
+
+        cred.setBackground(background);
+        back2.setBackground(buttonCol);
 
         pane.add(cred, "CRED");
 

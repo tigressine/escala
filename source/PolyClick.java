@@ -106,8 +106,9 @@ class PolyClick implements MouseListener{
         Logic logic = new Logic();
         int markShare = logic.marketShare;
         System.out.println(markShare);
+        PieChart pc = new PieChart(markShare);
 
-        popup.getContentPane().add(new PieChart(markShare));
+        popup.getContentPane().add(pc);
 
         popup.setVisible(true);
 
@@ -159,7 +160,11 @@ class PieChart extends JComponent {
      Slice[] slices = {
         new Slice(val, Color.white), new Slice(100-val, Color.black)
      };
-        drawPie((Graphics2D) g, getBounds(), slices);
+        Rectangle bounds = getBounds();
+        Dimension dm = bounds.getSize();
+        Dimension ndm = new Dimension(dm.width /2, dm.height /2);
+        Rectangle nbound = new Rectangle(ndm);
+        drawPie((Graphics2D) g, nbound, slices);
     }
     void drawPie(Graphics2D g, Rectangle area, Slice[] slices) {
         double total = 0.0D;

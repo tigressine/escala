@@ -135,6 +135,7 @@ class PolyClick implements MouseListener{
     }
 
     public void mouseEntered(MouseEvent e) {
+
     }
 
     public void mouseExited(MouseEvent e) {
@@ -142,38 +143,38 @@ class PolyClick implements MouseListener{
 }
 
 class Slice {
-   double value;
-   Color color;
-   public Slice(double value, Color color) {
-      this.value = value;
-      this.color = color;
-   }
+    double value;
+    Color color;
+    public Slice(double value, Color color) {
+        this.value = value;
+        this.color = color;
+    }
 }
 class PieChart extends JComponent {
     int val;
-   PieChart(int x) {
-     this.val = x;
-   }
-   public void paint(Graphics g) {
+    PieChart(int x) {
+        this.val = x;
+    }
+    public void paint(Graphics g) {
      Slice[] slices = {
-        new Slice(val, Color.black), new Slice(100-val, Color.green)
+        new Slice(val, Color.white), new Slice(100-val, Color.black)
      };
-      drawPie((Graphics2D) g, getBounds(), slices);
-   }
-   void drawPie(Graphics2D g, Rectangle area, Slice[] slices) {
-      double total = 0.0D;
+        drawPie((Graphics2D) g, getBounds(), slices);
+    }
+    void drawPie(Graphics2D g, Rectangle area, Slice[] slices) {
+        double total = 0.0D;
 
-      for (int i = 0; i < slices.length; i++) {
-         total += slices[i].value;
-      }
-      double curValue = 0.0D;
-      int startAngle = 0;
-      for (int i = 0; i < slices.length; i++) {
-         startAngle = (int) (curValue * 360 / total);
-         int arcAngle = (int) (slices[i].value * 360 / total);
-         g.setColor(slices[i].color);
-         g.fillArc(area.x, area.y, area.width, area.height, startAngle, arcAngle);
-         curValue += slices[i].value;
-      }
-   }
+        for (int i = 0; i < slices.length; i++) {
+            total += slices[i].value;
+        }
+        double curValue = 0.0D;
+        int startAngle = 0;
+        for (int i = 0; i < slices.length; i++) {
+            startAngle = (int) (curValue * 360 / total);
+            int arcAngle = (int) (slices[i].value * 360 / total);
+            g.setColor(slices[i].color);
+            g.fillArc(area.x, area.y, area.width, area.height, startAngle, arcAngle);
+            curValue += slices[i].value;
+        }
+    }
 }

@@ -102,7 +102,16 @@ class PolyClick implements MouseListener{
         popup.setSize((int) (game.getWidth() * .75), (int) (game.getHeight() * .75));
         Dimension dim = Toolkit.getDefaultToolkit().getScreenSize();
         popup.setLocation(dim.width/2-popup.getSize().width/2, dim.height/2-popup.getSize().height/2);
+
+        Logic logic = new Logic();
+        int markShare = logic.marketShare;
+        System.out.println(markShare);
+
+        popup.getContentPane().add(new PieChart(markShare));
+
         popup.setVisible(true);
+
+
 
         //canvas for upgrades
 
@@ -130,4 +139,41 @@ class PolyClick implements MouseListener{
 
     public void mouseExited(MouseEvent e) {
     }
+}
+
+class Slice {
+   double value;
+   Color color;
+   public Slice(double value, Color color) {
+      this.value = value;
+      this.color = color;
+   }
+}
+class PieChart extends JComponent {
+    int val;
+   PieChart(int x) {
+     this.val = x;
+   }
+   public void paint(Graphics g) {
+     Slice[] slices = {
+        new Slice(val, Color.black), new Slice(100-val, Color.green)
+     };
+      drawPie((Graphics2D) g, getBounds(), slices);
+   }
+   void drawPie(Graphics2D g, Rectangle area, Slice[] slices) {
+      double total = 0.0D;
+
+      for (int i = 0; i < slices.length; i++) {
+         total += slices[i].value;
+      }
+      double curValue = 0.0D;
+      int startAngle = 0;
+      for (int i = 0; i < slices.length; i++) {
+         startAngle = (int) (curValue * 360 / total);
+         int arcAngle = (int) (slices[i].value * 360 / total);
+         g.setColor(slices[i].color);
+         g.fillArc(area.x, area.y, area.width, area.height, startAngle, arcAngle);
+         curValue += slices[i].value;
+      }
+   }
 }

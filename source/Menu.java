@@ -76,6 +76,7 @@ public class Menu{
         exit.addActionListener(e -> quit(frame));
         easy.addActionListener(e -> startGameEasy(frame));
         medium.addActionListener(e -> startGameMedium(frame));
+        hard.addActionListener(e -> startGameHard(frame));
 
         //show screen
         frame.setVisible(true);
@@ -253,6 +254,10 @@ public class Menu{
     }
 
     private void startGameMedium(Container parent) {
-        JOptionPane.showMessageDialog(null, "My Goodness, this is so concise");
+        JOptionPane.showMessageDialog(null, "This page is currently under construction!");
+    }
+
+    private void startGameHard(Container parent) {
+        JOptionPane.showMessageDialog(null, "This page is currently under construction!");
     }
 }

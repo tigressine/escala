@@ -178,7 +178,7 @@ class PieChart extends JComponent {
             startAngle = (int) (curValue * 360 / total);
             int arcAngle = (int) (slices[i].value * 360 / total);
             g.setColor(slices[i].color);
-            g.fillArc(area.x, area.y, area.width, area.height, startAngle, arcAngle);
+            g.fillArc(area.x + 210, area.y +100, area.width, area.height, startAngle, arcAngle);
             curValue += slices[i].value;
         }
     }

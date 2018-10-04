@@ -5,7 +5,7 @@ package escala;
 
 import java.awt.event.MouseListener;
 import java.awt.event.MouseEvent;
-import escala.GameState;
+import escala.Game;
 import escala.graphics.Map;
 import java.awt.Point;
 import javax.swing.JFrame;
@@ -19,7 +19,7 @@ class PolyClick implements MouseListener{
 
     private static final int NUM_REGIONS = 10;
 
-    GameState state;
+    Game game;
     Rectangle cash  = new Rectangle(0,577,230,71);
     Rectangle stats = new Rectangle(260,600,632,48);
     Rectangle share = new Rectangle(922,577,230,71);
@@ -27,51 +27,50 @@ class PolyClick implements MouseListener{
     Rectangle play = new Rectangle(1020,0,50,48);
     Rectangle fast = new Rectangle(1080,0,72,48);
 
-	public PolyClick(GameState state)
+	public PolyClick(Game game)
 	{
-        this.state = state;
-	}
+        this.game = game;
+    }
 
     public void mouseClicked(MouseEvent e) {
-        Point p = MouseInfo.getPointerInfo().getLocation();
-        Point r = state.getFrame().getLocation();
-        Insets margin = state.getFrame().getInsets();
-        double scale = state.getScale();
+        Point frameLoc = game.getFrame().getLocation();
+        Point mouse = MouseInfo.getPointerInfo().getLocation();
+        Insets margin = game.getFrame().getInsets();
+        double scale = game.getScale();
 
-        p = new Point((p.x - r.x - margin.left),(p.y - r.y - margin.top));
+        mouse.x = (int)((1/scale) * (double)(mouse.x - frameLoc.x - margin.left));
+        mouse.y = (int)((1/scale) * (double)(mouse.y - frameLoc.y - margin.top));
 
-        p.x = (int)((1/scale) * (double)p.x);
-        p.y = (int)((1/scale) * (double)p.y);
 
-        System.out.println(p.x + " " + p.y);
+        System.out.println(mouse.x + " " + mouse.y);
 
-        if(cash.contains(p)){
-            tempPopup("Cash");
+        if(cash.contains(mouse)){
+            upgradePopup("Cash");
         }
-        else if(stats.contains(p)){
-            System.out.println("Stats");
-        }
-
-        else if(play.contains(p)){
-            System.out.println("play");
+        else if(stats.contains(mouse)){
+            upgradePopup("Stats");
         }
 
-        else if(pause.contains(p)){
-            System.out.println("pause");
+        else if(play.contains(mouse)){
+            game.continueGame();
         }
 
-        else if(fast.contains(p)){
-            System.out.println("fast");
+        else if(pause.contains(mouse)){
+            game.pauseGame();
         }
 
-        else if(share.contains(p)){
-            tempPopup("Market");
+        else if(fast.contains(mouse)){
+            game.increaseSpeed();
+        }
+
+        else if(share.contains(mouse)){
+            upgradePopup("Market");
         }
 
         else
         {
-            for (Region region : state.getAllRegions()) {
-                if (region.contains(p)) {
+            for (Region region : game.getAllRegions()) {
+                if (region.contains(mouse)) {
                     if (region.isSelected()) {
                         region.deselect();
                     }
@@ -96,8 +95,28 @@ class PolyClick implements MouseListener{
       popup.setVisible(true);
     }
 
+    public void upgradePopup(String title){
+        JFrame popup = new JFrame();
+        popup.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
+        popup.setTitle(title);
+        popup.setSize((int) (game.getWidth() * .75), (int) (game.getHeight() * .75));
+        Dimension dim = Toolkit.getDefaultToolkit().getScreenSize();
+        popup.setLocation(dim.width/2-popup.getSize().width/2, dim.height/2-popup.getSize().height/2);
+        popup.setVisible(true);
 
-	private void eventOutput(String eventDescription, MouseEvent e) {
+        //canvas for upgrades
+
+        // pause game
+        game.pauseGame();
+
+        // continue game when window closes.
+        popup.addWindowListener(new java.awt.event.WindowAdapter() {
+            @Override
+            public void windowClosing(java.awt.event.WindowEvent windowEvent) {
+                popup.dispose();
+                game.continueGame();
+            }
+        });
     }
 
     public void mousePressed(MouseEvent e) {

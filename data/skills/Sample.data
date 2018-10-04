@@ -1,0 +1,136 @@
+Sample
+
+1
+3 4 5
+Node one
+A description for node one.
+1.0
+1
+1
+1
+
+2
+4 5 6
+Node two
+A description for node two.
+2.0
+2
+2
+2
+
+3
+7
+Node three
+A description for node three.
+3.0
+3
+3
+3
+
+4
+11
+Node four
+A description for node four.
+4.5
+4
+4
+4
+
+5
+8 9 10
+Node five
+A description for node five.
+5.6
+5
+5
+5
+
+6
+10
+Node six
+A description for node six.
+6.0
+6
+6
+6
+
+7
+11 12
+Node seven
+A description for node seven.
+7.22
+7
+7
+7
+
+8
+12 13
+Node eight
+A description for node eight.
+8.44
+8
+8
+8
+
+9
+12 13
+Node nine
+A description for node nine.
+9.22
+9
+9
+9
+
+10
+14 15
+Node ten
+A description for node ten.
+10.11
+10
+10
+10
+
+11
+-1
+Node eleven
+A description for node eleven.
+11.12
+11
+11
+11
+
+12
+-1
+Node twelve
+A description for node twelve.
+12.222
+12
+12
+12
+
+13
+-1
+Node thirteen
+A description for node thirteen.
+13.44
+13
+13
+13
+
+14
+15
+Node fourteen
+A description for node fourteen.
+14.44
+14
+14
+14
+
+15
+-1
+Node fifteen
+A description for node fifteen.
+15.111
+15
+15
+15

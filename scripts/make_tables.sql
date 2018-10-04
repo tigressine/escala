@@ -4,6 +4,7 @@ Written by Tiger Sachse.
 */
 
 CONNECT 'jdbc:derby:../data/tables;create=true';
+
 CREATE TABLE regions (
     name VARCHAR(15),
     taxRate REAL,
@@ -44,5 +45,6 @@ CREATE TABLE skill_edges (
     FOREIGN KEY (follow_node, tree_id)
     REFERENCES skill_nodes
 );
+
 DISCONNECT;
 EXIT;

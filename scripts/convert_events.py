@@ -12,9 +12,9 @@ HEADER = (
     "Written by Tiger Sachse.\n"
     "This script has been automatically generated.\n"
     "*/\n\n"
-    "CONNECT 'jdbc:derby:../data/tables';\n"
+    "CONNECT 'jdbc:derby:../data/tables';\n\n"
 )
-FOOTER = "DISCONNECT;\nExit;\n"
+FOOTER = "\nDISCONNECT;\nExit;\n"
 
 # Open the destination and write the header and footer, as well as individual
 # INSERT lines for each argument file passed to this script.

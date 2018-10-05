@@ -5,6 +5,7 @@ package escala;
 
 import java.io.*;
 import java.sql.*;
+import escala.structures.*;
 
 /*
  * This class initializes Game (game variables) and the Database, 
@@ -31,7 +32,7 @@ public class Escala {
     
     public static void main(String[] args) {
         Escala escala = new Escala();
-        /*
+        /*        
         try {
             Game game = new Game();
             System.out.println("All events");
@@ -55,13 +56,16 @@ public class Escala {
         catch (Exception e) {
             e.printStackTrace();
         }*/
+
         /*
         try {
-            Loader loader = new Loader();
             Portal portal = new Portal();
-            loader.createRegions();
+            SkillTree tree = portal.getSkillTree("Sample");
+            System.out.print(tree);
 
-            loader.close();
+            SkillTree tree2 = portal.getSkillTree("Sample2");
+            System.out.print(tree2);
+
             portal.close();
         }
         catch (Exception e) {

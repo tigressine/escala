@@ -26,8 +26,9 @@ public class Game {
     private Portal portal;
     private int gameSpeed;
     private int frameHeight;
-    private boolean isRunning;
     private boolean isPaused;
+    private boolean isRunning;
+    private SkillTree skillTree;
     private Difficulty difficulty;
     private HashMap<String, Region> regions;
     private HashMap<String, BufferedImage> backgrounds;
@@ -52,9 +53,10 @@ public class Game {
         // Load all backgrounds.
         backgrounds = Portal.getBackgrounds();
 
-        // Load the database and get all regions.
+        // Load the database, all regions, and the sample skill tree.
         portal = new Portal();
         regions = portal.getAllRegions();
+        skillTree = portal.getSkillTree("Sample");
     }
 
     // Get the game width.

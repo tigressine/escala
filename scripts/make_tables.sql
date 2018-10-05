@@ -4,18 +4,47 @@ Written by Tiger Sachse.
 */
 
 CONNECT 'jdbc:derby:../data/tables;create=true';
-CREATE TABLE regions (name VARCHAR(15) PRIMARY KEY,
-                      taxRate REAL,
-                      entryCost REAL,
-                      logisticsCost INT,
-                      marketingCost INT,
-                      efficiencyCost INT);
-CREATE TABLE events (name VARCHAR(15) PRIMARY KEY,
-                     description VARCHAR(300),
-                     alignment REAL,
-                     cashEffect REAL,
-                     logisticsEffect INT,
-                     marketingEffect INT,
-                     efficiencyEffect INT);
+
+CREATE TABLE regions (
+    name VARCHAR(15),
+    taxRate REAL,
+    entryCost REAL,
+    logisticsCost INT,
+    marketingCost INT,
+    efficiencyCost INT,
+    PRIMARY KEY (name)
+);
+CREATE TABLE events (
+    name VARCHAR(15),
+    description VARCHAR(300),
+    alignment REAL,
+    cashEffect REAL,
+    logisticsEffect INT,
+    marketingEffect INT,
+    efficiencyEffect INT,
+    PRIMARY KEY (name)
+);
+CREATE TABLE skillNodes (
+    treeID VARCHAR(100),
+    nodeID INT,
+    name VARCHAR(100),
+    description VARCHAR(300),
+    cost REAL,
+    logisticsEffect INT,
+    marketingEffect INT,
+    efficiencyEffect INT,
+    PRIMARY KEY (nodeID, treeID)
+);
+CREATE TABLE skillEdges (
+    treeID VARCHAR(100),
+    startNode INT,
+    followNode INT,
+    PRIMARY KEY (treeID, startNode, followNode),
+    FOREIGN KEY (startNode, treeID)
+    REFERENCES skillNodes,
+    FOREIGN KEY (followNode, treeID)
+    REFERENCES skillNodes
+);
+
 DISCONNECT;
 EXIT;

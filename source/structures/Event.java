@@ -1,7 +1,7 @@
 // Part of Escala.
 // Written by Tiger Sachse.
 
-package escala;
+package escala.structures;
 
 // Read-only Event data structure.
 public class Event {

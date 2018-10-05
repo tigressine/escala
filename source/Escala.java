@@ -31,7 +31,7 @@ public class Escala {
     }
     
     public static void main(String[] args) {
-        //Escala escala = new Escala();
+        Escala escala = new Escala();
         /*        
         try {
             Game game = new Game();
@@ -57,7 +57,7 @@ public class Escala {
             e.printStackTrace();
         }*/
 
-        ///*
+        /*
         try {
             Portal portal = new Portal();
             SkillTree tree = portal.getSkillTree("Sample");
@@ -68,12 +68,12 @@ public class Escala {
             /*
             SkillTree tree2 = portal.getSkillTree("Sample2");
             System.out.print(tree2);
-            */
+            ///
 
             portal.close();
         }
         catch (Exception e) {
             e.printStackTrace();
-        }//*/
+        }*/
     }
 }

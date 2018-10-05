@@ -5,6 +5,7 @@ package escala;
 
 import java.io.*;
 import java.sql.*;
+import escala.structures.*;
 
 /*
  * This class initializes Game (game variables) and the Database, 

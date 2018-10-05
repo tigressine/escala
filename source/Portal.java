@@ -9,6 +9,7 @@ import java.net.*;
 import java.util.*;
 import javax.imageio.*;
 import java.awt.image.*;
+import escala.structures.*;
 import org.apache.derby.jdbc.*;
 
 // A view into the main game database.

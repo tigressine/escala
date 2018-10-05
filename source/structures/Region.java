@@ -1,7 +1,7 @@
 // Part of Escala.
 // Written by Tiger Sachse.
 
-package escala;
+package escala.structures;
 
 import java.io.*;
 import java.net.*;

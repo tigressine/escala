@@ -16,6 +16,7 @@ PACKAGE_NAME="escala"
 GRAPHICS_DIR="graphics"
 RUN_UNIX_SCRIPT="run.sh"
 JUNIT_JAR="junit-4.10.jar"
+STRUCTURES_DIR="structures"
 RUN_WINDOWS_SCRIPT="run.bat"
 DERBY_RUN_JAR="derbyrun.jar"
 EVENT_SCRIPT="add_events.sql"
@@ -31,6 +32,7 @@ function build_project {
 
     javac -cp $BUILD_DIR/$LIB_DIR/$DERBY_JAR \
         -d $BUILD_DIR $SOURCE_DIR/$GRAPHICS_DIR/*.java \
+        $SOURCE_DIR/$STRUCTURES_DIR/*.java \
         $SOURCE_DIR/*.java
 }
 

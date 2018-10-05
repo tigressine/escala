@@ -22,13 +22,14 @@ FOOTER = "\nDISCONNECT;\nExit;\n"
 
 class Node:
     """Hold information about graph nodes."""
-    def __init__(self, tree,
-                 identifier,
-                 targets, name,
-                 description, cost,
-                 logistics_effect,
-                 marketing_effect,
-                 efficiency_effect):
+    def __init__(
+        self, tree,
+        identifier,
+        targets, name,
+        description, cost,
+        logistics_effect,
+        marketing_effect,
+        efficiency_effect):
         """Initialize the graph node."""
 
         self.tree = tree

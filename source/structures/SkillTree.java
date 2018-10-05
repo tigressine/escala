@@ -1,9 +1,9 @@
 // Part of Escala.
 // Written by Tiger Sachse.
 
-package escala;
+package escala.structures;
 
-import escala.*;
+import escala.structures.*;
 import java.util.*;
 
 // Holds a graph of skills.

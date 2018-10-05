@@ -1,7 +1,7 @@
 // Part of Escala.
 // Written by Tiger Sachse.
 
-package escala;
+package escala.structures;
 
 // Holds information about a skill in a skill tree.
 public class Skill {

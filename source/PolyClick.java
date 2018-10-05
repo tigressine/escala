@@ -14,6 +14,7 @@ import java.awt.Insets;
 import java.awt.Rectangle;
 import java.awt.*;
 import javax.swing.*;
+import escala.structures.*;
 
 class PolyClick implements MouseListener{
 

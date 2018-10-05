@@ -26,8 +26,9 @@ public class Game {
     private Portal portal;
     private int gameSpeed;
     private int frameHeight;
-    private boolean isRunning;
     private boolean isPaused;
+    private boolean isRunning;
+    private SkillTree skillTree;
     private Difficulty difficulty;
     private HashMap<String, Region> regions;
     private HashMap<String, BufferedImage> backgrounds;
@@ -52,9 +53,10 @@ public class Game {
         // Load all backgrounds.
         backgrounds = Portal.getBackgrounds();
 
-        // Load the database and get all regions.
+        // Load the database, all regions, and the sample skill tree.
         portal = new Portal();
         regions = portal.getAllRegions();
+        skillTree = portal.getSkillTree("Sample");
     }
 
     // Get the game width.
@@ -82,12 +84,10 @@ public class Game {
         return isPaused;
     }
 
-    //Returns Speed of Game
-    //Range 0-2
-    public int getGameSpeed(){
-        return this.gameSpeed;
+    // Returns speed of the game.
+    public int getGameSpeed() {
+        return gameSpeed;
     }
-
 
     // Get the goal FPS.
     public int getGoalFPS() {
@@ -158,6 +158,26 @@ public class Game {
     // Get a random event with a specific alignment interval.
     public Event getRandomEvent(double minAlign, double maxAlign) {
         return portal.getRandomEvent(minAlign, maxAlign);
+    }
+
+    public ArrayList<Skill> getAvailableSkills() {
+        return skillTree.getAvailableSkills();
+    }
+
+    public ArrayList<Skill> getUnavailableSkills() {
+        return skillTree.getUnavailableSkills();
+    }
+
+    public ArrayList<Skill> getAllSkills() {
+        return skillTree.getAllSkills();
+    }
+
+    public boolean buySkill(int skillID) {
+        return skillTree.buySkill(skillID);
+    }
+
+    public Skill getSkill(int skillID) {
+        return skillTree.getSkill(skillID);
     }
 
     // Set the scale of the window.

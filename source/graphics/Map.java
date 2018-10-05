@@ -11,6 +11,7 @@ import java.util.*;
 import javax.swing.*;
 import javax.imageio.*;
 import java.awt.image.*;
+import escala.structures.*;
 
 // Holds the map and rendered regions.
 public class Map {

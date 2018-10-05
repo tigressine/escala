@@ -19,13 +19,14 @@ import escala.graphics.Sprite;
 
 public class Engine {
     public final int NUM_SPRITES = 4;
+    private int frameCount = 0;
 
     Sprite[] sprites = null;
     private Game game;
 
     //initialize map, logic, random events, and other necessary classes
     Map map = null;
-    // Logic
+    Logic logic = null;
     // RandomEvent
     // other...
 
@@ -47,12 +48,21 @@ public class Engine {
         sprites[3].setColor(Color.WHITE);
 
         map = new Map(this.game);
+        logic = Logic.getInstance();
     }
 
     public void updateGame() {
         //TODO::: respond to user input (if necessary)
 
         //TODO::: calculate and apply income and expenses
+        if(frameCount >= (60 /game.getGameSpeed()))
+        {
+            logic.timedUpdate();
+            frameCount = 0;
+        }
+        else 
+            frameCount++;
+        
 
         //TODO::: generate random event
 

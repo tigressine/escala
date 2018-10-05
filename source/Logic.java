@@ -21,9 +21,6 @@ import java.util.Calendar;
 public class Logic
 {
 	private static final int NUM_REGIONS = 10;
-	String[] regionNames = {"Asia", "EasternEurope", "LatinAmerica", "MiddleEast",
-            "NorthAfrica", "NorthAmerica", "Oceania", "SouthAfrica", "SouthAmerica", "WesternEurope"};
-
     private static Logic instance = null;
 	private int marketShare;
 	private static boolean [] active = new boolean [10];

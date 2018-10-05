@@ -19,9 +19,6 @@ public class Map {
     private int imageWidth;
     private int imageHeight;
 
-    //Barath for Testing of Game timer
-    Integer time = 0;
-
     private Game game;
 
     // Create a new map.
@@ -105,7 +102,7 @@ public class Map {
         g.drawString(logic.cashToString(),(int)((10 * scale) + margin.left),(int)((605 * scale) + margin.top));
         g.drawString(logic.shareToString(),(int)((1000 * scale) + margin.left),(int)((605 * scale)+ margin.top));
 
-        g.drawString(time.toString(),(int)((15 * scale) + margin.left),(int)((15 * scale) + margin.top));
+        g.drawString(logic.getDate(),(int)((1 * scale) + margin.left),(int)((15 * scale) + margin.top));
 
         g.setFont(new Font("serif", Font.BOLD, (int)(14 * scale)));
         g.setStroke(new BasicStroke((int)(2 * scale)));

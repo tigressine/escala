@@ -3,8 +3,8 @@
 
 package escala.structures;
 
-import escala.structures.*;
 import java.util.*;
+import escala.structures.*;
 
 // Holds a graph of skills.
 public class SkillTree {
@@ -29,6 +29,26 @@ public class SkillTree {
                 nodes.get(child).incrementParents();
             }
         }
+    }
+
+    public ArrayList<Skill> getAvailableSkills() {
+        return null;
+    }
+
+    public ArrayList<Skill> getUnavailableSkills() {
+        return null;
+    }
+
+    public ArrayList<Skill> getAllSkills() {
+        return null;
+    }
+
+    public boolean buySkill(int skillID) {
+        return false;
+    }
+
+    public Skill getSkill(int skillID) {
+        return null;
     }
 
     // Return a string representation of the tree.

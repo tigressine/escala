@@ -22,6 +22,15 @@ public class SkillTree {
         nodes.put(skill.getID(), new Node(skill, children));
     }
 
+    // Adjust all the parent counters for each node.
+    public void adjustParents() {
+        for (Node node : nodes.values()) {
+            for (int child : node.getChildren()) {
+                nodes.get(child).incrementParents();
+            }
+        }
+    }
+
     // Return a string representation of the tree.
     public String toString() {
         StringBuilder builder = new StringBuilder();
@@ -56,6 +65,19 @@ class Node {
         parents++;
     }
 
+    // Get an integer array of this node's children.
+    public int[] getChildren() {
+        int index = 0;
+        int[] children = new int[this.children.size()];
+
+        for (int child : this.children) {
+            children[index] = child;
+            index++;
+        }
+
+        return children;
+    }
+
     // Create a string representation of this node.
     public String toString() {
         StringBuilder builder = new StringBuilder();
@@ -64,6 +86,7 @@ class Node {
         builder.append(String.format("purchased: %s\n", String.valueOf(purchased)));
         builder.append(String.format("parents: %d\n", parents));
         builder.append("children:");
+
         for (Integer child : children) {
             builder.append(String.format(" %s", child.toString()));
         }

@@ -115,30 +115,61 @@ public class Portal {
         }
     }
 
-    public void getSkillTree(String treeID) {
+    public SkillTree getSkillTree(String treeID) {
 
         // BEGGING for an SQL injection... ;)
         String query = String.format(
-            "SELECT * FROM skill_nodes WHERE tree_id = '%s'",
+            "SELECT * FROM skillNodes WHERE treeID = '%s'",
             treeID
         );
 
         SkillTree tree = new SkillTree(treeID);
 
         try {
-            Statement statement = connection.createStatement();
-            ResultSet results = statement.executeQuery(query);
+            Statement nodeStatement = connection.createStatement();
+            ResultSet nodeResults = nodeStatement.executeQuery(query);
 
-            while (results.next()) {
-                
+            while (nodeResults.next()) {
+                Skill skill = new Skill(
+                    nodeResults.getInt("nodeID"),
+                    nodeResults.getString("name"),
+                    nodeResults.getString("description"),
+                    nodeResults.getFloat("cost"),
+                    nodeResults.getInt("logisticsEffect"),
+                    nodeResults.getInt("marketingEffect"),
+                    nodeResults.getInt("efficiencyEffect")
+                );
+
+                query = String.format(
+                    "SELECT followNode FROM skillEdges " +
+                    " WHERE treeID = '%s' AND startNode = %d",
+                    treeID,
+                    skill.getID()
+                );
+
+                Statement edgeStatement = connection.createStatement();
+                ResultSet edgeResults = edgeStatement.executeQuery(query);
+
+                HashSet<Integer> children = new HashSet<>();
+                while(edgeResults.next()) {
+                    children.add(edgeResults.getInt("followNode"));
+                }
+
+                tree.addSkill(skill, children);
+
+                if (edgeStatement != null) {
+                    edgeStatement.close();
+                }
             }
 
-
-            if (statement != null) {
-                statement.close();
+            if (nodeStatement != null) {
+                nodeStatement.close();
             }
+
+            return tree;
         }
         catch (SQLException exception) {
+            exception.printStackTrace();
             return null;
         }
     }

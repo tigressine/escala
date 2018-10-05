@@ -24,26 +24,26 @@ CREATE TABLE events (
     efficiencyEffect INT,
     PRIMARY KEY (name)
 );
-CREATE TABLE skill_nodes (
-    tree_id VARCHAR(100),
-    node_id INT,
+CREATE TABLE skillNodes (
+    treeID VARCHAR(100),
+    nodeID INT,
     name VARCHAR(100),
     description VARCHAR(300),
     cost REAL,
     logisticsEffect INT,
     marketingEffect INT,
     efficiencyEffect INT,
-    PRIMARY KEY (node_id, tree_id)
+    PRIMARY KEY (nodeID, treeID)
 );
-CREATE TABLE skill_edges (
-    tree_id VARCHAR(100),
-    start_node INT,
-    follow_node INT,
-    PRIMARY KEY (tree_id, start_node, follow_node),
-    FOREIGN KEY (start_node, tree_id)
-    REFERENCES skill_nodes,
-    FOREIGN KEY (follow_node, tree_id)
-    REFERENCES skill_nodes
+CREATE TABLE skillEdges (
+    treeID VARCHAR(100),
+    startNode INT,
+    followNode INT,
+    PRIMARY KEY (treeID, startNode, followNode),
+    FOREIGN KEY (startNode, treeID)
+    REFERENCES skillNodes,
+    FOREIGN KEY (followNode, treeID)
+    REFERENCES skillNodes
 );
 
 DISCONNECT;

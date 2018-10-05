@@ -6,10 +6,10 @@ from sys import argv as ARGS
 # Constants that make up a complete SQL script.
 SQL_SCRIPT = "add_skills.sql"
 INSERT_NODE = (
-    "INSERT INTO skill_nodes VALUES"
+    "INSERT INTO skillNodes VALUES"
     " ('{0}', {1}, '{2}', '{3}', {4}, {5}, {6}, {7});\n"
 )
-INSERT_EDGE = "INSERT INTO skill_edges VALUES ('{0}', {1}, {2});\n"
+INSERT_EDGE = "INSERT INTO skillEdges VALUES ('{0}', {1}, {2});\n"
 HEADER = (
     "/*\n"
     "Part of Escala.\n"

@@ -7,8 +7,8 @@ CONNECT 'jdbc:derby:../data/tables';
 
 DROP TABLE regions;
 DROP TABLE events;
-DROP TABLE skill_edges;
-DROP TABLE skill_nodes;
+DROP TABLE skillEdges;
+DROP TABLE skillNodes;
 
 DISCONNECT;
 EXIT;

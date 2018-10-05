@@ -19,6 +19,7 @@ JUNIT_JAR="junit-4.10.jar"
 RUN_WINDOWS_SCRIPT="run.bat"
 DERBY_RUN_JAR="derbyrun.jar"
 EVENT_SCRIPT="add_events.sql"
+SKILL_SCRIPT="add_skills.sql"
 
 # Build the project.
 function build_project {
@@ -109,12 +110,20 @@ function load_events {
     run_sql $SCRIPT_DIR/$EVENT_SCRIPT
 }
 
+# Load skills from raw files into an SQL script, then execute that script.
+function load_skills {
+    python3 $SCRIPT_DIR/convert_skills.py $DATA_DIR/skills/*
+    mv $SKILL_SCRIPT $SCRIPT_DIR/$SKILL_SCRIPT
+    run_sql $SCRIPT_DIR/$SKILL_SCRIPT
+}
+
 # Rebuild the main database from scratch.
 function rebuild_tables {
     run_sql $SCRIPT_DIR/drop_tables.sql
     run_sql $SCRIPT_DIR/make_tables.sql
     run_sql $SCRIPT_DIR/add_regions.sql
     load_events
+    load_skills
 }
 
 # Main entry point of this script.
@@ -139,6 +148,9 @@ case "$1" in
         ;;
     "--load-events")
         load_events
+        ;;
+    "--load-skills")
+        load_skills
         ;;
     "--rebuild-tables")
         rebuild_tables

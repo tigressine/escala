@@ -115,6 +115,34 @@ public class Portal {
         }
     }
 
+    public void getSkillTree(String treeID) {
+
+        // BEGGING for an SQL injection... ;)
+        String query = String.format(
+            "SELECT * FROM skill_nodes WHERE tree_id = '%s'",
+            treeID
+        );
+
+        SkillTree tree = new SkillTree(treeID);
+
+        try {
+            Statement statement = connection.createStatement();
+            ResultSet results = statement.executeQuery(query);
+
+            while (results.next()) {
+                
+            }
+
+
+            if (statement != null) {
+                statement.close();
+            }
+        }
+        catch (SQLException exception) {
+            return null;
+        }
+    }
+
     // Close the connection.
     public void close() {
         try {

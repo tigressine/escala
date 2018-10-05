@@ -3,8 +3,8 @@
 
 package escala.structures;
 
-import escala.structures.*;
 import java.util.*;
+import escala.structures.*;
 
 // Holds a graph of skills.
 public class SkillTree {
@@ -20,6 +20,35 @@ public class SkillTree {
     // Add a skill and its children to the tree.
     public void addSkill(Skill skill, HashSet<Integer> children) {
         nodes.put(skill.getID(), new Node(skill, children));
+    }
+
+    // Adjust all the parent counters for each node.
+    public void adjustParents() {
+        for (Node node : nodes.values()) {
+            for (int child : node.getChildren()) {
+                nodes.get(child).incrementParents();
+            }
+        }
+    }
+
+    public ArrayList<Skill> getAvailableSkills() {
+        return null;
+    }
+
+    public ArrayList<Skill> getUnavailableSkills() {
+        return null;
+    }
+
+    public ArrayList<Skill> getAllSkills() {
+        return null;
+    }
+
+    public boolean buySkill(int skillID) {
+        return false;
+    }
+
+    public Skill getSkill(int skillID) {
+        return null;
     }
 
     // Return a string representation of the tree.
@@ -56,6 +85,19 @@ class Node {
         parents++;
     }
 
+    // Get an integer array of this node's children.
+    public int[] getChildren() {
+        int index = 0;
+        int[] children = new int[this.children.size()];
+
+        for (int child : this.children) {
+            children[index] = child;
+            index++;
+        }
+
+        return children;
+    }
+
     // Create a string representation of this node.
     public String toString() {
         StringBuilder builder = new StringBuilder();
@@ -64,6 +106,7 @@ class Node {
         builder.append(String.format("purchased: %s\n", String.valueOf(purchased)));
         builder.append(String.format("parents: %d\n", parents));
         builder.append("children:");
+
         for (Integer child : children) {
             builder.append(String.format(" %s", child.toString()));
         }

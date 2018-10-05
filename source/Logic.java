@@ -3,6 +3,7 @@
 
 package escala;
 
+import java.util.Calendar;
 
 /*
 *	0	17	Asia(China, India Philippines)
@@ -17,7 +18,6 @@ package escala;
 *	9	14	Western Europe
 */
 
-
 public class Logic
 {
 	private static final int NUM_REGIONS = 10;
@@ -26,16 +26,19 @@ public class Logic
 
     private static Logic instance = null;
 	private int marketShare = 12;
-	private boolean [] active = new boolean [10];
+	private static boolean [] active = new boolean [10];
 	private final double [] distribution = { .17, .08, .08, .05, .07, .13, .12, .10, .06, .14 };
 	int [] regMarketShare = new int [10];
 	private int cash = 400;
-	private int logistics = 75;
-	private int marketing = 75;
-	private int product = 75;
+	private int logistics = 5;
+	private int marketing = 5;
+	private int product = 5;
+	private Calendar cal;
 
 	public Logic()
 	{
+		cal = Calendar.getInstance();
+		cal.set(1000,1,1);
 
 	}
 
@@ -44,7 +47,25 @@ public class Logic
        	{
             instance = new Logic();
     	}
+
+    	testing();
+
         return instance;
+    }
+
+    public String getDate()
+    {
+    	String string = String.format("%02d/%02d/%02d", 
+    		cal.get(Calendar.MONTH), 
+    		cal.get(Calendar.DAY_OF_MONTH), 
+    		(cal.get(Calendar.YEAR)%100));
+		return string;
+    }
+
+    private static void testing()
+    {
+    	setActive(1);
+    	setActive(5);
     }
 
 	public void setLogic(int cash, int product, int marketing, int logistics)
@@ -114,9 +135,9 @@ public class Logic
 		return this.marketing;
 	}
 
-	void setActive(int region)
+	public static void setActive(int region)
 	{
-		this.active[region] =  true;
+		active[region] =  true;
 	}
 
 	void timedUpdate()
@@ -132,7 +153,7 @@ public class Logic
 		{
 			if(active[i])
 			{
-				regMarketShare[i] += .45 * ((.33 * log) + (.33 * mark) + (.33 * prod));
+				regMarketShare[i] += .75 * ((.33 * log) + (.33 * mark) + (.33 * prod));
 
 				if(regMarketShare[i] > 1000)
 					regMarketShare[i] = 1000;
@@ -141,6 +162,7 @@ public class Logic
 			total += regMarketShare[i] * distribution[i];
 		}
 
+		this.cal.add(Calendar.DAY_OF_MONTH, 1);
 		this.marketShare = total/10;
 		this.cash += (this.marketShare) * (log + mark + prod);
 	}

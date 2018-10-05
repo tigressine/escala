@@ -59,8 +59,10 @@ public class Escala {
         try {
             Portal portal = new Portal();
             SkillTree tree = portal.getSkillTree("Sample");
-            tree.print();
+            System.out.print(tree);
 
+            SkillTree tree2 = portal.getSkillTree("Sample2");
+            System.out.print(tree2);
 
             portal.close();
         }

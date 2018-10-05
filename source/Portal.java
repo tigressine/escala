@@ -20,7 +20,11 @@ public class Portal {
     // Get all background images from file.
     public static HashMap<String, BufferedImage> getBackgrounds() throws IOException {
         HashMap<String, BufferedImage> backgrounds = new HashMap<>();
-        String[] names = {"Normal", "Fast", "Paused"};
+        String[] names = {
+            "Normal",
+            "Fast",
+            "Paused"
+        };
 
         for (String name : names) {
             URL url = Portal.class.getResource("/data/assets/Background" + name + ".png");
@@ -115,7 +119,9 @@ public class Portal {
         }
     }
 
+    // Get a skill tree from the database.
     public SkillTree getSkillTree(String treeID) {
+        SkillTree tree = new SkillTree(treeID);
 
         // BEGGING for an SQL injection... ;)
         String query = String.format(
@@ -123,12 +129,11 @@ public class Portal {
             treeID
         );
 
-        SkillTree tree = new SkillTree(treeID);
-
         try {
             Statement nodeStatement = connection.createStatement();
             ResultSet nodeResults = nodeStatement.executeQuery(query);
 
+            // Retrieve all the skills from the database.
             while (nodeResults.next()) {
                 Skill skill = new Skill(
                     nodeResults.getInt("nodeID"),
@@ -150,11 +155,13 @@ public class Portal {
                 Statement edgeStatement = connection.createStatement();
                 ResultSet edgeResults = edgeStatement.executeQuery(query);
 
+                // Get all of this skill's children from the skillEdges table.
                 HashSet<Integer> children = new HashSet<>();
                 while(edgeResults.next()) {
                     children.add(edgeResults.getInt("followNode"));
                 }
 
+                // Add the skill to the skill tree with its children.
                 tree.addSkill(skill, children);
 
                 if (edgeStatement != null) {
@@ -169,7 +176,6 @@ public class Portal {
             return tree;
         }
         catch (SQLException exception) {
-            exception.printStackTrace();
             return null;
         }
     }

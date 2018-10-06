@@ -3,3 +3,6 @@ When opening the initial game menu, as well as main game mode, check to see if w
 
 ## I want to be able to change the settings before starting the game.
 In the menu, open settings page and assess the results of the options given.
+
+## I want to have an interactive menu capable of properly leading user to the game.
+When you first run the game, make sure that the menu is properly loading

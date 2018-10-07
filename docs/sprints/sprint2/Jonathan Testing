@@ -1,0 +1,13 @@
+//Tesitng Map
+
+1) When hovering over a region, that region should be highlighted.
+2) When you click on a region, that region should be stay highlited when no longer hovering. No other region should become higlighted.
+3) When a region is clicked on, you can click on another region highliting that region.
+4) When a region is clicked on, you can click off a region and no region is highlighted.
+5) When you click on the pause button, the sprites stop moving, the timer stops and the pause button is highlited.
+6) When you click on the play button when paused, the game resumes and they play button is highlited.
+7) When you click on the fast foward button, the game timer speeds up and the fast forward button is highlighted. 
+8) When you click on the money, a pop up appears.
+9) When you click on the stats, a pop up appears.
+10) When you click on the cash, a pop up appears.
+

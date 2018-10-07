@@ -53,3 +53,35 @@ This game requires [Java8](http://www.oracle.com/technetwork/java/javase/downloa
 tests UPDATE
 -----
 Will either ship tests with archive or require repo download.
+
+A on screen slider can change the reslution.
+Different levels have different math assocaited with it. 
+Each product has unique charateristics.
+Each Porduct has some unique math involved.
+A pause button to pause game.
+A play button to resume game.
+Game starts at middle of screen.
+A fastword button to increase speed of game.
+Each region has multiple graphics asscoaietd with it depending on status.
+Clisk listener to select region and hightlight.
+Mouse location listener to allow for highlighting on hover.
+Stats stored and shown to player.
+Graphs on bottom of screen tp diplay stats.
+All stats values are an integer 1-100.
+Sprites move along specified path.
+Sprites repesent transportation means.
+Paths are defined along logical path for said transposrtation type.
+Events are stored in the database.
+A random event selector selects evernt randomly.
+Settings page, contains mulpile settings.
+Settings page asscessible from menu.
+USer can enter product name.
+Product name is continued to be used throughout the game.
+Each region has its own object.
+Each region charatyeristics are unique.
+Each region owned has effect on gameplay.
+Time passes automatically at steady rate.
+The ability to increase speed of time via fatsforward button.
+The stats automatically update as time passes.
+The user can but goods with cash accumalted.
+If the user does not have enoght money they cannot purchase a good.

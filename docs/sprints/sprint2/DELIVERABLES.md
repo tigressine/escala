@@ -37,10 +37,14 @@ burndown chart  UPDATE
 ---------------  
 ![Image cannot be displayed.](./BURNDOWN.png)
 
-design diagram  UPDATE
---------------  
+design diagrams  UPDATE
+---------------  
 ![Image cannot be displayed.](./UML.png)  
 [larger view](https://raw.githubusercontent.com/tgsachse/escala/dev/docs/sprints/sprint1/UML.png)  
+
+demonstration UPDATE
+-------------
+coming soon
 
 code  DONE
 ----  

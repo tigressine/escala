@@ -1,0 +1,12 @@
+//Pause
+1) When player presses the <p> key, the game will pause.
+2) While game is paused, the sprites do not move.
+3) While game is paused, the game does not continue updating.
+4) If game is paused and player presses the <p> key, game will continue.
+
+//Prompt before exit
+5) If user clicks the <x> button at top right, they will see a prompt:
+		"are you sure you want to exit"
+6) Game will be paused while user decides <yes> or <no>.
+7) If user selects <yes>, game will exit gracefully.
+8) If user selects <no>, game will continue.

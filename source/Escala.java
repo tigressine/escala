@@ -5,33 +5,75 @@ package escala;
 
 import java.io.*;
 import java.sql.*;
-import escala.database.*;
+import escala.structures.*;
 
 /*
- * This class initializes GameState (game variables) and the Database, 
+ * This class initializes Game (game variables) and the Database, 
  *      and provides entry into the game
  */
 
 public class Escala {
     
     public Escala() {
+        Game game = null;
+        try {
+            game = new Game();
+        }
+        catch (SQLException | IOException exception) {
+            exception.printStackTrace();
+            System.exit(-1);    
+        }
         
-        GameState myGame = GameState.getInstance();
-        
-        // TODO: initialize database instance here... attach to myGame
-        // myGame.setDatabaseInstance(dbInstance);   NOTE: this function does not exist yet.
-        
-        // Menu stuff
-        Menu menu = new Menu();
-        
-        Viewer gameViewer = new Viewer();
+        Menu menu = new Menu(game);
+        Viewer gameViewer = new Viewer(game);
         gameViewer.run(); 
+        game.closePortal();
     }
     
-    public static void main(String[] args) throws SQLException, IOException {
+    public static void main(String[] args) {
         Escala escala = new Escala();
-        //Portal portal = new Portal();
-        //portal.addRegion("data/raw/regions/NorthAmerica.txt");
-        //System.out.println(portal.getRegion("North America"));
+        /*        
+        try {
+            Game game = new Game();
+            System.out.println("All events");
+            for (int i = 0; i < 10; i++) {
+                System.out.println(game.getRandomEvent());
+            }
+            System.out.println("\nPositive events");
+            for (int i = 0; i < 10; i++) {
+                System.out.println(game.getRandomPositiveEvent());
+            }
+            System.out.println("\nNegative events");
+            for (int i = 0; i < 10; i++) {
+                System.out.println(game.getRandomNegativeEvent());
+            }
+            System.out.println("\nSpecific events");
+            for (int i = 0; i < 10; i++) {
+                System.out.println(game.getRandomEvent(.7, .8));
+            }
+            game.closePortal();
+        }
+        catch (Exception e) {
+            e.printStackTrace();
+        }*/
+
+        /*
+        try {
+            Portal portal = new Portal();
+            SkillTree tree = portal.getSkillTree("Sample");
+            System.out.print(tree);
+            tree.adjustParents();
+            System.out.print(tree);
+
+            /*
+            SkillTree tree2 = portal.getSkillTree("Sample2");
+            System.out.print(tree2);
+            ///
+
+            portal.close();
+        }
+        catch (Exception e) {
+            e.printStackTrace();
+        }*/
     }
 }

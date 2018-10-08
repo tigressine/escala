@@ -35,37 +35,30 @@ backlogs
 
 requirements
 ------------
-- A on screen slider can change the reslution.
-- Different levels have different math assocaited with it. 
+- An on-screen slider can change the resolution.
 - Each product has unique charateristics.
-- Each Porduct has some unique math involved.
-- A pause button to pause game.
-- A play button to resume game.
-- Game starts at middle of screen.
-- A fastword button to increase speed of game.
-- Each region has multiple graphics asscoaietd with it depending on status.
-- Clisk listener to select region and hightlight.
-- Mouse location listener to allow for highlighting on hover.
-- Stats stored and shown to player.
-- Graphs on bottom of screen tp diplay stats.
-- All stats values are an integer 1-100.
-- Sprites move along specified path.
-- Sprites repesent transportation means.
-- Paths are defined along logical path for said transposrtation type.
+- Game has a pause button to pause game.
+- Game has a play button to play game.
+- Game starts in the middle of the screen.
+- Game has a fastforward button to increase speed of the game.
+- Each region's status is indicated with graphics.
+- Regions can be highlighted and clicked on.
+- Regions are highlighted when hovered.
+- Statistics are stored and shown on the screen.
+- Game has graphs on the bottom of screen to diplay statistics.
+- All stats values are an integer from 1 to 100.
+- Sprites move along a defined path.
 - Events are stored in the database.
-- A random event selector selects evernt randomly.
-- Settings page, contains mulpile settings.
-- Settings page asscessible from menu.
-- USer can enter product name.
-- Product name is continued to be used throughout the game.
-- Each region has its own object.
-- Each region charatyeristics are unique.
-- Each region owned has effect on gameplay.
-- Time passes automatically at steady rate.
-- The ability to increase speed of time via fatsforward button.
-- The stats automatically update as time passes.
-- The user can but goods with cash accumalted.
-- If the user does not have enoght money they cannot purchase a good.
+- Events can be selected at random.
+- Game has a settings page with multiple settings.
+- This settings page is accessible from the menu.
+- Users can enter a product name.
+- This product name is used throughout the game.
+- Each region's characteristics are unique.
+- Each region has an effect on gameplay.
+- Time passes automatically at a steady rate.
+- Statistics are automatically updated as time passes.
+- Users can buy goods with in-game cash.
 
 burndown chart  
 ---------------  
@@ -82,11 +75,17 @@ class diagram:
 
 demonstration  
 -------------
-coming soon
+An early demonstration video is available [here](https://www.youtube.com/watch?v=5SXeTfJ3AfM).
 
-tests UPDATE
+tests  
 -----
-Manual (plaintext) tests are located [here](https://github.com/tgsachse/escala/blob/master/tests/MANUAL_TESTS.md).
+Manual (plain text) tests are located [here](https://github.com/tgsachse/escala/blob/master/tests/MANUAL_TESTS.md). To run database unit tests, clone the repository and execute the test command like this:
+```
+git clone https://www.github.com/tgsachse/escala.git
+cd escala
+./operations.sh --test
+```
+
 code  
 ----  
 This game requires [Java8](http://www.oracle.com/technetwork/java/javase/downloads/index.html). Download the zip [here](https://github.com/tgsachse/escala/releases/download/v0.2/escala.zip) and unzip the contents. To the run game, double click `run.sh` on Linux and macOS or `run.bat` on Windows. The scripts can also be executed from the command line.

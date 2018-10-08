@@ -33,33 +33,8 @@ backlogs
 [Product Backlog](https://github.com/tgsachse/escala/issues?utf8=%E2%9C%93&q=is%3Aissue+label%3A%22product+backlog%22+)  
 [Sprint Backlog](https://github.com/tgsachse/escala/issues?utf8=%E2%9C%93&q=is%3Aissue+label%3A%22sprint+2+backlog%22+)  
 
-burndown chart  
----------------  
-![Image cannot be displayed.](BURNDOWN.png)
-
-design diagrams  
----------------  
-![Image cannot be displayed.](ARCHITECTURE_DIAGRAM.png)  
-[larger view](https://raw.githubusercontent.com/tgsachse/escala/dev/docs/sprints/sprint2/ARCHITECTURE_DIAGRAM.png)  
-
-![Image cannot be displayed.](CLASS_DIAGRAM.png)  
-[larger view](https://raw.githubusercontent.com/tgsachse/escala/dev/docs/sprints/sprint2/CLASS_DIAGRAM.png)  
-
-demonstration UPDATE
--------------
-coming soon
-
-code  
-----  
-This game requires [Java8](http://www.oracle.com/technetwork/java/javase/downloads/index.html). Download the zip [here](https://github.com/tgsachse/escala/releases/download/v0.2/escala.zip) and unzip the contents. To the run game, double click `run.sh` on Linux and macOS or `run.bat` on Windows. The scripts can also be executed from the command line.
-
-tests UPDATE
------
-Will either ship tests with archive or require repo download.
-
 requirements
 ------------
-
 - A on screen slider can change the reslution.
 - Different levels have different math assocaited with it. 
 - Each product has unique charateristics.
@@ -91,3 +66,27 @@ requirements
 - The stats automatically update as time passes.
 - The user can but goods with cash accumalted.
 - If the user does not have enoght money they cannot purchase a good.
+
+burndown chart  
+---------------  
+![Image cannot be displayed.](BURNDOWN.png)
+
+design diagrams  
+---------------  
+architecture diagram:
+![Image cannot be displayed.](ARCHITECTURE_DIAGRAM.png)  
+
+class diagram:
+![Image cannot be displayed.](CLASS_DIAGRAM.png)  
+[larger view](https://raw.githubusercontent.com/tgsachse/escala/master/docs/sprints/sprint2/CLASS_DIAGRAM.png)  
+
+demonstration  
+-------------
+coming soon
+
+tests UPDATE
+-----
+Manual (plaintext) tests are located [here](https://github.com/tgsachse/escala/blob/master/tests/MANUAL_TESTS.md).
+code  
+----  
+This game requires [Java8](http://www.oracle.com/technetwork/java/javase/downloads/index.html). Download the zip [here](https://github.com/tgsachse/escala/releases/download/v0.2/escala.zip) and unzip the contents. To the run game, double click `run.sh` on Linux and macOS or `run.bat` on Windows. The scripts can also be executed from the command line.

@@ -75,11 +75,16 @@ class diagram:
 
 demonstration  
 -------------
-coming soon
+An early demonstration video is available [here](https://www.youtube.com/watch?v=5SXeTfJ3AfM).
 
 tests  
 -----
-Manual (plain text) tests are located [here](https://github.com/tgsachse/escala/blob/master/tests/MANUAL_TESTS.md).
+Manual (plain text) tests are located [here](https://github.com/tgsachse/escala/blob/master/tests/MANUAL_TESTS.md). To run database unit tests, clone the repository and execute the test command like this:
+```
+git clone https://www.github.com/tgsachse/escala.git
+cd escala
+./operations.sh --test
+```
 
 code  
 ----  

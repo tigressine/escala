@@ -1,0 +1,23 @@
+Task for the next Week
+
+Barath
+  Screen Capture of Game
+    Work on Popup Contents
+   
+Tiger
+  Create Test for for Database
+  Refactor
+  Help on other areas
+  
+Jonathan
+  Make Pause Buttons work
+  Change background on pause
+  Redo background
+  Sprite Graphics
+  Sprite Paths
+  Add time Lable
+  
+Spencer
+  Upgrade Display
+  Upgrade Logic class
+  Comapny Class

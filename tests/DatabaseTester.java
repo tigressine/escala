@@ -8,6 +8,7 @@ import java.io.*;
 import java.sql.*;
 import org.junit.*;
 import java.util.*;
+import escala.structures.*;
 import static org.junit.Assert.*;
 
 // Test the database and database portal.

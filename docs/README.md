@@ -9,7 +9,7 @@ This game requires [Java8](http://www.oracle.com/technetwork/java/javase/downloa
 # sprints
 Click the links to view Agile sprint documentation for this program.   
 - [Sprint #1](sprints/sprint1/DELIVERABLES.md)   
-- [Sprint #2](sprints/sprint1/DELIVERABLES.md)   
+- [Sprint #2](sprints/sprint2/DELIVERABLES.md)   
 - Sprint #3   
 
 # license

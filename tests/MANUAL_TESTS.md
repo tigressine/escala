@@ -1,7 +1,6 @@
-//Tesitng Map
-
-1) When hovering over a region, that region should be highlighted.
-2) When you click on a region, that region should be stay highlited when no longer hovering. No other region should become higlighted.
+# map testing
+- When hovering over a region, that region should be highlighted.
+- When you click on a region, that region should be stay highlighted. No other region should become higlighted.
 3) When a region is clicked on, you can click on another region highliting that region.
 4) When a region is clicked on, you can click off a region and no region is highlighted.
 5) When you click on the pause button, the sprites stop moving, the timer stops and the pause button is highlited.

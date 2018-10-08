@@ -1,10 +1,10 @@
-vision statement  DONE
+vision statement  
 ----------------  
 Escala is a simulation game that gives players the opportunity to spread a fictional commercial product around the world. This software features educational aspects but is primarily targeted at gamers. Many of the world’s cultural, social, logistical, and economic complexities are baked into the simulation engine, which means this game offers insight into the systems of product diffusion and economies-of-scale that many people take for granted.  
 
 Escala is inspired by [Plague Inc.](https://www.ndemiccreations.com/en/22-plague-inc), a mobile application whose primary objective is to enable players to destroy humanity with a biblical pandemic... Unlike Plague Inc., Escala’s objective is much more benign and *civilization-friendly*.
 
-user stories UPDATE 
+user stories  
 ------------  
 | User Stories | Validation | Priority | Story Points |
 |:------------:|:----------:|:--------:|:------------:|
@@ -28,60 +28,65 @@ user stories UPDATE
 | I want to be able to save my game and reload it. | Game can be reloaded. | 5 | 8 |
 | I want each region to have immersive data. | User sees region data in-game. | 5 | 8 |
 
-backlogs  DONE
+backlogs  
 --------  
 [Product Backlog](https://github.com/tgsachse/escala/issues?utf8=%E2%9C%93&q=is%3Aissue+label%3A%22product+backlog%22+)  
 [Sprint Backlog](https://github.com/tgsachse/escala/issues?utf8=%E2%9C%93&q=is%3Aissue+label%3A%22sprint+2+backlog%22+)  
 
-burndown chart  UPDATE
----------------  
-![Image cannot be displayed.](./BURNDOWN.png)
+requirements
+------------
+- A on screen slider can change the reslution.
+- Different levels have different math assocaited with it. 
+- Each product has unique charateristics.
+- Each Porduct has some unique math involved.
+- A pause button to pause game.
+- A play button to resume game.
+- Game starts at middle of screen.
+- A fastword button to increase speed of game.
+- Each region has multiple graphics asscoaietd with it depending on status.
+- Clisk listener to select region and hightlight.
+- Mouse location listener to allow for highlighting on hover.
+- Stats stored and shown to player.
+- Graphs on bottom of screen tp diplay stats.
+- All stats values are an integer 1-100.
+- Sprites move along specified path.
+- Sprites repesent transportation means.
+- Paths are defined along logical path for said transposrtation type.
+- Events are stored in the database.
+- A random event selector selects evernt randomly.
+- Settings page, contains mulpile settings.
+- Settings page asscessible from menu.
+- USer can enter product name.
+- Product name is continued to be used throughout the game.
+- Each region has its own object.
+- Each region charatyeristics are unique.
+- Each region owned has effect on gameplay.
+- Time passes automatically at steady rate.
+- The ability to increase speed of time via fatsforward button.
+- The stats automatically update as time passes.
+- The user can but goods with cash accumalted.
+- If the user does not have enoght money they cannot purchase a good.
 
-design diagrams  UPDATE
+burndown chart  
 ---------------  
-![Image cannot be displayed.](./UML.png)  
-[larger view](https://raw.githubusercontent.com/tgsachse/escala/dev/docs/sprints/sprint1/UML.png)  
+![Image cannot be displayed.](BURNDOWN.png)
 
-demonstration UPDATE
+design diagrams  
+---------------  
+architecture diagram:
+![Image cannot be displayed.](ARCHITECTURE_DIAGRAM.png)  
+
+class diagram:
+![Image cannot be displayed.](CLASS_DIAGRAM.png)  
+[larger view](https://raw.githubusercontent.com/tgsachse/escala/master/docs/sprints/sprint2/CLASS_DIAGRAM.png)  
+
+demonstration  
 -------------
 coming soon
 
-code  DONE
-----  
-This game requires [Java8](http://www.oracle.com/technetwork/java/javase/downloads/index.html). Download the zip [here](https://github.com/tgsachse/escala/releases/download/v0.2/escala.zip) and unzip the contents. To the run game, double click `run.sh` on Linux and macOS or `run.bat` on Windows. The scripts can also be executed from the command line.
-
 tests UPDATE
 -----
-Will either ship tests with archive or require repo download.
-
-A on screen slider can change the reslution.
-Different levels have different math assocaited with it. 
-Each product has unique charateristics.
-Each Porduct has some unique math involved.
-A pause button to pause game.
-A play button to resume game.
-Game starts at middle of screen.
-A fastword button to increase speed of game.
-Each region has multiple graphics asscoaietd with it depending on status.
-Clisk listener to select region and hightlight.
-Mouse location listener to allow for highlighting on hover.
-Stats stored and shown to player.
-Graphs on bottom of screen tp diplay stats.
-All stats values are an integer 1-100.
-Sprites move along specified path.
-Sprites repesent transportation means.
-Paths are defined along logical path for said transposrtation type.
-Events are stored in the database.
-A random event selector selects evernt randomly.
-Settings page, contains mulpile settings.
-Settings page asscessible from menu.
-USer can enter product name.
-Product name is continued to be used throughout the game.
-Each region has its own object.
-Each region charatyeristics are unique.
-Each region owned has effect on gameplay.
-Time passes automatically at steady rate.
-The ability to increase speed of time via fatsforward button.
-The stats automatically update as time passes.
-The user can but goods with cash accumalted.
-If the user does not have enoght money they cannot purchase a good.
+Manual (plaintext) tests are located [here](https://github.com/tgsachse/escala/blob/master/tests/MANUAL_TESTS.md).
+code  
+----  
+This game requires [Java8](http://www.oracle.com/technetwork/java/javase/downloads/index.html). Download the zip [here](https://github.com/tgsachse/escala/releases/download/v0.2/escala.zip) and unzip the contents. To the run game, double click `run.sh` on Linux and macOS or `run.bat` on Windows. The scripts can also be executed from the command line.

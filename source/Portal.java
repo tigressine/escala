@@ -65,6 +65,7 @@ public class Portal {
                 ,results.getdouble("worldShareDist")
                 ,results.getInt("regionCentX")
                 ,results.getInt("regionCentY")
+                */
             );
             regions.put(region.getName(), region); 
         }

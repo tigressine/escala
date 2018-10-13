@@ -1,5 +1,5 @@
 // Part of Escala.
-// Written by Spencer Phillips and Tiger Sachse.
+// Written by Spencer Phillips, Tiger Sachse and Jonathan Ponader.
 
 package escala.graphics;
 

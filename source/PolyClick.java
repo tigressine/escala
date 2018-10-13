@@ -130,7 +130,7 @@ class PolyClick implements MouseListener{
         Dimension dim = Toolkit.getDefaultToolkit().getScreenSize();
         popup.setLocation(dim.width/2-popup.getSize().width/2, dim.height/2-popup.getSize().height/2);
 
-        Logic logic = Logic.getInstance();
+        Logic logic = game.getLogic();
         int markShare = logic.getShare();
         System.out.println(markShare);
         PieChart pc = new PieChart(markShare);

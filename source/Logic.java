@@ -4,6 +4,9 @@
 package escala;
 
 import java.util.Calendar;
+import escala.structures.Region;
+import java.util.ArrayList;
+import escala.*;
 
 /*
 *	0	17	Asia(China, India Philippines)
@@ -20,26 +23,29 @@ import java.util.Calendar;
 
 public class Logic
 {
-	private static final int NUM_REGIONS = 10;
+	private Game game;
     private static Logic instance = null;
 	private int marketShare;
-	private static boolean [] active = new boolean [10];
-	private final double [] distribution = { .17, .08, .08, .05, .07, .13, .12, .10, .06, .14 };
-	int [] regMarketShare = new int [10];
+	//private static boolean [] active = new boolean [10];
+	//private final double [] distribution = { .17, .08, .08, .05, .07, .13, .12, .10, .06, .14 };
+	private int [] regMarketShare = new int [10];
 	private int cash = 400;
 	private int logistics = 5;
 	private int marketing = 5;
 	private int product = 5;
 	private Calendar cal;
+	private static ArrayList<Region> regions;
 
-	public Logic()
+	public Logic(Game game)
 	{
 		cal = Calendar.getInstance();
 		cal.set(1000,1,1);
-
+		this.game = game;
+		regions = game.getAllRegions();
+		testing();
 	}
 
-	public static Logic getInstance() {
+	/*public static Logic getInstance() {
     	if(instance == null)
        	{
             instance = new Logic();
@@ -48,7 +54,7 @@ public class Logic
     	testing();
 
         return instance;
-    }
+    }*/
 
     public String getDate()
     {
@@ -132,7 +138,7 @@ public class Logic
 
 	public static void setActive(int region)
 	{
-		active[region] =  true;
+		regions.get(region).purchase();
 	}
 
 	void timedUpdate()
@@ -142,9 +148,20 @@ public class Logic
 		int mark = Math.min(minDiff,this.marketing);
 		int prod = Math.min(minDiff,this.product);
 		int total = 0;
-		int flag = 0;
 
-		for(int i = 0; i < NUM_REGIONS; i++)
+		for (Region region : regions) {
+            if (region.isPurchased()) {
+
+                 region.addRegShare(.75 * ((.33 * log) + (.33 * mark) + (.33 * prod)));
+
+				if(region.getRegShare() > 1000)
+					region.setRegShare(1000);
+			}
+
+            total += (int)(region.getRegShare()  * region.getWorldShare());
+        }
+
+		/*for(int i = 0; i < NUM_REGIONS; i++)
 		{
 			if(active[i])
 			{
@@ -155,7 +172,7 @@ public class Logic
 			}
 
 			total += regMarketShare[i] * distribution[i];
-		}
+		}*/
 
 		this.cal.add(Calendar.DAY_OF_MONTH, 1);
 		this.marketShare = total/10;

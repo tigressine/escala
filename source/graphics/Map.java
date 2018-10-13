@@ -32,18 +32,6 @@ public class Map {
         osAdjust();
     }
 
-    private void osAdjust()
-    {
-        String os = game.getOS();
-
-        if(os.toLowerCase().contains("mac")){
-            osAdj = 0;
-        }
-        else
-            osAdj = -15;
-
-    }
-
     // Render the map onto the screen.
     public void renderMap(Graphics2D g) 
     {
@@ -73,6 +61,7 @@ public class Map {
             }
         }
         
+        //Calculates the mouses location
         Point frameLoc = game.getFrame().getLocation();
         Insets margin = game.getFrame().getInsets();
         double scale = game.getScale();
@@ -114,11 +103,10 @@ public class Map {
 
     }
 
-    //WORK IN PROGRESS TAKING OS INTO CONSIDERATION
+    //Prints all of the Required Labels
     private void printStats(Graphics2D g)
     {
-        Logic logic = Logic.getInstance();
-
+        Logic logic = game.getLogic();
         Insets margin = game.getFrame().getInsets();
         double scale = game.getScale();
 
@@ -168,5 +156,17 @@ public class Map {
         else 
             return (int)((location * scale));
         
+    }
+
+    //Adjust the location of the text according to the OS interpretation of SWING
+    private void osAdjust()
+    {
+        String os = game.getOS();
+
+        if(os.toLowerCase().contains("mac")){
+            osAdj = 0;
+        }
+        else
+            osAdj = -15;
     }
 }

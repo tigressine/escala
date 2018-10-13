@@ -12,6 +12,13 @@ CREATE TABLE regions (
     logisticsCost INT,
     marketingCost INT,
     efficiencyCost INT,
+    /*
+    worldShareDist REAL,
+    regionCentX INT,
+    regionCenty INT,
+
+
+    */
     PRIMARY KEY (name)
 );
 CREATE TABLE events (

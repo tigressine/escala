@@ -72,7 +72,7 @@ public class Game {
         return os;
     }
 
-
+    // Get the Logic for the Game
     public Logic getLogic(){
         return logic;
     }

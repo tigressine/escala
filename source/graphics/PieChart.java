@@ -7,21 +7,24 @@ package escala.graphics;
 import java.awt.*;
 import javax.swing.*;
 
-class PieChart extends JComponent {
+public class PieChart extends JComponent {
     int val;
-    PieChart(int x) {
+    public PieChart(int x) {
         this.val = x;
     }
+
     public void paint(Graphics g) {
-     Slice[] slices = {
-        new Slice(val, Color.white), new Slice(100-val, Color.black)
-     };
+        Slice[] slices = {
+            new Slice(val, Color.white), new Slice(100-val, Color.black)
+            };
+            
         Rectangle bounds = getBounds();
         Dimension dm = bounds.getSize();
         Dimension ndm = new Dimension(dm.width /2, dm.height /2);
         Rectangle nbound = new Rectangle(ndm);
         drawPie((Graphics2D) g, nbound, slices);
     }
+
     void drawPie(Graphics2D g, Rectangle area, Slice[] slices) {
         double total = 0.0D;
 

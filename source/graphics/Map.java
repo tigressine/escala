@@ -100,7 +100,6 @@ public class Map {
         }
         
         printStats(g);
-
     }
 
     //Prints all of the Required Labels

@@ -19,13 +19,29 @@ public class Map {
     private int imageWidth;
     private int imageHeight;
 
+    private int osAdj;
+
     private Game game;
 
     // Create a new map.
-    public Map(Game game) {
+    public Map(Game game) 
+    {
         imageWidth = game.getWidth();
         imageHeight =  game.getHeight();
         this.game = game;
+        osAdjust();
+    }
+
+    private void osAdjust()
+    {
+        String os = game.getOS();
+
+        if(os.toLowerCase().contains("mac")){
+            osAdj = 0;
+        }
+        else
+            osAdj = -15;
+
     }
 
     // Render the map onto the screen.
@@ -94,35 +110,63 @@ public class Map {
             );
         }
         
+        printStats(g);
 
+    }
+
+    //WORK IN PROGRESS TAKING OS INTO CONSIDERATION
+    private void printStats(Graphics2D g)
+    {
         Logic logic = Logic.getInstance();
 
+        Insets margin = game.getFrame().getInsets();
+        double scale = game.getScale();
+
         //Stats on Screen
-        g.setFont(new Font("serif", Font.BOLD, (int)(48 * scale)));
-        g.drawString(logic.cashToString(),(int)((10 * scale) + margin.left),(int)((605 * scale) + margin.top));
-        g.drawString(logic.shareToString(),(int)((1000 * scale) + margin.left),(int)((605 * scale)+ margin.top));
+        g.setFont(new Font("serif", Font.BOLD, locAdj(48,3)));
+        g.drawString(logic.cashToString(),locAdj(10,1),locAdj(605,2));
+        g.drawString(logic.shareToString(),locAdj(1000,1),locAdj(605,2));
+        g.drawString(logic.getDate(),locAdj(1,1),locAdj(15,2));
 
-        g.drawString(logic.getDate(),(int)((1 * scale) + margin.left),(int)((15 * scale) + margin.top));
-
-        g.setFont(new Font("serif", Font.BOLD, (int)(14 * scale)));
-        g.setStroke(new BasicStroke((int)(2 * scale)));
+        g.setFont(new Font("serif", Font.BOLD, locAdj(14,3)));
+        g.setStroke(new BasicStroke(locAdj(2,3)));
         
-        g.drawString("Product",(int)((403 * scale) + margin.left),(int)((590 * scale) + margin.top));
+        g.drawString("Product",locAdj(403,1),locAdj(590,2));
         g.setColor(Color.YELLOW);
-        g.fillRect((int)((376 * scale) + margin.left),(int)((595 * scale) + margin.top),(int)(logic.getProd() * scale),(int)(20 * scale));
+        g.fillRect(locAdj(376,1),locAdj(595,2),locAdj(logic.getProd(),3),locAdj(20,3));
         g.setColor(Color.BLACK);
-        g.drawRoundRect((int)((376 * scale) + margin.left),(int)((595 * scale) + margin.top),(int)(100 * scale),(int)(20 * scale),(int)(5 * scale),(int)(5 * scale));
+        g.drawRoundRect(locAdj(376,1),locAdj(595,2),locAdj(100,3),locAdj(20,3),locAdj(5,3),locAdj(5,3));
 
-        g.drawString("Marketing",(int)((545 * scale) + margin.left),(int)((590 * scale) + margin.top));
+        g.drawString("Marketing",locAdj(545,1),locAdj(590,2));
         g.setColor(Color.YELLOW);
-        g.fillRect((int)((526 * scale) + margin.left),(int)((595 * scale) + margin.top),(int)(logic.getMark() * scale),(int)(20 * scale));
+        g.fillRect(locAdj(526,1),locAdj(595,2),locAdj(logic.getMark(),3),locAdj(20,3));
         g.setColor(Color.BLACK);
-        g.drawRoundRect((int)((526 * scale) + margin.left),(int)((595 * scale) + margin.top),(int)(100 * scale),(int)(20 * scale),(int)(5 * scale),(int)(5 * scale));
+        g.drawRoundRect(locAdj(526,1),locAdj(595,2),locAdj(100,3),locAdj(20,3),locAdj(5,3),locAdj(5,3));
 
-        g.drawString("Logistics",(int)((700 * scale) + margin.left),(int)((590 * scale) + margin.top));
+
+        g.drawString("Logistics",locAdj(700,1),locAdj(590,2));
         g.setColor(Color.YELLOW);
-        g.fillRect((int)((676 * scale) + margin.left),(int)((595 * scale) + margin.top),(int)(logic.getLog() * scale),(int)(20 * scale));
+        g.fillRect(locAdj(676,1),locAdj(595,2),locAdj(logic.getLog(),3),locAdj(20,3));
         g.setColor(Color.BLACK);
-        g.drawRoundRect((int)((676 * scale) + margin.left),(int)((595 * scale) + margin.top),(int)(100 * scale),(int)(20 * scale),(int)(5 * scale),(int)(5 * scale));
+        g.drawRoundRect(locAdj(676,1),locAdj(595,2),locAdj(100,3),locAdj(20,3),locAdj(5,3),locAdj(5,3));
+    }
+
+
+
+    //Caries out the adjust for the drawing
+    // Type 1 = X- axis
+    // Type 2 = Y- axis
+    // Type 3 = simple scaling
+    private int locAdj(int location, int type){
+        Insets margin = game.getFrame().getInsets();
+        double scale = game.getScale();
+
+        if(type == 1)
+            return (int)((location * scale) + margin.left);
+        else if (type == 2)
+            return (int)((location * scale) + margin.top + osAdj);
+        else 
+            return (int)((location * scale));
+        
     }
 }

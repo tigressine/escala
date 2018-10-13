@@ -144,7 +144,7 @@ public class Logic
 					region.setRegShare(1000);
 			}
 
-            total += (int)(region.getRegShare()  * region.getWorldShare()) + 5;
+            total += (int)(region.getRegShare()  * region.getWorldShare());
         }
 
 		this.cal.add(Calendar.DAY_OF_MONTH, 1);

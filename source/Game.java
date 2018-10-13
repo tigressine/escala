@@ -26,13 +26,14 @@ public class Game {
     private Portal portal;
     private int gameSpeed;
     private int frameHeight;
+    private static String os;
     private boolean isPaused;
     private boolean isRunning;
     private SkillTree skillTree;
     private Difficulty difficulty;
     private HashMap<String, Region> regions;
     private HashMap<String, BufferedImage> backgrounds;
-
+    
     // Create a new game state with some defaults.
     public Game() throws SQLException, IOException {
 
@@ -59,6 +60,13 @@ public class Game {
         skillTree = portal.getSkillTree("Sample");
     }
 
+    // Get the OS of the System
+    public String getOS(){
+        if(os == null)
+            os = System.getProperty("os.name");
+
+        return os;
+    }
     // Get the game width.
     public int getWidth() {
         return (int) ((double) width * scale);

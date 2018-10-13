@@ -15,13 +15,17 @@ public class Region {
     private String name;
     private float taxRate;
     private float entryCost;
+    private double worldShareDist;
+    private double marketshare;
     private Polygon polygon;
     private boolean selected;
+    private boolean purchased;
     private int logisticsCost;
     private int marketingCost;
     private int efficiencyCost;
     private BufferedImage image;
     private BufferedImage outline;
+    private Point center;
 
     // Create a new region.
     public Region(
@@ -30,18 +34,43 @@ public class Region {
         float entryCost,
         int logisticsCost,
         int marketingCost,
-        int efficiencyCost) throws IOException {
+        int efficiencyCost
+        /*
+        ,double worldShareDist
+        ,int regionCentX
+        ,int regionCentY
+        */
+        ) throws IOException {
    
-        selected = false;
+        this.selected = false;
+        this.purchased = false;
         this.name = name;
         this.taxRate = taxRate;
         this.entryCost = entryCost;
         this.marketingCost = marketingCost;
         this.logisticsCost = logisticsCost;
         this.efficiencyCost = efficiencyCost;
+        this.worldShareDist =  0.125 ;//worldShareDist;
+        this.marketshare = 0;
+
         loadImage();
         loadOutline();
         loadPolygon();
+    }
+
+    //Returns the Share of the Market Share of the Region
+    public double getRegShare(){
+        return marketshare;
+    }
+
+    //Adds market Growth to the Region Share
+    public void addRegShare(double marketshare){
+        this.marketshare += marketshare;
+    }
+
+    //Sets the Market Share of the Region
+    public void setRegShare(double marketshare){
+        this.marketshare = marketshare;
     }
 
     // Get the name of this region.
@@ -57,6 +86,10 @@ public class Region {
     // Get the entry cost to access this region.
     public float getEntryCost() {
         return entryCost;
+    }
+
+    public double getWorldShare(){
+        return worldShareDist;
     }
 
     // Get the logistics cost to access this region.
@@ -86,6 +119,10 @@ public class Region {
 
     public boolean isSelected() {
         return selected;
+    }
+
+    public boolean isPurchased(){
+        return purchased;
     }
 
     // Check if a point is contained within this region's polygon.
@@ -119,6 +156,10 @@ public class Region {
     // Deselect the region.
     public void deselect() {
         selected = false;
+    }
+
+    public void purchase(){
+        purchased = true;
     }
 
     // Load the associated image from file.

@@ -20,6 +20,7 @@ public class Game {
 
     private int width;
     private int height;
+    private Logic logic;
     private int goalFPS;
     private double scale;
     private JFrame frame;
@@ -58,6 +59,9 @@ public class Game {
         portal = new Portal();
         regions = portal.getAllRegions();
         skillTree = portal.getSkillTree("Sample");
+
+        //Starts game Logic
+        logic = new Logic(this);
     }
 
     // Get the OS of the System
@@ -67,6 +71,12 @@ public class Game {
 
         return os;
     }
+
+
+    public Logic getLogic(){
+        return logic;
+    }
+
     // Get the game width.
     public int getWidth() {
         return (int) ((double) width * scale);

@@ -48,7 +48,7 @@ public class Engine {
         sprites[3].setColor(Color.WHITE);
 
         map = new Map(this.game);
-        logic = Logic.getInstance();
+        logic = game.getLogic();
     }
 
     public void updateGame() {

@@ -3,17 +3,12 @@
 
 package escala;
 
-import java.awt.event.MouseListener;
-import java.awt.event.MouseEvent;
-import escala.Game;
-import escala.graphics.Map;
-import java.awt.Point;
-import javax.swing.JFrame;
-import java.awt.MouseInfo;
-import java.awt.Insets;
-import java.awt.Rectangle;
+
+import escala.*;
 import java.awt.*;
 import javax.swing.*;
+import java.awt.event.*;
+import escala.graphics.*;
 import escala.structures.*;
 
 class PolyClick implements MouseListener{

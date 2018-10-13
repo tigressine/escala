@@ -8,7 +8,12 @@ Format of the regions table:
     entryCost,
     logisticsCost,
     marketingCost,
-    efficiencyCost
+    efficiencyCost,
+    worldShareDist,
+
+    to be added
+    regionCentX INT
+    regionCenty INT
 */
 
 CONNECT 'jdbc:derby:../data/tables';

@@ -58,6 +58,11 @@ public class Region {
         loadPolygon();
     }
 
+    //Returns Center Location of each Region
+    public Point getCenter(){
+        return center;
+    }
+
     //Returns the Share of the Market Share of the Region
     public double getRegShare(){
         return marketshare;

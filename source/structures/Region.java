@@ -52,6 +52,7 @@ public class Region {
         this.efficiencyCost = efficiencyCost;
         this.worldShareDist =  0.125 ;//worldShareDist;
         this.marketshare = 0;
+       // this.center = new Point(regionCentX,regionCentY);
 
         loadImage();
         loadOutline();
@@ -60,7 +61,8 @@ public class Region {
 
     //Returns Center Location of each Region
     public Point getCenter(){
-        return center;
+        //return center;
+        return new Point(45,45);
     }
 
     //Returns the Share of the Market Share of the Region
@@ -93,6 +95,11 @@ public class Region {
         return entryCost;
     }
 
+    public String getEntryCostStr(){
+        String string = String.format("$%.02f", entryCost);
+        return string;
+    }
+
     public double getWorldShare(){
         return worldShareDist;
     }
@@ -102,14 +109,30 @@ public class Region {
         return logisticsCost;
     }
 
+    public String getLogCostStr(){
+        String string = String.format("%d", logisticsCost);
+        return string;
+    }
+
     // Get the marketing cost to access this region.
     public int getMarketingCost() {
         return marketingCost;
     }
 
+    public String getMarkCostStr(){
+        String string = String.format("%d", marketingCost);
+        return string;
+    }
+
     // Get the efficiency cost to access this region.
+    // Product Cost
     public int getEfficiencyCost() {
         return efficiencyCost;
+    }
+
+    public String getProdCostStr(){
+        String string = String.format("%d", efficiencyCost);
+        return string;
     }
 
     // Get the associated image for this region.

@@ -127,7 +127,10 @@ class PolyClick implements MouseListener
         Logic logic = game.getLogic();
         int markShare = logic.getShare();
         System.out.println(markShare);
+
+
         PieChart pc = new PieChart(markShare);
+        //pc.paint(g,markShare);
 
         popup.getContentPane().add(pc);
 

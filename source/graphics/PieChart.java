@@ -1,5 +1,5 @@
 // Part of Escala.
-// Written by Barath Tirumala.
+// Written by Barath Tirumala and Jonathan Ponader.
 
 
 package escala.graphics;
@@ -13,16 +13,27 @@ public class PieChart extends JComponent {
         this.val = x;
     }
 
+    public PieChart() {
+
+    }
+
     public void paint(Graphics g) {
         Slice[] slices = {
-            new Slice(val, Color.white), new Slice(100-val, Color.black)
+            new Slice(val, Color.YELLOW), new Slice(100-val, Color.BLACK)
             };
-            
+
         Rectangle bounds = getBounds();
         Dimension dm = bounds.getSize();
         Dimension ndm = new Dimension(dm.width /2, dm.height /2);
         Rectangle nbound = new Rectangle(ndm);
         drawPie((Graphics2D) g, nbound, slices);
+    }
+
+    public void paint (Graphics g, Point center, int share){
+        Slice[] slices = {new Slice(share, Color.YELLOW), new Slice(100-share, Color.BLACK)};
+        Rectangle bounds = new Rectangle(40,40);
+
+        drawPie((Graphics2D)g, center, bounds, slices);
     }
 
     void drawPie(Graphics2D g, Rectangle area, Slice[] slices) {
@@ -37,7 +48,24 @@ public class PieChart extends JComponent {
             startAngle = (int) (curValue * 360 / total);
             int arcAngle = (int) (slices[i].value * 360 / total);
             g.setColor(slices[i].color);
-            g.fillArc(area.x + 210, area.y +100, area.width, area.height, startAngle, arcAngle);
+            g.fillArc(area.x, area.y, area.width, area.height, startAngle, arcAngle);
+            curValue += slices[i].value;
+        }
+    }
+
+    void drawPie(Graphics2D g, Point center, Rectangle bound, Slice[] slices) {
+        double total = 0.0D;
+
+        for (int i = 0; i < slices.length; i++) {
+            total += slices[i].value;
+        }
+        double curValue = 0.0D;
+        int startAngle = 0;
+        for (int i = 0; i < slices.length; i++) {
+            startAngle = (int) (curValue * 360 / total);
+            int arcAngle = (int) (slices[i].value * 360 / total);
+            g.setColor(slices[i].color);
+            g.fillArc(center.x + 210, center.y +100, bound.width, bound.height, startAngle, arcAngle);
             curValue += slices[i].value;
         }
     }

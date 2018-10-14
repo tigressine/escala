@@ -76,7 +76,7 @@ public class Map {
                     null
                 ); 
 
-                drawBought(region, g); 
+                //drawBought(region, g); 
             }
         }
 
@@ -93,12 +93,25 @@ public class Map {
 
             if(selectedRegion.isSelected() && !selectedRegion.isPurchased())
                 drawBuy(selectedRegion, g);
-            else
+            else if(selectedRegion.isSelected() && selectedRegion.isPurchased())
                 drawBought(selectedRegion, g);
 
         }
         
         printStats(g);
+    }
+
+    //Handles calculating the mouse position for the hover 
+    private Point Mouse(){
+        Point frameLoc = game.getFrame().getLocation();
+        Insets margin = game.getFrame().getInsets();
+        double scale = game.getScale();
+        Point mouse = MouseInfo.getPointerInfo().getLocation();
+
+        mouse.x = (int)((1/scale) * (double)(mouse.x - frameLoc.x - margin.left));
+        mouse.y = (int)((1/scale) * (double)(mouse.y - frameLoc.y - margin.top));
+
+        return mouse;
     }
 
     //Prints all of the Required Labels
@@ -169,6 +182,7 @@ public class Map {
             osAdj = -15;
     }
 
+    //Draws the Box to Buy the region
     private void drawBuy(Region region, Graphics2D g)
     {
         Point p = new Point(400,400); //region.getCenter();
@@ -197,23 +211,16 @@ public class Map {
         g.drawRoundRect(locAdj(p.x - 60,1), locAdj(p.y + 40 ,2), locAdj(190,3), locAdj(35,3), locAdj(15,3), locAdj(15,3));
     }
 
-
+    //Draws the Symbol showing that a region is owned
     private void drawBought(Region region, Graphics2D g)
     {
         Point p = region.getCenter();
-        g.setColor(Color.YELLOW);
-        g.fillRect(locAdj(p.x,1),locAdj(p.y,2),locAdj(45,3),locAdj(45,3));
+
+        //System.out.println(region.getRegShare());
+
+        PieChart pc = new PieChart();
+        pc.paint(g, region.getCenter(), (int)region.getRegShare());
     }
 
-    private Point Mouse(){
-        Point frameLoc = game.getFrame().getLocation();
-        Insets margin = game.getFrame().getInsets();
-        double scale = game.getScale();
-        Point mouse = MouseInfo.getPointerInfo().getLocation();
-
-        mouse.x = (int)((1/scale) * (double)(mouse.x - frameLoc.x - margin.left));
-        mouse.y = (int)((1/scale) * (double)(mouse.y - frameLoc.y - margin.top));
-
-        return mouse;
-    }
+    
 }

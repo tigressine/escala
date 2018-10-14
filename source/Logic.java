@@ -127,7 +127,7 @@ public class Logic
 		regions.get(region).purchase();
 	}
 
-	void timedUpdate()
+	public void timedUpdate()
 	{
 		int minDiff =  Math.min(logistics, Math.min(marketing, product)) + 20;
 		int log = Math.min(minDiff,this.logistics);
@@ -150,5 +150,24 @@ public class Logic
 		this.cal.add(Calendar.DAY_OF_MONTH, 1);
 		this.marketShare = total;
 		this.cash += (this.marketShare) * (log + mark + prod);
+		winState();
+	}
+
+
+	// To Add Win Loose Page
+	//Ends Game in Win or Loose Condition
+	private void winState(){
+		if(this.marketShare == 100){
+			System.out.println("Win State!!!!");
+		}
+
+		else if((cal.get(Calendar.YEAR)%100) == 10){
+			System.out.println("Loose State :(");
+		}
+		else
+			return;
+
+		game.stopGame();
+
 	}
 }

@@ -9,6 +9,7 @@ import java.awt.Point;
 import java.util.Random;
 import escala.graphics.Map;
 import escala.graphics.Sprite;
+import java.lang.Math;
 
 /*
  * This class does two things:
@@ -48,14 +49,14 @@ public class Engine {
         sprites[3].setColor(Color.WHITE);
 
         map = new Map(this.game);
-        logic = Logic.getInstance();
+        logic = game.getLogic();
     }
 
     public void updateGame() {
         //TODO::: respond to user input (if necessary)
 
         //TODO::: calculate and apply income and expenses
-        if(frameCount >= (60 /game.getGameSpeed()))
+        if(frameCount >= (60 /Math.pow((double)game.getGameSpeed(),2.0)))
         {
             logic.timedUpdate();
             frameCount = 0;

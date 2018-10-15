@@ -3,7 +3,9 @@
 
 package escala;
 
-import java.util.Calendar;
+import escala.*;
+import java.util.*;
+import escala.structures.*;
 
 /*
 *	0	17	Asia(China, India Philippines)
@@ -20,51 +22,31 @@ import java.util.Calendar;
 
 public class Logic
 {
-	private static final int NUM_REGIONS = 10;
-    private static Logic instance = null;
+	private Game game;
 	private int marketShare;
-	private static boolean [] active = new boolean [10];
-	private final double [] distribution = { .17, .08, .08, .05, .07, .13, .12, .10, .06, .14 };
-	int [] regMarketShare = new int [10];
 	private int cash = 400;
 	private int logistics = 5;
 	private int marketing = 5;
 	private int product = 5;
 	private Calendar cal;
+	private static ArrayList<Region> regions;
 
-	public Logic()
+	public Logic(Game game)
 	{
 		cal = Calendar.getInstance();
 		cal.set(1000,1,1);
-
+		this.game = game;
+		regions = game.getAllRegions();
+		testing();
 	}
-
-	public static Logic getInstance() {
-    	if(instance == null)
-       	{
-            instance = new Logic();
-    	}
-
-    	testing();
-
-        return instance;
-    }
-
-    public String getDate()
-    {
-    	String string = String.format("%02d/%02d/%02d", 
-    		cal.get(Calendar.MONTH), 
-    		cal.get(Calendar.DAY_OF_MONTH), 
-    		(cal.get(Calendar.YEAR)%100));
-		return string;
-    }
 
     private static void testing()
     {
-    	setActive(1);
-    	setActive(5);
+    	purchaseReg(1);
+    	purchaseReg(5);
     }
 
+    //Sets Key Stats for Game
 	public void setLogic(int cash, int product, int marketing, int logistics)
 	{
 		this.cash = cash;
@@ -114,6 +96,16 @@ public class Logic
 		return string;
 	}
 
+		//Returns Date for Map Label
+    public String getDate()
+    {
+    	String string = String.format("%02d/%02d/%02d", 
+    		cal.get(Calendar.MONTH), 
+    		cal.get(Calendar.DAY_OF_MONTH), 
+    		(cal.get(Calendar.YEAR)%100));
+		return string;
+    }
+
 	public int getLog(){
 		return this.logistics;
 	}
@@ -130,35 +122,52 @@ public class Logic
 		return marketShare;
 	}
 
-	public static void setActive(int region)
+	public static void purchaseReg(int region)
 	{
-		active[region] =  true;
+		regions.get(region).purchase();
 	}
 
-	void timedUpdate()
+	public void timedUpdate()
 	{
 		int minDiff =  Math.min(logistics, Math.min(marketing, product)) + 20;
 		int log = Math.min(minDiff,this.logistics);
 		int mark = Math.min(minDiff,this.marketing);
 		int prod = Math.min(minDiff,this.product);
 		int total = 0;
-		int flag = 0;
 
-		for(int i = 0; i < NUM_REGIONS; i++)
-		{
-			if(active[i])
-			{
-				regMarketShare[i] += .75 * ((.33 * log) + (.33 * mark) + (.33 * prod));
+		for (Region region : regions) {
+            if (region.isPurchased()) {
 
-				if(regMarketShare[i] > 1000)
-					regMarketShare[i] = 1000;
+                 region.addRegShare(.0075 * ((.33 * log) + (.33 * mark) + (.33 * prod)));
+
+				if(region.getRegShare() > 100)
+					region.setRegShare(100);
 			}
 
-			total += regMarketShare[i] * distribution[i];
-		}
+            total += (int)(region.getRegShare()  * region.getWorldShare());
+        }
 
 		this.cal.add(Calendar.DAY_OF_MONTH, 1);
-		this.marketShare = total/10;
+		this.marketShare = total;
 		this.cash += (this.marketShare) * (log + mark + prod);
+		winState();
+	}
+
+
+	// To Add Win Loose Page
+	//Ends Game in Win or Loose Condition
+	private void winState(){
+		if(this.marketShare == 100){
+			System.out.println("Win State!!!!");
+		}
+
+		else if((cal.get(Calendar.YEAR)%100) == 10){
+			System.out.println("Loose State :(");
+		}
+		else
+			return;
+
+		game.stopGame();
+
 	}
 }

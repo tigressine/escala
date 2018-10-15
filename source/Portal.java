@@ -61,6 +61,11 @@ public class Portal {
                 results.getInt("logisticsCost"),
                 results.getInt("marketingCost"),
                 results.getInt("efficiencyCost")
+                /*
+                ,results.getdouble("worldShareDist")
+                ,results.getInt("regionCentX")
+                ,results.getInt("regionCentY")
+                */
             );
             regions.put(region.getName(), region); 
         }

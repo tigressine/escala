@@ -20,19 +20,21 @@ public class Game {
 
     private int width;
     private int height;
+    private Logic logic;
     private int goalFPS;
     private double scale;
     private JFrame frame;
     private Portal portal;
     private int gameSpeed;
     private int frameHeight;
+    private static String os;
     private boolean isPaused;
     private boolean isRunning;
     private SkillTree skillTree;
     private Difficulty difficulty;
     private HashMap<String, Region> regions;
     private HashMap<String, BufferedImage> backgrounds;
-
+    
     // Create a new game state with some defaults.
     public Game() throws SQLException, IOException {
 
@@ -57,6 +59,22 @@ public class Game {
         portal = new Portal();
         regions = portal.getAllRegions();
         skillTree = portal.getSkillTree("Sample");
+
+        //Starts game Logic
+        logic = new Logic(this);
+    }
+
+    // Get the OS of the System
+    public String getOS(){
+        if(os == null)
+            os = System.getProperty("os.name");
+
+        return os;
+    }
+
+    // Get the Logic for the Game
+    public Logic getLogic(){
+        return logic;
     }
 
     // Get the game width.

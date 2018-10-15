@@ -77,7 +77,8 @@ public class Viewer implements KeyListener{
         // Canvas
         canvas = new Canvas(configuration);
         canvas.setSize( game.getWidth(), game.getHeight());
-        frame.add(canvas, 0);
+        Insets margin = frame.getInsets();
+        frame.add(canvas,0);
 
         //Adds Mouse Listener from class PolyClick
         canvas.addMouseListener(new PolyClick(game));

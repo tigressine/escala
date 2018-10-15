@@ -169,18 +169,18 @@ public class Menu{
         set.add(back);
 
         JButton loadFile = new JButton("Load Save File");
-        loadFile.setBounds(200, 110, 120, 30);
+        loadFile.setBounds(200, 190, 120, 30);
         loadFile.setBackground(buttonCol);
         set.add(loadFile);
 
         JLabel frameScale = new JLabel("50");
         frameScale.setFont(new Font("Serif", Font.PLAIN, 20));
-        frameScale.setBounds(250, 130, 240, 60);
+        frameScale.setBounds(250, 90, 240, 60);
         frameScale.setBackground(buttonCol);
         set.add(frameScale);
 
         JSlider framesPerSecond = new JSlider(JSlider.HORIZONTAL);
-        framesPerSecond.setBounds(160,190,200,30);
+        framesPerSecond.setBounds(160,140,200,30);
         framesPerSecond.setBackground(buttonCol);
         framesPerSecond.addChangeListener((ChangeEvent e) -> {
             frameScale.setText(String.valueOf(framesPerSecond.getValue()));

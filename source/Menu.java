@@ -25,13 +25,14 @@ public class Menu{
     JButton set = new JButton("SETTINGS");
     JButton cred = new JButton("CREDITS");
     JButton back = new JButton("BACK");
+    JButton backht = new JButton("BACK");
     JButton back2 = new JButton("BACK");
     JButton easy = new JButton("EASY");
     JButton backfromDiff = new JButton("BACK");
     JButton medium = new JButton("MEDIUM");
     JButton hard = new JButton("HARD");
     JButton exit = new JButton("EXIT");
-    JButton loadFile = new JButton("Tutorial");
+    JButton loadFile = new JButton("How-To");
     JPanel cards = new JPanel(new CardLayout());
 
     Color background = Color.decode("#1981C9");
@@ -64,6 +65,7 @@ public class Menu{
         addSetCard(cards);
         addCredCard(cards);
         addGameCard(cards);
+        addHowTo(cards);
 
         frame.add(cards);
 
@@ -71,6 +73,7 @@ public class Menu{
         play.addActionListener(e -> toDiff(frame));
         back.addActionListener(e -> toMenu(frame));
         back2.addActionListener(e -> toMenu(frame));
+        backht.addActionListener(e -> toMenu(frame));
         backfromDiff.addActionListener(e -> toMenu(frame));
         set.addActionListener(e -> toSet(frame));
         cred.addActionListener(e -> toCred(frame));
@@ -78,6 +81,7 @@ public class Menu{
         easy.addActionListener(e -> startGameEasy(frame));
         medium.addActionListener(e -> startGameMedium(frame));
         hard.addActionListener(e -> startGameHard(frame));
+        loadFile.addActionListener(e -> startHowTo(frame));
 
         //show screen
         frame.setVisible(true);
@@ -193,6 +197,26 @@ public class Menu{
         //add setting options
     }
 
+    public void addHowTo(Container pane){
+        JPanel ht = new JPanel();
+        ht.setLayout(null);
+
+        ht.setOpaque(true);
+        ht.setBackground(background);
+
+        JLabel setTitle = new JLabel("HOW-TO");
+        setTitle.setFont(new Font("Serif", Font.PLAIN, 50));
+        setTitle.setBounds(170, 40, 240, 60);
+
+
+        ht.add(setTitle);
+        backht.setBounds(200, 240, 120, 30);
+        backht.setBackground(buttonCol);
+        ht.add(backht);
+
+        pane.add(ht, "HOWTO");
+    }
+
     //add credits menu
     public void addCredCard(Container pane){
         JPanel cred = new JPanel();
@@ -251,6 +275,11 @@ public class Menu{
     private void toCred(Container parent) {
         CardLayout cl = (CardLayout)(cards.getLayout());
         cl.show(cards, "CRED");
+    }
+
+    private void startHowTo(Container parent) {
+        CardLayout cl = (CardLayout)(cards.getLayout());
+        cl.show(cards, "HOWTO");
     }
 
     //exits game

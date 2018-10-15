@@ -135,6 +135,15 @@ class PolyClick implements MouseListener{
         System.out.println(markShare);
         PieChart pc = new PieChart(markShare);
 
+        JButton next = new JButton("NEXT");
+        next.setBounds(popup.getSize().width/2 - 70, 350, 120, 30);
+
+        JLabel mstitle = new JLabel("Share Graph");
+        mstitle.setFont(new Font("Serif", Font.PLAIN, 50));
+        mstitle.setBounds(popup.getSize().width/2 - 140, 40, 300, 60);
+        popup.getContentPane().add(mstitle);
+        popup.getContentPane().add(next);
+
         popup.getContentPane().add(pc);
 
         popup.setVisible(true);

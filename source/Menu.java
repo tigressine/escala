@@ -31,6 +31,7 @@ public class Menu{
     JButton medium = new JButton("MEDIUM");
     JButton hard = new JButton("HARD");
     JButton exit = new JButton("EXIT");
+    JButton loadFile = new JButton("Tutorial");
     JPanel cards = new JPanel(new CardLayout());
 
     Color background = Color.decode("#1981C9");
@@ -168,7 +169,7 @@ public class Menu{
         back.setBackground(buttonCol);
         set.add(back);
 
-        JButton loadFile = new JButton("Load Save File");
+
         loadFile.setBounds(200, 190, 120, 30);
         loadFile.setBackground(buttonCol);
         set.add(loadFile);

@@ -206,7 +206,12 @@ public class Menu{
 
         JLabel setTitle = new JLabel("HOW-TO");
         setTitle.setFont(new Font("Serif", Font.PLAIN, 50));
-        setTitle.setBounds(170, 40, 240, 60);
+        setTitle.setBounds(160, 40, 240, 60);
+
+        String HTML_CONTENT = "<html><body><ol><li>Press Play to begin</li><li>Choose Difficulty level</li><li>Expand your product</li><li>Enjoy!</li></body></html>";
+        JLabel label = new JLabel (HTML_CONTENT);
+        label.setBounds(140, 120, 240, 60);
+        ht.add(label);
 
 
         ht.add(setTitle);

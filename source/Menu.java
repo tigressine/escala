@@ -25,12 +25,14 @@ public class Menu{
     JButton set = new JButton("SETTINGS");
     JButton cred = new JButton("CREDITS");
     JButton back = new JButton("BACK");
+    JButton backht = new JButton("BACK");
     JButton back2 = new JButton("BACK");
     JButton easy = new JButton("EASY");
     JButton backfromDiff = new JButton("BACK");
     JButton medium = new JButton("MEDIUM");
     JButton hard = new JButton("HARD");
     JButton exit = new JButton("EXIT");
+    JButton loadFile = new JButton("How-To");
     JPanel cards = new JPanel(new CardLayout());
 
     Color background = Color.decode("#1981C9");
@@ -63,6 +65,7 @@ public class Menu{
         addSetCard(cards);
         addCredCard(cards);
         addGameCard(cards);
+        addHowTo(cards);
 
         frame.add(cards);
 
@@ -70,6 +73,7 @@ public class Menu{
         play.addActionListener(e -> toDiff(frame));
         back.addActionListener(e -> toMenu(frame));
         back2.addActionListener(e -> toMenu(frame));
+        backht.addActionListener(e -> toMenu(frame));
         backfromDiff.addActionListener(e -> toMenu(frame));
         set.addActionListener(e -> toSet(frame));
         cred.addActionListener(e -> toCred(frame));
@@ -77,6 +81,7 @@ public class Menu{
         easy.addActionListener(e -> startGameEasy(frame));
         medium.addActionListener(e -> startGameMedium(frame));
         hard.addActionListener(e -> startGameHard(frame));
+        loadFile.addActionListener(e -> startHowTo(frame));
 
         //show screen
         frame.setVisible(true);
@@ -168,19 +173,19 @@ public class Menu{
         back.setBackground(buttonCol);
         set.add(back);
 
-        JButton loadFile = new JButton("Load Save File");
-        loadFile.setBounds(200, 110, 120, 30);
+
+        loadFile.setBounds(200, 190, 120, 30);
         loadFile.setBackground(buttonCol);
         set.add(loadFile);
 
         JLabel frameScale = new JLabel("50");
         frameScale.setFont(new Font("Serif", Font.PLAIN, 20));
-        frameScale.setBounds(250, 130, 240, 60);
+        frameScale.setBounds(250, 90, 240, 60);
         frameScale.setBackground(buttonCol);
         set.add(frameScale);
 
         JSlider framesPerSecond = new JSlider(JSlider.HORIZONTAL);
-        framesPerSecond.setBounds(160,190,200,30);
+        framesPerSecond.setBounds(160,140,200,30);
         framesPerSecond.setBackground(buttonCol);
         framesPerSecond.addChangeListener((ChangeEvent e) -> {
             frameScale.setText(String.valueOf(framesPerSecond.getValue()));
@@ -190,6 +195,31 @@ public class Menu{
 
         pane.add(set, "SET");
         //add setting options
+    }
+
+    public void addHowTo(Container pane){
+        JPanel ht = new JPanel();
+        ht.setLayout(null);
+
+        ht.setOpaque(true);
+        ht.setBackground(background);
+
+        JLabel setTitle = new JLabel("HOW-TO");
+        setTitle.setFont(new Font("Serif", Font.PLAIN, 50));
+        setTitle.setBounds(160, 40, 240, 60);
+
+        String HTML_CONTENT = "<html><body><ol><li>Press Play to begin</li><li>Choose Difficulty level</li><li>Expand your product</li><li>Enjoy!</li></body></html>";
+        JLabel label = new JLabel (HTML_CONTENT);
+        label.setBounds(140, 120, 240, 60);
+        ht.add(label);
+
+
+        ht.add(setTitle);
+        backht.setBounds(200, 240, 120, 30);
+        backht.setBackground(buttonCol);
+        ht.add(backht);
+
+        pane.add(ht, "HOWTO");
     }
 
     //add credits menu
@@ -250,6 +280,11 @@ public class Menu{
     private void toCred(Container parent) {
         CardLayout cl = (CardLayout)(cards.getLayout());
         cl.show(cards, "CRED");
+    }
+
+    private void startHowTo(Container parent) {
+        CardLayout cl = (CardLayout)(cards.getLayout());
+        cl.show(cards, "HOWTO");
     }
 
     //exits game

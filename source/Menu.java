@@ -199,7 +199,13 @@ public class Menu{
         p5.setBackground(buttonCol);
         p6.setBackground(buttonCol);
 
-
+        prod.add(prodTitle);
+        prod.add(p1);
+        prod.add(p2);
+        prod.add(p3);
+        prod.add(p4);
+        prod.add(p5);
+        prod.add(p6);
 
         pane.add(prod, "PROD");
 

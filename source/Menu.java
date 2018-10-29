@@ -181,15 +181,25 @@ public class Menu{
         prod.setBackground(background);
 
 
-        JLabel prodTitle = new JLabel("DICUTY");
+        JLabel prodTitle = new JLabel("PRODUCTS");
         prodTitle.setFont(new Font("Serif", Font.PLAIN, 50));
-        prodTitle.setBounds(120, 40, 300, 60);
+        prodTitle.setBounds(140, 40, 300, 60);
 
-        prod.add(prodTitle);
-        prod.add(easy);
-        prod.add(medium);
-        prod.add(hard);
-        prod.add(backfromDiff);
+        p1.setBounds(100, 120, 100, 50);
+        p2.setBounds(210, 120, 100, 50);
+        p3.setBounds(320, 120, 100, 50);
+        p4.setBounds(100, 180, 100, 50);
+        p5.setBounds(210, 180, 100, 50);
+        p6.setBounds(320, 180, 100, 50);
+
+        p1.setBackground(buttonCol);
+        p2.setBackground(buttonCol);
+        p3.setBackground(buttonCol);
+        p4.setBackground(buttonCol);
+        p5.setBackground(buttonCol);
+        p6.setBackground(buttonCol);
+
+
 
         pane.add(prod, "PROD");
 

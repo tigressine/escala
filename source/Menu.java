@@ -33,6 +33,15 @@ public class Menu{
     JButton hard = new JButton("HARD");
     JButton exit = new JButton("EXIT");
     JButton loadFile = new JButton("How-To");
+
+    // Products
+    JButton p1 = new JButton("CAR");
+    JButton p2 = new JButton("LAPTOP");
+    JButton p3 = new JButton("BIKE");
+    JButton p4 = new JButton("BLENDER");
+    JButton p5 = new JButton("TOILET");
+    JButton p6 = new JButton("TOASTER");
+
     JPanel cards = new JPanel(new CardLayout());
 
     Color background = Color.decode("#1981C9");
@@ -66,11 +75,12 @@ public class Menu{
         addCredCard(cards);
         addGameCard(cards);
         addHowTo(cards);
+        addProdCard(cards);
 
         frame.add(cards);
 
         //tie buttons to their respective functions
-        play.addActionListener(e -> toDiff(frame));
+        play.addActionListener(e -> toProd(frame));
         back.addActionListener(e -> toMenu(frame));
         back2.addActionListener(e -> toMenu(frame));
         backht.addActionListener(e -> toMenu(frame));
@@ -82,6 +92,14 @@ public class Menu{
         medium.addActionListener(e -> startGameMedium(frame));
         hard.addActionListener(e -> startGameHard(frame));
         loadFile.addActionListener(e -> startHowTo(frame));
+
+        //product buttons
+        p1.addActionListener(e -> toDiff(frame));
+        p2.addActionListener(e -> toDiff(frame));
+        p3.addActionListener(e -> toDiff(frame));
+        p4.addActionListener(e -> toDiff(frame));
+        p5.addActionListener(e -> toDiff(frame));
+        p6.addActionListener(e -> toDiff(frame));
 
         //show screen
         frame.setVisible(true);
@@ -151,6 +169,29 @@ public class Menu{
         diff.add(backfromDiff);
 
         pane.add(diff, "DIFF");
+
+        // color schemes
+    }
+
+    public void addProdCard(Container pane){
+        JPanel prod = new JPanel();
+        prod.setLayout(null);
+
+        prod.setOpaque(true);
+        prod.setBackground(background);
+
+
+        JLabel prodTitle = new JLabel("DICUTY");
+        prodTitle.setFont(new Font("Serif", Font.PLAIN, 50));
+        prodTitle.setBounds(120, 40, 300, 60);
+
+        prod.add(prodTitle);
+        prod.add(easy);
+        prod.add(medium);
+        prod.add(hard);
+        prod.add(backfromDiff);
+
+        pane.add(prod, "PROD");
 
         // color schemes
     }
@@ -280,6 +321,11 @@ public class Menu{
     private void toCred(Container parent) {
         CardLayout cl = (CardLayout)(cards.getLayout());
         cl.show(cards, "CRED");
+    }
+
+    private void toProd(Container parent) {
+        CardLayout cl = (CardLayout)(cards.getLayout());
+        cl.show(cards, "PROD");
     }
 
     private void startHowTo(Container parent) {

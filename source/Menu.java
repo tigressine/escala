@@ -66,11 +66,12 @@ public class Menu{
         addCredCard(cards);
         addGameCard(cards);
         addHowTo(cards);
+        addProdCard(cards);
 
         frame.add(cards);
 
         //tie buttons to their respective functions
-        play.addActionListener(e -> toDiff(frame));
+        play.addActionListener(e -> toProd(frame));
         back.addActionListener(e -> toMenu(frame));
         back2.addActionListener(e -> toMenu(frame));
         backht.addActionListener(e -> toMenu(frame));
@@ -151,6 +152,29 @@ public class Menu{
         diff.add(backfromDiff);
 
         pane.add(diff, "DIFF");
+
+        // color schemes
+    }
+
+    public void addProdCard(Container pane){
+        JPanel prod = new JPanel();
+        prod.setLayout(null);
+
+        prod.setOpaque(true);
+        prod.setBackground(background);
+
+
+        JLabel prodTitle = new JLabel("DICUTY");
+        prodTitle.setFont(new Font("Serif", Font.PLAIN, 50));
+        prodTitle.setBounds(120, 40, 300, 60);
+
+        prod.add(prodTitle);
+        prod.add(easy);
+        prod.add(medium);
+        prod.add(hard);
+        prod.add(backfromDiff);
+
+        pane.add(prod, "PROD");
 
         // color schemes
     }
@@ -280,6 +304,11 @@ public class Menu{
     private void toCred(Container parent) {
         CardLayout cl = (CardLayout)(cards.getLayout());
         cl.show(cards, "CRED");
+    }
+
+    private void toProd(Container parent) {
+        CardLayout cl = (CardLayout)(cards.getLayout());
+        cl.show(cards, "PROD");
     }
 
     private void startHowTo(Container parent) {

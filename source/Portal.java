@@ -56,16 +56,13 @@ public class Portal {
         while (results.next()) {
             Region region = new Region(
                 results.getString("name"),
+                0, 0,
                 results.getFloat("taxRate"),
+                0,
                 results.getFloat("entryCost"),
                 results.getInt("logisticsCost"),
                 results.getInt("marketingCost"),
                 results.getInt("efficiencyCost")
-                /*
-                ,results.getdouble("worldShareDist")
-                ,results.getInt("regionCentX")
-                ,results.getInt("regionCentY")
-                */
             );
             regions.put(region.getName(), region); 
         }

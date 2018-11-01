@@ -332,7 +332,9 @@ public class Menu{
 
     //switches to diff page
     private void toDiff(Container parent) {
+        // PASS THIS VALUE TO GAME
         String productName = prodName.getText();
+        
         CardLayout cl = (CardLayout)(cards.getLayout());
         cl.show(cards, "DIFF");
     }

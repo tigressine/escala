@@ -200,13 +200,29 @@ public class Map {
         g.drawString("BUY",locAdj(p.x+10,1), locAdj(p.y+27,2));
         g.setFont(new Font("serif", Font.BOLD, locAdj(14,3)));
         g.drawString("Cost", locAdj(p.x-58,1), locAdj(p.y+55,2));
-        g.drawString(region.getEntryCostStr(), locAdj(p.x-55,1), locAdj(p.y+70,2));
+        g.drawString(
+            String.format("%f", region.getEntryCost()),
+            locAdj(p.x-55,1),
+            locAdj(p.y+70,2)
+        );
         g.drawString("Prod", locAdj(p.x,1), locAdj(p.y+55,2));
-        g.drawString(region.getProdCostStr(), locAdj(p.x+5,1), locAdj(p.y+70,2));
+        g.drawString(
+            String.format("%d", region.getEfficiencyCost()),
+            locAdj(p.x+5,1),
+            locAdj(p.y+70,2)
+        );
         g.drawString("Mark", locAdj(p.x+49,1), locAdj(p.y+55,2));
-        g.drawString(region.getMarkCostStr(), locAdj(p.x+55,1), locAdj(p.y+70,2));
+        g.drawString(
+            String.format("%d", region.getMarketingCost()),
+            locAdj(p.x+55,1),
+            locAdj(p.y+70,2)
+        );
         g.drawString("Log", locAdj(p.x+105,1), locAdj(p.y+55,2));
-        g.drawString(region.getLogCostStr(), locAdj(p.x+105,1), locAdj(p.y+70,2));
+        g.drawString(
+            String.format("%d", region.getLogisticsCost()),
+            locAdj(p.x+105,1),
+            locAdj(p.y+70,2)
+        );
         g.drawRoundRect(locAdj(p.x,1), locAdj(p.y,2), locAdj(70,3), locAdj(40,3), locAdj(15,3), locAdj(15,3));
         g.drawRoundRect(locAdj(p.x - 60,1), locAdj(p.y + 40 ,2), locAdj(190,3), locAdj(35,3), locAdj(15,3), locAdj(15,3));
     }
@@ -219,7 +235,7 @@ public class Map {
         //System.out.println(region.getRegShare());
 
         PieChart pc = new PieChart();
-        pc.paint(g, region.getCenter(), (int)region.getRegShare());
+        pc.paint(g, region.getCenter(), (int)region.getMarketShare());
     }
 
     

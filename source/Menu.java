@@ -34,6 +34,7 @@ public class Menu{
     JButton hard = new JButton("HARD");
     JButton exit = new JButton("EXIT");
     JButton loadFile = new JButton("How-To");
+    JTextField prodName;
 
     // Products
     JButton p1 = new JButton("CAR");
@@ -183,16 +184,16 @@ public class Menu{
         prod.setOpaque(true);
         prod.setBackground(background);
 
-        JTextField prodName = new JTextField("enter name and choose", 16);
+        prodName = new JTextField("enter name and choose", 16);
         prodName.setBounds(190,110,160,25);
 
+        //Clears text field when clicked on
         prodName.addMouseListener(new MouseAdapter(){
             @Override
             public void mouseClicked(MouseEvent e){
                 prodName.setText("");
             }
         });
-
 
         JLabel prodTitle = new JLabel("PRODUCTS");
         prodTitle.setFont(new Font("Serif", Font.PLAIN, 50));
@@ -331,6 +332,7 @@ public class Menu{
 
     //switches to diff page
     private void toDiff(Container parent) {
+        String productName = prodName.getText();
         CardLayout cl = (CardLayout)(cards.getLayout());
         cl.show(cards, "DIFF");
     }

@@ -138,13 +138,13 @@ public class Logic
 		for (Region region : regions) {
             if (region.isPurchased()) {
 
-                 region.addRegShare(.0075 * ((.33 * log) + (.33 * mark) + (.33 * prod)));
+                 region.incrementMarketShare(.0075 * ((.33 * log) + (.33 * mark) + (.33 * prod)));
 
-				if(region.getRegShare() > 100)
-					region.setRegShare(100);
+				if(region.getMarketShare() > 100)
+					region.setMarketShare(100);
 			}
 
-            total += (int)(region.getRegShare()  * region.getWorldShare());
+            total += (int)(region.getMarketShare()  * region.getWorldShare());
         }
 
 		this.cal.add(Calendar.DAY_OF_MONTH, 1);

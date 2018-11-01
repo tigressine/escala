@@ -7,6 +7,7 @@ import java.awt.*;
 import javax.swing.*;
 import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
+import java.awt.event.*;
 
 public class Menu{
 
@@ -33,6 +34,7 @@ public class Menu{
     JButton hard = new JButton("HARD");
     JButton exit = new JButton("EXIT");
     JButton loadFile = new JButton("How-To");
+    JTextField prodName;
 
     // Products
     JButton p1 = new JButton("CAR");
@@ -173,6 +175,8 @@ public class Menu{
         // color schemes
     }
 
+    //Product creation page
+    //Has given choices to select from
     public void addProdCard(Container pane){
         JPanel prod = new JPanel();
         prod.setLayout(null);
@@ -180,17 +184,27 @@ public class Menu{
         prod.setOpaque(true);
         prod.setBackground(background);
 
+        prodName = new JTextField("enter name and choose", 16);
+        prodName.setBounds(190,110,160,25);
+
+        //Clears text field when clicked on
+        prodName.addMouseListener(new MouseAdapter(){
+            @Override
+            public void mouseClicked(MouseEvent e){
+                prodName.setText("");
+            }
+        });
 
         JLabel prodTitle = new JLabel("PRODUCTS");
         prodTitle.setFont(new Font("Serif", Font.PLAIN, 50));
         prodTitle.setBounds(140, 40, 300, 60);
 
-        p1.setBounds(100, 120, 100, 50);
-        p2.setBounds(210, 120, 100, 50);
-        p3.setBounds(320, 120, 100, 50);
-        p4.setBounds(100, 180, 100, 50);
-        p5.setBounds(210, 180, 100, 50);
-        p6.setBounds(320, 180, 100, 50);
+        p1.setBounds(110, 150, 100, 50);
+        p2.setBounds(220, 150, 100, 50);
+        p3.setBounds(330, 150, 100, 50);
+        p4.setBounds(110, 210, 100, 50);
+        p5.setBounds(220, 210, 100, 50);
+        p6.setBounds(330, 210, 100, 50);
 
         p1.setBackground(buttonCol);
         p2.setBackground(buttonCol);
@@ -206,10 +220,9 @@ public class Menu{
         prod.add(p4);
         prod.add(p5);
         prod.add(p6);
+        prod.add(prodName);
 
         pane.add(prod, "PROD");
-
-        // color schemes
     }
 
     //add settings menu
@@ -254,6 +267,7 @@ public class Menu{
         //add setting options
     }
 
+    //Adding tutorial selection in menu
     public void addHowTo(Container pane){
         JPanel ht = new JPanel();
         ht.setLayout(null);
@@ -265,6 +279,7 @@ public class Menu{
         setTitle.setFont(new Font("Serif", Font.PLAIN, 50));
         setTitle.setBounds(160, 40, 240, 60);
 
+        //format as html text
         String HTML_CONTENT = "<html><body><ol><li>Press Play to begin</li><li>Choose Difficulty level</li><li>Expand your product</li><li>Enjoy!</li></body></html>";
         JLabel label = new JLabel (HTML_CONTENT);
         label.setBounds(140, 120, 240, 60);
@@ -317,6 +332,9 @@ public class Menu{
 
     //switches to diff page
     private void toDiff(Container parent) {
+        // PASS THIS VALUE TO GAME
+        String productName = prodName.getText();
+        
         CardLayout cl = (CardLayout)(cards.getLayout());
         cl.show(cards, "DIFF");
     }

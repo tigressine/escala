@@ -186,6 +186,13 @@ public class Menu{
         JTextField prodName = new JTextField("enter name and choose", 16);
         prodName.setBounds(190,110,160,25);
 
+        prodName.addMouseListener(new MouseAdapter(){
+            @Override
+            public void mouseClicked(MouseEvent e){
+                prodName.setText("");
+            }
+        });
+
 
         JLabel prodTitle = new JLabel("PRODUCTS");
         prodTitle.setFont(new Font("Serif", Font.PLAIN, 50));

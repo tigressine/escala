@@ -173,6 +173,8 @@ public class Menu{
         // color schemes
     }
 
+    //Product creation page
+    //Has given choices to select from
     public void addProdCard(Container pane){
         JPanel prod = new JPanel();
         prod.setLayout(null);
@@ -208,8 +210,6 @@ public class Menu{
         prod.add(p6);
 
         pane.add(prod, "PROD");
-
-        // color schemes
     }
 
     //add settings menu
@@ -254,6 +254,7 @@ public class Menu{
         //add setting options
     }
 
+    //Adding tutorial selection in menu
     public void addHowTo(Container pane){
         JPanel ht = new JPanel();
         ht.setLayout(null);
@@ -265,6 +266,7 @@ public class Menu{
         setTitle.setFont(new Font("Serif", Font.PLAIN, 50));
         setTitle.setBounds(160, 40, 240, 60);
 
+        //format as html text
         String HTML_CONTENT = "<html><body><ol><li>Press Play to begin</li><li>Choose Difficulty level</li><li>Expand your product</li><li>Enjoy!</li></body></html>";
         JLabel label = new JLabel (HTML_CONTENT);
         label.setBounds(140, 120, 240, 60);

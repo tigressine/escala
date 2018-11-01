@@ -7,6 +7,7 @@ import java.awt.*;
 import javax.swing.*;
 import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
+import java.awt.event.*;
 
 public class Menu{
 
@@ -182,17 +183,20 @@ public class Menu{
         prod.setOpaque(true);
         prod.setBackground(background);
 
+        JTextField prodName = new JTextField("enter name and choose", 16);
+        prodName.setBounds(190,110,160,25);
+
 
         JLabel prodTitle = new JLabel("PRODUCTS");
         prodTitle.setFont(new Font("Serif", Font.PLAIN, 50));
         prodTitle.setBounds(140, 40, 300, 60);
 
-        p1.setBounds(100, 120, 100, 50);
-        p2.setBounds(210, 120, 100, 50);
-        p3.setBounds(320, 120, 100, 50);
-        p4.setBounds(100, 180, 100, 50);
-        p5.setBounds(210, 180, 100, 50);
-        p6.setBounds(320, 180, 100, 50);
+        p1.setBounds(110, 150, 100, 50);
+        p2.setBounds(220, 150, 100, 50);
+        p3.setBounds(330, 150, 100, 50);
+        p4.setBounds(110, 210, 100, 50);
+        p5.setBounds(220, 210, 100, 50);
+        p6.setBounds(330, 210, 100, 50);
 
         p1.setBackground(buttonCol);
         p2.setBackground(buttonCol);
@@ -208,6 +212,7 @@ public class Menu{
         prod.add(p4);
         prod.add(p5);
         prod.add(p6);
+        prod.add(prodName);
 
         pane.add(prod, "PROD");
     }

@@ -138,7 +138,7 @@ class PolyClick implements MouseListener
         popup.setLocation(dim.width/2-popup.getSize().width/2, dim.height/2-popup.getSize().height/2);
 
         Logic logic = game.getLogic();
-        int markShare = logic.getShare();
+        int markShare = (int)logic.getShare();
         System.out.println(markShare);
 
 

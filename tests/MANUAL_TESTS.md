@@ -24,4 +24,4 @@ In the menu, open the settings page and find all the available settings and opti
 When you first run the game, make sure that the menu is properly loading.
 
 *I want to be able to access instructions how to play the game.*  
-When you first run the game,you can go to settings and access the how-to page. Or in-game click on the menu ba.
+When you first run the game,you can go to settings and access the how-to page. Or in-game click on the menu bar.

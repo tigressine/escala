@@ -125,9 +125,10 @@ class PolyClick implements MouseListener
         setTitle.setBounds(160, 40, 240, 60);
 
         //format as html text
-        String HTML_CONTENT = "<html><body><ol><li>Press Play to begin</li><li>Choose Difficulty level</li><li>Expand your product</li><li>Enjoy!</li></body></html>";
+
+        String HTML_CONTENT = "<html><body><ol><li>Press Play/Pause to stop or resume time</li><li>The first region chosen is free to expand into</li><li>After the first region, purchase others to expand</li><li>Enjoy and have fun!</li></body></html>";
         JLabel label = new JLabel (HTML_CONTENT);
-        label.setBounds(140, 120, 240, 60);
+        label.setBounds(140, 120, 360, 120);
         ht.add(label);
 
 

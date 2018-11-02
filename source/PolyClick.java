@@ -163,7 +163,7 @@ class PolyClick implements MouseListener
         popup.getContentPane().setBackground(background);
 
         Logic logic = game.getLogic();
-        int markShare = logic.getShare();
+        int markShare = (int)logic.getShare();
         System.out.println(markShare);
 
 

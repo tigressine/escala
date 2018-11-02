@@ -126,7 +126,7 @@ public class Map {
         g.setColor(Color.BLACK);
         g.setFont(new Font("serif", Font.BOLD, locAdj(48,3)));
         g.drawString(logic.cashToString(), locAdj(10,1), locAdj(605,2));
-        g.drawString(logic.shareToString(), locAdj(1000,1), locAdj(605,2));
+        g.drawString(logic.shareToString(), locAdj(975,1), locAdj(605,2));
         g.drawString(logic.getDate(), locAdj(1,1), locAdj(15,2));
 
         g.setFont(new Font("serif", Font.BOLD, locAdj(14,3)));

@@ -24,11 +24,12 @@ import escala.structures.*;
 public class Logic
 {
 	private Game game;
-	private int marketShare;
+	private double marketShare;
 	private int cash = 400;
-	private int logistics = 5;
-	private int marketing = 5;
-	private int product = 5;
+	private int logistics = 0;
+	private int marketing = 0;
+	private int product = 0;
+	private int bought = 1;
 	private Calendar cal;
 	private static ArrayList<Region> regions;
 	private boolean free = true;
@@ -62,19 +63,13 @@ public class Logic
 			if((this.cash - cash) < 0)
 				return false;
 
-			if((this.product - product) < 0)
-				return false;
-
-			if((this.marketing - marketing) < 0)
-				return false;
-
-			if((this.logistics - logistics) < 0)
-				return false;
-
-			updateStats(cash * -1, product * -1, marketing * -1, logistics * -1);
+			updateStats(cash * -1, product, marketing, logistics);
+			bought++;
 		}
-
-		free = false;
+		else{
+			free = false;
+			updateStats(0, product, marketing, logistics);
+		}
 
 		return true;
 	}
@@ -96,7 +91,7 @@ public class Logic
 
 	public String shareToString()
 	{
-		String string = String.format("%02d %%", marketShare);
+		String string = String.format("%02.2f %%", marketShare);
 		return string;
 	}
 
@@ -122,7 +117,7 @@ public class Logic
 		return this.marketing;
 	}
 
-	public int getShare(){
+	public double getShare(){
 		return marketShare;
 	}
 
@@ -133,27 +128,35 @@ public class Logic
 
 	public void timedUpdate()
 	{
-		int minDiff =  Math.min(logistics, Math.min(marketing, product)) + 20;
-		int log = Math.min(minDiff,this.logistics);
-		int mark = Math.min(minDiff,this.marketing);
-		int prod = Math.min(minDiff,this.product);
+		int log = this.logistics;
+		int mark = this.marketing;
+		int prod = this.product;
 		double total = 0;
 
 		for (Region region : regions) {
             if (region.isPurchased()) {
 
-                 region.incrementMarketShare(.01 * ((.33 * log) + (.33 * mark) + (.33 * prod)));
+                
 
 				if(region.getMarketShare() > 100)
 					region.setMarketShare(100);
+
+				else if(region.getMarketShare() >= 75)
+					region.incrementMarketShare(.0025 * ((.25 * log) + (.50 * mark) + (.25 * prod)));
+
+				else if(region.getMarketShare() >= 50)
+					region.incrementMarketShare(.0040 * ((.50 * log) + (.25 * mark) + (.25 * prod)));
+
+				else
+					region.incrementMarketShare(.0055 * ((.25 * log) + (.50 * mark) + (.25 * prod)));
 			}
 
             total += region.getMarketShare()  * region.getWorldShare();
         }
 
-		this.cal.add(Calendar.DAY_OF_MONTH, 1);
-		this.marketShare = (int)total;
-		this.cash += (int)((total) * (log + mark + prod) * 20);
+		this.cal.add(Calendar.DAY_OF_MONTH, 2);
+		this.marketShare = total;
+		this.cash += (int)(total*10)/(Math.min(Math.pow(2,bought), (6 * bought)));
 		winState();
 	}
 
@@ -166,7 +169,7 @@ public class Logic
 			System.exit(0);
 		}
 
-		else if((cal.get(Calendar.YEAR)%100) == 10){
+		else if((cal.get(Calendar.YEAR)%100) == 5){
 			JOptionPane.showMessageDialog(null, "You Loose, Better Luck Next Time");
 			System.exit(0);
 		}

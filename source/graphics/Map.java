@@ -76,7 +76,8 @@ public class Map {
                     null
                 ); 
 
-                //drawBought(region, g); 
+                if(region.isPurchased())
+                    drawBought(region, g); 
             }
         }
 
@@ -157,7 +158,7 @@ public class Map {
     // Type 1 = X- axis
     // Type 2 = Y- axis
     // Type 3 = simple scaling
-    private int locAdj(int location, int type){
+    public int locAdj(int location, int type){
         Insets margin = game.getFrame().getInsets();
         double scale = game.getScale();
 
@@ -185,7 +186,9 @@ public class Map {
     //Draws the Box to Buy the region
     private void drawBuy(Region region, Graphics2D g)
     {
-        Point p = new Point(400,400); //region.getCenter();
+        Point w = region.getCenter();
+        Point p = new Point(w);
+        p.y = p.y - 40;
 
         g.setStroke(new BasicStroke(locAdj(2,3)));
         g.setColor(Color.GRAY);
@@ -232,10 +235,18 @@ public class Map {
     {
         Point p = region.getCenter();
 
-        //System.out.println(region.getRegShare());
+        g.setStroke(new BasicStroke(locAdj(2,3)));
+        g.setColor(Color.GRAY);
+        g.fillRoundRect(locAdj(p.x-30,1), locAdj(p.y - 25,2), locAdj(100,3), locAdj(70,3), locAdj(15,3), locAdj(15,3));
+        
+        g.setColor(Color.BLACK);
+        g.drawRoundRect(locAdj(p.x-30,1), locAdj(p.y - 25,2), locAdj(100,3), locAdj(70,3), locAdj(15,3), locAdj(15,3));
 
         PieChart pc = new PieChart();
         pc.paint(g, region.getCenter(), (int)region.getMarketShare());
+
+        g.setFont(new Font("serif", Font.BOLD, locAdj(20,3)));
+        g.drawString("Purchased", locAdj(p.x - 23 ,1), locAdj(p.y + 33,2));
     }
 
     

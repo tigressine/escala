@@ -167,7 +167,6 @@ class PolyClick implements MouseListener
 
 
         PieChart pc = new PieChart(markShare);
-        //pc.paint(g,markShare);
 
         JButton next = new JButton("NEXT");
         next.setBounds(popup.getSize().width/2 - 70, 350, 120, 30);

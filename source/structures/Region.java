@@ -15,7 +15,7 @@ public class Region {
     private String name;
     private Point center;
     private float taxRate;
-    private float entryCost;
+    private int entryCost;
     private Polygon polygon;
     private boolean selected;
     private boolean purchased;
@@ -34,7 +34,7 @@ public class Region {
         int centerY,
         float taxRate,
         double worldShare,
-        float entryCost,
+        int entryCost,
         int logisticsCost,
         int marketingCost,
         int efficiencyCost
@@ -84,7 +84,7 @@ public class Region {
     }
 
     // Get the entry cost to access this region.
-    public float getEntryCost() {
+    public int getEntryCost() {
         return entryCost;
     }
 

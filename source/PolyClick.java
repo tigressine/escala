@@ -23,6 +23,9 @@ class PolyClick implements MouseListener
     Rectangle play = new Rectangle(1020,0,50,48);
     Rectangle fast = new Rectangle(1080,0,72,48);
 
+    Color background = Color.decode("#1981C9");
+    Color buttonCol = Color.decode("#567A4C");
+
 	public PolyClick(Game game)
 	{
         this.game = game;
@@ -107,9 +110,30 @@ class PolyClick implements MouseListener
         JFrame popup = new JFrame();
         popup.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
         popup.setTitle(title);
-        popup.setSize((int) (game.getWidth() * .75), (int) (game.getHeight() * .75));
+        popup.setSize(540, 360);
         Dimension dim = Toolkit.getDefaultToolkit().getScreenSize();
         popup.setLocation(dim.width/2-popup.getSize().width/2, dim.height/2-popup.getSize().height/2);
+
+        JPanel ht = new JPanel();
+        ht.setLayout(null);
+
+        ht.setOpaque(true);
+        ht.setBackground(background);
+
+        JLabel setTitle = new JLabel("HOW-TO");
+        setTitle.setFont(new Font("Serif", Font.PLAIN, 50));
+        setTitle.setBounds(160, 40, 240, 60);
+
+        //format as html text
+
+        String HTML_CONTENT = "<html><body><ol><li>Press Play/Pause to stop or resume time</li><li>Press fast-forward to speed up game environment time</li><li>The first region chosen is free to expand into</li><li>After the first region, purchase others to expand</li><li>Enjoy and have fun!</li></body></html>";
+        JLabel label = new JLabel (HTML_CONTENT);
+        label.setBounds(100, 100, 360, 120);
+        ht.add(label);
+
+
+        ht.add(setTitle);
+        popup.add(ht);
 
 
         popup.setVisible(true);
@@ -136,6 +160,7 @@ class PolyClick implements MouseListener
         popup.setSize((int) (game.getWidth() * .75), (int) (game.getHeight() * .75));
         Dimension dim = Toolkit.getDefaultToolkit().getScreenSize();
         popup.setLocation(dim.width/2-popup.getSize().width/2, dim.height/2-popup.getSize().height/2);
+        popup.getContentPane().setBackground(background);
 
         Logic logic = game.getLogic();
         int markShare = logic.getShare();
@@ -143,7 +168,6 @@ class PolyClick implements MouseListener
 
 
         PieChart pc = new PieChart(markShare);
-        //pc.paint(g,markShare);
 
         JButton next = new JButton("NEXT");
         next.setBounds(popup.getSize().width/2 - 70, 350, 120, 30);
@@ -152,7 +176,7 @@ class PolyClick implements MouseListener
         mstitle.setFont(new Font("Serif", Font.PLAIN, 50));
         mstitle.setBounds(popup.getSize().width/2 - 140, 40, 300, 60);
         popup.getContentPane().add(mstitle);
-        popup.getContentPane().add(next);
+        //popup.getContentPane().add(next);
 
         popup.getContentPane().add(pc);
 

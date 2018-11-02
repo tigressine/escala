@@ -23,6 +23,9 @@ class PolyClick implements MouseListener
     Rectangle play = new Rectangle(1020,0,50,48);
     Rectangle fast = new Rectangle(1080,0,72,48);
 
+    Color background = Color.decode("#1981C9");
+    Color buttonCol = Color.decode("#567A4C");
+
 	public PolyClick(Game game)
 	{
         this.game = game;
@@ -111,6 +114,26 @@ class PolyClick implements MouseListener
         Dimension dim = Toolkit.getDefaultToolkit().getScreenSize();
         popup.setLocation(dim.width/2-popup.getSize().width/2, dim.height/2-popup.getSize().height/2);
 
+        JPanel ht = new JPanel();
+        ht.setLayout(null);
+
+        ht.setOpaque(true);
+        ht.setBackground(background);
+
+        JLabel setTitle = new JLabel("HOW-TO");
+        setTitle.setFont(new Font("Serif", Font.PLAIN, 50));
+        setTitle.setBounds(160, 40, 240, 60);
+
+        //format as html text
+        String HTML_CONTENT = "<html><body><ol><li>Press Play to begin</li><li>Choose Difficulty level</li><li>Expand your product</li><li>Enjoy!</li></body></html>";
+        JLabel label = new JLabel (HTML_CONTENT);
+        label.setBounds(140, 120, 240, 60);
+        ht.add(label);
+
+
+        ht.add(setTitle);
+        popup.add(ht);
+
 
         popup.setVisible(true);
 
@@ -152,7 +175,7 @@ class PolyClick implements MouseListener
         mstitle.setFont(new Font("Serif", Font.PLAIN, 50));
         mstitle.setBounds(popup.getSize().width/2 - 140, 40, 300, 60);
         popup.getContentPane().add(mstitle);
-        popup.getContentPane().add(next);
+        //popup.getContentPane().add(next);
 
         popup.getContentPane().add(pc);
 

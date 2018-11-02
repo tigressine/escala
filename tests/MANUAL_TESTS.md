@@ -22,3 +22,6 @@ In the menu, open the settings page and find all the available settings and opti
 
 *I want to have an interactive menu capable of properly leading the user to the game.*  
 When you first run the game, make sure that the menu is properly loading.
+
+*I want .*  
+When you first run the game, make sure that the menu is properly loading.

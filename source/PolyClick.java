@@ -41,9 +41,6 @@ class PolyClick implements MouseListener
         mouse.x = (int)((1/scale) * (double)(mouse.x - frameLoc.x - margin.left));
         mouse.y = (int)((1/scale) * (double)(mouse.y - frameLoc.y - margin.top));
 
-
-        System.out.println(mouse.x + " " + mouse.y);
-
         if(cash.contains(mouse)){
             upgradePopup("Cash");
         }
@@ -131,14 +128,10 @@ class PolyClick implements MouseListener
         label.setBounds(100, 100, 360, 120);
         ht.add(label);
 
-
         ht.add(setTitle);
         popup.add(ht);
 
-
         popup.setVisible(true);
-
-        //canvas for upgrades
 
         // pause game
         game.pauseGame();
@@ -181,8 +174,6 @@ class PolyClick implements MouseListener
         popup.getContentPane().add(pc);
 
         popup.setVisible(true);
-
-        //canvas for upgrades
 
         // pause game
         game.pauseGame();

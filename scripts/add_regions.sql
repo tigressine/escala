@@ -10,7 +10,6 @@ Format of the regions table:
     logisticsCost,
     marketingCost,
     efficiencyCost,
-
     worldShareDist,
     regionCentX,
     regionCenty

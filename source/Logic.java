@@ -8,19 +8,6 @@ import java.util.*;
 import javax.swing.*;
 import escala.structures.*;
 
-/*
-*	0	17	Asia(China, India Philippines)
-*	1	8	Eastern Europe (All of Russia)
-*	2	8	Latin/Central America(Mexico, Central Caribbean)
-*	3	5	Middle East
-*	4	7	North Africa
-*	5	13	North America (Canada, US)
-*	6	12	Oceania
-*	7	10	South Africa
-*	8	6	South America
-*	9	14	Western Europe
-*/
-
 public class Logic
 {
 	private Game game;
@@ -95,7 +82,7 @@ public class Logic
 		return string;
 	}
 
-		//Returns Date for Map Label
+	//Returns Date for Map Label
     public String getDate()
     {
     	String string = String.format("%02d/%02d/%02d", 
@@ -136,8 +123,6 @@ public class Logic
 		for (Region region : regions) {
             if (region.isPurchased()) {
 
-                
-
 				if(region.getMarketShare() > 100)
 					region.setMarketShare(100);
 
@@ -161,7 +146,6 @@ public class Logic
 	}
 
 
-	// To Add Win Loose Page
 	//Ends Game in Win or Loose Condition
 	private void winState(){
 		if(this.marketShare >= 100){
@@ -177,6 +161,5 @@ public class Logic
 			return;
 
 		game.stopGame();
-
 	}
 }

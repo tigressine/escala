@@ -56,10 +56,11 @@ public class Portal {
         while (results.next()) {
             Region region = new Region(
                 results.getString("name"),
-                0, 0,
+                results.getInt("centerX"),
+                results.getInt("centerY"),
                 results.getFloat("taxRate"),
-                0,
-                results.getFloat("entryCost"),
+                results.getFloat("worldShare"),
+                results.getInt("entryCost"),
                 results.getInt("logisticsCost"),
                 results.getInt("marketingCost"),
                 results.getInt("efficiencyCost")

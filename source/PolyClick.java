@@ -15,6 +15,7 @@ class PolyClick implements MouseListener
 {
 
     Game game;
+    Logic logic;
     Rectangle cash  = new Rectangle(0,577,230,71);
     Rectangle stats = new Rectangle(260,600,632,48);
     Rectangle share = new Rectangle(922,577,230,71);
@@ -25,6 +26,7 @@ class PolyClick implements MouseListener
 	public PolyClick(Game game)
 	{
         this.game = game;
+        this.logic = game.getLogic();
     }
 
     public void mouseClicked(MouseEvent e) {
@@ -67,7 +69,18 @@ class PolyClick implements MouseListener
             for (Region region : game.getAllRegions()) {
                 if (region.contains(mouse)) {
                     if (region.isSelected()) {
-                        region.deselect();
+                        if(!region.isPurchased()){
+                            Point p = region.getCenter();
+                            Rectangle button = new Rectangle(p.x,p.y, 70, 40);
+
+                            if(button.contains(mouse)){
+                                if(logic.purchaseRegion(region)){
+                                    region.purchase();
+                                }
+                                else
+                                    JOptionPane.showMessageDialog(null, "You do not have enough Resources to buy this Region");
+                            }
+                        }
                     }
                     else {
                         region.select();
@@ -80,7 +93,7 @@ class PolyClick implements MouseListener
         }
     }
 
-    public void tempPopup(String title){
+    public void simplePopup(String title){
       JFrame popup = new JFrame();
       popup.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
       popup.setTitle(title);

@@ -5,6 +5,7 @@ package escala;
 
 import escala.*;
 import java.util.*;
+import javax.swing.*;
 import escala.structures.*;
 
 /*
@@ -30,6 +31,7 @@ public class Logic
 	private int product = 5;
 	private Calendar cal;
 	private static ArrayList<Region> regions;
+	private boolean free = true;
 
 	public Logic(Game game)
 	{
@@ -37,14 +39,7 @@ public class Logic
 		cal.set(1000,1,1);
 		this.game = game;
 		regions = game.getAllRegions();
-		testing();
 	}
-
-    private static void testing()
-    {
-    	purchaseReg(1);
-    	purchaseReg(5);
-    }
 
     //Sets Key Stats for Game
 	public void setLogic(int cash, int product, int marketing, int logistics)
@@ -55,22 +50,31 @@ public class Logic
 		this.logistics = logistics;
 	}
 
+	public boolean purchaseRegion(Region r){
+		return isValidPurchase(r.getEntryCost(), r.getEfficiencyCost(), r.getMarketingCost(), r.getLogisticsCost());
+	}
+
 	//Checks to see if the player can afford the purchase, if so purchases the goods
 	public boolean isValidPurchase(int cash, int product, int marketing, int logistics)
 	{
-		if((this.cash - cash) < 0)
-			return false;
+		if (!free)
+		{
+			if((this.cash - cash) < 0)
+				return false;
 
-		if((this.product - product) < 0)
-			return false;
+			if((this.product - product) < 0)
+				return false;
 
-		if((this.marketing - marketing) < 0)
-			return false;
+			if((this.marketing - marketing) < 0)
+				return false;
 
-		if((this.logistics - logistics) < 0)
-			return false;
+			if((this.logistics - logistics) < 0)
+				return false;
 
-		updateStats(cash, product, marketing, logistics);
+			updateStats(cash * -1, product * -1, marketing * -1, logistics * -1);
+		}
+
+		free = false;
 
 		return true;
 	}
@@ -133,23 +137,23 @@ public class Logic
 		int log = Math.min(minDiff,this.logistics);
 		int mark = Math.min(minDiff,this.marketing);
 		int prod = Math.min(minDiff,this.product);
-		int total = 0;
+		double total = 0;
 
 		for (Region region : regions) {
             if (region.isPurchased()) {
 
-                 region.incrementMarketShare(.0075 * ((.33 * log) + (.33 * mark) + (.33 * prod)));
+                 region.incrementMarketShare(.01 * ((.33 * log) + (.33 * mark) + (.33 * prod)));
 
 				if(region.getMarketShare() > 100)
 					region.setMarketShare(100);
 			}
 
-            total += (int)(region.getMarketShare()  * region.getWorldShare());
+            total += region.getMarketShare()  * region.getWorldShare();
         }
 
 		this.cal.add(Calendar.DAY_OF_MONTH, 1);
-		this.marketShare = total;
-		this.cash += (this.marketShare) * (log + mark + prod);
+		this.marketShare = (int)total;
+		this.cash += (int)((total) * (log + mark + prod) * 20);
 		winState();
 	}
 
@@ -157,12 +161,14 @@ public class Logic
 	// To Add Win Loose Page
 	//Ends Game in Win or Loose Condition
 	private void winState(){
-		if(this.marketShare == 100){
-			System.out.println("Win State!!!!");
+		if(this.marketShare >= 100){
+			JOptionPane.showMessageDialog(null, "You Win, Thank you For Playing!");
+			System.exit(0);
 		}
 
 		else if((cal.get(Calendar.YEAR)%100) == 10){
-			System.out.println("Loose State :(");
+			JOptionPane.showMessageDialog(null, "You Loose, Better Luck Next Time");
+			System.exit(0);
 		}
 		else
 			return;

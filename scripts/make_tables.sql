@@ -7,14 +7,14 @@ CONNECT 'jdbc:derby:../data/tables;create=true';
 
 CREATE TABLE regions (
     name VARCHAR(15),
-    centerX INT,
-    centerY INT,
     taxRate REAL,
-    worldShare REAL,
-    entryCost REAL,
+    entryCost INT,
     logisticsCost INT,
     marketingCost INT,
     efficiencyCost INT,
+    worldShare REAL,
+    centerX INT,
+    centerY INT,
     PRIMARY KEY (name)
 );
 CREATE TABLE events (

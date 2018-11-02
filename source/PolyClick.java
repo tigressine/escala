@@ -67,7 +67,13 @@ class PolyClick implements MouseListener
             for (Region region : game.getAllRegions()) {
                 if (region.contains(mouse)) {
                     if (region.isSelected()) {
-                        region.deselect();
+                        if(!region.isPurchased()){
+                            Point p = region.getCenter();
+                            Rectangle button = new Rectangle(p.x,p.y, 70, 40);
+
+                            if(button.contains(mouse))
+                                region.purchase();
+                        }
                     }
                     else {
                         region.select();

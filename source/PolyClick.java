@@ -110,7 +110,7 @@ class PolyClick implements MouseListener
         JFrame popup = new JFrame();
         popup.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
         popup.setTitle(title);
-        popup.setSize((int) (game.getWidth() * .75), (int) (game.getHeight() * .75));
+        popup.setSize(540, 360);
         Dimension dim = Toolkit.getDefaultToolkit().getScreenSize();
         popup.setLocation(dim.width/2-popup.getSize().width/2, dim.height/2-popup.getSize().height/2);
 
@@ -159,6 +159,7 @@ class PolyClick implements MouseListener
         popup.setSize((int) (game.getWidth() * .75), (int) (game.getHeight() * .75));
         Dimension dim = Toolkit.getDefaultToolkit().getScreenSize();
         popup.setLocation(dim.width/2-popup.getSize().width/2, dim.height/2-popup.getSize().height/2);
+        popup.getContentPane().setBackground(background);
 
         Logic logic = game.getLogic();
         int markShare = logic.getShare();

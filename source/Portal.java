@@ -60,7 +60,7 @@ public class Portal {
                 results.getInt("centerY"),
                 results.getFloat("taxRate"),
                 results.getFloat("worldShare"),
-                results.getFloat("entryCost"),
+                results.getInt("entryCost"),
                 results.getInt("logisticsCost"),
                 results.getInt("marketingCost"),
                 results.getInt("efficiencyCost")

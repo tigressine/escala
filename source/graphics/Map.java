@@ -63,7 +63,7 @@ public class Map {
 
         // Render all regions and determine if a region is being hovered, if needed.
         for (Region region : regions) {
-            if (selectedRegion == null && region.contains(Mouse())) {
+            if (selectedRegion == null && region.contains(Mouse()) && !region.isPurchased()) {
                 selectedRegion = region;
             }
             else {
@@ -204,7 +204,7 @@ public class Map {
         g.setFont(new Font("serif", Font.BOLD, locAdj(14,3)));
         g.drawString("Cost", locAdj(p.x-58,1), locAdj(p.y+55,2));
         g.drawString(
-            String.format("%f", region.getEntryCost()),
+            String.format("%d", region.getEntryCost()),
             locAdj(p.x-55,1),
             locAdj(p.y+70,2)
         );

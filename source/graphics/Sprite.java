@@ -9,6 +9,10 @@ import java.awt.Graphics2D;
 import java.awt.Point;
 import java.awt.Rectangle;
 import javax.swing.JComponent;
+import java.awt.Image;
+import javax.imageio.ImageIO;
+import java.io.File;
+import java.io.IOException;
 
 import escala.Game;
 
@@ -245,9 +249,19 @@ public class Sprite extends JComponent {
 
     //TODO: override this in child classes
     public void paintComponent(Graphics g) {
+      /*
         Graphics2D g2 = (Graphics2D) g;
         g2.setColor(color);
         Rectangle box = new Rectangle((int) posX, (int) posY, width, height);
         g2.fill(box);
+      */
+      Image img = null;
+      try {
+			     img = ImageIO.read(new File("./data/plane/" + "plane" + ".png"));
+		  } catch (IOException e) {
+			     e.printStackTrace();
+		  }
+
+      g.drawImage(img, (int)posX, (int)posY, 35, 15, null);
     }
 }

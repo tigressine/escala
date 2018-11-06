@@ -262,6 +262,6 @@ public class Sprite extends JComponent {
 			     e.printStackTrace();
 		  }
 
-      g.drawImage(img, (int)posX, (int)posY, 35, 15, null);
+      g.drawImage(img, (int)posX, (int)posY, 49, 21, null);
     }
 }

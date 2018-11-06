@@ -249,19 +249,17 @@ public class Sprite extends JComponent {
 
     //TODO: override this in child classes
     public void paintComponent(Graphics g) {
-      /*
-        Graphics2D g2 = (Graphics2D) g;
-        g2.setColor(color);
-        Rectangle box = new Rectangle((int) posX, (int) posY, width, height);
-        g2.fill(box);
-      */
+      //Declare Image variable
       Image img = null;
+
+      //Load image file and catch execption
       try {
 			     img = ImageIO.read(new File("./data/plane/" + "plane" + ".png"));
 		  } catch (IOException e) {
 			     e.printStackTrace();
 		  }
 
+      //Use this image to draw in needed location
       g.drawImage(img, (int)posX, (int)posY, 49, 21, null);
     }
 }

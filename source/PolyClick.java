@@ -1,5 +1,5 @@
 // Part of Escala.
-// Written by Jonathan Ponader.
+// Written by Jonathan Ponader and Barath Tirumala.
 
 package escala;
 
@@ -23,7 +23,7 @@ class PolyClick implements MouseListener
 
     Color background = Color.decode("#1981C9");
     Color buttonCol = Color.decode("#567A4C");
-	
+
     public PolyClick(Game game)
     {
    	    this.game = game;
@@ -88,6 +88,7 @@ class PolyClick implements MouseListener
         }
     }
 
+    //Default popup for in-game settings
     public void simplePopup(String title){
         JFrame popup = new JFrame();
         popup.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
@@ -98,6 +99,7 @@ class PolyClick implements MouseListener
         popup.setVisible(true);
     }
 
+    //Popup when clicked on upgrading option
     public void upgradePopup(String title){
         JFrame popup = new JFrame();
         popup.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
@@ -116,7 +118,7 @@ class PolyClick implements MouseListener
         setTitle.setFont(new Font("Serif", Font.PLAIN, 50));
         setTitle.setBounds(160, 40, 240, 60);
 
-        //format as html text
+        //format as html text for how-to instrutcions
         String HTML_CONTENT = "<html><body><ol><li>Press Play/Pause to stop or resume time</li><li>Press fast-forward to speed up game environment time</li><li>The first region chosen is free to expand into</li><li>After the first region, purchase others to expand</li><li>Enjoy and have fun!</li></body></html>";
         JLabel label = new JLabel (HTML_CONTENT);
         label.setBounds(100, 100, 360, 120);
@@ -140,6 +142,7 @@ class PolyClick implements MouseListener
         });
     }
 
+    //Market share popup with pie chart
     public void MSharePopup(String title){
         JFrame popup = new JFrame();
         popup.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
@@ -153,6 +156,7 @@ class PolyClick implements MouseListener
         int markShare = (int)logic.getShare();
         System.out.println(markShare);
 
+        //Declare pie chart
         PieChart pc = new PieChart(markShare);
 
         JButton next = new JButton("NEXT");

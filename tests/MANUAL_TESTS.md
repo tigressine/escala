@@ -1,6 +1,14 @@
 # map tests
 - When hovering over a region, that region should be highlighted.
 - When you click on a region, that region should be stay highlighted. No other region should become highlighted.
+- If you click on a region and that region is not purcahsesd, a pop up should appear allowing you to purchase the region.
+- If you click on a regions but button, and you have sufficent cash, the region should be puchased and the purchase pop up should appear.
+- No two purchase pop ups should eve be on the screen at the same time.
+- if you attempt to purchase a region with insufficient funds, a pop up should appear stating that.
+- If a region is purchases, a purchased label should appear on that region.
+- If you have 100% global market share before 5 years, a win state pop up shoudl appear ending the game.
+- If you do not have 100% global market share before 5 years, a loose state pop up shoudl appear ending the game.
+- The purchase label should show a pie chart showing the Market share of the region.
 - When a region is highlighted, clicking elsewhere on the map will remove the highlight.
 - When you click on the pause button, the sprites stop moving, the timer stops and the pause button is highlighted.
 - When you click on the play button when paused, the game resumes and the play button is highlighted.

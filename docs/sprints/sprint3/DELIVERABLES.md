@@ -4,10 +4,13 @@ Escala is a simulation game that gives players the opportunity to spread a ficti
 
 Escala is inspired by [Plague Inc.](https://www.ndemiccreations.com/en/22-plague-inc), a mobile application whose primary objective is to enable players to destroy humanity with a biblical pandemic... Unlike Plague Inc., Escala’s objective is much more benign and *civilization-friendly*.
 
+user stories  
+------------ 
+
 backlogs  
 --------  
 [Product Backlog](https://github.com/tgsachse/escala/issues?utf8=%E2%9C%93&q=is%3Aissue+label%3A%22product+backlog%22+)  
-[Sprint Backlog](https://github.com/tgsachse/escala/issues?utf8=%E2%9C%93&q=is%3Aissue+label%3A%22sprint+2+backlog%22+)  
+[Sprint Backlog](https://github.com/tgsachse/escala/issues?utf8=%E2%9C%93&q=is%3Aissue+label%3A%22sprint+3+backlog%22+)  
 
 requirements
 ------------
@@ -36,13 +39,25 @@ requirements
 - Statistics are automatically updated as time passes.
 - Users can buy goods with in-game cash.
 
+burndown chart  
+---------------  
+
+design diagrams  
+---------------  
+architecture diagram:
+![Image cannot be displayed.](ARCHITECTURE_DIAGRAM.png)  
+
+class diagram:
+![Image cannot be displayed.](CLASS_DIAGRAM.png)  
+[larger view](https://raw.githubusercontent.com/tgsachse/escala/dev/docs/sprints/sprint3/CLASS_DIAGRAM.png) 
+
 demonstration  
 -------------
 An early demonstration video is available [here](https://youtu.be/IEVUkmqEtiI).
 
 tests  
 -----
-Manual (plain text) tests are located [here](https://github.com/tgsachse/escala/blob/master/tests/MANUAL_TESTS.md). To run database unit tests, clone the repository and execute the test command like this:
+Manual (plain text) tests are located [here](https://github.com/tgsachse/escala/blob/dev/tests/MANUAL_TESTS.md). To run database unit tests, clone the repository and execute the test command like this:
 ```
 git clone -b master https://www.github.com/tgsachse/escala.git
 cd escala

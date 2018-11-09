@@ -4,6 +4,9 @@ Escala is a simulation game that gives players the opportunity to spread a ficti
 
 Escala is inspired by [Plague Inc.](https://www.ndemiccreations.com/en/22-plague-inc), a mobile application whose primary objective is to enable players to destroy humanity with a biblical pandemic... Unlike Plague Inc., Escala’s objective is much more benign and *civilization-friendly*.
 
+user stories  
+------------ 
+
 backlogs  
 --------  
 [Product Backlog](https://github.com/tgsachse/escala/issues?utf8=%E2%9C%93&q=is%3Aissue+label%3A%22product+backlog%22+)  
@@ -35,6 +38,12 @@ requirements
 - Time passes automatically at a steady rate.
 - Statistics are automatically updated as time passes.
 - Users can buy goods with in-game cash.
+
+burndown chart  
+---------------  
+
+design diagrams  
+---------------  
 
 demonstration  
 -------------

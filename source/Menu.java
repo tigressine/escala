@@ -12,7 +12,6 @@ import java.awt.event.*;
 public class Menu{
 
     //declare some variables
-
     private Game game;
     private JFrame frame;
     private static int width = 360;
@@ -36,7 +35,7 @@ public class Menu{
     JButton loadFile = new JButton("How-To");
     JTextField prodName;
 
-    // Products
+    // Product Buttons
     JButton p1 = new JButton("CAR");
     JButton p2 = new JButton("LAPTOP");
     JButton p3 = new JButton("BIKE");
@@ -44,22 +43,20 @@ public class Menu{
     JButton p5 = new JButton("TOILET");
     JButton p6 = new JButton("TOASTER");
 
+    //Over all card layout
     JPanel cards = new JPanel(new CardLayout());
 
+    //Background color definitions
     Color background = Color.decode("#1981C9");
     Color buttonCol = Color.decode("#567A4C");
 
-
-
-    /**
-     * Creates new form Start
-     */
     public Menu(Game game) {
         //init frame
         this.game = game;
         game.setFrame(new JFrame());
         frame = game.getFrame();
 
+        //Set key properties
         frame.setResizable(false);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setTitle("Escala");
@@ -95,7 +92,7 @@ public class Menu{
         hard.addActionListener(e -> startGameHard(frame));
         loadFile.addActionListener(e -> startHowTo(frame));
 
-        //product buttons
+        //product buttons set to certain vars
         p1.addActionListener(e -> toDiff(frame));
         p2.addActionListener(e -> toDiff(frame));
         p3.addActionListener(e -> toDiff(frame));

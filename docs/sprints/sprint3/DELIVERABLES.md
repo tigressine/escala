@@ -51,7 +51,7 @@ An early demonstration video is available [here](https://youtu.be/IEVUkmqEtiI).
 
 tests  
 -----
-Manual (plain text) tests are located [here](https://github.com/tgsachse/escala/blob/master/tests/MANUAL_TESTS.md). To run database unit tests, clone the repository and execute the test command like this:
+Manual (plain text) tests are located [here](https://github.com/tgsachse/escala/blob/dev/tests/MANUAL_TESTS.md). To run database unit tests, clone the repository and execute the test command like this:
 ```
 git clone -b master https://www.github.com/tgsachse/escala.git
 cd escala

@@ -3,7 +3,6 @@
 
 package escala;
 
-
 import escala.*;
 import java.awt.*;
 import javax.swing.*;
@@ -13,7 +12,6 @@ import escala.structures.*;
 
 class PolyClick implements MouseListener
 {
-
     Game game;
     Logic logic;
     Rectangle cash  = new Rectangle(0,577,230,71);
@@ -25,13 +23,14 @@ class PolyClick implements MouseListener
 
     Color background = Color.decode("#1981C9");
     Color buttonCol = Color.decode("#567A4C");
-
-	public PolyClick(Game game)
-	{
-        this.game = game;
-        this.logic = game.getLogic();
+	
+    public PolyClick(Game game)
+    {
+   	    this.game = game;
+	    this.logic = game.getLogic();
     }
 
+    // Takes Action on Mouse Click
     public void mouseClicked(MouseEvent e) {
         Point frameLoc = game.getFrame().getLocation();
         Point mouse = MouseInfo.getPointerInfo().getLocation();
@@ -47,28 +46,24 @@ class PolyClick implements MouseListener
         else if(stats.contains(mouse)){
             upgradePopup("Stats");
         }
-
         else if(play.contains(mouse)){
             game.continueGame();
         }
-
         else if(pause.contains(mouse)){
             game.pauseGame();
         }
-
         else if(fast.contains(mouse)){
             game.increaseSpeed();
         }
-
         else if(share.contains(mouse)){
             MSharePopup("Market");
         }
-
         else
         {
             for (Region region : game.getAllRegions()) {
                 if (region.contains(mouse)) {
                     if (region.isSelected()) {
+                        // Check to see if a Regions puchase bubble was click on
                         if(!region.isPurchased()){
                             Point p = region.getCenter();
                             Rectangle button = new Rectangle(p.x,p.y, 70, 40);
@@ -94,13 +89,13 @@ class PolyClick implements MouseListener
     }
 
     public void simplePopup(String title){
-      JFrame popup = new JFrame();
-      popup.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-      popup.setTitle(title);
-      popup.setSize(400 ,300);
-      Dimension dim = Toolkit.getDefaultToolkit().getScreenSize();
-      popup.setLocation(dim.width/2-popup.getSize().width/2, dim.height/2-popup.getSize().height/2);
-      popup.setVisible(true);
+        JFrame popup = new JFrame();
+        popup.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+        popup.setTitle(title);
+        popup.setSize(400 ,300);
+        Dimension dim = Toolkit.getDefaultToolkit().getScreenSize();
+        popup.setLocation(dim.width/2-popup.getSize().width/2, dim.height/2-popup.getSize().height/2);
+        popup.setVisible(true);
     }
 
     public void upgradePopup(String title){
@@ -122,7 +117,6 @@ class PolyClick implements MouseListener
         setTitle.setBounds(160, 40, 240, 60);
 
         //format as html text
-
         String HTML_CONTENT = "<html><body><ol><li>Press Play/Pause to stop or resume time</li><li>Press fast-forward to speed up game environment time</li><li>The first region chosen is free to expand into</li><li>After the first region, purchase others to expand</li><li>Enjoy and have fun!</li></body></html>";
         JLabel label = new JLabel (HTML_CONTENT);
         label.setBounds(100, 100, 360, 120);
@@ -158,7 +152,6 @@ class PolyClick implements MouseListener
         Logic logic = game.getLogic();
         int markShare = (int)logic.getShare();
         System.out.println(markShare);
-
 
         PieChart pc = new PieChart(markShare);
 

@@ -29,7 +29,7 @@ public class Logic
 		regions = game.getAllRegions();
 	}
 
-    //Sets Key Stats for Game
+    	// Sets Key Stats for Game
 	public void setLogic(int cash, int product, int marketing, int logistics)
 	{
 		this.cash = cash;
@@ -44,7 +44,8 @@ public class Logic
 
 	//Checks to see if the player can afford the purchase, if so purchases the goods
 	public boolean isValidPurchase(int cash, int product, int marketing, int logistics)
-	{
+	{	
+		// Allows for First region to be purcahsed for free
 		if (!free)
 		{
 			if((this.cash - cash) < 0)
@@ -53,11 +54,11 @@ public class Logic
 			updateStats(cash * -1, product, marketing, logistics);
 			bought++;
 		}
-		else{
+		else
+		{
 			free = false;
 			updateStats(0, product, marketing, logistics);
 		}
-
 		return true;
 	}
 
@@ -70,12 +71,14 @@ public class Logic
 		this.logistics += logistics;
 	}
 
+	// Creates string for use on the MAP
 	public String cashToString()
 	{
 		String string = String.format("$ %06d", cash);
 		return string;
 	}
-
+	
+	// Creates string for use on the MAP
 	public String shareToString()
 	{
 		String string = String.format("%02.2f %%", marketShare);
@@ -83,15 +86,15 @@ public class Logic
 	}
 
 	//Returns Date for Map Label
-    public String getDate()
-    {
-    	String string = String.format("%02d/%02d/%02d", 
-    		cal.get(Calendar.MONTH), 
-    		cal.get(Calendar.DAY_OF_MONTH), 
-    		(cal.get(Calendar.YEAR)%100));
+    	public String getDate()
+    	{
+		String string = String.format("%02d/%02d/%02d", 
+			cal.get(Calendar.MONTH), 
+			cal.get(Calendar.DAY_OF_MONTH), 
+			(cal.get(Calendar.YEAR)%100));
 		return string;
-    }
-
+   	 }
+	
 	public int getLog(){
 		return this.logistics;
 	}
@@ -108,11 +111,7 @@ public class Logic
 		return marketShare;
 	}
 
-	public static void purchaseReg(int region)
-	{
-		regions.get(region).purchase();
-	}
-
+	// Called once per period, to update the game, applying the game
 	public void timedUpdate()
 	{
 		int log = this.logistics;
@@ -120,31 +119,31 @@ public class Logic
 		int prod = this.product;
 		double total = 0;
 
-		for (Region region : regions) {
-            if (region.isPurchased()) {
-
-				if(region.getMarketShare() > 100)
+		for (Region region : regions) 
+		{
+            		if (region.isPurchased()) 
+			{
+				if(region.getMarketShare() > 100){
 					region.setMarketShare(100);
-
-				else if(region.getMarketShare() >= 75)
+				}
+				else if(region.getMarketShare() >= 75){
 					region.incrementMarketShare(.0025 * ((.25 * log) + (.50 * mark) + (.25 * prod)));
-
-				else if(region.getMarketShare() >= 50)
+				}
+				else if(region.getMarketShare() >= 50){
 					region.incrementMarketShare(.0040 * ((.50 * log) + (.25 * mark) + (.25 * prod)));
-
-				else
+				}
+				else{
 					region.incrementMarketShare(.0055 * ((.25 * log) + (.50 * mark) + (.25 * prod)));
+				}
 			}
-
-            total += region.getMarketShare()  * region.getWorldShare();
-        }
+            		total += region.getMarketShare()  * region.getWorldShare();
+        	}
 
 		this.cal.add(Calendar.DAY_OF_MONTH, 2);
 		this.marketShare = total;
 		this.cash += (int)(total*10)/(Math.min(Math.pow(2,bought), (6 * bought)));
 		winState();
 	}
-
 
 	//Ends Game in Win or Loose Condition
 	private void winState(){
@@ -159,7 +158,5 @@ public class Logic
 		}
 		else
 			return;
-
-		game.stopGame();
 	}
 }

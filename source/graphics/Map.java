@@ -18,7 +18,6 @@ public class Map {
 
     private int imageWidth;
     private int imageHeight;
-
     private int osAdj;
 
     private Game game;
@@ -35,7 +34,6 @@ public class Map {
     // Render the map onto the screen.
     public void renderMap(Graphics2D g) 
     {
-
         // Load the background and render it.
         BufferedImage background = game.getBackground();
         if (background != null) {
@@ -75,12 +73,10 @@ public class Map {
                     imageHeight,
                     null
                 ); 
-
                 if(region.isPurchased())
                     drawBought(region, g); 
             }
         }
-
         // Draw the selected/hovered region.
         if (selectedRegion != null) {
             g.drawImage(
@@ -96,13 +92,11 @@ public class Map {
                 drawBuy(selectedRegion, g);
             else if(selectedRegion.isSelected() && selectedRegion.isPurchased())
                 drawBought(selectedRegion, g);
-
         }
-        
         printStats(g);
     }
 
-    //Handles calculating the mouse position for the hover 
+    // Handles calculating the mouse position for the hover 
     private Point Mouse(){
         Point frameLoc = game.getFrame().getLocation();
         Insets margin = game.getFrame().getInsets();
@@ -115,7 +109,7 @@ public class Map {
         return mouse;
     }
 
-    //Prints all of the Required Labels
+    // Prints all of the Required Labels
     private void printStats(Graphics2D g)
     {
         Logic logic = game.getLogic();
@@ -144,7 +138,6 @@ public class Map {
         g.setColor(Color.BLACK);
         g.drawRoundRect(locAdj(526,1), locAdj(595,2), locAdj(100,3), locAdj(20,3), locAdj(5,3), locAdj(5,3));
 
-
         g.drawString("Logistics", locAdj(700,1), locAdj(590,2));
         g.setColor(Color.YELLOW);
         g.fillRect(locAdj(676,1), locAdj(595,2), locAdj(logic.getLog(),3), locAdj(20,3));
@@ -167,8 +160,7 @@ public class Map {
         else if (type == 2)
             return (int)((location * scale) + margin.top + osAdj);
         else 
-            return (int)((location * scale));
-        
+            return (int)((location * scale)); 
     }
 
     // Adjust the location of the text according to the OS interpretation of SWING
@@ -183,7 +175,7 @@ public class Map {
             osAdj = -15;
     }
 
-    //Draws the Box to Buy the region
+    // Draws the Box to Buy the region
     private void drawBuy(Region region, Graphics2D g)
     {
         Point w = region.getCenter();
@@ -193,7 +185,8 @@ public class Map {
         g.setStroke(new BasicStroke(locAdj(2,3)));
         g.setColor(Color.GRAY);
         g.fillRoundRect(locAdj(p.x - 60,1), locAdj(p.y + 40 ,2), locAdj(190,3), locAdj(35,3), locAdj(15,3), locAdj(15,3));
-
+        
+        // Changes Color on hover
         if(new Rectangle(locAdj(p.x,1), locAdj(p.y,2), locAdj(70,3), locAdj(40,3)).contains(Mouse()))
             g.setColor(Color.DARK_GRAY);
         
@@ -203,34 +196,18 @@ public class Map {
         g.drawString("BUY",locAdj(p.x+10,1), locAdj(p.y+27,2));
         g.setFont(new Font("serif", Font.BOLD, locAdj(14,3)));
         g.drawString("Cost", locAdj(p.x-58,1), locAdj(p.y+55,2));
-        g.drawString(
-            String.format("%d", region.getEntryCost()),
-            locAdj(p.x-55,1),
-            locAdj(p.y+70,2)
-        );
+        g.drawString(String.format("%d", region.getEntryCost()), locAdj(p.x-55,1), locAdj(p.y+70,2));
         g.drawString("Prod", locAdj(p.x,1), locAdj(p.y+55,2));
-        g.drawString(
-            String.format("%d", region.getEfficiencyCost()),
-            locAdj(p.x+5,1),
-            locAdj(p.y+70,2)
-        );
+        g.drawString(String.format("%d", region.getEfficiencyCost()), locAdj(p.x+5,1), locAdj(p.y+70,2));
         g.drawString("Mark", locAdj(p.x+49,1), locAdj(p.y+55,2));
-        g.drawString(
-            String.format("%d", region.getMarketingCost()),
-            locAdj(p.x+55,1),
-            locAdj(p.y+70,2)
-        );
+        g.drawString(String.format("%d", region.getMarketingCost()), locAdj(p.x+55,1), locAdj(p.y+70,2));
         g.drawString("Log", locAdj(p.x+105,1), locAdj(p.y+55,2));
-        g.drawString(
-            String.format("%d", region.getLogisticsCost()),
-            locAdj(p.x+105,1),
-            locAdj(p.y+70,2)
-        );
+        g.drawString(String.format("%d", region.getLogisticsCost()), locAdj(p.x+105,1), locAdj(p.y+70,2));
         g.drawRoundRect(locAdj(p.x,1), locAdj(p.y,2), locAdj(70,3), locAdj(40,3), locAdj(15,3), locAdj(15,3));
         g.drawRoundRect(locAdj(p.x - 60,1), locAdj(p.y + 40 ,2), locAdj(190,3), locAdj(35,3), locAdj(15,3), locAdj(15,3));
     }
 
-    //Draws the Symbol showing that a region is owned
+    // Draws the PieChart showing that a region is owned
     private void drawBought(Region region, Graphics2D g)
     {
         Point p = region.getCenter();
@@ -248,6 +225,4 @@ public class Map {
         g.setFont(new Font("serif", Font.BOLD, locAdj(20,3)));
         g.drawString("Purchased", locAdj(p.x - 23 ,1), locAdj(p.y + 33,2));
     }
-
-    
 }

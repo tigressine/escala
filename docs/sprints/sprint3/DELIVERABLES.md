@@ -44,6 +44,12 @@ burndown chart
 
 design diagrams  
 ---------------  
+architecture diagram:
+![Image cannot be displayed.](ARCHITECTURE_DIAGRAM.png)  
+
+class diagram:
+![Image cannot be displayed.](CLASS_DIAGRAM.png)  
+[larger view](https://raw.githubusercontent.com/tgsachse/escala/dev/docs/sprints/sprint3/CLASS_DIAGRAM.png) 
 
 demonstration  
 -------------

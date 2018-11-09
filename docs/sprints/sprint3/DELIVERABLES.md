@@ -7,7 +7,7 @@ Escala is inspired by [Plague Inc.](https://www.ndemiccreations.com/en/22-plague
 backlogs  
 --------  
 [Product Backlog](https://github.com/tgsachse/escala/issues?utf8=%E2%9C%93&q=is%3Aissue+label%3A%22product+backlog%22+)  
-[Sprint Backlog](https://github.com/tgsachse/escala/issues?utf8=%E2%9C%93&q=is%3Aissue+label%3A%22sprint+2+backlog%22+)  
+[Sprint Backlog](https://github.com/tgsachse/escala/issues?utf8=%E2%9C%93&q=is%3Aissue+label%3A%22sprint+3+backlog%22+)  
 
 requirements
 ------------

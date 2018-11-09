@@ -33,3 +33,12 @@ When you first run the game, make sure that the menu is properly loading.
 
 *I want to be able to access instructions how to play the game.*  
 When you first run the game,you can go to settings and access the how-to page. Or in-game click on the menu bar.
+
+*I want to be able to select different products for the the game.*
+When opening the app, there is a product selection page. Choose a different product and verify that the change is updated.
+
+*I want to see a demo before playing the game.*
+Under settings, choose the "How-To" page to identify the instructions-like tutorial in how to play the game.
+
+*I want to be able to name my product, and see it used in the game.*
+When opening the app, there is a product naming slot. Choose a name and verify that the change is updated.

@@ -62,7 +62,7 @@ requirements
 
 burndown chart  
 ---------------  
-
+![Image cannot be displayed.](BURNDOWN_3.png) 
 design diagrams  
 ---------------  
 architecture diagram:

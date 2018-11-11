@@ -32,48 +32,5 @@ public class Escala {
     
     public static void main(String[] args) {
         Escala escala = new Escala();
-        /*        
-        try {
-            Game game = new Game();
-            System.out.println("All events");
-            for (int i = 0; i < 10; i++) {
-                System.out.println(game.getRandomEvent());
-            }
-            System.out.println("\nPositive events");
-            for (int i = 0; i < 10; i++) {
-                System.out.println(game.getRandomPositiveEvent());
-            }
-            System.out.println("\nNegative events");
-            for (int i = 0; i < 10; i++) {
-                System.out.println(game.getRandomNegativeEvent());
-            }
-            System.out.println("\nSpecific events");
-            for (int i = 0; i < 10; i++) {
-                System.out.println(game.getRandomEvent(.7, .8));
-            }
-            game.closePortal();
-        }
-        catch (Exception e) {
-            e.printStackTrace();
-        }*/
-
-        /*
-        try {
-            Portal portal = new Portal();
-            SkillTree tree = portal.getSkillTree("Sample");
-            System.out.print(tree);
-            tree.adjustParents();
-            System.out.print(tree);
-
-            /*
-            SkillTree tree2 = portal.getSkillTree("Sample2");
-            System.out.print(tree2);
-            ///
-
-            portal.close();
-        }
-        catch (Exception e) {
-            e.printStackTrace();
-        }*/
     }
 }

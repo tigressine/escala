@@ -121,7 +121,7 @@ public class Logic
 
 		for (Region region : regions) 
 		{
-            		if (region.isPurchased()) 
+            if (region.isPurchased()) 
 			{
 				if(region.getMarketShare() > 100){
 					region.setMarketShare(100);

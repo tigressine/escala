@@ -13,35 +13,54 @@ import java.awt.image.*;
 // Read-only Region data structure.
 public class Region {
     private String name;
+    private Point center;
     private float taxRate;
-    private float entryCost;
+    private int entryCost;
     private Polygon polygon;
     private boolean selected;
+    private boolean purchased;
     private int logisticsCost;
     private int marketingCost;
+    private double worldShare;
     private int efficiencyCost;
+    private double marketShare;
     private BufferedImage image;
     private BufferedImage outline;
 
     // Create a new region.
     public Region(
         String name,
+        int centerX,
+        int centerY,
         float taxRate,
-        float entryCost,
+        double worldShare,
+        int entryCost,
         int logisticsCost,
         int marketingCost,
-        int efficiencyCost) throws IOException {
+        int efficiencyCost
+        ) throws IOException {
    
-        selected = false;
+        this.marketShare = 0;
+        this.selected = false;
+        this.purchased = false;
+
         this.name = name;
         this.taxRate = taxRate;
         this.entryCost = entryCost;
+        this.worldShare = worldShare;
         this.marketingCost = marketingCost;
         this.logisticsCost = logisticsCost;
         this.efficiencyCost = efficiencyCost;
+        this.center = new Point(centerX, centerY);
+
         loadImage();
         loadOutline();
         loadPolygon();
+    }
+
+    // Get the center location of the Region.
+    public Point getCenter() {
+        return center;
     }
 
     // Get the name of this region.
@@ -49,13 +68,23 @@ public class Region {
         return name;
     }
     
+    // Return the current market share of the region.
+    public double getMarketShare() {
+        return marketShare;
+    }
+
+    // Get the world share for this region.
+    public double getWorldShare() {
+        return worldShare;
+    }
+
     // Get the tax rate in this region.
     public float getTaxRate() {
         return taxRate;
     }
 
     // Get the entry cost to access this region.
-    public float getEntryCost() {
+    public int getEntryCost() {
         return entryCost;
     }
 
@@ -84,14 +113,45 @@ public class Region {
         return outline;
     }
 
+    // Check if the region has been selected.
     public boolean isSelected() {
         return selected;
+    }
+
+    // Check if the region has been purchased.
+    public boolean isPurchased() {
+        return purchased;
     }
 
     // Check if a point is contained within this region's polygon.
     public boolean contains(Point point) {
         return polygon.contains(point);
 	}
+
+    // Add market growth to the region's market share.
+    public void incrementMarketShare(double amount) {
+        marketShare += amount;
+    }
+
+    // Set the market share of the region.
+    public void setMarketShare(double marketShare) {
+        this.marketShare = marketShare;
+    }
+
+    // Select the region.
+    public void select() {
+        selected = true;
+    }
+
+    // Deselect the region.
+    public void deselect() {
+        selected = false;
+    }
+
+    // Purchase the region.
+    public void purchase() {
+        purchased = true;
+    }
 
     // Create a string representation of this region.
     public String toString() {
@@ -109,16 +169,6 @@ public class Region {
             marketingCost,
             efficiencyCost
         );
-    }
-
-    // Select the region.
-    public void select() {
-        selected = true;
-    }
-
-    // Deselect the region.
-    public void deselect() {
-        selected = false;
     }
 
     // Load the associated image from file.

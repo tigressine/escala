@@ -7,11 +7,11 @@ import java.awt.*;
 import javax.swing.*;
 import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
+import java.awt.event.*;
 
 public class Menu{
 
     //declare some variables
-
     private Game game;
     private JFrame frame;
     private static int width = 360;
@@ -25,28 +25,38 @@ public class Menu{
     JButton set = new JButton("SETTINGS");
     JButton cred = new JButton("CREDITS");
     JButton back = new JButton("BACK");
+    JButton backht = new JButton("BACK");
     JButton back2 = new JButton("BACK");
     JButton easy = new JButton("EASY");
     JButton backfromDiff = new JButton("BACK");
     JButton medium = new JButton("MEDIUM");
     JButton hard = new JButton("HARD");
     JButton exit = new JButton("EXIT");
+    JButton loadFile = new JButton("How-To");
+    JTextField prodName;
+
+    // Product Buttons
+    JButton p1 = new JButton("CAR");
+    JButton p2 = new JButton("LAPTOP");
+    JButton p3 = new JButton("BIKE");
+    JButton p4 = new JButton("BLENDER");
+    JButton p5 = new JButton("TOILET");
+    JButton p6 = new JButton("TOASTER");
+
+    //Over all card layout
     JPanel cards = new JPanel(new CardLayout());
 
+    //Background color definitions
     Color background = Color.decode("#1981C9");
     Color buttonCol = Color.decode("#567A4C");
 
-
-
-    /**
-     * Creates new form Start
-     */
     public Menu(Game game) {
         //init frame
         this.game = game;
         game.setFrame(new JFrame());
         frame = game.getFrame();
 
+        //Set key properties
         frame.setResizable(false);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setTitle("Escala");
@@ -63,13 +73,16 @@ public class Menu{
         addSetCard(cards);
         addCredCard(cards);
         addGameCard(cards);
+        addHowTo(cards);
+        addProdCard(cards);
 
         frame.add(cards);
 
         //tie buttons to their respective functions
-        play.addActionListener(e -> toDiff(frame));
+        play.addActionListener(e -> toProd(frame));
         back.addActionListener(e -> toMenu(frame));
         back2.addActionListener(e -> toMenu(frame));
+        backht.addActionListener(e -> toMenu(frame));
         backfromDiff.addActionListener(e -> toMenu(frame));
         set.addActionListener(e -> toSet(frame));
         cred.addActionListener(e -> toCred(frame));
@@ -77,6 +90,15 @@ public class Menu{
         easy.addActionListener(e -> startGameEasy(frame));
         medium.addActionListener(e -> startGameMedium(frame));
         hard.addActionListener(e -> startGameHard(frame));
+        loadFile.addActionListener(e -> startHowTo(frame));
+
+        //product buttons set to certain vars
+        p1.addActionListener(e -> toDiff(frame));
+        p2.addActionListener(e -> toDiff(frame));
+        p3.addActionListener(e -> toDiff(frame));
+        p4.addActionListener(e -> toDiff(frame));
+        p5.addActionListener(e -> toDiff(frame));
+        p6.addActionListener(e -> toDiff(frame));
 
         //show screen
         frame.setVisible(true);
@@ -150,6 +172,56 @@ public class Menu{
         // color schemes
     }
 
+    //Product creation page
+    //Has given choices to select from
+    public void addProdCard(Container pane){
+        JPanel prod = new JPanel();
+        prod.setLayout(null);
+
+        prod.setOpaque(true);
+        prod.setBackground(background);
+
+        prodName = new JTextField("enter name and choose", 16);
+        prodName.setBounds(190,110,160,25);
+
+        //Clears text field when clicked on
+        prodName.addMouseListener(new MouseAdapter(){
+            @Override
+            public void mouseClicked(MouseEvent e){
+                prodName.setText("");
+            }
+        });
+
+        JLabel prodTitle = new JLabel("PRODUCTS");
+        prodTitle.setFont(new Font("Serif", Font.PLAIN, 50));
+        prodTitle.setBounds(140, 40, 300, 60);
+
+        p1.setBounds(110, 150, 100, 50);
+        p2.setBounds(220, 150, 100, 50);
+        p3.setBounds(330, 150, 100, 50);
+        p4.setBounds(110, 210, 100, 50);
+        p5.setBounds(220, 210, 100, 50);
+        p6.setBounds(330, 210, 100, 50);
+
+        p1.setBackground(buttonCol);
+        p2.setBackground(buttonCol);
+        p3.setBackground(buttonCol);
+        p4.setBackground(buttonCol);
+        p5.setBackground(buttonCol);
+        p6.setBackground(buttonCol);
+
+        prod.add(prodTitle);
+        prod.add(p1);
+        prod.add(p2);
+        prod.add(p3);
+        prod.add(p4);
+        prod.add(p5);
+        prod.add(p6);
+        prod.add(prodName);
+
+        pane.add(prod, "PROD");
+    }
+
     //add settings menu
     public void addSetCard(Container pane){
         JPanel set = new JPanel();
@@ -168,19 +240,19 @@ public class Menu{
         back.setBackground(buttonCol);
         set.add(back);
 
-        JButton loadFile = new JButton("Load Save File");
-        loadFile.setBounds(200, 110, 120, 30);
+
+        loadFile.setBounds(200, 190, 120, 30);
         loadFile.setBackground(buttonCol);
         set.add(loadFile);
 
         JLabel frameScale = new JLabel("50");
         frameScale.setFont(new Font("Serif", Font.PLAIN, 20));
-        frameScale.setBounds(250, 130, 240, 60);
+        frameScale.setBounds(250, 90, 240, 60);
         frameScale.setBackground(buttonCol);
         set.add(frameScale);
 
         JSlider framesPerSecond = new JSlider(JSlider.HORIZONTAL);
-        framesPerSecond.setBounds(160,190,200,30);
+        framesPerSecond.setBounds(160,140,200,30);
         framesPerSecond.setBackground(buttonCol);
         framesPerSecond.addChangeListener((ChangeEvent e) -> {
             frameScale.setText(String.valueOf(framesPerSecond.getValue()));
@@ -190,6 +262,33 @@ public class Menu{
 
         pane.add(set, "SET");
         //add setting options
+    }
+
+    //Adding tutorial selection in menu
+    public void addHowTo(Container pane){
+        JPanel ht = new JPanel();
+        ht.setLayout(null);
+
+        ht.setOpaque(true);
+        ht.setBackground(background);
+
+        JLabel setTitle = new JLabel("HOW-TO");
+        setTitle.setFont(new Font("Serif", Font.PLAIN, 50));
+        setTitle.setBounds(160, 40, 240, 60);
+
+        //format as html text
+        String HTML_CONTENT = "<html><body><ol><li>Press Play to begin</li><li>Choose Difficulty level</li><li>Expand your product</li><li>Enjoy!</li></body></html>";
+        JLabel label = new JLabel (HTML_CONTENT);
+        label.setBounds(140, 120, 240, 60);
+        ht.add(label);
+
+
+        ht.add(setTitle);
+        backht.setBounds(200, 240, 120, 30);
+        backht.setBackground(buttonCol);
+        ht.add(backht);
+
+        pane.add(ht, "HOWTO");
     }
 
     //add credits menu
@@ -230,6 +329,9 @@ public class Menu{
 
     //switches to diff page
     private void toDiff(Container parent) {
+        // PASS THIS VALUE TO GAME
+        String productName = prodName.getText();
+
         CardLayout cl = (CardLayout)(cards.getLayout());
         cl.show(cards, "DIFF");
     }
@@ -250,6 +352,16 @@ public class Menu{
     private void toCred(Container parent) {
         CardLayout cl = (CardLayout)(cards.getLayout());
         cl.show(cards, "CRED");
+    }
+
+    private void toProd(Container parent) {
+        CardLayout cl = (CardLayout)(cards.getLayout());
+        cl.show(cards, "PROD");
+    }
+
+    private void startHowTo(Container parent) {
+        CardLayout cl = (CardLayout)(cards.getLayout());
+        cl.show(cards, "HOWTO");
     }
 
     //exits game

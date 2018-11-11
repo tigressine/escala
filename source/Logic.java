@@ -3,68 +3,33 @@
 
 package escala;
 
-import java.util.Calendar;
-
-/*
-*	0	17	Asia(China, India Philippines)
-*	1	8	Eastern Europe (All of Russia)
-*	2	8	Latin/Central America(Mexico, Central Caribbean)
-*	3	5	Middle East
-*	4	7	North Africa
-*	5	13	North America (Canada, US)
-*	6	12	Oceania
-*	7	10	South Africa
-*	8	6	South America
-*	9	14	Western Europe
-*/
+import escala.*;
+import java.util.*;
+import javax.swing.*;
+import escala.structures.*;
 
 public class Logic
 {
-	private static final int NUM_REGIONS = 10;
-    private static Logic instance = null;
-	private int marketShare;
-	private static boolean [] active = new boolean [10];
-	private final double [] distribution = { .17, .08, .08, .05, .07, .13, .12, .10, .06, .14 };
-	int [] regMarketShare = new int [10];
+	private Game game;
+	private double marketShare;
 	private int cash = 400;
-	private int logistics = 5;
-	private int marketing = 5;
-	private int product = 5;
+	private int logistics = 0;
+	private int marketing = 0;
+	private int product = 0;
+	private int bought = 1;
 	private Calendar cal;
+	private static ArrayList<Region> regions;
+	private boolean free = true;
 
-	public Logic()
+	public Logic(Game game)
 	{
 		cal = Calendar.getInstance();
 		cal.set(1000,1,1);
-
+		this.game = game;
+		regions = game.getAllRegions();
 	}
 
-	public static Logic getInstance() {
-    	if(instance == null)
-       	{
-            instance = new Logic();
-    	}
-
-    	testing();
-
-        return instance;
-    }
-
-    public String getDate()
-    {
-    	String string = String.format("%02d/%02d/%02d", 
-    		cal.get(Calendar.MONTH), 
-    		cal.get(Calendar.DAY_OF_MONTH), 
-    		(cal.get(Calendar.YEAR)%100));
-		return string;
-    }
-
-    private static void testing()
-    {
-    	setActive(1);
-    	setActive(5);
-    }
-
+    	// Sets Key Stats for Game
 	public void setLogic(int cash, int product, int marketing, int logistics)
 	{
 		this.cash = cash;
@@ -73,23 +38,27 @@ public class Logic
 		this.logistics = logistics;
 	}
 
+	public boolean purchaseRegion(Region r){
+		return isValidPurchase(r.getEntryCost(), r.getEfficiencyCost(), r.getMarketingCost(), r.getLogisticsCost());
+	}
+
 	//Checks to see if the player can afford the purchase, if so purchases the goods
 	public boolean isValidPurchase(int cash, int product, int marketing, int logistics)
-	{
-		if((this.cash - cash) < 0)
-			return false;
+	{	
+		// Allows for First region to be purcahsed for free
+		if (!free)
+		{
+			if((this.cash - cash) < 0)
+				return false;
 
-		if((this.product - product) < 0)
-			return false;
-
-		if((this.marketing - marketing) < 0)
-			return false;
-
-		if((this.logistics - logistics) < 0)
-			return false;
-
-		updateStats(cash, product, marketing, logistics);
-
+			updateStats(cash * -1, product, marketing, logistics);
+			bought++;
+		}
+		else
+		{
+			free = false;
+			updateStats(0, product, marketing, logistics);
+		}
 		return true;
 	}
 
@@ -102,18 +71,30 @@ public class Logic
 		this.logistics += logistics;
 	}
 
+	// Creates string for use on the MAP
 	public String cashToString()
 	{
 		String string = String.format("$ %06d", cash);
 		return string;
 	}
-
+	
+	// Creates string for use on the MAP
 	public String shareToString()
 	{
-		String string = String.format("%02d %%", marketShare);
+		String string = String.format("%02.2f %%", marketShare);
 		return string;
 	}
 
+	//Returns Date for Map Label
+    	public String getDate()
+    	{
+		String string = String.format("%02d/%02d/%02d", 
+			cal.get(Calendar.MONTH), 
+			cal.get(Calendar.DAY_OF_MONTH), 
+			(cal.get(Calendar.YEAR)%100));
+		return string;
+   	 }
+	
 	public int getLog(){
 		return this.logistics;
 	}
@@ -126,39 +107,56 @@ public class Logic
 		return this.marketing;
 	}
 
-	public int getShare(){
+	public double getShare(){
 		return marketShare;
 	}
 
-	public static void setActive(int region)
+	// Called once per period, to update the game, applying the game
+	public void timedUpdate()
 	{
-		active[region] =  true;
+		int log = this.logistics;
+		int mark = this.marketing;
+		int prod = this.product;
+		double total = 0;
+
+		for (Region region : regions) 
+		{
+            		if (region.isPurchased()) 
+			{
+				if(region.getMarketShare() > 100){
+					region.setMarketShare(100);
+				}
+				else if(region.getMarketShare() >= 75){
+					region.incrementMarketShare(.0025 * ((.25 * log) + (.50 * mark) + (.25 * prod)));
+				}
+				else if(region.getMarketShare() >= 50){
+					region.incrementMarketShare(.0040 * ((.50 * log) + (.25 * mark) + (.25 * prod)));
+				}
+				else{
+					region.incrementMarketShare(.0055 * ((.25 * log) + (.50 * mark) + (.25 * prod)));
+				}
+			}
+            		total += region.getMarketShare()  * region.getWorldShare();
+        	}
+
+		this.cal.add(Calendar.DAY_OF_MONTH, 2);
+		this.marketShare = total;
+		this.cash += (int)(total*10)/(Math.min(Math.pow(2,bought), (6 * bought)));
+		winState();
 	}
 
-	void timedUpdate()
-	{
-		int minDiff =  Math.min(logistics, Math.min(marketing, product)) + 20;
-		int log = Math.min(minDiff,this.logistics);
-		int mark = Math.min(minDiff,this.marketing);
-		int prod = Math.min(minDiff,this.product);
-		int total = 0;
-		int flag = 0;
-
-		for(int i = 0; i < NUM_REGIONS; i++)
-		{
-			if(active[i])
-			{
-				regMarketShare[i] += .75 * ((.33 * log) + (.33 * mark) + (.33 * prod));
-
-				if(regMarketShare[i] > 1000)
-					regMarketShare[i] = 1000;
-			}
-
-			total += regMarketShare[i] * distribution[i];
+	//Ends Game in Win or Loose Condition
+	private void winState(){
+		if(this.marketShare >= 100){
+			JOptionPane.showMessageDialog(null, "You Win, Thank you For Playing!");
+			System.exit(0);
 		}
 
-		this.cal.add(Calendar.DAY_OF_MONTH, 1);
-		this.marketShare = total/10;
-		this.cash += (this.marketShare) * (log + mark + prod);
+		else if((cal.get(Calendar.YEAR)%100) == 5){
+			JOptionPane.showMessageDialog(null, "You Loose, Better Luck Next Time");
+			System.exit(0);
+		}
+		else
+			return;
 	}
 }

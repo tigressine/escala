@@ -36,7 +36,7 @@ backlogs
 requirements
 ------------
 - An on-screen slider can change the resolution.
-- Each product has unique charateristics.
+- Each product has unique characteristics.
 - Game has a pause button to pause game.
 - Game has a play button to play game.
 - Game starts in the middle of the screen.
@@ -62,7 +62,7 @@ requirements
 
 burndown chart  
 ---------------  
-![Image cannot be displayed.](BURNDOWN_3.png) 
+![Image cannot be displayed.](BURNDOWN.png) 
 
 design diagrams  
 ---------------  
@@ -71,21 +71,21 @@ architecture diagram:
 
 class diagram:
 ![Image cannot be displayed.](CLASS_DIAGRAM.png)  
-[larger view](https://raw.githubusercontent.com/tgsachse/escala/dev/docs/sprints/sprint3/CLASS_DIAGRAM.png) 
+[larger view](https://raw.githubusercontent.com/tgsachse/escala/master/docs/sprints/sprint3/CLASS_DIAGRAM.png) 
 
 demonstration  
 -------------
-An early demonstration video is available [here](https://youtu.be/IEVUkmqEtiI).
+The final demonstration video is available [here](https://youtu.be/IEVUkmqEtiI).
 
 tests  
 -----
-Manual (plain text) tests are located [here](https://github.com/tgsachse/escala/blob/dev/tests/MANUAL_TESTS.md). To run database unit tests, clone the repository and execute the test command like this:
+Manual (plain text) tests are located [here](https://github.com/tgsachse/escala/blob/master/tests/MANUAL_TESTS.md). To run database unit tests, clone the repository and execute the test command like this (in Linux preferably):
 ```
-git clone -b master https://www.github.com/tgsachse/escala.git
+git clone https://www.github.com/tgsachse/escala.git
 cd escala
 ./operations.sh --test
 ```
 
 code  
 ----  
-This game requires [Java8](http://www.oracle.com/technetwork/java/javase/downloads/index.html). Download the zip [here](https://github.com/tgsachse/escala/releases/download/v0.2/escala.zip) and unzip the contents. To the run game, double click `run.sh` on Linux and macOS or `run.bat` on Windows. The scripts can also be executed from the command line.
+This game requires [Java8](http://www.oracle.com/technetwork/java/javase/downloads/index.html). Download the zip [here](https://github.com/tgsachse/escala/releases/download/v1.0/escala.zip) and unzip the contents. To the run game, double click `run.sh` on Linux and macOS or `run.bat` on Windows. The scripts can also be executed from the command line.

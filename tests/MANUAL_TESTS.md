@@ -22,7 +22,7 @@
 - If user selects `no`, the game will continue.
 
 # user story tests
-*I want the software to load at the center of my screen.*
+*I want the software to load at the center of my screen.*  
 Both the initial menus and the main game window should open at the center of the screen.
 
 *I want to be able to change the settings before starting the game.*  
